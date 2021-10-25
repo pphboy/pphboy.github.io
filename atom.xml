@@ -6,7 +6,7 @@
   <link href="http://pphboy.github.io/atom.xml" rel="self"/>
   
   <link href="http://pphboy.github.io/"/>
-  <updated>2021-10-25T09:34:25.400Z</updated>
+  <updated>2021-10-25T10:24:21.369Z</updated>
   <id>http://pphboy.github.io/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring-io.md</title>
+    <link href="http://pphboy.github.io/2021/10/25/spring-io-md/"/>
+    <id>http://pphboy.github.io/2021/10/25/spring-io-md/</id>
+    <published>2021-10-25T10:24:21.000Z</published>
+    <updated>2021-10-25T10:24:21.369Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>系统架构设计师- 软件架构文档</title>
