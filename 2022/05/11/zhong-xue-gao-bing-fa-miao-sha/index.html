@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>重学SpringBoot. step7 高并发 秒杀</title>
+<meta name="keywords" content="重学SpringBoot. step7 高并发 秒杀, Hexo">
+<meta name="description" content="高并发高并发最容易出现的问题就是数据安全能不能得到保障。
+你需要保证速度，又需要保证数据安全，那么速度也必然会有所下降。
+所以最简单的办法就是提升硬件。或者把Mysql换成MongoDB，加个Redis，等等。其实最好的办法就是加Redis">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="重学SpringBoot. step7 高并发 秒杀">
+<meta property="og:description" content="高并发高并发最容易出现的问题就是数据安全能不能得到保障。
+你需要保证速度，又需要保证数据安全，那么速度也必然会有所下降。
+所以最简单的办法就是提升硬件。或者把Mysql换成MongoDB，加个Redis，等等。其实最好的办法就是加Redis">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">重学SpringBoot. step7 高并发 秒杀</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-05-11</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h1><p>高并发最容易出现的问题就是数据安全能不能得到保障。</p>
+<p>你需要保证速度，又需要保证数据安全，那么速度也必然会有所下降。</p>
+<p>所以最简单的办法就是提升硬件。或者把Mysql换成MongoDB，加个Redis，等等。<br>其实最好的办法就是加Redis，因为你的资料的占用时间不会太长，也就没有什么影响，任务可以等到后面再处理数据。</p>
+<p>书上的思路上，先把数据存到Redis，然后再凌晨一点时候，没有什么人的时候，再用空余的资源去处理这些数据。</p>
+<p>但要思考的还是数据安全的问题，Redis万一挂了怎么办？当然这些问题不是高并发目标要解决的问题。</p>
+<p>现在是使用SpringBoot相关的技术来实现一个1000到2000的并发的解决方案。</p>
+<p>我在实操的时候，2000的并发，会有600多是服务器无法处理的，因为超时了，等等。整体而言就是反应不过来，服务器如果不用缓存技术，除非提升硬件，那么根本处理不过来。</p>
+<p>集群？是个好办法，建议把服务器全升级到线程撕裂者。然后配一百个集群。</p>
+<h2 id="直接用Redis"><a href="#直接用Redis" class="headerlink" title="直接用Redis"></a>直接用Redis</h2><p>业务需求：秒杀抢购</p>
+<p>思路：获取库存，然后判断Redis列表内的数量是否等于库存，如果不等于，就添加，如果等于，就是抢购失败。</p>
+<p>缓存后的数据直接用消息队列控制主机的服务来处理这些数据。单机的话，可以用定时器到凌晨1点，再用空余的资源来解决这些问题。</p>
+<p>代码实现可能都不用看了。</p>
+<p>不过我之前学的时候，还有一种方案是引入这个任务队列，不过我好像没学会用Netty怎么来操作这种秒杀。那样就更为底层了。</p>
+<p>下面是传统的基于版本号的秒杀。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">buyId</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">if</span>((end - start) &gt; <span class="number">100</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="built_in">this</span>.getById(id);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(product.getStock() &lt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 指定 delete Flag为 version吧</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">version</span> <span class="operator">=</span> product.getDeleteFlag();</span><br><span class="line"></span><br><span class="line">        product.setStock(product.getStock()-<span class="number">1</span>);</span><br><span class="line">        product.setDeleteFlag(version+<span class="number">1</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">result</span> <span class="operator">=</span> <span class="built_in">this</span>.update(product,<span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;Product&gt;().lambda().eq(Product::getId,product.getId()).eq(Product::getDeleteFlag,product.getDeleteFlag()-<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!result) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E9%AB%98%E5%B9%B6%E5%8F%91"><span class="top-box-text">高并发</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E7%9B%B4%E6%8E%A5%E7%94%A8Redis"><span class="top-box-text">直接用Redis</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/05/11/zhong-xue-gao-ji-ji-qiao/">
+          <h3 class="post-title">
+            下一篇：重学SpringBoot. step6 SpringBoot高级技巧
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

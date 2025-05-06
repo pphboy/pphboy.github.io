@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Vite 配置别名   vue3 项目</title>
+<meta name="keywords" content="Vite 配置别名   vue3 项目, Hexo">
+<meta name="description" content="官方文档还是有点难懂，然后点链接找到了 https://github.com/rollup/plugins/tree/master/packages/alias#entries
+1234567891011121314151617181920">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Vite 配置别名   vue3 项目">
+<meta property="og:description" content="官方文档还是有点难懂，然后点链接找到了 https://github.com/rollup/plugins/tree/master/packages/alias#entries
+1234567891011121314151617181920">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Vite 配置别名   vue3 项目</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-01-25</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>官方文档还是有点难懂，然后点链接找到了 <a target="_blank" rel="noopener" href="https://github.com/rollup/plugins/tree/master/packages/alias#entries">https://github.com/rollup/plugins/tree/master/packages/alias#entries</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// rollup.config.js</span></span><br><span class="line"><span class="keyword">import</span> alias <span class="keyword">from</span> <span class="string">&#x27;@rollup/plugin-alias&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> resolve <span class="keyword">from</span> <span class="string">&#x27;@rollup/plugin-node-resolve&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> customResolver = <span class="title function_">resolve</span>(&#123;</span><br><span class="line">  <span class="attr">extensions</span>: [<span class="string">&#x27;.mjs&#x27;</span>, <span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.jsx&#x27;</span>, <span class="string">&#x27;.json&#x27;</span>, <span class="string">&#x27;.sass&#x27;</span>, <span class="string">&#x27;.scss&#x27;</span>]</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> projectRootDir = path.<span class="title function_">resolve</span>(__dirname);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="title function_">alias</span>(&#123;</span><br><span class="line">      <span class="attr">entries</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="attr">find</span>: <span class="string">&#x27;src&#x27;</span>,</span><br><span class="line">          <span class="attr">replacement</span>: path.<span class="title function_">resolve</span>(projectRootDir, <span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">          <span class="comment">// OR place `customResolver` here. See explanation below.</span></span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      customResolver</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="title function_">resolve</span>()</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="我的写法"><a href="#我的写法" class="headerlink" title="我的写法"></a>我的写法</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; defineConfig &#125; <span class="keyword">from</span> <span class="string">&#x27;vite&#x27;</span></span><br><span class="line"><span class="keyword">import</span> vue <span class="keyword">from</span> <span class="string">&#x27;@vitejs/plugin-vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> alias <span class="keyword">from</span> <span class="string">&#x27;@rollup/plugin-alias&#x27;</span></span><br><span class="line"><span class="keyword">import</span> path <span class="keyword">from</span> <span class="string">&#x27;path&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> projectRootDir = path.<span class="title function_">resolve</span>(__dirname);</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://vitejs.dev/config/</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">	<span class="attr">plugins</span>: [</span><br><span class="line">		<span class="title function_">vue</span>(),</span><br><span class="line">		<span class="title function_">alias</span>(&#123;</span><br><span class="line">			<span class="attr">entries</span>:[</span><br><span class="line">				&#123;<span class="attr">find</span>: <span class="string">&#x27;@&#x27;</span>,<span class="attr">replacement</span>: path.<span class="title function_">resolve</span>(projectRootDir, <span class="string">&#x27;src&#x27;</span>)&#125;</span><br><span class="line">			],</span><br><span class="line">		&#125;)</span><br><span class="line">	],</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>【地址】<a target="_blank" rel="noopener" href="https://vitejs.dev/config/#publicdir">https://vitejs.dev/config/#publicdir</a><br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2022.cnblogs.com/blog/2146100/202201/2146100-20220125120417130-1364708757.png"><img   src="/images/loading.svg" data-src="https://img2022.cnblogs.com/blog/2146100/202201/2146100-20220125120417130-1364708757.png"  alt="image" lazyload></a></p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%88%91%E7%9A%84%E5%86%99%E6%B3%95"><span class="top-box-text">我的写法</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3"><span class="top-box-text">官方文档</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/01/22/zhong-duan-pei-zhi-dai-li/">
+          <h3 class="post-title">
+            下一篇：终端配置 代理
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

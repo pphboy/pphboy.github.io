@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>SpringBoot使用线程池发送邮件</title>
+<meta name="keywords" content="SpringBoot使用线程池发送邮件, Hexo">
+<meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748@Componentpublic class EmailUtil ">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="SpringBoot使用线程池发送邮件">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748@Componentpublic class EmailUtil ">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">SpringBoot使用线程池发送邮件</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-05-30</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class EmailUtil &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;email.user&#125;&quot;)</span><br><span class="line">    private String emailUser;</span><br><span class="line">    @Value(&quot;$&#123;email.password&#125;&quot;)</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">    private static final int THREAD_POOL_SIZE = 10;</span><br><span class="line">    private static final int QUEUE_CAPACITY = 100;</span><br><span class="line">    private final ThreadPoolExecutor executor;</span><br><span class="line"></span><br><span class="line">    public EmailUtil() &#123;</span><br><span class="line">        // 创建线程池</span><br><span class="line">        this.executor = new ThreadPoolExecutor(</span><br><span class="line">                THREAD_POOL_SIZE, THREAD_POOL_SIZE,</span><br><span class="line">                0L, TimeUnit.MILLISECONDS,</span><br><span class="line">                new ArrayBlockingQueue&lt;&gt;(QUEUE_CAPACITY));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 发送内容为简单文本的邮件</span><br><span class="line">     */</span><br><span class="line">    public void sendHtmlEmail(String toEmail,String title,String html) throws EmailException &#123;</span><br><span class="line">        this.executor.execute(()-&gt;&#123;</span><br><span class="line">            HtmlEmail email = new HtmlEmail();</span><br><span class="line">            email.setHostName(&quot;smtp.qq.com&quot;);</span><br><span class="line">            email.setSmtpPort(25);</span><br><span class="line">            email.setAuthenticator(new DefaultAuthenticator(emailUser,password));</span><br><span class="line">            email.setSSLOnConnect(true);</span><br><span class="line">            // email.setDebug(false);</span><br><span class="line">            email.setCharset(&quot;UTF-8&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                email.setFrom(&quot;pbot@qq.com&quot;,&quot;PBOT机器人&quot;);</span><br><span class="line">                email.addTo(toEmail);</span><br><span class="line">                email.setSubject(title);</span><br><span class="line">                email.setHtmlMsg(html);</span><br><span class="line">                email.send();</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                throw new RuntimeException(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/05/29/xiu-gai-gun-dong-tiao-yang-shi/">
+          <h3 class="post-title">
+            下一篇：Vue3 ，html 修改滚动条样式
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

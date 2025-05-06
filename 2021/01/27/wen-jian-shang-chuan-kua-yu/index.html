@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Vditor文件上传跨域</title>
+<meta name="keywords" content="Vditor文件上传跨域, Hexo">
+<meta name="description" content="Vditor文件上传跨域官网是发了一次请求，而我这里发了两次请求。
+有一个option请求，形成了跨域。
+虽然我在后端配置了允许跨域，但事实上，我用JWT的拦截器把文件上传的接口给拦截了。
+且走的是OPTION，然后报错了跨域。
+我的MVC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Vditor文件上传跨域">
+<meta property="og:description" content="Vditor文件上传跨域官网是发了一次请求，而我这里发了两次请求。
+有一个option请求，形成了跨域。
+虽然我在后端配置了允许跨域，但事实上，我用JWT的拦截器把文件上传的接口给拦截了。
+且走的是OPTION，然后报错了跨域。
+我的MVC">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Vditor文件上传跨域</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-01-27</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h3 id="Vditor文件上传跨域"><a href="#Vditor文件上传跨域" class="headerlink" title="Vditor文件上传跨域"></a>Vditor文件上传跨域</h3><p>官网是发了一次请求，而我这里发了两次请求。</p>
+<p>有一个option请求，形成了跨域。</p>
+<p>虽然我在后端配置了允许跨域，但事实上，我用JWT的拦截器把文件上传的接口给拦截了。</p>
+<p>且走的是OPTION，然后报错了跨域。</p>
+<p>我的MVC拦截器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">vditor</span> = <span class="keyword">new</span> <span class="title class_">Vditor</span>(<span class="string">&#x27;vditor&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">height</span>: <span class="number">360</span>,</span><br><span class="line">    <span class="attr">toolbarConfig</span>: &#123;</span><br><span class="line">        <span class="attr">pin</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">cache</span>: &#123;</span><br><span class="line">        <span class="attr">enable</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">upload</span>: &#123;</span><br><span class="line">        <span class="attr">fieldName</span>:<span class="string">&quot;file&quot;</span>,</span><br><span class="line">        <span class="attr">headers</span>:&#123;</span><br><span class="line">            <span class="attr">token</span>:main.<span class="property">local</span>.<span class="title function_">get</span>(<span class="string">&quot;piyu&quot;</span>).<span class="property">token</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">withCredentials</span>:<span class="literal">true</span>,</span><br><span class="line">        <span class="attr">accept</span>: <span class="string">&#x27;image/*,.mp3, .wav, .rar&#x27;</span>,</span><br><span class="line">        <span class="attr">token</span>: main.<span class="property">local</span>.<span class="title function_">get</span>(<span class="string">&quot;piyu&quot;</span>).<span class="property">token</span>,</span><br><span class="line">        <span class="attr">url</span>:<span class="variable language_">this</span>.<span class="property">$api</span>.<span class="property">API_UPLOAD_FILE</span>,</span><br><span class="line">        <span class="attr">linkToImgUrl</span>:<span class="variable language_">this</span>.<span class="property">$api</span>.<span class="property">API_UPLOAD_FILE</span>,</span><br><span class="line">        <span class="title function_">filename</span> (name) &#123;</span><br><span class="line">            <span class="keyword">return</span> name.<span class="title function_">replace</span>(<span class="regexp">/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g</span>, <span class="string">&#x27;&#x27;</span>).</span><br><span class="line">            <span class="title function_">replace</span>(<span class="regexp">/[\?\\/:|&lt;&gt;\*\[\]\(\)\$%\&#123;\&#125;@~]/g</span>, <span class="string">&#x27;&#x27;</span>).</span><br><span class="line">            <span class="title function_">replace</span>(<span class="string">&#x27;/\\s/g&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">after</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">vditor</span>.<span class="title function_">setValue</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">toolbar</span>: [</span><br><span class="line">        <span class="string">&#x27;emoji&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;headings&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;bold&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;italic&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;strike&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;link&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;|&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;list&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;ordered-list&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;check&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;outdent&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;indent&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;|&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;quote&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;line&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;code&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;inline-code&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;insert-before&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;insert-after&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;|&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;upload&#x27;</span>,</span><br><span class="line">        <span class="comment">// &#x27;record&#x27;,</span></span><br><span class="line">        <span class="string">&#x27;table&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;|&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;undo&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;redo&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;|&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;edit-mode&#x27;</span>,</span><br><span class="line">        <span class="comment">// &#x27;content-theme&#x27;,</span></span><br><span class="line">        <span class="string">&#x27;code-theme&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;export&#x27;</span>,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;more&#x27;</span>,</span><br><span class="line">            <span class="attr">toolbar</span>: [</span><br><span class="line">                <span class="string">&#x27;fullscreen&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;both&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;preview&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;info&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;help&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">        &#125;],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pipihao.piyu.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pipihao.piyu.interceptor.JWTInterceptor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.InterceptorRegistry;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">InterceptorConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解决跨域</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowCredentials(<span class="literal">true</span>)</span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;PUT&quot;</span>,<span class="string">&quot;OPTIONS&quot;</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 拦截器</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> &#123;</span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> <span class="title class_">JWTInterceptor</span>())</span><br><span class="line">                .addPathPatterns(<span class="string">&quot;/**&quot;</span>) <span class="comment">//拦截的接口，（理论上是所有的都拦截了）</span></span><br><span class="line">                .excludePathPatterns(</span><br><span class="line">                        <span class="string">&quot;/login&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;/user/register&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;/file/upload&quot;</span>,</span><br><span class="line">                        <span class="string">&quot;/class/all&quot;</span> <span class="comment">//所有分类</span></span><br><span class="line">                ); <span class="comment">// 不拦截的链接前端得加上“/”</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>解决方案：不拦截文件上传接口，在文件上传的接口内使用JWT验证即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;/file/upload&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title function_">upload</span><span class="params">(<span class="meta">@RequestParam(&quot;file&quot;)</span> MultipartFile filename, HttpServletRequest request)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    Map&lt;String,Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        JWTUtils.verifyToken(request.getHeader(<span class="string">&quot;token&quot;</span>));</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        <span class="comment">/*此处记录来访者的ip*/</span></span><br><span class="line">        map.put(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;非法数据访问&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//文件保存</span></span><br><span class="line">    <span class="keyword">return</span> map;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Vditor%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%B7%A8%E5%9F%9F"><span class="top-box-text">Vditor文件上传跨域</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/01/24/bian-xie-de-ji-lian-xuan-ze-zu-jian-shi-ji-di-qu-shu-ju/">
+          <h3 class="post-title">
+            下一篇：编写antd的Cascader 级联选择组件市级地区数据
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

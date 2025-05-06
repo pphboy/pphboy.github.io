@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>重学SpringBoot. step1 全注解的SpringBoot</title>
+<meta name="keywords" content="重学SpringBoot. step1 全注解的SpringBoot, Hexo">
+<meta name="description" content="参考：《深入浅出SpringBoot 2.x》
+全注解的SpringBoot用户可以通过注解将所需要的对象，存放到IOC容器中，然后SpringBoot可以根据这些需要使用的情况，自动注入到需要的Bean中。
+Component 组件如果你">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="重学SpringBoot. step1 全注解的SpringBoot">
+<meta property="og:description" content="参考：《深入浅出SpringBoot 2.x》
+全注解的SpringBoot用户可以通过注解将所需要的对象，存放到IOC容器中，然后SpringBoot可以根据这些需要使用的情况，自动注入到需要的Bean中。
+Component 组件如果你">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">重学SpringBoot. step1 全注解的SpringBoot</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-05-08</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>参考：《深入浅出SpringBoot 2.x》</p>
+<h2 id="全注解的SpringBoot"><a href="#全注解的SpringBoot" class="headerlink" title="全注解的SpringBoot"></a>全注解的SpringBoot</h2><p>用户可以通过注解将所需要的对象，存放到IOC容器中，然后SpringBoot可以根据这些需要使用的情况，自动注入到需要的Bean中。</p>
+<h3 id="Component-组件"><a href="#Component-组件" class="headerlink" title="Component 组件"></a>Component 组件</h3><p>如果你需要重复的使用一个类，而这个类又不属于业务，只是数据处理，那么就可以使用Component注解标记该类，然后使用ComponentScan即可将该类实例化到容器中。</p>
+<p>ComponentScan就是一个扫描器，在SpringApplication中也带着一个这样的扫描器。有这种包含的扫描，那么又引出了ComponentScan注解中引出了excludeFilters属性，可以指定哪些类不被扫描器扫描到。</p>
+<p>可以看下SpringBootApplication注解中，也使用了ComponentScan的注解，也就是SpringBoot应用的启动类同级的包，或者是类，默认会被扫描器扫描到。</p>
+<p>在Configuration的类中，可以定义一些带@Bean注解的方法，这些方法的返回值，被加入到IOC容器中，如果不指定Bean的Name属性，那么将会使用该方法的方法名作为对象的名称存入到IOC容器中。</p>
+<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>依赖注入，用的是多态来体现，一个对象，多种形态，然后用@Autowired给对象注入依赖，之后可以通过@Primary设置注入时候的容器中的实例的优先级和@Quelifier直接指定bean的名称。</p>
+<p>这里我感觉还是很混乱，容器中的实例，一直没有个名称，一直说是用Bean装配到IOC容器中，这里其实已经理论混乱了。</p>
+<p>Bean实例存放在容器之中，但Bean对应的实例有多种形态，也称之为Bean的依赖，Bean有多种依赖，所以需要进行选择，不然就会报错。所以注入的Bean的名称都是唯一的。</p>
+<h3 id="读取属性文件"><a href="#读取属性文件" class="headerlink" title="读取属性文件"></a>读取属性文件</h3><p>@Value(“${…}”)  这样的占位符可以读取application.yml的的配置</p>
+<p>还有一种读取的方法是用类来读取，</p>
+<p>需要在类上加两个注解，Component，ConfgurationProperties(“前缀名”)</p>
+<p>然后就可以读取指定的配置</p>
+<p>例如: file.path &#x3D; “&#x2F;home&#x2F;files”</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(&quot;file&quot;)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Path</span>()&#123;</span><br><span class="line">    <span class="keyword">private</span> String path;<span class="comment">// = file.path</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Bean的作用域"><a href="#Bean的作用域" class="headerlink" title="Bean的作用域"></a>Bean的作用域</h3><p>Bean可以直接设定其类型，不用的作用域会产生不同的Bean，或者相同的作用域，每次都会刷新。</p>
+<p>所以可以使用@Scope注解给每个SpringBoot的组件指定在WEB中访问的范围。</p>
+<h3 id="Profile"><a href="#Profile" class="headerlink" title="@Profile"></a>@Profile</h3><p>加载多套配置文件的注解。</p>
+<p>一个很常见的例子，多个测试环境中有不同的数据库，在这里已经得到了答案。</p>
+<p>可以通过Profile直接给指定的方法来指定。</p>
+<blockquote>
+<p>本来我以为是用来同时加载不同的配置文件</p>
+</blockquote>
+<p>书上讲的不是特别好，就是spring.profiles.active也可以指定其加载的文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">profiles:</span> </span><br><span class="line">        <span class="attr">active:</span>  <span class="string">dev</span></span><br></pre></td></tr></table></figure>
+<h3 id="SpringEl"><a href="#SpringEl" class="headerlink" title="SpringEl"></a>SpringEl</h3><p>在@Value注解中使用El表达式，可以写一些简单的代码运算，或者代码的调用 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;$&#123;file.path&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String path;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;#&#123;1+1&#125;&quot;)</span></span><br><span class="line"><span class="type">int</span> a;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Value(&quot;#&#123;T(System).currentTimeMillis()&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">long</span> time;</span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">    System.out.println(a);</span><br><span class="line">    System.out.println(time);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E5%85%A8%E6%B3%A8%E8%A7%A3%E7%9A%84SpringBoot"><span class="top-box-text">全注解的SpringBoot</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Component-%E7%BB%84%E4%BB%B6"><span class="top-box-text">Component 组件</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="top-box-text">依赖注入</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E8%AF%BB%E5%8F%96%E5%B1%9E%E6%80%A7%E6%96%87%E4%BB%B6"><span class="top-box-text">读取属性文件</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Bean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="top-box-text">Bean的作用域</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#Profile"><span class="top-box-text">@Profile</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#SpringEl"><span class="top-box-text">SpringEl</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/04/28/zai-shang-wu-fa-yun-xing-bao-wu-fa-fang-wen-cuo-wu/">
+          <h3 class="post-title">
+            下一篇：SpringBoot 2.x 在Tomcat8上无法运行，报无法访问错误
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

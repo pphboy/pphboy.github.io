@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>ThinkPad E580 装Ubuntu系 系统无WIFI 解决办法</title>
+<meta name="keywords" content="ThinkPad E580 装Ubuntu系 系统无WIFI 解决办法, Hexo">
+<meta name="description" content="首先得下载 最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去https://github.com/tomaspinho/rtl8821ce 这个是最新的驱动的下载 地址，建议从这里下载最新的 RTL 8821ce驱动
+">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="ThinkPad E580 装Ubuntu系 系统无WIFI 解决办法">
+<meta property="og:description" content="首先得下载 最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去https://github.com/tomaspinho/rtl8821ce 这个是最新的驱动的下载 地址，建议从这里下载最新的 RTL 8821ce驱动
+">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">ThinkPad E580 装Ubuntu系 系统无WIFI 解决办法</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-10-20</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h3 id="首先得下载-最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去"><a href="#首先得下载-最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去" class="headerlink" title="首先得下载 最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去"></a>首先得下载 最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去</h3><h3 id="https-github-com-tomaspinho-rtl8821ce-这个是最新的驱动的下载-地址，建议从这里下载最新的-RTL-8821ce驱动"><a href="#https-github-com-tomaspinho-rtl8821ce-这个是最新的驱动的下载-地址，建议从这里下载最新的-RTL-8821ce驱动" class="headerlink" title="https://github.com/tomaspinho/rtl8821ce 这个是最新的驱动的下载 地址，建议从这里下载最新的 RTL 8821ce驱动"></a><a target="_blank" rel="noopener" href="https://github.com/tomaspinho/rtl8821ce">https://github.com/tomaspinho/rtl8821ce</a> 这个是最新的驱动的下载 地址，建议从这里下载最新的 RTL 8821ce驱动</h3><ol>
+<li><p>然后解压包，<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201020095022971-418967446.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201020095022971-418967446.png"  lazyload></a></p>
+</li>
+<li><p>修改Makefile文件<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201020095407151-1844956564.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201020095407151-1844956564.png"  lazyload></a></p>
+</li>
+<li><p>在当前的文件夹下面打开终端<br>相继输入</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo make</span><br><span class="line">sudo make install</span><br><span class="line">sudo modprobe -a 8821ce</span><br></pre></td></tr></table></figure>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201020095836381-1884335961.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201020095836381-1884335961.png"  lazyload></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line">下面是终端完整的显示</span><br><span class="line">pph@IBM:~/Downloads/rtl8821ce-master$ sudo make</span><br><span class="line">请输入密码</span><br><span class="line">[sudo] pph 的密码：</span><br><span class="line">验证成功</span><br><span class="line">make ARCH=x86_64 CROSS_COMPILE= -C /lib/modules/5.4.50-amd64-desktop/build M=/home/pph/Downloads/rtl8821ce-master  modules</span><br><span class="line">make[1]: 进入目录“/usr/src/linux-headers-5.4.50-amd64-desktop”</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_cmd.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_security.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_debug.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_io.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_ioctl_query.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_ioctl_set.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_ieee80211.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_mlme.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_mlme_ext.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_mi.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_wlan_util.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_vht.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_pwrctrl.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_rf.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_chplan.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_recv.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_sta_mgt.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_ap.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/mesh/rtw_mesh.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/mesh/rtw_mesh_pathtbl.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/mesh/rtw_mesh_hwmp.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_xmit.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_p2p.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_rson.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_tdls.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_br_ext.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_iol.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_sreset.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_btcoex_wifionly.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_btcoex.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_beamforming.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_odm.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_rm.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_rm_fsm.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/efuse/rtw_efuse.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/osdep_service.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/os_intfs.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/pci_intf.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/pci_ops_linux.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/ioctl_linux.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/xmit_linux.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/mlme_linux.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/recv_linux.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/ioctl_cfg80211.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/rtw_cfgvendor.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/wifi_regd.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/rtw_android.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/rtw_proc.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/rtw_rhashtable.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/os_dep/linux/ioctl_mp.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_intf.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_com.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_com_phycfg.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_phy.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_dm.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_dm_acs.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_btcoex_wifionly.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_btcoex.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_mp.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_mcc.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_hci/hal_pci.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/led/hal_led.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/led/hal_pci_led.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/rtl8821c_halinit.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/rtl8821c_mac.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/rtl8821c_cmd.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/rtl8821c_phy.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/rtl8821c_dm.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/rtl8821c_ops.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/hal8821c_fw.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_halinit.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_halmac.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_io.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_xmit.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_recv.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_led.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/rtl8821c/pci/rtl8821ce_ops.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/efuse/rtl8821c/HalEfuseMask8821C_PCIE.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/hal_halmac.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_api.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_bb_rf_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_cfg_wmac_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_common_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_efuse_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_flash_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_fw_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_gpio_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_init_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_mimo_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_pcie_88xx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_cfg_wmac_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_common_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_gpio_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_init_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_phy_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_pwr_seq_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master//hal/halmac/halmac_88xx/halmac_8821c/halmac_pcie_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_debug.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_antdiv.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_soml.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_smt_ant.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_antdect.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_interface.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_phystatus.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_hwconfig.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_dig.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_pathdiv.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_rainfo.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_dynamictxpower.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_adaptivity.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_cfotracking.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_noisemonitor.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_beamforming.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_dfs.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/txbf/halcomtxbf.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/txbf/haltxbfinterface.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/txbf/phydm_hal_txbf_api.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_adc_sampling.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_ccx.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_psd.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_primary_cca.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_cck_pd.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_rssi_monitor.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_auto_dbg.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_math_lib.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_api.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_pow_train.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_lna_sat.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_pmac_tx_setting.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/phydm_mp.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/halrf.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/halrf_debug.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/halphyrf_ce.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/halrf_powertracking_ce.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/halrf_powertracking.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/halrf_kfree.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/rtl8821c/halhwimg8821c_bb.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/rtl8821c/halhwimg8821c_mac.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/rtl8821c/halhwimg8821c_rf.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/rtl8821c/phydm_hal_api8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/rtl8821c/phydm_regconfig8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/rtl8821c/halrf_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/phydm/halrf/rtl8821c/halrf_iqk_8821c.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/btc/halbtc8821cwifionly.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/btc/halbtc8821c1ant.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/hal/btc/halbtc8821c2ant.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/platform/platform_ops.o</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/core/rtw_mp.o</span><br><span class="line">  LD [M]  /home/pph/Downloads/rtl8821ce-master/8821ce.o</span><br><span class="line">  Building modules, stage 2.</span><br><span class="line">  MODPOST 1 modules</span><br><span class="line">  CC [M]  /home/pph/Downloads/rtl8821ce-master/8821ce.mod.o</span><br><span class="line">  LD [M]  /home/pph/Downloads/rtl8821ce-master/8821ce.ko</span><br><span class="line">make[1]: 离开目录“/usr/src/linux-headers-5.4.50-amd64-desktop”</span><br><span class="line">pph@IBM:~/Downloads/rtl8821ce-master$ sudo make install</span><br><span class="line">install -p -m 644 8821ce.ko  /lib/modules/5.4.50-amd64-desktop/kernel/drivers/net/wireless/</span><br><span class="line">/sbin/depmod -a 5.4.50-amd64-desktop</span><br><span class="line">pph@IBM:~/Downloads/rtl8821ce-master$ sudo modprobe -a 8821ce</span><br></pre></td></tr></table></figure>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%A6%96%E5%85%88%E5%BE%97%E4%B8%8B%E8%BD%BD-%E6%9C%80%E6%96%B0%E7%9A%84%E9%A9%B1%E5%8A%A8%EF%BC%8C%E6%88%91%E4%B9%8B%E5%89%8D%E5%9B%A0%E4%B8%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%8B%E8%BD%BD%E7%9A%84%E9%A9%B1%E5%8A%A8%E4%B8%8D%E5%A4%9F%E6%96%B0%EF%BC%8C%E5%AF%BC%E8%87%B4%E6%88%91%E7%9A%84%E9%A9%B1%E5%8A%A8%E4%B8%80%E7%9B%B4%E8%A3%85%E4%B8%8D%E4%B8%8A%E5%8E%BB"><span class="top-box-text">首先得下载 最新的驱动，我之前因为自己的下载的驱动不够新，导致我的驱动一直装不上去</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#https-github-com-tomaspinho-rtl8821ce-%E8%BF%99%E4%B8%AA%E6%98%AF%E6%9C%80%E6%96%B0%E7%9A%84%E9%A9%B1%E5%8A%A8%E7%9A%84%E4%B8%8B%E8%BD%BD-%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%BB%BA%E8%AE%AE%E4%BB%8E%E8%BF%99%E9%87%8C%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%9A%84-RTL-8821ce%E9%A9%B1%E5%8A%A8"><span class="top-box-text">https:&#x2F;&#x2F;github.com&#x2F;tomaspinho&#x2F;rtl8821ce 这个是最新的驱动的下载 地址，建议从这里下载最新的 RTL 8821ce驱动</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/10/15/lao-shou-fu-xi-wen-dang/">
+          <h3 class="post-title">
+            下一篇：Mybatis老手复习文档
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

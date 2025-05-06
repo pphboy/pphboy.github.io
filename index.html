@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Hexo</title>
+<meta name="keywords" content="Hexo, Hexo">
+<meta name="description" content="Hexo">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Hexo">
+<meta property="og:description" content="Hexo">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+
+    
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2025/04/24/yun-xing-shi-bai/">
+        <h2 class="post-title">docker运行open-iscsi失败</h2>
+      </a>
+      <a href="/2025/04/24/yun-xing-shi-bai/">
+          <div class="post-abstract">
+            
+			    iscsid: sendmsg: bug? ctrl_fd 4出现这个情况，是需要开启network_mode: host
+
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2025-04-24</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/12/24/pei-zhi-dai-li-guo-lv-dui-ying-zhan-dian-yuan/">
+        <h2 class="post-title">dockerd,docker 配置代理，过滤对应站点源</h2>
+      </a>
+      <a href="/2024/12/24/pei-zhi-dai-li-guo-lv-dui-ying-zhan-dian-yuan/">
+          <div class="post-abstract">
+            
+			    12sudo mkdir -p /etc/systemd/system/docker.service.dsudo touch /etc/systemd/system/docker.service.d/proxy.conf
+
+1234[Ser
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-12-24</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/12/01/shi-yong-yao-ji-de-diao-bu-ran-deng-xie-man-huan-cun-cai-hui/">
+        <h2 class="post-title">Damn !!!! 使用bufio.ReadWriter，要记得调 Flush()，不然等写满缓存才会Flush</h2>
+      </a>
+      <a href="/2024/12/01/shi-yong-yao-ji-de-diao-bu-ran-deng-xie-man-huan-cun-cai-hui/">
+          <div class="post-abstract">
+            
+			    bufio.ReadWriterbufio.Writer
+看文档，这个Writer. God Damn Lazy!
+https://pkg.go.dev/bufio#Writer
+
+Damn !!!! 
+
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-12-01</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/11/19/zhong-wen-zi-ti-yi-chang-xian-shi-cu-xi-bu-yi-zhi/">
+        <h2 class="post-title">Konsole 中文字体异常显示 ，粗细不一致</h2>
+      </a>
+      <a href="/2024/11/19/zhong-wen-zi-ti-yi-chang-xian-shi-cu-xi-bu-yi-zhi/">
+          <div class="post-abstract">
+            
+			    写入 ~/.config/fontconfig/fonts.conf ，确定你安装了其中的字体
+123456789101112131415161718192021222324252627282930313233343536373839404
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-11-19</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/10/26/mo-ren/">
+        <h2 class="post-title">git pull 默认rebase</h2>
+      </a>
+      <a href="/2024/10/26/mo-ren/">
+          <div class="post-abstract">
+            
+			    如果你习惯使用git pull ，同时又希望默认使用选项–rebase，你可以执行这条语句git config –global pull.rebase true 来更改pull.rebase 的默认配置
+
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-10-26</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/04/25/da-bao-dan-wei-dai-shang-de-yi-lai-zhao-bu-dao/">
+        <h2 class="post-title">Pyinstaller打包 openvino，但未带上 openvino的依赖，找不到CPU,GPU</h2>
+      </a>
+      <a href="/2024/04/25/da-bao-dan-wei-dai-shang-de-yi-lai-zhao-bu-dao/">
+          <div class="post-abstract">
+            
+			    命令:
+1pyinstaller --onefile --collect-submodules openvino --collect-binaries openvino --collect-data openvino server.py
+
+
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-04-25</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/02/28/xie/">
+        <h2 class="post-title">vue &amp;amp; vite 写 tsx</h2>
+      </a>
+      <a href="/2024/02/28/xie/">
+          <div class="post-abstract">
+            
+			    tsconfig.json重点在于    “jsx”: “preserve”,    “jsxImportSource”: “vue”,
+1234567891011121314151617181920212223242526272829&#
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-02-28</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/02/28/pei-zhi-xiang-dui-lu-jing/">
+        <h2 class="post-title">vite配置相对路径</h2>
+      </a>
+      <a href="/2024/02/28/pei-zhi-xiang-dui-lu-jing/">
+          <div class="post-abstract">
+            
+			    vite.config.ts
+12345678910111213const pathResolve = (pathStr: string) =&gt; &#123;  return path.resolve(__dirname, pathS
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-02-28</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2024/01/03/sui-xiang/">
+        <h2 class="post-title">Emacs随想</h2>
+      </a>
+      <a href="/2024/01/03/sui-xiang/">
+          <div class="post-abstract">
+            
+			    http://everet.org/thinking-of-emacs.html?utm_source=tuicool
+
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-01-03</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="post-item">
+    <div class="content">
+      <a href="/2023/12/12/jian-ting-liu-lan-qi-lian-wang-zhuang-tai/">
+        <h2 class="post-title">监听浏览器联网状态</h2>
+      </a>
+      <a href="/2023/12/12/jian-ting-liu-lan-qi-lian-wang-zhuang-tai/">
+          <div class="post-abstract">
+            
+			    1234567window.addEventListener(&#x27;online&#x27;, function() &#123;  console.log(&#x27;浏览器已连接网络&#x27;);&#125;);window.a
+            
+          </div>
+      </a>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-12-12</span>
+        
+      </div>
+    </div>
+  </section>
+
+
+
+
+    <div class="pagination-container">
+      
+      
+        <a href="/page/2/" class="next">下一页 <i class="icon icon-arrow-ios-forward-outline"></i></a>
+      
+    </div>
+
+
+
+  </div>
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = false; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
+

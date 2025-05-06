@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Vue.config.js配置 最新可用版本</title>
+<meta name="keywords" content="Vue.config.js配置 最新可用版本, Hexo">
+<meta name="description" content="最近 在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上下面是我的Vue.config.js的配置，我感觉这个复用的程度高，所以记下 了这个随笔123456789101112131415">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Vue.config.js配置 最新可用版本">
+<meta property="og:description" content="最近 在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上下面是我的Vue.config.js的配置，我感觉这个复用的程度高，所以记下 了这个随笔123456789101112131415">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Vue.config.js配置 最新可用版本</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-10-12</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h2 id="最近-在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上"><a href="#最近-在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上" class="headerlink" title="最近 在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上"></a>最近 在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上</h2><h4 id="下面是我的Vue-config-js的配置，我感觉这个复用的程度高，所以记下-了这个随笔"><a href="#下面是我的Vue-config-js的配置，我感觉这个复用的程度高，所以记下-了这个随笔" class="headerlink" title="下面是我的Vue.config.js的配置，我感觉这个复用的程度高，所以记下 了这个随笔"></a>下面是我的Vue.config.js的配置，我感觉这个复用的程度高，所以记下 了这个随笔</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&#x27;path&#x27;)</span><br><span class="line">const CopyWebpackPlugin = require(&#x27;copy-webpack-plugin&#x27;)</span><br><span class="line"></span><br><span class="line">function resolve (dir) &#123;</span><br><span class="line">    return path.join(__dirname, &#x27;.&#x27;, dir) // 这里采用一个点，因为vue.config.js文件和package.json文件都在同一个目录下，即根目录下</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  /** 区分打包环境与开发环境</span><br><span class="line">   * process.env.NODE_ENV===&#x27;production&#x27;  (打包环境)</span><br><span class="line">   * process.env.NODE_ENV===&#x27;development&#x27; (开发环境)</span><br><span class="line">   * baseUrl: process.env.NODE_ENV===&#x27;production&#x27;?&quot;https://cdn.didabisai.com/front/&quot;:&#x27;front/&#x27;,</span><br><span class="line">   */</span><br><span class="line">  // 项目部署的基础路径</span><br><span class="line">  // 我们默认假设你的应用将会部署在域名的根部,</span><br><span class="line">  // 例如 https://www.my-app.com/</span><br><span class="line">  // 如果你的应用部署在一个子路径下，那么你需要在这里</span><br><span class="line">  // 指定子路径。比如将你的应用部署在</span><br><span class="line">  // https://www.foobar.com/my-app/</span><br><span class="line">  // 那么将这个值改为 &#x27;/my-app/&#x27;</span><br><span class="line"></span><br><span class="line">  outputDir: &quot;dist&quot;, // where to put static assets (js/css/img/font/...) // 是否在保存时使用‘eslint-loader’进行检查 // 有效值: true | false | &#x27;error&#x27; // 当设置为‘error’时，检查出的错误会触发编译失败</span><br><span class="line">  lintOnSave: true, // 使用带有浏览器内编译器的完整构建版本 // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only</span><br><span class="line">  runtimeCompiler: false, // babel-loader默认会跳过`node_modules`依赖. // 通过这个选项可以显示转译一个依赖</span><br><span class="line">  transpileDependencies: [</span><br><span class="line">    /* string or regex */</span><br><span class="line">  ], // 是否为生产环境构建生成sourceMap?</span><br><span class="line"></span><br><span class="line">  productionSourceMap: false, // 调整内部的webpack配置. // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md</span><br><span class="line">  chainWebpack: config =&gt; &#123;</span><br><span class="line">     config</span><br><span class="line">       .plugin(&#x27;html&#x27;)</span><br><span class="line">       .tap(args =&gt; &#123;</span><br><span class="line">         args[0].title= &#x27;你的项目的默认的名字&#x27;</span><br><span class="line">         return args</span><br><span class="line">       &#125;)</span><br><span class="line">   &#125;,</span><br><span class="line">  configureWebpack: () =&gt; &#123;&#125;, // CSS 相关选项</span><br><span class="line">  css: &#123;</span><br><span class="line">    // 将组件内部的css提取到一个单独的css文件（只用在生产环境）</span><br><span class="line">    // 也可以是传递给 extract-text-webpack-plugin 的选项对象</span><br><span class="line">    extract: true, // 允许生成 CSS source maps?</span><br><span class="line">    sourceMap: false, // pass custom options to pre-processor loaders. e.g. to pass options to // sass-loader, use &#123; sass: &#123; ... &#125; &#125;</span><br><span class="line">    loaderOptions: &#123;&#125;, // Enable CSS modules for all css / pre-processor files. // This option does not affect *.vue files.</span><br><span class="line">    modules: false</span><br><span class="line">  &#125;, // use thread-loader for babel &amp; TS in production build // enabled by default if the machine has more than 1 cores</span><br><span class="line"></span><br><span class="line">  parallel: require(&quot;os&quot;).cpus().length &gt; 1, // PWA 插件相关配置 // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa</span><br><span class="line"></span><br><span class="line">  pwa: &#123;&#125;, // configure webpack-dev-server behavior</span><br><span class="line">  configureWebpack: &#123;</span><br><span class="line">      resolve: &#123;</span><br><span class="line">          alias: &#123;</span><br><span class="line">            &#x27;@&#x27;: resolve(&#x27;src&#x27;),</span><br><span class="line">            &#x27;@css&#x27;: resolve(&#x27;src/assets/css/&#x27;),</span><br><span class="line">             // 这里采用两个@符号来代替路径的别名，因为一个@符号已经默认被设置src的路径了，为了不影响原有的功能，这里采用两个@字符</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      plugins: [</span><br><span class="line">          // 需要用到拷贝文件的插件</span><br><span class="line">          new CopyWebpackPlugin([</span><br><span class="line">              &#123;</span><br><span class="line">                from: path.resolve(__dirname, &#x27;./static&#x27;),</span><br><span class="line">                to: &#x27;.&#x27;,</span><br><span class="line">                ignore: [&#x27;.*&#x27;]</span><br><span class="line">              &#125;</span><br><span class="line">            ])</span><br><span class="line">      ]</span><br><span class="line">  &#125;,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    open: process.platform === &quot;darwin&quot;,</span><br><span class="line">    disableHostCheck: false,</span><br><span class="line">    host: &quot;0.0.0.0&quot;,</span><br><span class="line">    port: 8080,</span><br><span class="line">    https: false,</span><br><span class="line">    hotOnly: false, // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy</span><br><span class="line">    proxy: null // string | Object</span><br><span class="line">    // before: app =&gt; &#123;&#125;</span><br><span class="line">  &#125;, // 第三方插件配置</span><br><span class="line"></span><br><span class="line">  pluginOptions: &#123;</span><br><span class="line">    // ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%9C%80%E8%BF%91-%E5%9C%A8%E5%AD%A6%E5%89%8D%E7%AB%AF%EF%BC%8C%E7%84%B6%E5%90%8E%EF%BC%8C%E5%AD%A6%E4%BA%86%E8%BF%99%E4%B8%AAvue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%EF%BC%8C%E8%99%BD%E7%84%B6%EF%BC%8C%E6%88%91%E8%BF%99%E4%B8%AAvue-cli%E8%BF%98%E4%B8%8D%E7%AE%97%E5%85%A5%E9%97%A8%EF%BC%8C%E5%90%8E%E6%88%91%E4%BC%9A%E6%8A%8A%E8%BF%99%E4%B8%AA%E7%AC%94%E8%AE%B0%E8%A1%A5%E4%B8%8A"><span class="top-box-text">最近 在学前端，然后，学了这个vue-cli脚手架，虽然，我这个vue-cli还不算入门，后我会把这个笔记补上</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/10/09/ru-he-cha-zhao-yi-ge-wei-de-zi-duan/">
+          <h3 class="post-title">
+            下一篇：如何查找一个为NULL的MYSQL字段
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

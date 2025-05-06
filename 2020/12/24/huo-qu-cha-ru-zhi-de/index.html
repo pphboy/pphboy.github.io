@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Mybatis获取插入值的ID</title>
+<meta name="keywords" content="Mybatis获取插入值的ID, Hexo">
+<meta name="description" content="需求: 在后台做多次插入的时候,需要使用返回ID,然而普通的操作是无法做到的
+
+Mybatis可以在insert的标签 上加上 keyProperty&#x3D;’id’ useGeneratedKeys&#x3D;”true”来获取值
+问">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Mybatis获取插入值的ID">
+<meta property="og:description" content="需求: 在后台做多次插入的时候,需要使用返回ID,然而普通的操作是无法做到的
+
+Mybatis可以在insert的标签 上加上 keyProperty&#x3D;’id’ useGeneratedKeys&#x3D;”true”来获取值
+问">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Mybatis获取插入值的ID</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-12-24</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p><strong>需求: 在后台做多次插入的时候,需要使用返回ID,然而普通的操作是无法做到的</strong></p>
+<ul>
+<li>Mybatis可以在insert的标签 上加上 keyProperty&#x3D;’id’ useGeneratedKeys&#x3D;”true”来获取值</li>
+<li>问题: 一直没有办法获取到它主键ID的值</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertOptionInfo&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;map&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span> <span class="attr">useGeneratedKeys</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">        INSERT INTO `shopping`.`option_info`(`id`, `name`, `type`) VALUES (null, #&#123;name&#125;, 0)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>解决: 因为使用的是Map做为参数,然后其返回的Id的值事实上,会存到我们做为参数的这个ID</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping(&quot;admin/info/send&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title function_">sendOptionInfo</span><span class="params">(<span class="meta">@RequestBody</span> Map&lt;String,Object&gt; map)</span> &#123;</span><br><span class="line">        System.out.println(map);</span><br><span class="line">        <span class="keyword">if</span>(map.get(<span class="string">&quot;id&quot;</span>) != <span class="literal">null</span>) &#123;</span><br><span class="line">            om.updateOptionValue(map);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            om.insertOptionInfo(map);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>下面是其在前端的返回值<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202012/2146100-20201224085337263-1365715303.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202012/2146100-20201224085337263-1365715303.png"  lazyload></a></li>
+</ul>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/12/17/de-yu-lian-yong-de-wen-ti-ji-ban-fa/">
+          <h3 class="post-title">
+            下一篇：Bootstrap的Modal与WebUploader联用的问题及办法
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

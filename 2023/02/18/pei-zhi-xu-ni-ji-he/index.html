@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>VirtualBox 配置虚拟机 Host-only 和 Nat</title>
+<meta name="keywords" content="VirtualBox 配置虚拟机 Host-only 和 Nat, Hexo">
+<meta name="description" content="需求:
+
+需要虚拟机能够访问公网
+需要虚拟机能够被主机使用（使用基本的IP进行连接）
+
+软件： VirtualBox 7.0
+系统： Win7 ，Debian 11
+前提：创建Nat网络，创建Host-only网络
+原理：为每个虚拟机添加两">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="VirtualBox 配置虚拟机 Host-only 和 Nat">
+<meta property="og:description" content="需求:
+
+需要虚拟机能够访问公网
+需要虚拟机能够被主机使用（使用基本的IP进行连接）
+
+软件： VirtualBox 7.0
+系统： Win7 ，Debian 11
+前提：创建Nat网络，创建Host-only网络
+原理：为每个虚拟机添加两">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">VirtualBox 配置虚拟机 Host-only 和 Nat</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-02-18</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>需求:</p>
+<ol>
+<li>需要虚拟机能够访问公网</li>
+<li>需要虚拟机能够被主机使用（使用基本的IP进行连接）</li>
+</ol>
+<p>软件： VirtualBox 7.0</p>
+<p>系统： Win7 ，Debian 11<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218162801613-1288784890.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218162801613-1288784890.png"  alt="image" lazyload></a></p>
+<p>前提：<br>创建Nat网络，创建Host-only网络<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163008014-2007988014.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163008014-2007988014.png"  alt="image" lazyload></a><br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163023990-92771095.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163023990-92771095.png"  alt="image" lazyload></a></p>
+<p>原理：<br>为每个虚拟机添加两个网卡</p>
+<p>网卡1: 设置Nat网络<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218162906976-143312216.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218162906976-143312216.png"  alt="image" lazyload></a></p>
+<p>网卡2：设置Host-only(就是刚刚添加的host-only)<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218162921519-623138748.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218162921519-623138748.png"  alt="image" lazyload></a></p>
+<p>使用：<br>Win7的话会网卡是自动添加的以太网的，就当于插两个网卡就访问不同的网络<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163217489-1099131963.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163217489-1099131963.png"  alt="image" lazyload></a></p>
+<p>Debian需要配置，在网络里面将另一个以太网添加进去就行，Ubuntu好像会自动添加，如果不能用Host-only或者Nat，就是需要添加以太网就行<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163321484-2022965152.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163321484-2022965152.png"  alt="image" lazyload></a></p>
+<p><strong>总之就是你配好了，后没网，可能是没连接。建议写个自动脚本进行配置，我目前不会写。</strong></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163548893-1489429960.png"><img   src="/images/loading.svg" data-src="https://img2023.cnblogs.com/blog/2146100/202302/2146100-20230218163548893-1489429960.png"  alt="image" lazyload></a></p>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/02/16/she-zhi-chuang-kou-dao-ding-qie-bu-yun-xu-qi-ta-chuang-kou-cao-zuo/">
+          <h3 class="post-title">
+            下一篇：Qt 设置窗口到顶，且不允许其他窗口操作
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Cpp 友元简述</title>
+<meta name="keywords" content="Cpp 友元简述, Hexo">
+<meta name="description" content="友元函数，友元类
+使用友元，主要是易于直接访问数据，但友元本质是以破坏封装性为代价。
+下例引用于： 《C++程序设计（第2版）》
+
+
+
+
+
+
+
+友元声明位置由程序设计者决定，且不受类中public、private、protected权限控制">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Cpp 友元简述">
+<meta property="og:description" content="友元函数，友元类
+使用友元，主要是易于直接访问数据，但友元本质是以破坏封装性为代价。
+下例引用于： 《C++程序设计（第2版）》
+
+
+
+
+
+
+
+友元声明位置由程序设计者决定，且不受类中public、private、protected权限控制">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Cpp 友元简述</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-09-25</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>友元函数，友元类</p>
+<p><strong>使用友元，主要是易于直接访问数据，但友元本质是以破坏封装性为代价。</strong></p>
+<p>下例引用于： 《C++程序设计（第2版）》</p>
+<blockquote>
+<blockquote>
+<blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<ol>
+<li>友元声明位置由程序设计者决定，且不受类中public、private、protected权限控制符的影响。</li>
+<li>友元关系是单向的，即类A是类B的友元，但B不是A的友元。</li>
+<li>友元关系不具有传递性，即类C是类D的友元，类E是类C的友元，但类E不是类D的友元。</li>
+<li>友元关系不能被继承。<blockquote>
+<blockquote>
+<blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 友元类的例子</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Time</span>&#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="keyword">class</span> <span class="title class_">Circle</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">showDate</span><span class="params">()</span></span>;</span><br><span class="line"><span class="keyword">private</span> :</span><br><span class="line">    <span class="type">int</span> date;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Time::showDate</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;date = &quot;</span> &lt;&lt; <span class="keyword">this</span>-&gt;date &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span>&#123;</span><br><span class="line">    <span class="comment">// friend void getArea(Circle &amp;circle);</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">float</span> radius;</span><br><span class="line">    <span class="type">const</span> <span class="type">float</span> PI = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setTime</span><span class="params">(Time &amp;time,<span class="type">int</span> date)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">float</span> <span class="title">getArea</span><span class="params">(Point &amp;p1,Point &amp;p2)</span></span>;</span><br><span class="line">    <span class="built_in">Circle</span>(<span class="type">float</span> radius);</span><br><span class="line">    ~<span class="built_in">Circle</span>();</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Circle::setTime</span><span class="params">(Time &amp;time,<span class="type">int</span> date)</span></span>&#123;</span><br><span class="line">    time.date = date;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Circle::<span class="built_in">Circle</span>(<span class="type">float</span> radius = <span class="number">0</span>): <span class="built_in">radius</span>(radius)&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;圆的初始化半径为: &quot;</span>&lt;&lt; <span class="keyword">this</span>-&gt;radius &lt;&lt;  endl;</span><br><span class="line">&#125;</span><br><span class="line">Circle::~<span class="built_in">Circle</span>()&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;i came,i saw, i conquered&quot;</span>&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Point</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">float</span> <span class="title">Circle::getArea</span><span class="params">(Point &amp;p1,Point &amp;p2)</span></span>;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Point</span>(<span class="type">float</span> x,<span class="type">float</span> y);</span><br><span class="line">    ~<span class="built_in">Point</span>();</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">float</span> x;</span><br><span class="line">    <span class="type">float</span> y;</span><br><span class="line">&#125;;</span><br><span class="line">Point::<span class="built_in">Point</span>(<span class="type">float</span> x,<span class="type">float</span> y): <span class="built_in">x</span>(x),<span class="built_in">y</span>(y)&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;初始化坐标&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">Point::~<span class="built_in">Point</span>()&#123;&#125;;</span><br><span class="line"><span class="comment">// 如果是友元，则可以访问和修改私有成员变量 ，如果不是友元，从其根本上就无法访问私有变量 </span></span><br><span class="line"><span class="comment">// void getArea(Circle &amp;circle)&#123;</span></span><br><span class="line"><span class="comment">//     cout &lt;&lt; &quot;圆的半径：&quot; &lt;&lt; circle.radius &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">//     cout &lt;&lt;&quot;圆的面积：&quot; &lt;&lt; circle.PI * circle.radius* circle.radius &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">//     circle.radius = 1;</span></span><br><span class="line"><span class="comment">//     cout &lt;&lt; &quot;圆的半径：&quot; &lt;&lt; circle.radius &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">//     cout &lt;&lt;&quot;圆的面积：&quot; &lt;&lt; circle.PI * circle.radius* circle.radius &lt;&lt; endl;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// 如果一个类的成员函数被标识为另一个类的友元函数，则这个类的函数，可以通过引用直接访问另一个类的私有属性</span></span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">Circle::getArea</span><span class="params">(Point &amp;p1,Point &amp;p2)</span></span>&#123;</span><br><span class="line">    <span class="type">float</span> x = <span class="built_in">abs</span>(p<span class="number">1.</span>x-p<span class="number">2.</span>x);</span><br><span class="line">    <span class="type">float</span> y = <span class="built_in">abs</span>(p<span class="number">1.</span>y-p<span class="number">2.</span>y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;坐标(%.2f,%.2f)\n&quot;</span>,x,y);</span><br><span class="line">    <span class="type">float</span> len = <span class="built_in">sqrtf</span>(x*x+y*y); <span class="comment">//求两点之间的距离，这是勾股定理</span></span><br><span class="line">    cout&lt;&lt; <span class="string">&quot;两点之间的距离 : &quot;</span> &lt;&lt; len &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> len*len*PI;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Circle circle;</span><br><span class="line">    <span class="function">Point <span class="title">p1</span><span class="params">(<span class="number">5</span>,<span class="number">5</span>)</span></span>;</span><br><span class="line">    <span class="function">Point <span class="title">p2</span><span class="params">(<span class="number">10</span>,<span class="number">10</span>)</span></span>;</span><br><span class="line">    circle.<span class="built_in">getArea</span>(p1,p2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 测试友元类</span></span><br><span class="line">    <span class="comment">// 存在 两个 类 A 与 B，如果B内部标识了 friend class A;</span></span><br><span class="line">    <span class="comment">// 则A 内部的函数即可通过 B的对象，直接访问B的私有成员</span></span><br><span class="line">    Time time;</span><br><span class="line">    circle.<span class="built_in">setTime</span>(time,<span class="number">666</span>);</span><br><span class="line">    time.<span class="built_in">showDate</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/09/17/han-nuo-ta-shi-xian/">
+          <h3 class="post-title">
+            下一篇：汉诺塔  Java &amp;amp;&amp;amp; Cpp 实现
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

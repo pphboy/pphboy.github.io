@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Python元组(Tuple)</title>
+<meta name="keywords" content="Python元组(Tuple), Hexo">
+<meta name="description" content="
+元组并不简单，请分开元组与列表
+
+0x00 前言很多时间我都把Python的元组与列表归为一谈，但元组在开发中的使用效率便让我不得不重新认识一下元组。
+0x01 介绍元组无法变动其元素，且用小括号表示“（）”
+0x02 元组操作元组赋值需">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Python元组(Tuple)">
+<meta property="og:description" content="
+元组并不简单，请分开元组与列表
+
+0x00 前言很多时间我都把Python的元组与列表归为一谈，但元组在开发中的使用效率便让我不得不重新认识一下元组。
+0x01 介绍元组无法变动其元素，且用小括号表示“（）”
+0x02 元组操作元组赋值需">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Python元组(Tuple)</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-04-12</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <blockquote>
+<p>元组并不简单，请分开元组与列表</p>
+</blockquote>
+<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>很多时间我都把Python的元组与列表归为一谈，但元组在开发中的使用效率便让我不得不重新认识一下元组。</p>
+<h2 id="0x01-介绍"><a href="#0x01-介绍" class="headerlink" title="0x01 介绍"></a>0x01 介绍</h2><p>元组无法变动其元素，且用小括号表示“（）”</p>
+<h2 id="0x02-元组操作"><a href="#0x02-元组操作" class="headerlink" title="0x02 元组操作"></a>0x02 元组操作</h2><p>元组赋值需要带逗号，主要是为了区别于其它数据结构。</p>
+<p>且只有一个元素的时候不加逗号就会出现如下的问题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(a)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;int&#x27;</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">1</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">(<span class="number">1</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(a)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;tuple&#x27;</span>&gt;</span><br><span class="line"><span class="comment"># 下面这个写法可行，但不建议</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b</span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(b)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;tuple&#x27;</span>&gt;</span><br><span class="line"><span class="comment">#这是一种不带小括号的元组赋值方式</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c=<span class="number">1</span>,</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(c)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;tuple&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>拆开元组</strong></p>
+<p>把一个元组拆开分别赋值。（这里看得出元组不可变，可能因为其值是一个常量）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d,f = <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>d</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f</span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">type</span>(d)</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;int&#x27;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="元组加法"><a href="#元组加法" class="headerlink" title="元组加法"></a>元组加法</h3><p>就是将两个表合并</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">1</span>,<span class="number">2</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = (<span class="number">3</span>,<span class="number">4</span>,<span class="number">2</span>,)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a+b</span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="元组操作一些函数"><a href="#元组操作一些函数" class="headerlink" title="元组操作一些函数"></a>元组操作一些函数</h3><p>tuple()与list()可以相互转换成元组或是列表</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>len</td>
+<td>长度</td>
+</tr>
+<tr>
+<td>max</td>
+<td>返回最大值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>返回最小值</td>
+</tr>
+<tr>
+<td>tuple</td>
+<td>将列表转成元组</td>
+</tr>
+<tr>
+<td>del</td>
+<td>删除元组对象</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>对元组所有元素求和</td>
+</tr>
+</tbody></table>
+<h3 id="取元组元素"><a href="#取元组元素" class="headerlink" title="取元组元素"></a>取元组元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[:<span class="number">2</span>] <span class="comment"># 下标切片取元素</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">3</span>:<span class="number">4</span>]</span><br><span class="line">(<span class="number">4</span>,)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>关于公众号回复：pydoc 即可领取 python chm 的API文档</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://gitee.com/imgsbed/images/raw/master/img/%E5%85%AC%E4%BC%97%E5%8F%B7.png"><img   src="/images/loading.svg" data-src="https://gitee.com/imgsbed/images/raw/master/img/%E5%85%AC%E4%BC%97%E5%8F%B7.png"  alt="公众号" lazyload></a></p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="top-box-text">0x00 前言</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#0x01-%E4%BB%8B%E7%BB%8D"><span class="top-box-text">0x01 介绍</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#0x02-%E5%85%83%E7%BB%84%E6%93%8D%E4%BD%9C"><span class="top-box-text">0x02 元组操作</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%85%83%E7%BB%84%E5%8A%A0%E6%B3%95"><span class="top-box-text">元组加法</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%85%83%E7%BB%84%E6%93%8D%E4%BD%9C%E4%B8%80%E4%BA%9B%E5%87%BD%E6%95%B0"><span class="top-box-text">元组操作一些函数</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%8F%96%E5%85%83%E7%BB%84%E5%85%83%E7%B4%A0"><span class="top-box-text">取元组元素</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/04/02/guan-bi-de-feng-ming-jie-jue-zai-shan-li-de-wen-ti/">
+          <h3 class="post-title">
+            下一篇：关闭Vim 的蜂鸣 | 解决Vim在Git BASH闪砾的问题
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

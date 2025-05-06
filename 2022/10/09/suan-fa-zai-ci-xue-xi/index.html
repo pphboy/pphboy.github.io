@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>KMP 算法 再次学习</title>
+<meta name="keywords" content="KMP 算法 再次学习, Hexo">
+<meta name="description" content="c++ 版后面再补
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="KMP 算法 再次学习">
+<meta property="og:description" content="c++ 版后面再补
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">KMP 算法 再次学习</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-10-09</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>c++ 版后面再补</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.kbug.dynamic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * KMP 算法本质上是对 搜索的字符串做优化，然后在匹配的时候，能做到非常省时间</span></span><br><span class="line"><span class="comment"> * 如果搜索的串，都没有最大公连接相等子串，则此算法与暴力匹配无异</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Administrator</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KMPStringSearch</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="comment">// index = 14 是 </span></span><br><span class="line"><span class="comment">//		orgin[14] = &#x27;A&#x27;</span></span><br><span class="line">		<span class="type">String</span> <span class="variable">orign</span> <span class="operator">=</span> <span class="string">&quot;BBC ABBCDABCD ABBADDACCD AB&quot;</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;ABBA&quot;</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span> next[] = getNext(key);</span><br><span class="line">		System.out.println(Arrays.toString(next));</span><br><span class="line">		<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> kmpSearchString(orign, key, next);</span><br><span class="line">		System.out.println(<span class="string">&quot;index=&quot;</span>+index);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> origin</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> next next数组是key的部分匹配表</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">kmpSearchString</span><span class="params">(String origin,String key,<span class="type">int</span> next[])</span> &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>,j=<span class="number">0</span>;i&lt;origin.length();i++) &#123;</span><br><span class="line">			<span class="comment">// 这里就是说，拿到子串的上一个相同的字符进行比较</span></span><br><span class="line">			<span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; origin.charAt(i) != key.charAt(j)) &#123;</span><br><span class="line">				j = next[j-<span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 如果两个字符相当，则把 key的指针提前向后移一位</span></span><br><span class="line">			<span class="keyword">if</span>(origin.charAt(i) == key.charAt(j)) &#123;</span><br><span class="line">				j++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 我也不知道为什么要这样写</span></span><br><span class="line">			<span class="comment">// 作用是返回当前匹配成功的字符串</span></span><br><span class="line">			<span class="comment">// 原理我是真没明白，因为 在匹配的时候，i指针往后走，j也会往后走</span></span><br><span class="line">			<span class="comment">// 但j 指的是key字符串，而i指的是 origin的指针</span></span><br><span class="line">			<span class="comment">// j == key.length() 时，显然已经必然匹配成功</span></span><br><span class="line">			<span class="comment">// 所以 i 则是匹配成功最后一个字符的位置</span></span><br><span class="line">			<span class="comment">// 将 i 的位置 - j其实就是减key的字符长度</span></span><br><span class="line">			<span class="comment">// +1 是因为 j 是等于字符长度，而非数组索引（因为j = key.len)</span></span><br><span class="line">			<span class="comment">// 因为 每次判断后都会给j提前加上 1，所以j是越界的，但如果j 与key.len相等，则说明匹配成功</span></span><br><span class="line">			<span class="keyword">if</span>(j == key.length()) &#123;</span><br><span class="line">				<span class="comment">// 写成 更好理解，j-1就是j的索引</span></span><br><span class="line">				<span class="keyword">return</span> i-(j-<span class="number">1</span>);</span><br><span class="line"><span class="comment">//				return i-j+1;</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] getNext(String dest) &#123;</span><br><span class="line">		<span class="type">int</span> next[] = <span class="keyword">new</span> <span class="title class_">int</span>[dest.length()];</span><br><span class="line">		<span class="comment">// 第一个永远是0，因为仅有一个字符串的时候，只能是0</span></span><br><span class="line">		next[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>, j = <span class="number">0</span>; i &lt; dest.length(); i++) &#123;</span><br><span class="line">			<span class="comment">// 一直去寻找i与j相等的字符</span></span><br><span class="line">			<span class="comment">// 如果没找到就把 j 的上一个next的值给J，意思说</span></span><br><span class="line">			<span class="comment">// 如果没找到就从上一个开始重新找，但这个重新找</span></span><br><span class="line">			<span class="comment">// 意味着必然会在数据中，找到 next[j-1]与i相等的字符</span></span><br><span class="line">			<span class="comment">// 如果找不到，直到 j &lt;= 0 了，则会自动跳出这次循环</span></span><br><span class="line"><span class="comment">//			System.out.printf(&quot;j=%d, i =%d %c -&gt; %c \n&quot;,j,i,dest.charAt(i) ,dest.charAt(j));</span></span><br><span class="line">			<span class="comment">// 循环里的条件，每一次都会进行判断，所以不应该单拿出来</span></span><br><span class="line">			<span class="keyword">while</span>(j &gt;<span class="number">0</span> &amp;&amp; dest.charAt(i) != dest.charAt(j)) &#123;</span><br><span class="line"><span class="comment">//				System.out.println(&quot;a&quot;);</span></span><br><span class="line">				j = next[j-<span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 相等就把J++，则相等的长度+1</span></span><br><span class="line">			<span class="keyword">if</span>(dest.charAt(i) == dest.charAt(j)) &#123;</span><br><span class="line">				j++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			next[i] = j;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/10/09/ji-suan-ji-suan-fa-she-ji-yu-fen-xi-shi-yan-ti-ji-dai-ma/">
+          <h3 class="post-title">
+            下一篇：计算机算法设计与分析  实验题 及代码
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

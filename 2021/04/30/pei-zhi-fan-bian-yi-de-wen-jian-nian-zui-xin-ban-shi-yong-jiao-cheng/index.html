@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>eclipse配置JD-Eclipse反编译java的class文件 【2021年最新版使用教程】</title>
+<meta name="keywords" content="eclipse配置JD-Eclipse反编译java的class文件 【2021年最新版使用教程】, Hexo">
+<meta name="description" content="
+简介就是像eclipse那样ctrl+左键点击查看源码，不过eclipse本身不带这种插件而已
+0x00  下载JD-eclipse官网：http://java-decompiler.github.io/亲测下载有时可能不太稳定，所以我将">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="eclipse配置JD-Eclipse反编译java的class文件 【2021年最新版使用教程】">
+<meta property="og:description" content="
+简介就是像eclipse那样ctrl+左键点击查看源码，不过eclipse本身不带这种插件而已
+0x00  下载JD-eclipse官网：http://java-decompiler.github.io/亲测下载有时可能不太稳定，所以我将">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">eclipse配置JD-Eclipse反编译java的class文件 【2021年最新版使用教程】</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-04-30</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-a486ccf57e9be740ba1958d654e604b7aac.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-a486ccf57e9be740ba1958d654e604b7aac.png"  lazyload></a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>就是像eclipse那样ctrl+左键点击查看源码，不过eclipse本身不带这种插件而已</p>
+<h3 id="0x00-下载JD-eclipse"><a href="#0x00-下载JD-eclipse" class="headerlink" title="0x00  下载JD-eclipse"></a>0x00  下载JD-eclipse</h3><p>官网：<a target="_blank" rel="noopener" href="http://java-decompiler.github.io/">http://java-decompiler.github.io/</a><br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-eb697db20850997737f6031721fb4fdeeb5.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-eb697db20850997737f6031721fb4fdeeb5.png"  lazyload></a><br>亲测下载有时可能不太稳定，所以我将其包上传至我的gitee上，链接如下：<br><a target="_blank" rel="noopener" href="https://gitee.com/pimg/image/blob/master/img/jd-eclipse-2.0.0.zip">https://gitee.com/pimg/image/blob/master/img/jd-eclipse-2.0.0.zip</a></p>
+<p>如果可以请关注我的gitee:<a target="_blank" rel="noopener" href="https://gitee.com/pphboy">https://gitee.com/pphboy</a></p>
+<h3 id="0x01-解压"><a href="#0x01-解压" class="headerlink" title="0x01  解压"></a>0x01  解压</h3><p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-912b8539c525be72bf2c1087fa23ac9ce25.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-912b8539c525be72bf2c1087fa23ac9ce25.png"  lazyload></a></p>
+<p>如下图</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-58553756b21564fb6bab60e728867169f84.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-58553756b21564fb6bab60e728867169f84.png"  lazyload></a></p>
+<h3 id="0x02-安装"><a href="#0x02-安装" class="headerlink" title="0x02 安装"></a>0x02 安装</h3><p>Help -&gt; Install Software<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-f4a2ec6fa7124a5b28735f8c8e4923209b7.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-f4a2ec6fa7124a5b28735f8c8e4923209b7.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-e575fc8142b3be6a1a1c59e00af3c49b3c5.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-e575fc8142b3be6a1a1c59e00af3c49b3c5.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-fc6478896649e273b1f9945cf174c402642.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-fc6478896649e273b1f9945cf174c402642.png"  lazyload></a><br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-42c3e8eb77d9494f84d06f28916710f1975.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-42c3e8eb77d9494f84d06f28916710f1975.png"  lazyload></a><br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-cbaf1158919717c0526bdd9456a6f88846f.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-cbaf1158919717c0526bdd9456a6f88846f.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-abc1f62621e795291db34ed9ef16c7902d2.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-abc1f62621e795291db34ed9ef16c7902d2.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-7701b7d9991fd92ce1fec03248f2b9673f2.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-7701b7d9991fd92ce1fec03248f2b9673f2.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-968c7bc63b82b7f4be9e09ff193967980c5.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-968c7bc63b82b7f4be9e09ff193967980c5.png"  lazyload></a></p>
+<h3 id="0x03-配置JD-eclipse插件"><a href="#0x03-配置JD-eclipse插件" class="headerlink" title="0x03 配置JD-eclipse插件"></a>0x03 配置JD-eclipse插件</h3><p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-34306707414cc4b8182e7fd3a4decf17ca5.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-34306707414cc4b8182e7fd3a4decf17ca5.png"  lazyload></a></p>
+<p>打到 Editor就需要将.class文件的打开方式改成我们的这个插件的方式</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-de5e3234b827d05e5f9b11bf167a622a70e.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-de5e3234b827d05e5f9b11bf167a622a70e.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-f480c4c826c613880014540a9f8b25c5402.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-f480c4c826c613880014540a9f8b25c5402.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-305610364b20f1a9a7509b450776dafc699.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-305610364b20f1a9a7509b450776dafc699.png"  lazyload></a></p>
+<p>将Jd class file viewer 改成default</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-5e0a8511c58478423febf4594b0f9a883c3.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-5e0a8511c58478423febf4594b0f9a883c3.png"  lazyload></a></p>
+<h4 id="配置-class"><a href="#配置-class" class="headerlink" title="配置 .class"></a>配置 .class</h4><p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-c2b2226c4c40c514579309d1f25961ca21c.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-c2b2226c4c40c514579309d1f25961ca21c.png"  lazyload></a></p>
+<p>也设置为Default</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-c51b06a8d1282e5e35a3a0a73dee497234d.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-c51b06a8d1282e5e35a3a0a73dee497234d.png"  lazyload></a></p>
+<p>一点要点击成这个效果才行</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-9b55648f47ab41bb96f80fccf16cf526a5c.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-9b55648f47ab41bb96f80fccf16cf526a5c.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-3ee14b5142fd4415bba6de2b15f90f6449b.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-3ee14b5142fd4415bba6de2b15f90f6449b.png"  lazyload></a></p>
+<p>点击Apply and Close</p>
+<h3 id="0x04-配置样式"><a href="#0x04-配置样式" class="headerlink" title="0x04 配置样式"></a>0x04 配置样式</h3><p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-4737b612efe54f133378f15e6e0947621ea.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-4737b612efe54f133378f15e6e0947621ea.png"  lazyload></a></p>
+<p>已经ctrl+左键点击进入了</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-888f69664dc8e60604e6f12f7251055ab54.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-888f69664dc8e60604e6f12f7251055ab54.png"  lazyload></a></p>
+<p>但会看到有一些不想要的注释，让我们关掉它</p>
+<p>**Windows -&gt; Preferences **<br><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-8662d6f9e595d380865c0158c3f8ce17131.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-8662d6f9e595d380865c0158c3f8ce17131.png"  lazyload></a></p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-fb1b6e08b1fa9ea20dbe0c01f05fae93bac.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-fb1b6e08b1fa9ea20dbe0c01f05fae93bac.png"  lazyload></a></p>
+<p>把这三把勾全部去掉，然后 Apply and Close</p>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://oscimg.oschina.net/oscnet/up-66049b1a52f747b7753690b6f8d9bf6a375.png"><img   src="/images/loading.svg" data-src="https://oscimg.oschina.net/oscnet/up-66049b1a52f747b7753690b6f8d9bf6a375.png"  lazyload></a></p>
+<p><strong>提示：如果已打开过的文件可能不会改变其注释，但重启eclipse可解决其问题，打开未打开过的class文件，是没有问题的</strong></p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E7%AE%80%E4%BB%8B"><span class="top-box-text">简介</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#0x00-%E4%B8%8B%E8%BD%BDJD-eclipse"><span class="top-box-text">0x00  下载JD-eclipse</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#0x01-%E8%A7%A3%E5%8E%8B"><span class="top-box-text">0x01  解压</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#0x02-%E5%AE%89%E8%A3%85"><span class="top-box-text">0x02 安装</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#0x03-%E9%85%8D%E7%BD%AEJD-eclipse%E6%8F%92%E4%BB%B6"><span class="top-box-text">0x03 配置JD-eclipse插件</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#0x04-%E9%85%8D%E7%BD%AE%E6%A0%B7%E5%BC%8F"><span class="top-box-text">0x04 配置样式</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/04/12/yuan-zu/">
+          <h3 class="post-title">
+            下一篇：Python元组(Tuple)
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

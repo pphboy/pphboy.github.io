@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>JWT拦截器与跨域问题</title>
+<meta name="keywords" content="JWT拦截器与跨域问题, Hexo">
+<meta name="description" content=" 本文参考： https://blog.csdn.net/csdn_x_w/article/details/108027940
+我发现走的都是OPTIONS协议，然后JWT 却把OPTIONS拦截了，于是参考上文放行了OPTION请求
+拦截">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="JWT拦截器与跨域问题">
+<meta property="og:description" content=" 本文参考： https://blog.csdn.net/csdn_x_w/article/details/108027940
+我发现走的都是OPTIONS协议，然后JWT 却把OPTIONS拦截了，于是参考上文放行了OPTION请求
+拦截">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">JWT拦截器与跨域问题</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-01-28</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p> 本文参考： <a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn_x_w/article/details/108027940">https://blog.csdn.net/csdn_x_w/article/details/108027940</a></p>
+<p>我发现走的都是OPTIONS协议，然后JWT 却把OPTIONS拦截了，于是参考上文<br>放行了OPTION请求</p>
+<h4 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">package com.pipihao.piyu.interceptor;</span><br><span class="line"></span><br><span class="line">import com.auth0.jwt.exceptions.AlgorithmMismatchException;</span><br><span class="line">import com.auth0.jwt.exceptions.SignatureVerificationException;</span><br><span class="line">import com.auth0.jwt.exceptions.TokenExpiredException;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.pipihao.piyu.utils.JWTUtils;</span><br><span class="line">import org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import java.security.SignatureException;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class JWTInterceptor implements HandlerInterceptor &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        if(request.getMethod().toUpperCase().equals(&quot;OPTIONS&quot;))&#123;</span><br><span class="line">            return true; // 通过所有OPTION请求</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            Map&lt;String,Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">            // 获取请求令牌</span><br><span class="line">            String token = request.getHeader(&quot;token&quot;);</span><br><span class="line">            try&#123;</span><br><span class="line">                JWTUtils.verifyToken(token); // 验证令牌</span><br><span class="line">                return true;</span><br><span class="line">            &#125;catch (SignatureVerificationException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                map.put(&quot;msg&quot;,&quot;签名无效&quot;);</span><br><span class="line">            &#125;catch (TokenExpiredException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                map.put(&quot;msg&quot;,&quot;token过期&quot;);</span><br><span class="line">            &#125;catch(AlgorithmMismatchException e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                map.put(&quot;msg&quot;,&quot;token算法不一致&quot;);</span><br><span class="line">            &#125;catch (Exception e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                map.put(&quot;msg&quot;,&quot;token无效&quot;);</span><br><span class="line">            &#125;finally &#123;</span><br><span class="line">                /*如果进入到 finally内，则必然是报错了*/</span><br><span class="line">                // 将Map转换成Json</span><br><span class="line">                String json = new ObjectMapper().writeValueAsString(map);</span><br><span class="line">                response.setContentType(&quot;application/json;charset=UTF-8&quot;);</span><br><span class="line">                response.getWriter().println(json);</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="MVC配置"><a href="#MVC配置" class="headerlink" title="MVC配置"></a>MVC配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">package com.pipihao.piyu.config;</span><br><span class="line"></span><br><span class="line">import com.pipihao.piyu.interceptor.JWTInterceptor;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.CorsRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.InterceptorRegistry;</span><br><span class="line">import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@Configuration</span><br><span class="line">public class InterceptorConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 解决跨域</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addCorsMappings(CorsRegistry registry) &#123;</span><br><span class="line">        registry.addMapping(&quot;/**&quot;)</span><br><span class="line">                .allowedOrigins(&quot;*&quot;)</span><br><span class="line">                .allowCredentials(true)</span><br><span class="line">                .allowedMethods(&quot;GET&quot;, &quot;POST&quot;, &quot;DELETE&quot;, &quot;PUT&quot;)</span><br><span class="line">                .maxAge(3600);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 拦截器</span><br><span class="line">     * @param registry</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(new JWTInterceptor())</span><br><span class="line">                .addPathPatterns(&quot;/**&quot;) //拦截的接口，（理论上是所有的都拦截了）</span><br><span class="line">                .excludePathPatterns(</span><br><span class="line">                        &quot;/login&quot;,</span><br><span class="line">                        &quot;/user/register&quot;,</span><br><span class="line">                        &quot;/file/upload&quot;,</span><br><span class="line">                        &quot;/class/all&quot; //所有分类</span><br><span class="line">                ); // 不拦截的链接前端得加上“/”</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> 这个文章这样做不太聪明，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/pipihao/p/14336510.html">https://www.cnblogs.com/pipihao/p/14336510.html</a></p>
+<h4 id="反省"><a href="#反省" class="headerlink" title="反省"></a>反省</h4><p>对于跨域没有一个清楚的认识，对于 OPTIONS 协议的玩法模糊。<br>不熟悉拦截器原理，不熟悉Servlet原理。（很少看过API）</p>
+<p>通过此文 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/heioray/p/9392533.html">https://www.cnblogs.com/heioray/p/9392533.html</a><br>认识了OPTIONS 感觉该作者</p>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/01/27/wen-jian-shang-chuan-kua-yu/">
+          <h3 class="post-title">
+            下一篇：Vditor文件上传跨域
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

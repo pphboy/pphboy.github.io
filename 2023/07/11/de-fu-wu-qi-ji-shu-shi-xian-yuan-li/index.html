@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Unix C的Http服务器技术实现原理</title>
+<meta name="keywords" content="Unix C的Http服务器技术实现原理, Hexo">
+<meta name="description" content="基于tiny-httpd的一个http server，可处理 GET和POST请求。
+知识范围：
+POSIX接口pipe(int arr[2])pipe(int arr[2]);  使用pipe会创建通道，arr[0]为读，arr[1]为写">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Unix C的Http服务器技术实现原理">
+<meta property="og:description" content="基于tiny-httpd的一个http server，可处理 GET和POST请求。
+知识范围：
+POSIX接口pipe(int arr[2])pipe(int arr[2]);  使用pipe会创建通道，arr[0]为读，arr[1]为写">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Unix C的Http服务器技术实现原理</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-07-11</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>基于tiny-httpd的一个http server，可处理 GET和POST请求。</p>
+<p>知识范围：</p>
+<h2 id="POSIX接口"><a href="#POSIX接口" class="headerlink" title="POSIX接口"></a>POSIX接口</h2><p><strong>pipe(int arr[2])</strong><br>pipe(int arr[2]);  使用pipe会创建通道，arr[0]为读，arr[1]为写。</p>
+<p><strong>dup2 - 复制文件描述符</strong></p>
+<p>这个fd我目前理解是用来读数据的，使用dup2相当于直接复制了oldfd对应的数据</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dup2(oldfd,newfd)</span><br><span class="line">dup2(arr[<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">dup2(arr[<span class="number">0</span>],<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+
+
+<p>官方文档内容:</p>
+<blockquote>
+<p> On program startup, the integer file descriptors associated with the streams stdin, stdout, and stderr are 0, 1, and 2,  respectively.<br>   The  preprocessor  symbols STDIN_FILENO, STDOUT_FILENO, and STDERR_FILENO are defined with these values in &lt;unistd.h&gt;.</p>
+</blockquote>
+<ul>
+<li><p>fd也就是文件描述符</p>
+<ul>
+<li>0 表示 STDIN 标准输入流</li>
+<li>1 表示 STDOUT 标准输出流</li>
+<li>2 表示 STDERR 标准错误输出流</li>
+</ul>
+</li>
+</ul>
+<p><strong>I&#x2F;O 操作</strong></p>
+<p>fopen的介绍，fopen(filename,mode)<br>mode 填写  w 就是创建和覆盖的意思，上传文件的时候可以直接使用w</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">The fopen() function opens the file whose name is the string pointed to</span><br><span class="line">by pathname and associates a stream with it.</span><br><span class="line"></span><br><span class="line">The argument mode points to a string beginning with one of the  follow‐</span><br><span class="line">ing sequences (possibly followed by additional characters, as described</span><br><span class="line">below):</span><br><span class="line"></span><br><span class="line">r      Open text file for reading.  The stream is positioned at the be‐</span><br><span class="line">       ginning of the file.</span><br><span class="line"></span><br><span class="line">r+     Open  for  reading and writing.  The stream is positioned at the</span><br><span class="line">       beginning of the file.</span><br><span class="line"></span><br><span class="line">w      Truncate file to zero length or create text  file  for  writing.</span><br><span class="line">       The stream is positioned at the beginning of the file.</span><br><span class="line"></span><br><span class="line">w+     Open  for  reading  and writing.  The file is created if it does</span><br><span class="line">       not exist, otherwise it is truncated.  The stream is  positioned</span><br><span class="line">       at the beginning of the file.</span><br><span class="line"></span><br><span class="line">a      Open  for  appending (writing at end of file).  The file is cre‐</span><br><span class="line">       ated if it does not exist.  The stream is positioned at the  end</span><br><span class="line">       of the file.</span><br><span class="line"></span><br><span class="line">a+     Open  for  reading  and appending (writing at end of file).  The</span><br><span class="line">       file is created if it does not exist.  Output is always appended</span><br><span class="line">       to  the  end  of  the file.  POSIX is silent on what the initial</span><br><span class="line">       read position is when using this mode.  For glibc,  the  initial</span><br><span class="line">       file  position  for reading is at the beginning of the file, but</span><br><span class="line">       for Android/BSD/MacOS, the initial file position for reading  is</span><br><span class="line">       at the end of the file.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>需要实现一个类似于把文件读取 到连接的文件描述符中</p>
+<p>文件读取和写入</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">create_newfile</span><span class="params">(<span class="type">char</span> *filename)</span>&#123;</span><br><span class="line">  FILE* res = <span class="literal">NULL</span>;</span><br><span class="line">  res = fopen(filename, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">  <span class="type">char</span> bus[<span class="number">1024</span>];</span><br><span class="line">  <span class="built_in">sprintf</span>(bus, <span class="string">&quot;&#123;\n\t\&quot;a\&quot;:\&quot;%s\&quot;\n&#125;&quot;</span>,filename);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">fputs</span>(bus, res);</span><br><span class="line">  fflush(res);</span><br><span class="line">  fclose(res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="type">char</span> *a = <span class="string">&quot;./b.txt&quot;</span>;</span><br><span class="line"></span><br><span class="line">  FILE *res = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">1024</span>];</span><br><span class="line">  <span class="type">int</span> i = <span class="number">-1</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 创建文件并写文件</span></span><br><span class="line">  create_newfile(a);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 读文件</span></span><br><span class="line">  res = fopen(a, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  fgets(buf, <span class="keyword">sizeof</span> buf, res);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span>(!(i = feof(res))) &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,buf);</span><br><span class="line"></span><br><span class="line">    fgets(buf, <span class="keyword">sizeof</span> buf, res);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>,buf);</span><br><span class="line">  </span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;i = %d\n&quot;</span>,i);</span><br><span class="line">  fclose(res);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用子进程执行cgi程序</strong> </p>
+<p>这里的重点是需要了解 父进程是可能比子进程 早完成，所以需要使用wait() 或者 waitpid()进行等待子进程完成</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// child thread cgi</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="type">char</span> *path = <span class="string">&quot;c.cgi&quot;</span>;</span><br><span class="line">  <span class="type">int</span> pid = <span class="number">-1</span>,status = <span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">&quot;CreateP&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">    execl(path,path,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Faker\n&quot;</span>);</span><br><span class="line">    <span class="comment">// 如果不等待子进程完成，那么父进程可能比子进程先执行完，那么子进程就变成了孤儿进程</span></span><br><span class="line">    <span class="comment">// 会导致 程序无法正常退出，所以需要使用wait() 或 waitpid()</span></span><br><span class="line">    waitpid(pid, &amp;status, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Status:%d\n&quot;</span>,status);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Pid:%d\n&quot;</span>,pid);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用dup2改变标准输入输出流</strong></p>
+<p>作用就是可以直接拿子进程的输入输出流的数据，如果需要输入数据那么就操作 STDIN(0) ，获取子进程的输出数据  STDOUT(1)</p>
+<p>因为使用的是操作 文件描述符，适合底层操作，因为POSIX中用的就是文件描述符，TCP 通讯也是  文件描述符 (就是那个 fd)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">int</span> flags, <span class="type">mode_t</span> mode)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">creat</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *pathname, <span class="type">mode_t</span> mode)</span>;</span><br><span class="line">                   </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> flags</span></span><br><span class="line"><span class="comment"> </span></span><br><span class="line"><span class="comment">O_RDONLY：以只读方式打开文件。</span></span><br><span class="line"><span class="comment">O_WRONLY：以只写方式打开文件。</span></span><br><span class="line"><span class="comment">O_RDWR：以读写方式打开文件。</span></span><br><span class="line"><span class="comment">O_CREAT：如果文件不存在，则创建一个新文件。</span></span><br><span class="line"><span class="comment">O_APPEND：在文件末尾附加数据，而不覆盖现有内容。</span></span><br><span class="line"><span class="comment">O_TRUNC：如果文件已存在，则截断（清空）文件。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">mode</span></span><br><span class="line"><span class="comment">S_IRUSR：用户（owner）可读权限</span></span><br><span class="line"><span class="comment">S_IWUSR：用户（owner）可写权限</span></span><br><span class="line"><span class="comment">S_IXUSR：用户（owner）可执行权限</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="type">char</span> *path = <span class="string">&quot;c.cgi&quot;</span>;</span><br><span class="line">  <span class="type">char</span> *<span class="built_in">log</span> = <span class="string">&quot;log&quot;</span>;</span><br><span class="line">  <span class="type">int</span> pid = <span class="number">-1</span>,status = <span class="number">-1</span>;</span><br><span class="line">  <span class="type">int</span> pfd = <span class="number">-1</span>;</span><br><span class="line">  pfd = open(<span class="built_in">log</span>, O_WRONLY | O_CREAT | O_TRUNC,S_IRUSR | S_IWUSR);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">&quot;CreateP&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 直接将 STDOUT 输入到 文件夹</span></span><br><span class="line">    dup2(pfd,<span class="number">1</span>);</span><br><span class="line">    execl(path,path,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Faker\n&quot;</span>);</span><br><span class="line">    <span class="comment">// 如果不等待子进程完成，那么父进程可能比子进程先执行完，那么子进程就变成了孤儿进程</span></span><br><span class="line">    <span class="comment">// 会导致 程序无法正常退出，所以需要使用wait() 或 waitpid()</span></span><br><span class="line">    waitpid(pid, &amp;status, <span class="number">0</span>);</span><br><span class="line">    close(pfd);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Status:%d\n&quot;</span>,status);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Pid:%d\n&quot;</span>,pid);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用管道进行文件描述转换</strong></p>
+<p>pipe(pipe_array) 创建一个管道</p>
+<p>使用 dup2() 复制 STDOUT 到 pipe_array[1] </p>
+<p>等程序执行完成后，再把 pipe_array[0] 中的数据写到文件中去</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// child thread cgi</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">  <span class="type">char</span> *path = <span class="string">&quot;c.cgi&quot;</span>;</span><br><span class="line">  <span class="type">char</span> *<span class="built_in">log</span> = <span class="string">&quot;log&quot;</span>;</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">1024</span>];</span><br><span class="line">  <span class="type">char</span> c;</span><br><span class="line">  <span class="type">int</span> pid = <span class="number">-1</span>,status = <span class="number">-1</span>;</span><br><span class="line">  <span class="type">int</span> pfd = <span class="number">-1</span>;</span><br><span class="line">  <span class="type">int</span> pipe_output[<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// disable umask</span></span><br><span class="line">  <span class="comment">// 还需要重新学一下怎么配置umask</span></span><br><span class="line">  <span class="comment">// umask control file privilege,if you dont disable or set umask, than you will cant change some privilege about new file</span></span><br><span class="line">  umask(<span class="number">0</span>);</span><br><span class="line">    pfd = open(<span class="built_in">log</span>, O_WRONLY | O_CREAT | O_TRUNC, <span class="number">0777</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;FILE P:%d\n&quot;</span>, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(pipe(pipe_output) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    perror(<span class="string">&quot;PIPE&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;PIPE_OUTPUT:%d\n&quot;</span>,pipe_output[<span class="number">1</span>]);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span>((pid = fork()) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    perror(<span class="string">&quot;CreateP&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">if</span>(pid == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// 直接将 STDOUT 输入到 管道中</span></span><br><span class="line">    dup2(pipe_output[<span class="number">1</span>],<span class="number">1</span>);</span><br><span class="line">    execl(path,path,<span class="literal">NULL</span>);</span><br><span class="line">    <span class="comment">// finished writing, should close the file descriptor</span></span><br><span class="line">    close(pipe_output[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">  &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// in parent process, the first should close the writing pipe </span></span><br><span class="line">    close(pipe_output[<span class="number">1</span>]);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Faker\n&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    waitpid(pid, &amp;status, <span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> read_len = read(pipe_output[<span class="number">0</span>],&amp;buf,<span class="keyword">sizeof</span> buf);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;read_len:%d\n&quot;</span>,read_len);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>( read_len &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="comment">// if data dont have 1024 bytes size, shoud add \0 in the end of content</span></span><br><span class="line">      <span class="keyword">if</span>(read_len &lt; <span class="number">1024</span> ) &#123;</span><br><span class="line">        buf[read_len] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      write(pfd,&amp;buf,read_len);</span><br><span class="line">      read_len = read(pipe_output[<span class="number">0</span>],&amp;buf,<span class="keyword">sizeof</span> buf);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Buf:\n%s&quot;</span>,buf);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;read_len: %d\n&quot;</span>,read_len);</span><br><span class="line">    close(pfd);</span><br><span class="line">    close(pipe_output[<span class="number">1</span>]);</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置Socket状态</strong></p>
+<p>建立套接字后需要设置套接字的状态，须使用 <code>setsockopt()</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;sys/types.h&gt;          /* See NOTES */</span><br><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line"></span><br><span class="line">int getsockopt(int sockfd, int level, int optname,</span><br><span class="line">                void *optval, socklen_t *optlen);</span><br><span class="line">int setsockopt(int sockfd, int level, int optname,</span><br><span class="line">                const void *optval, socklen_t optlen);</span><br></pre></td></tr></table></figure>
+
+<p>解释一下参数的意思<br> sockfd， 就是sock的文件描述符<br> level就是sock所处的层次 一般用<code>SOL_SOCKET</code> 代表TCP<br> optname   表示需要设置的选项</p>
+<pre><code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SO_DEBUG：打开或关闭排错模式</span><br><span class="line">SO_REUSEADDR：在bind()函数中允许本地IP地址可重复使用</span><br><span class="line">SO_TYPE：返回socket形态</span><br><span class="line">SO_ERROR：返回socket已发生的错误原因</span><br><span class="line">SO_DONTROUTE：发送的数据包不要利用路由设备来传输</span><br><span class="line">SO_BROADCAST：使用广播方式传送</span><br><span class="line">SO_SNDBUF：设置发送的暂存区大小</span><br><span class="line">SO_RCVBUF：设置接收的暂存区大小</span><br><span class="line">SO_KEEPALIVE：定期确定连线是否已终止</span><br><span class="line">SO_OOBINLINE：当接收到OOB 数据时会马上送至标准输入设备</span><br><span class="line">SO_LINGER：确保数据可以安全可靠地传送出去。</span><br></pre></td></tr></table></figure>
+</code></pre>
+<p>   optval 设置参数返回值的指针<br>   optlen表示optval的长度。<br>   setsockopt 执行成功返回 0 ,执行失败返回1</p>
+<h2 id="Makefile-简单使用"><a href="#Makefile-简单使用" class="headerlink" title="Makefile 简单使用"></a>Makefile 简单使用</h2><p>单文件的，先简单使用一下，主要是先用起来，后面再补</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc</span><br><span class="line"></span><br><span class="line">BIN = make_test</span><br><span class="line"></span><br><span class="line">BIN_DIR = bin</span><br><span class="line">OBJS_DIR = obj</span><br><span class="line">SRC_DIR = src</span><br><span class="line"></span><br><span class="line">OBJS = ../$(OBJS_DIR)/%.o</span><br><span class="line"></span><br><span class="line">all:COMPILE</span><br><span class="line"></span><br><span class="line">COMPILE: CHECK_DIR</span><br><span class="line">	$(CC) -c $(SRC_DIR)/*.c</span><br><span class="line">	mv *.o $(OBJS_DIR)</span><br><span class="line">	$(CC) -o $(BIN) $(OBJS_DIR)/*.o</span><br><span class="line"></span><br><span class="line">CHECK_DIR: ECHO</span><br><span class="line">	@mkdir -p $(BIN_DIR)</span><br><span class="line">	@mkdir -p $(OBJS_DIR)</span><br><span class="line"></span><br><span class="line">ECHO: </span><br><span class="line">	@echo $(SUBDIRS)</span><br><span class="line">	@echo begin compile</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	@$(RM) $(OBJS_DIR)/*.o</span><br><span class="line">	@rm -rf $(BIN_DIR)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="Tiny-Httpd实现步骤"><a href="#Tiny-Httpd实现步骤" class="headerlink" title="Tiny Httpd实现步骤"></a>Tiny Httpd实现步骤</h2><ol>
+<li><p>创建一个 listenfd 用于 绑定端口</p>
+<ul>
+<li>设置 sockfd 的状态为 setsockopt(connfd, SOL_SOCKET, SO_REUSEADDR, &amp;re, sizeof(re)) ;<ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77023584">https://zhuanlan.zhihu.com/p/77023584</a></li>
+</ul>
+</li>
+<li>使用htons 绑定端口， htonl(INADDR_ANY) 绑定 0.0.0.0 的IP 地址</li>
+</ul>
+</li>
+<li><p>通过accept接收一个关于listenfd的 链接 connfd</p>
+</li>
+<li><p>使用recv接收connfd的请求头数据，如下所示</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RECV N: 82</span><br><span class="line">GET /path HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:8081</span><br><span class="line">User-Agent: curl/7.74.0</span><br><span class="line">Accept: */*</span><br></pre></td></tr></table></figure></li>
+<li><p>获取特定的函数处理以上请求头，获取请求体</p>
+</li>
+<li><p>在发送数据之前先把请求头写到connfd中</p>
+<ul>
+<li>还需要完成  一些错误处理的函数</li>
+<li>根据 数字返回请求头  <code>headers(int connfd,int  HttpStatus)</code></li>
+<li>HttpStatus  用枚举可好？ HTTP_OK , HTTP_NOT_FOUD</li>
+</ul>
+</li>
+<li><p>判断是否要执行 cgi，就是说 如果请求的 <code>/path</code> 是 cgi的名字，那么就执行cgi</p>
+<ol>
+<li>先把准备好的请求参数放到子进程的运行环境中</li>
+<li>cgi程序需要位于 &#x2F;cgi目录于  请求时 类似于 请求 <a target="_blank" rel="noopener" href="http://127.0.0.1/cgi/test.cgi">http://127.0.0.1/cgi/test.cgi</a></li>
+<li>如果 <code>path</code> 前缀是 &#x2F;cgi 则判断文件 是否存在，存在则执行，不存在则报404</li>
+</ol>
+</li>
+<li><p>判断是否是静态文件，反正不在 <code>/cgi</code> 的都是静态文件，默认 请求的path为 <code>/</code> ，指向 <code>/index.html</code> 或 <code>index.cgi</code></p>
+<ul>
+<li>index.html为静态文件</li>
+<li>index.cgi为  c语言的可执行程序</li>
+<li>如果这两个都不存在，则报 404</li>
+</ul>
+</li>
+<li><p>执行完后，需要close(connfd)</p>
+</li>
+</ol>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#POSIX%E6%8E%A5%E5%8F%A3"><span class="top-box-text">POSIX接口</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Makefile-%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="top-box-text">Makefile 简单使用</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#Tiny-Httpd%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="top-box-text">Tiny Httpd实现步骤</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/07/10/yu-yan-huo-qu-wen-jian-hou-zhui/">
+          <h3 class="post-title">
+            下一篇：C语言获取文件后缀
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

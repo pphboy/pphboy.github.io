@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>MySQL的执行顺序</title>
+<meta name="keywords" content="MySQL的执行顺序, Hexo">
+<meta name="description" content="MySQL语句一共分为11步，最先执行的是FROM操作，最后执行的是LIMIT操作，其中每一个操作都会产生一张虚拟的表，这个虚拟的表作为一个处理的输入，只是虚拟的表对用户来说是透明的，只有最后一个虚拟表会被作为结果返回，如果没有在语句中指定">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="MySQL的执行顺序">
+<meta property="og:description" content="MySQL语句一共分为11步，最先执行的是FROM操作，最后执行的是LIMIT操作，其中每一个操作都会产生一张虚拟的表，这个虚拟的表作为一个处理的输入，只是虚拟的表对用户来说是透明的，只有最后一个虚拟表会被作为结果返回，如果没有在语句中指定">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">MySQL的执行顺序</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-08-01</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>MySQL语句一共分为11步，最先执行的是FROM操作，最后执行的是LIMIT操作，其中每一个操作都会产生一张虚拟的表，这个虚拟的表作为一个处理的输入，只是虚拟的表对用户来说是透明的，只有最后一个虚拟表会被作为结果返回，如果没有在语句中指定某一个子句，那么将会跳过相应的步骤。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(8) SELECT </span><br><span class="line">	(9) DISTINCT&lt;Select_list&gt;</span><br><span class="line">(1) FROM &lt;LEFT_TABLE&gt;</span><br><span class="line">(3) &lt;join type&gt; JOIN &lt;right_table&gt;</span><br><span class="line">(2)	ON &lt;join_condition&gt;</span><br><span class="line">(4) WHERE &lt;where_condition&gt;</span><br><span class="line">(5) GROUP BY &lt;grou_by_list&gt;</span><br><span class="line">(6) WITH &#123;CUBE|ROLLUP&#125;</span><br><span class="line">(7) HAVING &lt;having_condition&gt;</span><br><span class="line">(10) ORDER BY &lt;order_by_list&gt;</span><br><span class="line">(11) LIMIT &lt;limit_number&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>详情：</strong></p>
+<ol>
+<li>FROM : 对 FROM 的左边的表和右边的表计算笛卡尔积，产生虚表VT1</li>
+<li>ON：对虚表VT1 进行ON筛选，只有那些符合 &lt;join-condition&gt;的行才会被记录在虚表VT2中。</li>
+<li>JOIN：如果指定了OUTER JOIN（比如left join, right join)，那么保留表中未匹配的竺就会作为外部添行添加到VT2中，产生虚表VT3，rug from 中包含两个以上的表话，那么就会对上一个join连接产生结果的VT3和下一个表重复执行步骤1~3，一直到处理完所有表为止。</li>
+<li>WHERE：对虚拟表VT3进行WHERE 条件过滤，只有符合 &lt;where-condition&gt;的记录才会被插入到虚拟表VT4中。</li>
+<li>GROUP BY: 根据group by 子句中的列，对VT4的记录进行分组操作，产生 VT5.</li>
+<li>CUBE| ROLLUP：对表VT5进行CUBE或者rollup操作，产生 VT6。</li>
+<li>HAVING: 对虚拟表VT6 应用having过滤，只有符合&lt;having-condition&gt;的记录才会被插入到虚拟表VT7中。</li>
+</ol>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/08/01/shu-ju-ku-she-ji-gui-fan/">
+          <h3 class="post-title">
+            下一篇：Mysql数据库设计规范
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

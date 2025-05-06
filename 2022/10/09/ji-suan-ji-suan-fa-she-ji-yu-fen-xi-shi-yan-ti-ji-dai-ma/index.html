@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>计算机算法设计与分析  实验题 及代码</title>
+<meta name="keywords" content="计算机算法设计与分析  实验题 及代码, Hexo">
+<meta name="description" content="很舒服的题目，不难。科班的知识就是舒服。
+实验2：递归与分治实验目的熟悉递归算法的基本思想和基本步骤，熟练掌握递归公式的推导和定义方法，用递归算法解决实际问题。
+实验要求 f对本实验中的问题，设计出算法并编程实现。实验内容：
+注意：以下算法">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="计算机算法设计与分析  实验题 及代码">
+<meta property="og:description" content="很舒服的题目，不难。科班的知识就是舒服。
+实验2：递归与分治实验目的熟悉递归算法的基本思想和基本步骤，熟练掌握递归公式的推导和定义方法，用递归算法解决实际问题。
+实验要求 f对本实验中的问题，设计出算法并编程实现。实验内容：
+注意：以下算法">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">计算机算法设计与分析  实验题 及代码</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-10-09</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>很舒服的题目，不难。科班的知识就是舒服。</p>
+<p>实验2：递归与分治<br>实验目的<br>熟悉递归算法的基本思想和基本步骤，熟练掌握递归公式的推导和定义方法，用递归算法解决实际问题。</p>
+<p>实验要求 f<br>对本实验中的问题，设计出算法并编程实现。<br>实验内容：</p>
+<p>注意：以下算法要求使用函数实现，都放到一个程序文件里面。即只使用使用一个main函数。</p>
+<p>1 求最大公约数 (30分)<br>使用辗转相除法和递归求两个正整数m和n的最大公约数。	</p>
+<p>输入格式:<br>输入两个正整数m,n。</p>
+<p>输出格式:<br>按要求输出辗转相除过程及最终结果，输出结果之间空格分隔。</p>
+<p>输入样例:<br>21 35	<br>输出样例:<br>gcd(21,35) gcd(35,21) gcd(21,14) gcd(14,7) 7</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">maxgyNum</span><span class="params">(<span class="type">int</span> n1,<span class="type">int</span> n2)</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(n1 &lt; n2)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;gcb(%d,%d) &quot;</span>,n1,n2);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">maxgyNum</span>(n2,n1);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="type">int</span> n3=n1%n2;</span><br><span class="line">		<span class="keyword">if</span>(n3 % n2 != <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;gcb(%d,%d) &quot;</span>,n1,n2);</span><br><span class="line">			<span class="keyword">return</span> <span class="built_in">maxgyNum</span>(n3,n2);</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> n2;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="built_in">maxgyNum</span>(<span class="number">21</span>,<span class="number">35</span>);</span><br><span class="line">	cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.使用递归算法判断是否是完数，并输出2-2000的所有完数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6 3 2 1</span></span><br><span class="line"><span class="comment">//28 14 7 4 2 1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">isPN</span><span class="params">(<span class="type">int</span> num,<span class="type">int</span> next,<span class="type">int</span> sum)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(num % next == <span class="number">0</span>)&#123;</span><br><span class="line">		sum += next;</span><br><span class="line">		<span class="comment">//cout &lt;&lt; next  &lt;&lt;&quot;-&quot; &lt;&lt; sum&lt;&lt; endl;</span></span><br><span class="line">		<span class="keyword">if</span>(next==<span class="number">1</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> sum == num;</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(next &lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">isPN</span>(num,--next,sum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取完全数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">getPN</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">isPN</span>(num,num<span class="number">-1</span>,<span class="number">0</span>))&#123;</span><br><span class="line">		cout &lt;&lt; num &lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(num&lt;=<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">getPN</span>(--num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">getPN</span>(<span class="number">2000</span>);</span><br><span class="line">	<span class="comment">//cout &lt;&lt; isPN(18,17,0) &lt;&lt; endl;</span></span><br><span class="line">	<span class="comment">//cout &lt;&lt; 28 % 28 &lt;&lt;endl;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3 递归实现逆序输出整数 (15分)<br>本题目要求读入1个正整数n，然后编写递归函数reverse(int n)实现将该正整数逆序输出。<br>输入格式:<br>输入在一行中给出1个正整数n。</p>
+<p>输出格式:<br>对每一组输入，在一行中输出n的逆序数。</p>
+<p>输入样例:<br>12345<br>输出样例:<br>54321</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int reverse(int n)&#123;</span><br><span class="line">	if(n &lt;= 0) return 0;</span><br><span class="line">	cout &lt;&lt; n%10;</span><br><span class="line">	reverse(n/10);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>4.一球从100米高度自由落下，每次落地后反跳回原高度的一半；再落下，求它在第10次落地时，共经过多少米？第10次反弹多</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">float rebound(int n,float high)&#123;</span><br><span class="line">	if(n&lt;=1) &#123;</span><br><span class="line">		return 100;</span><br><span class="line">	&#125;</span><br><span class="line">	return rebound(n-1,high) + (high/pow(2,n-1))*2;	</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	cout &lt;&lt; rebound(10,100) &lt;&lt; endl;</span><br><span class="line">	return 0;</span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>5 递归 递推 (15分)<br>大一新生LinYX 最近学了一个新的算法—递归，他发现这个算法可以解决一些高中的数列问题，如果已知f1以及公式fn&#x3D;a*fn-1+b，求fn很方便。聪明的你也应该已经学会了递归，那就来表现一下吧。<br>输入格式:<br>输入包含若干行数据，每行都有4个整数，n，f1,a，b。</p>
+<p>输出格式:<br>输出fn 。每组测试数据显示在不同行。</p>
+<p>输入样例:<br>在这里给出一组输入。例如：<br>	n<br>1 4 1 1  f1 &#x3D; 1*<br>1 6 2 3<br>2 2 1 1<br>输出样例:<br>在这里给出相应的输出。例如：</p>
+<p>4<br>6<br>3</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">recursion</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> fn,<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> fn; <span class="comment">// 因为是fn-1，并且提供了n，当n=1时 ,fn = f1 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a*<span class="built_in">recursion</span>(n<span class="number">-1</span>,fn,a,b)+b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">recursion</span>(<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>) &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6 函数的递归调用 (10分)<br>有n个人坐在一起，第n个人比第n-1个人大2岁，第n-1个人比第n-2个人大2岁，以此类推，……，第1个人是10岁。请问第n个人年龄多大？<br>输入格式:<br>输入一个整数表示第几个人。</p>
+<p>输出格式:<br>输出第n个人是m岁。</p>
+<p>输入样例:<br>5<br>输出样例:<br>Number 5 is 18 age!</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">cAge</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(num&lt;=<span class="number">1</span>) <span class="keyword">return</span> <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">cAge</span>(num<span class="number">-1</span>)<span class="number">+2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="built_in">cAge</span>(<span class="number">100</span>) &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/09/25/you-yuan-jian-shu/">
+          <h3 class="post-title">
+            下一篇：Cpp 友元简述
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

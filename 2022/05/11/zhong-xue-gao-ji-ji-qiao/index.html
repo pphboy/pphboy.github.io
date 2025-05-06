@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>重学SpringBoot. step6 SpringBoot高级技巧</title>
+<meta name="keywords" content="重学SpringBoot. step6 SpringBoot高级技巧, Hexo">
+<meta name="description" content="SpringBoot高级技术博客地址: step6 SpringBoot高级技巧
+异步线程池书上讲的是什么像异步操作那样，然后不需要等待。问题是，不需要等待，但数据在生成的时候的时间并不能省。我们计时不是从开始到得到数据时候吗？
+我觉得是多">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="重学SpringBoot. step6 SpringBoot高级技巧">
+<meta property="og:description" content="SpringBoot高级技术博客地址: step6 SpringBoot高级技巧
+异步线程池书上讲的是什么像异步操作那样，然后不需要等待。问题是，不需要等待，但数据在生成的时候的时间并不能省。我们计时不是从开始到得到数据时候吗？
+我觉得是多">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">重学SpringBoot. step6 SpringBoot高级技巧</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-05-11</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="SpringBoot高级技术"><a href="#SpringBoot高级技术" class="headerlink" title="SpringBoot高级技术"></a>SpringBoot高级技术</h1><p><a target="_blank" rel="noopener" href="https://kbug.cn/post/733.html">博客地址: step6 SpringBoot高级技巧</a></p>
+<h2 id="异步线程池"><a href="#异步线程池" class="headerlink" title="异步线程池"></a>异步线程池</h2><p>书上讲的是什么像异步操作那样，然后不需要等待。<br>问题是，不需要等待，但数据在生成的时候的时间并不能省。<br>我们计时不是从开始到得到数据时候吗？</p>
+<p>我觉得是多任务的时候可以用异步线程池，如：统计和拿到各大模块的数据的时候，就可以用异步多线程，或者是不需要结果的操作时。</p>
+<p>像清理文件，这就可以用异步来做，然后直接返回信息，不需要用户等待。</p>
+<p>更为具体的，我认为可以称之为，异步任务队列。</p>
+<p>第一，给自己的Service 实现方法上打上@Async，然后就是异步执行了。</p>
+<p>这个功能用来远程调用还是非常不错的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableAsync</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AsyncConfig</span> <span class="keyword">implements</span> <span class="title class_">AsyncConfigurer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Executor <span class="title function_">getAsyncExecutor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ThreadPoolTaskExecutor</span> <span class="variable">taskExecutor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPoolTaskExecutor</span>();</span><br><span class="line">        <span class="comment">// 核心线程数量</span></span><br><span class="line">        taskExecutor.setCorePoolSize(<span class="number">10</span>);</span><br><span class="line">        <span class="comment">// 线程池最大线程数</span></span><br><span class="line">        taskExecutor.setMaxPoolSize(<span class="number">30</span>);</span><br><span class="line">        <span class="comment">// 线程队列最大线程数</span></span><br><span class="line">        taskExecutor.setQueueCapacity(<span class="number">2000</span>);</span><br><span class="line">        taskExecutor.initialize();</span><br><span class="line">        <span class="keyword">return</span> taskExecutor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定时器-异步消息"><a href="#定时器-异步消息" class="headerlink" title="定时器 &amp;&amp; 异步消息"></a>定时器 &amp;&amp; 异步消息</h2><p>用定时器可以做一些定时广播的任务，定时给用户发广告，当然这得用异步。</p>
+<p>其中Sechuled可以配置每天什么时候，或者是隔多久执行一次</p>
+<p>@EnableScheduling 开启全局定时器</p>
+<p>异步消息就是在要执行方法上加上@Async,然后配置类在异步线程池那一段，但如果你的需求要用到异步的时候，请一定要想好数据安全是否得到保证。</p>
+<p>你更不能指望这一篇博文能帮助你学会这个技术，即使一本SpringBoot的专业书也不行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SystemServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">SystemService</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Async</span></span><br><span class="line">    <span class="meta">@Scheduled(fixedRate = 4000)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">backups</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;备份数据ing&quot;</span>);</span><br><span class="line">        WebSocketServiceImpl.webSocketSet.forEach(d-&gt;&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                d.session.getBasicRemote().sendText(<span class="string">&quot;定时任务发送&quot;</span>+ DateUtil.formatAsDatetime(<span class="keyword">new</span> <span class="title class_">Date</span>()));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;备份数据完成&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="WebSocket应用"><a href="#WebSocket应用" class="headerlink" title="WebSocket应用"></a>WebSocket应用</h2><p>兼容除chrome,firefox之外的浏览器可能需要使用WebSocket下的子协议STOMP</p>
+<p>对于服务端而言，需要实现特定的钩子，OnOpen，OnClose，OnMessage</p>
+<p>然后这些钩子会帮助你进行对客户端WebSocket进行通信，相关的API可以上官网进行查看，这里只在书上看常用的，并且我还用其实现了 定时广播的功能</p>
+<p>可以看看：<a target="_blank" rel="noopener" href="https://github.com/527515025/springBoot">SpringBoot学习地址 </a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-websocket<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@ServerEndpoint(&quot;/ws/&#123;username&#125;&quot;)</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebSocketServiceImpl</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="variable">onlineCount</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每次访问对象对应的请求对象</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> CopyOnWriteArraySet&lt;WebSocketServiceImpl&gt; webSocketSet = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArraySet</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> Session session;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnOpen</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">onOpen</span><span class="params">(Session session,<span class="meta">@PathParam(&quot;username&quot;)</span> String username)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.session = session;</span><br><span class="line">        <span class="built_in">this</span>.username = username;</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.session);</span><br><span class="line">        webSocketSet.add(<span class="built_in">this</span>);</span><br><span class="line">        addOnlineCount();</span><br><span class="line">        <span class="comment">// 为什么要用getOnelineCount，因为这个加了线程保护锁</span></span><br><span class="line">        System.out.println(<span class="string">&quot;新加入成功！目前总在线人数：&quot;</span>+getOnlineCount());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            sendMessage(<span class="string">&quot;有新的连接加入！&quot;</span>+session.getId());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@OnClose</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onClose</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">        webSocketSet.remove(<span class="built_in">this</span>);</span><br><span class="line">        subOnelineCount();</span><br><span class="line">        System.out.println(<span class="string">&quot;有一个人退出聊天室！&quot;</span>+getOnlineCount());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OnMessage</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onMessage</span><span class="params">(String message,Session session)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;one guy send one message: &quot;</span>+message);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 给每个在线的用户都发送这条信息，广播？</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (WebSocketServiceImpl item :</span><br><span class="line">                webSocketSet) &#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//                    String username = item.session.getUserPrincipal().getName();</span></span><br><span class="line">                    System.out.println(item.username+<span class="string">&quot;:&quot;</span>+message);</span><br><span class="line">                    item.sendMessage(item.username+<span class="string">&quot;:&quot;</span>+message);</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">sendMessage</span><span class="params">(String msg)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="built_in">this</span>.session.getBasicRemote().sendText(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span>  <span class="type">int</span> <span class="title function_">getOnlineCount</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> onlineCount;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">subOnelineCount</span><span class="params">()</span>&#123;</span><br><span class="line">        onlineCount--;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title function_">addOnlineCount</span><span class="params">()</span>&#123;</span><br><span class="line">        onlineCount++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;message&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入信息&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;sendMessage&quot;</span>&gt;</span>发送信息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;closeConnection&quot;</span>&gt;</span>关闭WebSocket连接<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">&quot;(l,i) in msgList&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;i&quot;</span>&gt;</span>&#123;&#123;l&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;WebSocket&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">data</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">message</span>:<span class="literal">null</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">ws</span>:<span class="literal">null</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">msgList</span>:[],</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">username</span>:<span class="literal">null</span>,</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">created</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">this</span>.<span class="property">username</span> = <span class="title function_">prompt</span>(<span class="string">&quot;请输入用户名&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">this</span>.<span class="title function_">initWebSocket</span>()</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">methods</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">initWebSocket</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> vm = <span class="variable language_">this</span></span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span> (<span class="string">&#x27;WebSocket&#x27;</span> <span class="keyword">in</span> <span class="variable language_">window</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    vm.<span class="property">ws</span> = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&quot;ws://localhost:8083/ws/&quot;</span>+vm.<span class="property">username</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onerror</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                        vm.<span class="property">msgList</span>.<span class="title function_">push</span>(<span class="string">&quot;error&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                        vm.<span class="property">msgList</span>.<span class="title function_">push</span>(<span class="string">&quot;open successful&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">// 添加信息</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>)=&gt;</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="variable language_">console</span>.<span class="title function_">log</span>(event,<span class="string">&quot;onmessage&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">                        vm.<span class="property">msgList</span>.<span class="title function_">push</span>(event.<span class="property">data</span>)</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">alert</span>(<span class="string">&quot;browser cant got websocket,nigger&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="comment">// 窗口关闭时关闭连接</span></span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">window</span>.<span class="property">onbeforeunload</span> = <span class="function">()=&gt;</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                    vm.<span class="property">ws</span>.<span class="title function_">close</span>()</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">closeConnection</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">this</span>.<span class="property">ws</span>?.<span class="title function_">close</span>()</span></span><br><span class="line"><span class="language-javascript">            &#125;,</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">sendMessage</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">ws</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">this</span>.<span class="property">ws</span>?.<span class="title function_">send</span>(<span class="variable language_">this</span>.<span class="property">message</span>)</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">this</span>.<span class="property">message</span> = <span class="literal">null</span></span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;send ok&quot;</span>)</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#SpringBoot%E9%AB%98%E7%BA%A7%E6%8A%80%E6%9C%AF"><span class="top-box-text">SpringBoot高级技术</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E6%B1%A0"><span class="top-box-text">异步线程池</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E5%AE%9A%E6%97%B6%E5%99%A8-%E5%BC%82%E6%AD%A5%E6%B6%88%E6%81%AF"><span class="top-box-text">定时器 &amp;&amp; 异步消息</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#WebSocket%E5%BA%94%E7%94%A8"><span class="top-box-text">WebSocket应用</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/05/10/zhong-xue-zai-xue/">
+          <h3 class="post-title">
+            下一篇：重学SpringBoot. step5 再学SpringMVC
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

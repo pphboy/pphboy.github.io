@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>SpringBoot 学习 step.3数据库</title>
+<meta name="keywords" content="SpringBoot 学习 step.3数据库, Hexo">
+<meta name="description" content="数据库JPA默认用的是Hibernate。
+SpringBoot开发WEB应用时，目前菜用较多的是mybatis+mybatis-plus，还有是springboot-data-jpa，jpa默认使用的是hibernate
+jpa更像是my">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="SpringBoot 学习 step.3数据库">
+<meta property="og:description" content="数据库JPA默认用的是Hibernate。
+SpringBoot开发WEB应用时，目前菜用较多的是mybatis+mybatis-plus，还有是springboot-data-jpa，jpa默认使用的是hibernate
+jpa更像是my">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">SpringBoot 学习 step.3数据库</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-05-09</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>JPA默认用的是Hibernate。</p>
+<p>SpringBoot开发WEB应用时，目前菜用较多的是mybatis+mybatis-plus，还有是springboot-data-jpa，jpa默认使用的是hibernate</p>
+<p>jpa更像是mybatis-plus+mybatis的结合体，不过mybatis的插件体系，让mybatis走的是逆向工程，而hibernate是正常的生成工程。</p>
+<p>也就是说，hibernate需要的是UML模型，mybatis需要的是数据库模型。</p>
+<p>hibernate重业务，mybatis轻业务更轻便</p>
+<p>也就是说hibernate的模型是对应着业务出来的，而mybatis就是偏向于专门处理数据库相关的功能。</p>
+<p>至于使用的话，可以看看文档，这些内容无非就是定义接口定义类，或者重写类。</p>
+<h2 id="数据库事务处理"><a href="#数据库事务处理" class="headerlink" title="数据库事务处理"></a>数据库事务处理</h2><p>这个牵涉的数据库理论知识较多，因为只有知道这些理论才能明白。</p>
+<p>首先为什么会需要事务，事务用来解决什么问题？遇到 了什么问题？</p>
+<p>在实际的业务场景中，需要进行处理并发问题，像两个人同时买东西，如果库存为0，那么就只有一个人能买到，还有数据更新问题。其实这些都是非常常见的数据库数据的更新问题。</p>
+<p>数据库四个基本特征：原子性、一致性、隔离性、持久性</p>
+<p>在很大程度上，数据库在生产环境中是会可能达到数以万计级别的访问，这时，就会遇到读写锁和丢失更新还有性能问题。</p>
+<p>第一，性能是用户直观的感受，没有人在乎你后台做了什么。</p>
+<p>第二，读锁与写锁，必然会导致响应速度下降。</p>
+<p>第三，丢失更新，用户获取的数据没有得到即时的更新</p>
+<p>这些问题需要通过特定的任务手段进行解决，如任务队列，数据库串行化。</p>
+<p>数据库的隔离级别就是通过底层来控制SQL脚本的执行和更新问题。隔离级别越高，性能越低。</p>
+<h3 id="传播行为"><a href="#传播行为" class="headerlink" title="传播行为"></a>传播行为</h3><p>即当前的方法与被调用的方法都会被置于统一的隔离级别。</p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="top-box-text">数据库</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86"><span class="top-box-text">数据库事务处理</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E4%BC%A0%E6%92%AD%E8%A1%8C%E4%B8%BA"><span class="top-box-text">传播行为</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/05/08/zhong-xue/">
+          <h3 class="post-title">
+            下一篇：重学SpringBoot. step2 Spring AOP
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

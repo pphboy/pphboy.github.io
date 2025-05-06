@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>vue &amp;amp; vite 写 tsx</title>
+<meta name="keywords" content="vue &amp;amp; vite 写 tsx, Hexo">
+<meta name="description" content="tsconfig.json重点在于    “jsx”: “preserve”,    “jsxImportSource”: “vue”,
+1234567891011121314151617181920212223242526272829&#">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="vue &amp;amp; vite 写 tsx">
+<meta property="og:description" content="tsconfig.json重点在于    “jsx”: “preserve”,    “jsxImportSource”: “vue”,
+1234567891011121314151617181920212223242526272829&#">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">vue &amp;amp; vite 写 tsx</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-02-28</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>tsconfig.json<br>重点在于<br>    “jsx”: “preserve”,<br>    “jsxImportSource”: “vue”,</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;target&quot;: &quot;ES2020&quot;,</span><br><span class="line">    &quot;useDefineForClassFields&quot;: true,</span><br><span class="line">    &quot;module&quot;: &quot;ESNext&quot;,</span><br><span class="line">    &quot;lib&quot;: [&quot;ES2020&quot;, &quot;DOM&quot;, &quot;DOM.Iterable&quot;],</span><br><span class="line">    &quot;skipLibCheck&quot;: true,</span><br><span class="line">    &quot;baseUrl&quot;: &quot;.&quot;,</span><br><span class="line">    &quot;paths&quot;: &#123;&quot;@/*&quot;:[&quot;src/*&quot;]&#125;,</span><br><span class="line"></span><br><span class="line">    /* Bundler mode */</span><br><span class="line">    &quot;moduleResolution&quot;: &quot;bundler&quot;,</span><br><span class="line">    &quot;allowImportingTsExtensions&quot;: true,</span><br><span class="line">    &quot;resolveJsonModule&quot;: true,</span><br><span class="line">    &quot;isolatedModules&quot;: true,</span><br><span class="line">    &quot;noEmit&quot;: true,</span><br><span class="line">    &quot;jsx&quot;: &quot;preserve&quot;,</span><br><span class="line">    &quot;jsxImportSource&quot;: &quot;vue&quot;,</span><br><span class="line"></span><br><span class="line">    /* Linting */</span><br><span class="line">    &quot;strict&quot;: true,</span><br><span class="line">    &quot;noUnusedLocals&quot;: true,</span><br><span class="line">    &quot;noUnusedParameters&quot;: true,</span><br><span class="line">    &quot;noFallthroughCasesInSwitch&quot;: true</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;include&quot;: [&quot;src/**/*.ts&quot;, &quot;src/**/*.tsx&quot;, &quot;src/**/*.vue&quot;],</span><br><span class="line">  &quot;references&quot;: [&#123; &quot;path&quot;: &quot;./tsconfig.node.json&quot; &#125;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>vite.config.ts</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import &#123; defineConfig &#125; from &quot;vite&quot;;</span><br><span class="line">import vue from &quot;@vitejs/plugin-vue&quot;;</span><br><span class="line">import vueJsx from &quot;@vitejs/plugin-vue-jsx&quot;;</span><br><span class="line">import path from &quot;path&quot;;</span><br><span class="line"></span><br><span class="line">const pathResolve = (pathStr: string) =&gt; &#123;</span><br><span class="line">  return path.resolve(__dirname, pathStr);</span><br><span class="line">&#125;;</span><br><span class="line">// https://vitejs.dev/config/</span><br><span class="line">export default defineConfig(&#123;</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      &quot;@&quot;: pathResolve(&quot;./src&quot;),</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [vue(), vueJsx()],</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2024/02/28/pei-zhi-xiang-dui-lu-jing/">
+          <h3 class="post-title">
+            下一篇：vite配置相对路径
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

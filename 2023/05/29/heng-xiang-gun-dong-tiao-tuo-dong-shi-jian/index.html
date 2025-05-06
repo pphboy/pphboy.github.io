@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Vue横向滚动条拖动事件</title>
+<meta name="keywords" content="Vue横向滚动条拖动事件, Hexo">
+<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&lt;template&gt;  &lt;div class=&qu">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Vue横向滚动条拖动事件">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344454647&lt;template&gt;  &lt;div class=&qu">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Vue横向滚动条拖动事件</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-05-29</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;scroll-container&quot; ref=&quot;scrollContainer&quot;</span><br><span class="line">       v-on:mousedown=&quot;handleMouseDown&quot;</span><br><span class="line">       v-on:mousemove=&quot;handleMouseMove&quot;</span><br><span class="line">       v-on:mouseup=&quot;handleMouseUp&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;scroll-content&quot;&gt;</span><br><span class="line">      &lt;!-- 横向内容 --&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">.scroll-container &#123;</span><br><span class="line">  overflow-x: scroll;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.scroll-content &#123;</span><br><span class="line">  /* 横向内容样式 */</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; ref &#125; from &#x27;vue&#x27;</span><br><span class="line"></span><br><span class="line">let isDragging = false</span><br><span class="line">let startX = 0</span><br><span class="line">let scrollLeft = 0</span><br><span class="line"></span><br><span class="line">const scrollContainer = ref(null)</span><br><span class="line"></span><br><span class="line">function handleMouseDown(event: MouseEvent) &#123;</span><br><span class="line">  isDragging = true;</span><br><span class="line">  startX = event.clientX;</span><br><span class="line">  scrollLeft = scrollContainer.value.scrollLeft;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function handleMouseMove(event: MouseEvent) &#123;</span><br><span class="line">  if (!isDragging) return;</span><br><span class="line">  const x = event.clientX - startX;</span><br><span class="line">  scrollContainer.value.scrollLeft = scrollLeft - x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function handleMouseUp() &#123;</span><br><span class="line">  isDragging = false;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/04/28/ru-he-gei-yuan-su-tian-jia-yi-ge-de-shi-jian-yong-yu-bao-cun-wen-jian/">
+          <h3 class="post-title">
+            下一篇：Vue3+typescript如何给元素添加一个Ctrl+s的事件，用于保存文件？
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

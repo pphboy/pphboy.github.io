@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Linux C 获取 域名IP 地址</title>
+<meta name="keywords" content="Linux C 获取 域名IP 地址, Hexo">
+<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;stdio.h&gt;#include &lt;sys/">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Linux C 获取 域名IP 地址">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;stdio.h&gt;#include &lt;sys/">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Linux C 获取 域名IP 地址</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2023-06-20</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;sys/socket.h&gt;</span><br><span class="line">#include &lt;netdb.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">// 使用inet_ntoa 需要 引包  &lt;arpa/inet.h&gt;</span><br><span class="line">#include &lt;arpa/inet.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main(int argc,char *argv[])&#123;</span><br><span class="line">  struct hostent *host;</span><br><span class="line"></span><br><span class="line">  char hostname[]=&quot;www.kbug.cn&quot;;</span><br><span class="line">  char hostname2[] = &quot;www.baidu2.com1&quot;;</span><br><span class="line">  struct in_addr in;</span><br><span class="line">  struct sockaddr_in addr_in;</span><br><span class="line">  extern int h_errno;</span><br><span class="line"></span><br><span class="line">  if((host = gethostbyname(hostname)) != NULL ) &#123;</span><br><span class="line">    memcpy(&amp;addr_in.sin_addr.s_addr, host-&gt;h_addr,4); // 复制地址</span><br><span class="line">    in.s_addr = addr_in.sin_addr.s_addr;</span><br><span class="line">    printf(&quot;Real Number : %x \n&quot;,in.s_addr);</span><br><span class="line">    printf(&quot;Domain name:%s \n&quot;,hostname);</span><br><span class="line">    printf(&quot;IP length: %d \n&quot;,host-&gt;h_length);</span><br><span class="line">    printf(&quot;Type: %d \n&quot;,host-&gt;h_addrtype);</span><br><span class="line">    printf(&quot;IP： %s\n&quot;,inet_ntoa(in));</span><br><span class="line">  &#125;else &#123;</span><br><span class="line">    // 出错处理</span><br><span class="line">    printf(&quot;Domain Name: %s Error: %d \n %s\n&quot;,hostname,h_errno,hstrerror(h_errno));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  if((host = gethostbyname(hostname2)) != NULL ) &#123;</span><br><span class="line">    memcpy(&amp;addr_in.sin_addr.s_addr, host-&gt;h_addr,4); // 复制地址</span><br><span class="line">    in.s_addr = addr_in.sin_addr.s_addr;</span><br><span class="line">    printf(&quot;Domain2 name:%s \n&quot;,hostname2);</span><br><span class="line">    printf(&quot;IP length: %d \n&quot;,host-&gt;h_length);</span><br><span class="line">    printf(&quot;Type: %d \n&quot;,host-&gt;h_addrtype);</span><br><span class="line">    printf(&quot;IP： %s\n&quot;,inet_ntoa(in));</span><br><span class="line">  &#125;else &#123;</span><br><span class="line">    // 出错处理</span><br><span class="line">    printf(&quot;Domain Name: %s Error: %d \n %s\n&quot;,hostname2,h_errno,hstrerror(h_errno));</span><br><span class="line">  &#125;</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2023/06/12/shu-ru-fa-qie-huan-zhuang-tai-jie-jue-fang-fa/">
+          <h3 class="post-title">
+            下一篇：Ctrl+Space输入法切换状态解决方法
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

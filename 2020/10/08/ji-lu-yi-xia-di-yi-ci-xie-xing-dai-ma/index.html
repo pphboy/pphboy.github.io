@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>记录一下第一次写 50行 SQL代码</title>
+<meta name="keywords" content="记录一下第一次写 50行 SQL代码, Hexo">
+<meta name="description" content="这 是一个电商项目，做的是报表的展示，我还以为要请求几次，结果，用一个SQL全部查完了下面是目标效果图
+这是我的SQL代码12345678910111213141516171819202122232425262728293031323334">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="记录一下第一次写 50行 SQL代码">
+<meta property="og:description" content="这 是一个电商项目，做的是报表的展示，我还以为要请求几次，结果，用一个SQL全部查完了下面是目标效果图
+这是我的SQL代码12345678910111213141516171819202122232425262728293031323334">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">记录一下第一次写 50行 SQL代码</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-10-08</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h4 id="这-是一个电商项目，做的是报表的展示，我还以为要请求几次，结果，用一个SQL全部查完了"><a href="#这-是一个电商项目，做的是报表的展示，我还以为要请求几次，结果，用一个SQL全部查完了" class="headerlink" title="这 是一个电商项目，做的是报表的展示，我还以为要请求几次，结果，用一个SQL全部查完了"></a>这 是一个电商项目，做的是报表的展示，我还以为要请求几次，结果，用一个SQL全部查完了</h4><h4 id="下面是目标效果图"><a href="#下面是目标效果图" class="headerlink" title="下面是目标效果图"></a>下面是目标效果图</h4><p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201008091442556-1007071529.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201008091442556-1007071529.png"  lazyload></a></p>
+<h4 id="这是我的SQL代码"><a href="#这是我的SQL代码" class="headerlink" title="这是我的SQL代码"></a>这是我的SQL代码</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">	product.NAME,</span><br><span class="line">product.price,</span><br><span class="line">	pros.order_num,</span><br><span class="line">	product.price <span class="operator">*</span> pros.count_product sum_price,</span><br><span class="line">	ads.create_time,</span><br><span class="line">	ads.contact_address,</span><br><span class="line">	ads.contact_name,</span><br><span class="line">	ads.contact_mobile</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">	product,</span><br><span class="line">	(</span><br><span class="line">		<span class="keyword">SELECT</span></span><br><span class="line">			order_num,</span><br><span class="line">			product_id,</span><br><span class="line">			<span class="built_in">COUNT</span>(product_id) count_product</span><br><span class="line">		<span class="keyword">FROM</span></span><br><span class="line">			order_item</span><br><span class="line">		<span class="keyword">WHERE</span></span><br><span class="line">			order_num <span class="operator">=</span> &quot;O2020100500001&quot;</span><br><span class="line">		<span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line">			product_id</span><br><span class="line">	) pros,</span><br><span class="line">	(</span><br><span class="line">		<span class="keyword">SELECT</span></span><br><span class="line">			of.create_time,</span><br><span class="line">			ot.product_id pid,</span><br><span class="line">			of.contact_address,</span><br><span class="line">			of.contact_name,</span><br><span class="line">			of.contact_mobile</span><br><span class="line">		<span class="keyword">FROM</span></span><br><span class="line">			order_item ot,</span><br><span class="line">			order_info <span class="keyword">of</span></span><br><span class="line">		<span class="keyword">WHERE</span></span><br><span class="line">		 of.order_num <span class="operator">=</span> &quot;O2020100500001&quot;</span><br><span class="line">		<span class="keyword">AND</span> ot.order_num <span class="operator">=</span> &quot;O2020100500001&quot;</span><br><span class="line">	) ads</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">	id <span class="keyword">IN</span> (</span><br><span class="line">		<span class="keyword">SELECT</span></span><br><span class="line">			product_id</span><br><span class="line">		<span class="keyword">FROM</span></span><br><span class="line">			order_item</span><br><span class="line">		<span class="keyword">WHERE</span></span><br><span class="line">			order_num <span class="operator">=</span> &quot;O2020100500001&quot;</span><br><span class="line">		<span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line">			product_id</span><br><span class="line">	)</span><br><span class="line"><span class="keyword">AND</span> id <span class="operator">=</span> pros.product_id <span class="keyword">and</span> id <span class="operator">=</span> ads.pid</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> id</span><br></pre></td></tr></table></figure>
+<h4 id="这是我的查询效果"><a href="#这是我的查询效果" class="headerlink" title="这是我的查询效果"></a>这是我的查询效果</h4><p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201008091702555-1723269620.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201008091702555-1723269620.png"  lazyload></a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>在sql之中，可以使用结果集做为表来查询（以前会，只不过忘了）</li>
+<li>在sql之中，可以使用这个嵌套查询来做为复杂查询（会牺牲效率，但鬼换取的是一劳永逸）</li>
+</ol>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%80%BB%E7%BB%93"><span class="top-box-text">总结</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/09/05/gu-ming-si-yi/">
+          <h3 class="post-title">
+            下一篇：jwtUtils顾名思意
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

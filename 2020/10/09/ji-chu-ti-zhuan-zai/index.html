@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>MYSQL 50 基础题　（转载）</title>
+<meta name="keywords" content="MYSQL 50 基础题　（转载）, Hexo">
+<meta name="description" content="MYSQL 50 基础题 （转载）前言：最近在强化MYSQL 能力答案在（也是转载处） https://www.cnblogs.com/kangxinxin/p/11585935.html下面是数据12345678–1.学生表Student">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="MYSQL 50 基础题　（转载）">
+<meta property="og:description" content="MYSQL 50 基础题 （转载）前言：最近在强化MYSQL 能力答案在（也是转载处） https://www.cnblogs.com/kangxinxin/p/11585935.html下面是数据12345678–1.学生表Student">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">MYSQL 50 基础题　（转载）</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-10-09</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h2 id="MYSQL-50-基础题-（转载）"><a href="#MYSQL-50-基础题-（转载）" class="headerlink" title="MYSQL 50 基础题 （转载）"></a>MYSQL 50 基础题 （转载）</h2><h3 id="前言：最近在强化MYSQL-能力"><a href="#前言：最近在强化MYSQL-能力" class="headerlink" title="前言：最近在强化MYSQL 能力"></a>前言：最近在强化MYSQL 能力</h3><h4 id="答案在（也是转载处）-https-www-cnblogs-com-kangxinxin-p-11585935-html"><a href="#答案在（也是转载处）-https-www-cnblogs-com-kangxinxin-p-11585935-html" class="headerlink" title="答案在（也是转载处） https://www.cnblogs.com/kangxinxin/p/11585935.html"></a>答案在（也是转载处） <a target="_blank" rel="noopener" href="https://www.cnblogs.com/kangxinxin/p/11585935.html">https://www.cnblogs.com/kangxinxin/p/11585935.html</a></h4><h5 id="下面是数据"><a href="#下面是数据" class="headerlink" title="下面是数据"></a>下面是数据</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">–1.学生表</span><br><span class="line">Student(s_id,s_name,s_birth,s_sex) –学生编号,学生姓名, 出生年月,学生性别</span><br><span class="line">–2.课程表</span><br><span class="line">Course(c_id,c_name,t_id) – –课程编号, 课程名称, 教师编号</span><br><span class="line">–3.教师表</span><br><span class="line">Teacher(t_id,t_name) –教师编号,教师姓名</span><br><span class="line">–4.成绩表</span><br><span class="line">Score(s_id,c_id,s_score) –学生编号,课程编号,分数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE test;</span><br><span class="line">USE test;</span><br><span class="line">1CREATE TABLE `Student`(</span><br><span class="line">`s_id` VARCHAR(20),</span><br><span class="line">`s_name` VARCHAR(20) NOT NULL DEFAULT &#x27;&#x27;,</span><br><span class="line">`s_birth` VARCHAR(20) NOT NULL DEFAULT &#x27;&#x27;,</span><br><span class="line">`s_sex` VARCHAR(10) NOT NULL DEFAULT &#x27;&#x27;,</span><br><span class="line">PRIMARY KEY(`s_id`)</span><br><span class="line">);</span><br><span class="line">--课程表</span><br><span class="line">CREATE TABLE `Course`(</span><br><span class="line">`c_id` VARCHAR(20),</span><br><span class="line">`c_name` VARCHAR(20) NOT NULL DEFAULT &#x27;&#x27;,</span><br><span class="line">`t_id` VARCHAR(20) NOT NULL,</span><br><span class="line">PRIMARY KEY(`c_id`)</span><br><span class="line">);</span><br><span class="line">--教师表</span><br><span class="line">CREATE TABLE `Teacher`(</span><br><span class="line">`t_id` VARCHAR(20),</span><br><span class="line">`t_name` VARCHAR(20) NOT NULL DEFAULT &#x27;&#x27;,</span><br><span class="line">PRIMARY KEY(`t_id`)</span><br><span class="line">);</span><br><span class="line">--成绩表</span><br><span class="line">CREATE TABLE `Score`(</span><br><span class="line">`s_id` VARCHAR(20),</span><br><span class="line">`c_id` VARCHAR(20),</span><br><span class="line">`s_score` INT(3),</span><br><span class="line">PRIMARY KEY(`s_id`,`c_id`)</span><br><span class="line">);</span><br><span class="line">--插入学生表测试数据</span><br><span class="line">INSERT INTO Student VALUES(&#x27;01&#x27; , &#x27;赵雷&#x27; , &#x27;1990-01-01&#x27; , &#x27;男&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;02&#x27; , &#x27;钱电&#x27; , &#x27;1990-12-21&#x27; , &#x27;男&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;03&#x27; , &#x27;孙风&#x27; , &#x27;1990-05-20&#x27; , &#x27;男&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;04&#x27; , &#x27;李云&#x27; , &#x27;1990-08-06&#x27; , &#x27;男&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;05&#x27; , &#x27;周梅&#x27; , &#x27;1991-12-01&#x27; , &#x27;女&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;06&#x27; , &#x27;吴兰&#x27; , &#x27;1992-03-01&#x27; , &#x27;女&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;07&#x27; , &#x27;郑竹&#x27; , &#x27;1989-07-01&#x27; , &#x27;女&#x27;);</span><br><span class="line">INSERT INTO Student VALUES(&#x27;08&#x27; , &#x27;王菊&#x27; , &#x27;1990-01-20&#x27; , &#x27;女&#x27;);</span><br><span class="line">--课程表测试数据</span><br><span class="line">INSERT INTO Course VALUES(&#x27;01&#x27; , &#x27;语文&#x27; , &#x27;02&#x27;);</span><br><span class="line">INSERT INTO Course VALUES(&#x27;02&#x27; , &#x27;数学&#x27; , &#x27;01&#x27;);</span><br><span class="line">INSERT INTO Course VALUES(&#x27;03&#x27; , &#x27;英语&#x27; , &#x27;03&#x27;);</span><br><span class="line"></span><br><span class="line">--教师表测试数据</span><br><span class="line">INSERT INTO Teacher VALUES(&#x27;01&#x27; , &#x27;张三&#x27;);</span><br><span class="line">INSERT INTO Teacher VALUES(&#x27;02&#x27; , &#x27;李四&#x27;);</span><br><span class="line">INSERT INTO Teacher VALUES(&#x27;03&#x27; , &#x27;王五&#x27;);</span><br><span class="line"></span><br><span class="line">--成绩表测试数据</span><br><span class="line">INSERT INTO Score VALUES(&#x27;01&#x27; , &#x27;01&#x27; , 80);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;01&#x27; , &#x27;02&#x27; , 90);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;01&#x27; , &#x27;03&#x27; , 99);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;02&#x27; , &#x27;01&#x27; , 70);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;02&#x27; , &#x27;02&#x27; , 60);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;02&#x27; , &#x27;03&#x27; , 80);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;03&#x27; , &#x27;01&#x27; , 80);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;03&#x27; , &#x27;02&#x27; , 80);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;03&#x27; , &#x27;03&#x27; , 80);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;04&#x27; , &#x27;01&#x27; , 50);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;04&#x27; , &#x27;02&#x27; , 30);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;04&#x27; , &#x27;03&#x27; , 20);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;05&#x27; , &#x27;01&#x27; , 76);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;05&#x27; , &#x27;02&#x27; , 87);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;06&#x27; , &#x27;01&#x27; , 31);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;06&#x27; , &#x27;03&#x27; , 34);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;07&#x27; , &#x27;02&#x27; , 89);</span><br><span class="line">INSERT INTO Score VALUES(&#x27;07&#x27; , &#x27;03&#x27; , 98);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> – 1、查询”01”课程比”02”课程成绩高的学生的信息及课程分数  </p>
+<p> – 2、查询”01”课程比”02”课程成绩低的学生的信息及课程分数</p>
+<p> – 3、查询平均成绩大于等于60分的同学的学生编号和学生姓名和平均成绩 </p>
+<p> – 4、查询平均成绩小于60分的同学的学生编号和学生姓名和平均成绩        – (包括有成绩的和无成绩的) </p>
+<p> – 5、查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩 </p>
+<p> – 6、查询”李”姓老师的数量 </p>
+<p> – 7、查询学过”张三”老师授课的同学的信息  </p>
+<p> – 8、查询没学过”张三”老师授课的同学的信息  </p>
+<p> – 9、查询学过编号为”01”并且也学过编号为”02”的课程的同学的信息 </p>
+<p> – 10、查询学过编号为”01”但是没有学过编号为”02”的课程的同学的信息 </p>
+<p> – 11、查询没有学全所有课程的同学的信息 – 太复杂,下次换一种思路,看有没有简单点方法 – 此处思路为查学全所有课程的学生id,再内联取反面 </p>
+<p> – 12、查询至少有一门课与学号为”01”的同学所学相同的同学的信息 </p>
+<p> – 13、查询和”01”号的同学学习的课程完全相同的其他同学的信息 </p>
+<p> – 14、查询没学过”张三”老师讲授的任一门课程的学生姓名 </p>
+<p> – 15、查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩 </p>
+<p> – 16、检索”01”课程分数小于60，按分数降序排列的学生信息 </p>
+<p> – 17、按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩 – 可加round,case when then else end 使显示更完美 </p>
+<p> – 18.查询各科成绩最高分、最低分和平均分：以如下形式显示：课程ID，课程name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率 – 及格为&gt;&#x3D;60，中等为：70-80，优良为：80-90，优秀为：&gt;&#x3D;90 </p>
+<p> – 19、按各科成绩进行排序，并显示排名(实现不完全) </p>
+<p> – 20、查询学生的总成绩并进行排名 </p>
+<p> – 21、查询不同老师所教不同课程平均分从高到低显示  </p>
+<p> – 22、查询所有课程的成绩第2名到第3名的学生信息及该课程成绩 </p>
+<p> – 23、统计各科成绩各分数段人数：课程编号,课程名称,[100-85],[85-70],[70-60],[0-60]及所占百分比 </p>
+<p> – 24、查询学生平均成绩及其名次  </p>
+<p> – 25、查询各科成绩前三名的记录 </p>
+<p> – 26、查询每门课程被选修的学生数  </p>
+<p> – 27、查询出只有两门课程的全部学生的学号和姓名 </p>
+<p> – 28、查询男生、女生人数 </p>
+<p> – 29、查询名字中含有”风”字的学生信息 </p>
+<p> – 30、查询同名同性学生名单，并统计同名人数  </p>
+<p> – 31、查询1990年出生的学生名单 </p>
+<p> – 32、查询每门课程的平均成绩，结果按平均成绩降序排列，平均成绩相同时，按课程编号升序排列  </p>
+<p> – 33、查询平均成绩大于等于85的所有学生的学号、姓名和平均成绩 </p>
+<p> – 34、查询课程名称为”数学”，且分数低于60的学生姓名和分数  </p>
+<p> – 35、查询所有学生的课程及分数情况； </p>
+<p> – 36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数 </p>
+<p> – 37、查询不及格的课程 </p>
+<p> – 38、查询课程编号为01且课程成绩在80分以上的学生的学号和姓名 </p>
+<p> – 39、求每门课程的学生人数 </p>
+<p> – 40、查询选修”张三”老师所授课程的学生中，成绩最高的学生信息及其成绩  </p>
+<p> – 41、查询不同课程成绩相同的学生的学生编号、课程编号、学生成绩  </p>
+<p> – 42、查询每门功成绩最好的前两名  </p>
+<p> – 43、统计每门课程的学生选修人数（超过5人的课程才统计）。要求输出课程号和选修人数，查询结果按人数降序排列， –     若人数相同，按课程号升序排列   </p>
+<p> – 44、检索至少选修两门课程的学生学号  </p>
+<p> – 45、查询选修了全部课程的学生信息 </p>
+<p> – 46、查询各学生的年龄 </p>
+<p> – 47、查询本周过生日的学生 </p>
+<p>   – 此处可能有问题,week函数取的为当前年的第几周,2017-12-12是第50周而2018-12-12是第49周,可以取月份,day,星期几(%w),  – 再判断本周是否会持续到下一个月进行判断,太麻烦,不会写 </p>
+<p> – 48、查询下周过生日的学生 </p>
+<p> – 49、查询本月过生日的学生 </p>
+<p> – 50、查询下月过生日的学生 </p>
+<p>  – 注意:当 当前月为12时,用month(now())+1为13而不是1,可用timestampadd()函数或mod取模 </p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#MYSQL-50-%E5%9F%BA%E7%A1%80%E9%A2%98-%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89"><span class="top-box-text">MYSQL 50 基础题 （转载）</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E6%9C%80%E8%BF%91%E5%9C%A8%E5%BC%BA%E5%8C%96MYSQL-%E8%83%BD%E5%8A%9B"><span class="top-box-text">前言：最近在强化MYSQL 能力</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/10/08/ji-lu-yi-xia-di-yi-ci-xie-xing-dai-ma/">
+          <h3 class="post-title">
+            下一篇：记录一下第一次写 50行 SQL代码
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>系统架构师- 软件架构知识点</title>
+<meta name="keywords" content="系统架构师- 软件架构知识点, Hexo">
+<meta name="description" content="软件架构
+架构模式是软件设计中的高层决策
+设计模式主要关注软件系统的设计，与具体实现语言无关
+惯用法则是实现时通过某种特定的程序设计语言来描述构件与构件之间的关系
+
+架构文档化的主要输出结果是架构说明书和架构质量说明书
+介绍软件架构设计包括">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="系统架构师- 软件架构知识点">
+<meta property="og:description" content="软件架构
+架构模式是软件设计中的高层决策
+设计模式主要关注软件系统的设计，与具体实现语言无关
+惯用法则是实现时通过某种特定的程序设计语言来描述构件与构件之间的关系
+
+架构文档化的主要输出结果是架构说明书和架构质量说明书
+介绍软件架构设计包括">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">系统架构师- 软件架构知识点</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-10-25</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="软件架构"><a href="#软件架构" class="headerlink" title="软件架构"></a>软件架构</h1><ul>
+<li>架构模式是软件设计中的高层决策</li>
+<li>设计模式主要关注软件系统的设计，与具体实现语言无关</li>
+<li>惯用法则是实现时通过某种特定的程序设计语言来描述构件与构件之间的关系</li>
+</ul>
+<p>架构文档化的主要输出结果是架构说明书和架构质量说明书</p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>软件架构设计包括提出</p>
+<ul>
+<li>架构模型</li>
+<li>产生架构设计</li>
+<li>进行设计评审</li>
+</ul>
+<p>软件系统架构是善于软件系统的结构、行为和属性的高级抽象。</p>
+<ul>
+<li>架构设计关注点<ul>
+<li>结构</li>
+<li>属性</li>
+<li>交互作用</li>
+</ul>
+</li>
+</ul>
+<h2 id="架构风格"><a href="#架构风格" class="headerlink" title="架构风格"></a>架构风格</h2><h3 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h3><p>软件架构风格是描述某一特定应用领域中系统组织方式的惯用模式。</p>
+<p>架构风格定义了一类架构所共有的特征，主要包括架构定义、架构词汇表和架构约束。</p>
+<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><blockquote>
+<p>一个体系结构定义了一个词汇表和一组约束</p>
+</blockquote>
+<p>架构风格反映领域中众多系统所共有的结构和语义特征</p>
+<p>架构设计是一个迭代过程，在建立软件架构的初期，选择一个合适的<strong>架构风格</strong>是首要的，在此基础上，开发人员通过架构模型，可以获得关于软件架构<strong>属性</strong>的理解，为将来的架构实现与演化过程建立了目标。</p>
+<ul>
+<li>GUI：事件驱动</li>
+</ul>
+<h3 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h3><ul>
+<li>强调用户自定义</li>
+</ul>
+<h3 id="管道过滤器"><a href="#管道过滤器" class="headerlink" title="管道过滤器"></a>管道过滤器</h3><ul>
+<li><ul>
+<li>支持分阶段数据处理</li>
+</ul>
+</li>
+</ul>
+<h3 id="隐式调用"><a href="#隐式调用" class="headerlink" title="隐式调用"></a>隐式调用</h3><ul>
+<li>调试器，本质是在断点处设计一个事件监听函数</li>
+</ul>
+<h3 id="闭环结构"><a href="#闭环结构" class="headerlink" title="闭环结构"></a>闭环结构</h3><ul>
+<li><p>适用于处理简单的任务</p>
+</li>
+<li><p>机器装配</p>
+</li>
+<li><p>不适用于复杂任务</p>
+</li>
+</ul>
+<h3 id="分层结构"><a href="#分层结构" class="headerlink" title="分层结构"></a>分层结构</h3><ul>
+<li><p>引入抽象层</p>
+</li>
+<li><p>低层不确定的实现细节在高层会变得确定</p>
+</li>
+<li><p>系统结构更加清晰</p>
+</li>
+</ul>
+<h3 id="数据共享"><a href="#数据共享" class="headerlink" title="数据共享"></a>数据共享</h3><ul>
+<li>现代编译器</li>
+</ul>
+<h3 id="面向构件"><a href="#面向构件" class="headerlink" title="面向构件"></a>面向构件</h3><h4 id="介绍-2"><a href="#介绍-2" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
+<p>软件构件是部署、版本控制和替换的基本单位。</p>
+</blockquote>
+<ul>
+<li>构件通常需要同时部署的院子构件</li>
+<li>原子构件通常成组地部署，但他也能够被单独部署</li>
+</ul>
+<h5 id="原子构件-与-构件的区别"><a href="#原子构件-与-构件的区别" class="headerlink" title="原子构件 与  构件的区别"></a>原子构件 与  构件的区别</h5><p>原子构件永远不会被单独的部署，尽管其可以单独部署</p>
+<blockquote>
+<p>大多数原子构件都属于一个家庭，一次部署往往整个家庭</p>
+</blockquote>
+<p><strong>一个模块是不带单独资源的原子构件</strong></p>
+<hr>
+<ul>
+<li>逻辑构件模型用功能描述系统的抽象设计<ul>
+<li>作为系统的设计蓝图以保证系统提供适当的功能</li>
+</ul>
+</li>
+<li>物理构件模型<ul>
+<li>技术设施产品、硬件分布和拓扑结构</li>
+<li>了解系统的性能、吞吐率等许多非功能性属性</li>
+</ul>
+</li>
+</ul>
+<h4 id="构件特性"><a href="#构件特性" class="headerlink" title="构件特性"></a>构件特性</h4><ol>
+<li>独立部署单元 </li>
+<li>作为第三方的组装单元 </li>
+<li>没有（外部的）可见状态</li>
+</ol>
+<h4 id="对象的特性"><a href="#对象的特性" class="headerlink" title="对象的特性"></a>对象的特性</h4><ol>
+<li>一个实例单元，具有唯一的标志</li>
+<li>可能具有状态，此状态外部可见 </li>
+<li>封闭了自己的状态</li>
+</ol>
+<h4 id="构件组装"><a href="#构件组装" class="headerlink" title="构件组装"></a>构件组装</h4><h5 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h5><ul>
+<li>构件失配<ul>
+<li>由于系统对构件基础设施、控制模型和数据模型的假设存在冲突引起的失配</li>
+</ul>
+</li>
+<li>连接子失配<ul>
+<li>包括于系统对构件交互协议、构件连接子失配包括由于系统对构件交互协议、构件连接时数据格式的假设存在冲突引起的扮酷</li>
+</ul>
+</li>
+</ul>
+<h4 id="CORBA"><a href="#CORBA" class="headerlink" title="CORBA"></a>CORBA</h4><h5 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h5><h6 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h6><blockquote>
+<p>在底层的传输平台与接收调用并返回结果的对象实现之间进行协调</p>
+</blockquote>
+<p>目前采用的对象适配器规范是POAching（可移植对象适配器）</p>
+<p>替代了传统的BOA(基本对象适配器)</p>
+<h6 id="Servant-伺服对象"><a href="#Servant-伺服对象" class="headerlink" title="Servant 伺服对象"></a>Servant 伺服对象</h6><p>最终完成客户请求的服务对象实现</p>
+<h6 id="伺服对象管理器"><a href="#伺服对象管理器" class="headerlink" title="伺服对象管理器"></a>伺服对象管理器</h6><blockquote>
+<p>伺服对象激活器和伺服对象定位器</p>
+<p>用来提供CORBA服务端的对象查找服务</p>
+</blockquote>
+<p>活动对象映射表用来保存已注册的CORBA对象标识和伺服对象之间的映射关系。</p>
+<h5 id="实体（Entity"><a href="#实体（Entity" class="headerlink" title="实体（Entity)"></a>实体（Entity)</h5><ul>
+<li>长期持久并主要用于事务性行为</li>
+<li>由窗口管理其持久化</li>
+</ul>
+<h5 id="加工（Process）"><a href="#加工（Process）" class="headerlink" title="加工（Process）"></a>加工（Process）</h5><ul>
+<li>同样需要窗口管理其持久化，但没有客户端可以访问的主键</li>
+</ul>
+<h5 id="会话（Session）"><a href="#会话（Session）" class="headerlink" title="会话（Session）"></a>会话（Session）</h5><ul>
+<li>构件不需要窗口管理其持久化</li>
+<li>自己管理自身状态信息</li>
+</ul>
+<h5 id="服务（Service）"><a href="#服务（Service）" class="headerlink" title="服务（Service）"></a>服务（Service）</h5><ul>
+<li>构件是无状态的</li>
+</ul>
+<h5 id="COP-面向构件编程"><a href="#COP-面向构件编程" class="headerlink" title="COP  面向构件编程"></a>COP  面向构件编程</h5><p>需要的基本支持</p>
+<blockquote>
+<ul>
+<li>多太性（可替代性）</li>
+<li>模块封装性（高层次信息隐藏）</li>
+<li>后期的绑定和装载（部署独立性）</li>
+<li>安全性（类型和模块安全性）</li>
+</ul>
+</blockquote>
+<h3 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h3><h4 id="5层"><a href="#5层" class="headerlink" title="5层"></a>5层</h4><ul>
+<li>表示层<ul>
+<li>实现用户界面</li>
+</ul>
+</li>
+<li>表示逻辑层<ul>
+<li>为了生成数据</li>
+</ul>
+</li>
+<li>应用逻辑层<ul>
+<li>数据计算和分析</li>
+</ul>
+</li>
+<li>数据处理层<ul>
+<li>存储和访问数据库的应用逻辑和命令</li>
+</ul>
+</li>
+<li>数据层<ul>
+<li>数据库中实际存储的业务数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-1-视图"><a href="#4-1-视图" class="headerlink" title="4+1 视图"></a>4+1 视图</h3><ul>
+<li>4+1视图中，逻辑视图用来描述软件模块的组织与管理</li>
+<li>开发视图：描述了软件模块的组织与管理</li>
+<li>过程视图描述设计的并发和同步特征。</li>
+</ul>
+<h3 id="ADL"><a href="#ADL" class="headerlink" title="ADL"></a>ADL</h3><ul>
+<li>组成部分<ul>
+<li>组件、组件接口、连接件、架构配置</li>
+</ul>
+</li>
+</ul>
+<h3 id="C2"><a href="#C2" class="headerlink" title="C2"></a>C2</h3><h4 id="介绍-3"><a href="#介绍-3" class="headerlink" title="介绍"></a>介绍</h4><blockquote>
+<p>通过连接件绑定在一按照一组规则动作的并行构件风格。</p>
+<p>C2风格中的系统组织规则如下</p>
+</blockquote>
+<h2 id="架构复审"><a href="#架构复审" class="headerlink" title="架构复审"></a>架构复审</h2><p>架构设计、文档化和复审是一个迭代的过程</p>
+<ul>
+<li><p>通常会对一个可运行的最小化系统进行架构评估和测试</p>
+</li>
+<li><p>目标：</p>
+</li>
+<li><ul>
+<li>标识潜在的风险，及早发现架构设计的缺陷和错误</li>
+</ul>
+</li>
+</ul>
+<h3 id="介绍-4"><a href="#介绍-4" class="headerlink" title="介绍"></a>介绍</h3><h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>为了标识潜在的风险，及早发现架构设计中的缺陷和错误</p>
+<p>在架构复审过程中，主要由用户代表与领域专家决定架构是否满足需求、质量需求是否在设计中得到体现</p>
+<h2 id="架构文档"><a href="#架构文档" class="headerlink" title="架构文档"></a>架构文档</h2><ul>
+<li>软件架构文档是对软件架构的一种描述，帮助程序员使用特定的程序设计语言实现软件架构</li>
+</ul>
+<h3 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h3><ol>
+<li>文档从使用者的角度进行编写</li>
+<li>必须分发给所有与系统有关的开发人员</li>
+<li>保持文档更新，但不要太频繁</li>
+<li>避免不必要的重复</li>
+<li>每次架构文档的修改都应该记录进行修改的原则</li>
+</ol>
+<h2 id="软件架构设计"><a href="#软件架构设计" class="headerlink" title="软件架构设计"></a>软件架构设计</h2><ul>
+<li><p>是降低成本、改进质量、按时和按需交付产品的关键因素。</p>
+</li>
+<li><p>满足系统的性能、可维护性</p>
+</li>
+<li><p>使不同利益相关的人达到一致的目标</p>
+</li>
+<li><p>支持项目计划和项目管理等活动</p>
+</li>
+<li><p>能够有效地管理复杂性</p>
+</li>
+</ul>
+<h3 id="软件体系结构"><a href="#软件体系结构" class="headerlink" title="软件体系结构"></a>软件体系结构</h3><h4 id="文档化过程"><a href="#文档化过程" class="headerlink" title="文档化过程"></a>文档化过程</h4><p>输出结果：<strong>体系结构规格说明</strong> 和 <strong>测试体系结构需求的质量设计说明书</strong> </p>
+<p>文档的完整性和质量是软件体系结构成功的关键因素</p>
+<blockquote>
+<p>文档从使用者的角度进行编写</p>
+<p>必须颁发给所有与系统有关的开发人员</p>
+<p>且必须保证开发者手上的文档是最新的</p>
+</blockquote>
+<h3 id="软件架构需求"><a href="#软件架构需求" class="headerlink" title="软件架构需求"></a>软件架构需求</h3><ul>
+<li>（软件架构需求不应该包括设计构件的过程）</li>
+</ul>
+<h3 id="基于架构的软件设计-ABSD"><a href="#基于架构的软件设计-ABSD" class="headerlink" title="基于架构的软件设计 - ABSD"></a>基于架构的软件设计 - ABSD</h3><ol>
+<li>功能分解</li>
+<li>采用架构风格实现质量属性与商业需求</li>
+<li>采用模板设计软件结构</li>
+</ol>
+<ul>
+<li>ABSD方法是一个自顶向下，递归细化的过程，软件系统的架构通过该方法得到细化，直到能产生软件架构的类</li>
+<li>强调由商业、质量和功能需求的组合驱动软件架构设计。</li>
+<li>强调采用视角和视图来描述软件架构</li>
+<li>采用用例和质量场景来描述需求</li>
+</ul>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><ul>
+<li><p>Ping&#x2F; Echo 主要提高系统的可用性</p>
+</li>
+<li><p>限制访问</p>
+<ul>
+<li>提高系统的安全性</li>
+</ul>
+</li>
+<li><p>运行时注册</p>
+<ul>
+<li>提高系统的可修改性</li>
+</ul>
+</li>
+<li><p>主动冗余</p>
+<ul>
+<li>系统的可靠性</li>
+</ul>
+</li>
+<li><p>队列调度</p>
+<ul>
+<li>提高系统的性能</li>
+</ul>
+</li>
+<li><p>信息隐藏</p>
+<ul>
+<li>提高系统的可修改性</li>
+</ul>
+</li>
+<li><p>记录回放</p>
+<ul>
+<li>可测试性</li>
+</ul>
+</li>
+</ul>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ul>
+<li><p>访问者模式</p>
+</li>
+<li><ul>
+<li>在不改变原来的类结构（活动节点）的基础上增加新功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="三种模式"><a href="#三种模式" class="headerlink" title="三种模式"></a>三种模式</h3><h4 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h4><blockquote>
+<p>通过采用抽象类所定义的接口，封装了系统中对象如何创建、组合</p>
+</blockquote>
+<ul>
+<li>abstract factory</li>
+<li>builder</li>
+<li>factory method</li>
+<li>prototype</li>
+<li><strong>singletoin</strong></li>
+</ul>
+<h4 id="结构型模式"><a href="#结构型模式" class="headerlink" title="结构型模式"></a>结构型模式</h4><blockquote>
+<p>主要用于如何组合已有的类和对象以获得更大的结构</p>
+</blockquote>
+<ul>
+<li><strong>adaptor</strong> </li>
+<li>bridge</li>
+<li>composite</li>
+<li>decorator </li>
+<li>facade</li>
+<li>flyweight</li>
+<li>proxy</li>
+</ul>
+<h5 id="行为型模型"><a href="#行为型模型" class="headerlink" title="行为型模型"></a>行为型模型</h5><blockquote>
+<p>主要用于对象之间的职责及其提供服务的分配方式</p>
+</blockquote>
+<ul>
+<li>chain of responsibility </li>
+<li>command</li>
+<li>interpreter</li>
+<li>iterator </li>
+<li>mediator </li>
+<li>memento</li>
+<li>observer</li>
+<li>state</li>
+<li>strategy</li>
+<li>template matehod</li>
+<li><strong>visitor</strong></li>
+</ul>
+<h3 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h3><ul>
+<li>要求外部与一个子系统的通信必须通过一个统一的外观对象进行</li>
+<li>为子系统中的一组接口提供一个一致的界面</li>
+</ul>
+<h2 id="软件系统架构评估"><a href="#软件系统架构评估" class="headerlink" title="软件系统架构评估"></a>软件系统架构评估</h2><h3 id="ATAM"><a href="#ATAM" class="headerlink" title="ATAM"></a>ATAM</h3><ul>
+<li>软件体系结构的设计结果进行评估</li>
+<li>ATAM并不是一种精确的评估方法，该方法表现的主要形式是评审会议</li>
+</ul>
+<blockquote>
+<p>在系统开发之前，性能、可能性、安全性和可修改性等质量属性进行<strong>评价</strong>和<strong>折中</strong>。</p>
+</blockquote>
+<p>ATAM分 为四个主要的活动阶段</p>
+<ul>
+<li>需求收集</li>
+<li>架构视图</li>
+<li>描述</li>
+<li>属性模型</li>
+</ul>
+<blockquote>
+<p>强调以视图做为架构评估的核心概念</p>
+</blockquote>
+<ul>
+<li>效用树<ul>
+<li>对质量属性的描述进行刻画与排序</li>
+</ul>
+</li>
+</ul>
+<p>在识别出质量属性描述后，通常采用效用树对质量属性的描述进行刻画与排序</p>
+<h4 id="架构评价的理解和应用"><a href="#架构评价的理解和应用" class="headerlink" title="架构评价的理解和应用"></a>架构评价的理解和应用</h4><p>敏感点：是实现一个特定质量属性的关键特征</p>
+<p>权衡点：会影响一个或多个属性，并对多个属性来说都是第三点</p>
+<h2 id="领域分析"><a href="#领域分析" class="headerlink" title="领域分析"></a>领域分析</h2><ul>
+<li>领域分析的主要目的是获得领域模型</li>
+<li>领域模型描述领域中系统之间共同的需求，即领域需求</li>
+<li>领域设计的主要目标是获取<strong>DSSA</strong>（需求的解决方案）</li>
+<li>领域实现的主要目标是依据领域模型和DSSA开发和组织可重用信息，并对<strong>基础软件架构</strong>进行实现</li>
+</ul>
+<h3 id="DSSA"><a href="#DSSA" class="headerlink" title="DSSA"></a>DSSA</h3><h4 id="介绍-5"><a href="#介绍-5" class="headerlink" title="介绍"></a>介绍</h4><p>DSSA是一个具有三个层次的系统模型，包括领域开发环境、领域特定应用开发环境和应用执行环境</p>
+<ul>
+<li>应用工程师主要在领域特定应用开发环境中工作</li>
+</ul>
+<h4 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h4><blockquote>
+<p>以一个特定问题领域为对象，形成由领域参考模型、参考需求、参考架构等组成的开发基础架构，其目标是支持一个特定领域中多个应用的生成。</p>
+</blockquote>
+<h4 id="基本活动"><a href="#基本活动" class="headerlink" title="基本活动"></a>基本活动</h4><blockquote>
+<p>领域分析、领域设计、领域实现</p>
+</blockquote>
+<h2 id="架构需求"><a href="#架构需求" class="headerlink" title="架构需求"></a>架构需求</h2><h3 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h3><p>UML对系统架构的定义是系统的组织结构</p>
+<ol>
+<li>逻辑视图：（设计视图），它表示了设计模型中在架构方面具有重要意义的部分，即类、子系统、包和用例实现的子集</li>
+<li>进程视图：是可执行线程和进程作为活动类的建模，它是逻辑视图的一次执行实例，描述了并发与同步结构</li>
+<li>实现视图：对组成基于系统的物理代码的文件和构件进行建模</li>
+<li>部署视图：把构件部署到一组物理节点上，表示软件到硬件的映射和分布结构</li>
+<li>用例视图：是最基本的需求分析模型</li>
+</ol>
+<p>用例视图：是最基本的需求分析模型</p>
+<h2 id="架构分析"><a href="#架构分析" class="headerlink" title="架构分析"></a>架构分析</h2><h3 id="SAAM"><a href="#SAAM" class="headerlink" title="SAAM"></a>SAAM</h3><p>是最早广泛应用的架构分析方法</p>
+<blockquote>
+<p>SAAM输入是问题描述、需求说明和架构描述</p>
+</blockquote>
+<p>分析过程：场景开发、架构描述、单个场景评估、场景交互和总体评估</p>
+<h2 id="软件策略"><a href="#软件策略" class="headerlink" title="软件策略"></a>软件策略</h2><ul>
+<li>心跳：增加计算机资源、减少计算机开销、引入并发机制、采用资源高度等。</li>
+<li>可用性：心跳、Ping&#x2F;Echo、主动冗余、被动冗余 、选举等<strong>架构策略</strong>实现该属性</li>
+<li>安全性：入侵检测、用户认证、用户授权、追踪审计</li>
+</ul>
+<h2 id="野生知识"><a href="#野生知识" class="headerlink" title="野生知识"></a>野生知识</h2><h3 id="机器人"><a href="#机器人" class="headerlink" title="机器人"></a>机器人</h3><p>使用规划系统架构风格</p>
+<h3 id="IDL"><a href="#IDL" class="headerlink" title="IDL"></a>IDL</h3><h4 id="介绍-6"><a href="#介绍-6" class="headerlink" title="介绍"></a>介绍</h4><p>是一种接口定义语言</p>
+<h4 id="主要元素"><a href="#主要元素" class="headerlink" title="主要元素"></a>主要元素</h4><p>接口描述、模块定义、类型定义、常量定义、异常、值类型</p>
+<h4 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h4><p>接口描述是ILD文件中最核心的内容 </p>
+<blockquote>
+<p>ILD只是一种接口定义语言，最终还是要落地与语言对接，所以IDL的数据类型要与实现语言进行映射</p>
+</blockquote>
+<h3 id="逆向工程"><a href="#逆向工程" class="headerlink" title="逆向工程"></a>逆向工程</h3><blockquote>
+<p>分析已有的程序，寻求比源代码更高级的抽象表现形式</p>
+</blockquote>
+<h2 id="系统移植"><a href="#系统移植" class="headerlink" title="系统移植"></a>系统移植</h2><h3 id="阶段"><a href="#阶段" class="headerlink" title="阶段"></a>阶段</h3><h4 id="1-计划阶段"><a href="#1-计划阶段" class="headerlink" title="1. 计划阶段"></a>1. 计划阶段</h4><p>在计划阶段，要进行现有系统的调查整理，从移植技术、系统内容(是否进行系统提炼等)、系统运行三个方面，探讨如何转换成新系统，决定移植方法，确立移植工作体制及移植日程</p>
+<h4 id="2-准备阶段"><a href="#2-准备阶段" class="headerlink" title="2. 准备阶段"></a>2. 准备阶段</h4><p>在准备阶段要进行移植方面的研究，准备转换所需的资料。该阶段的作业质量将对以后的生产效率产生很大的影响</p>
+<h4 id="3-转换阶段"><a href="#3-转换阶段" class="headerlink" title="3. 转换阶段"></a>3. 转换阶段</h4><p>这一阶段是将程序设计和数据转换成新机器能根据需要工作的阶段。提高转换工作的精度，减轻下一阶段的测试负担是提高移植工作效率的基本内容</p>
+<h4 id="4-测试阶段"><a href="#4-测试阶段" class="headerlink" title="4. 测试阶段"></a>4. 测试阶段</h4><p>这一阶段是进行程序单元、工作单元测试的阶段。在本阶段要核实程序能否在新系统中准确地工作。所以，当有不能准确工作的程序时，就要回到转换阶段重新工作</p>
+<h4 id="5-验证阶段"><a href="#5-验证阶段" class="headerlink" title="5. 验证阶段"></a>5. 验证阶段</h4><p>这是测试完的程序使新系统工作，最后核实系统，准备正式运行的阶段</p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84"><span class="top-box-text">软件架构</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E4%BB%8B%E7%BB%8D"><span class="top-box-text">介绍</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%9E%B6%E6%9E%84%E9%A3%8E%E6%A0%BC"><span class="top-box-text">架构风格</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E4%BB%8B%E7%BB%8D-1"><span class="top-box-text">介绍</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="top-box-text">解释器</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E7%AE%A1%E9%81%93%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="top-box-text">管道过滤器</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%9A%90%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="top-box-text">隐式调用</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%97%AD%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="top-box-text">闭环结构</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84"><span class="top-box-text">分层结构</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB"><span class="top-box-text">数据共享</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%9D%A2%E5%90%91%E6%9E%84%E4%BB%B6"><span class="top-box-text">面向构件</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="top-box-text">分布式系统</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-1-%E8%A7%86%E5%9B%BE"><span class="top-box-text">4+1 视图</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#ADL"><span class="top-box-text">ADL</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#C2"><span class="top-box-text">C2</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%9E%B6%E6%9E%84%E5%A4%8D%E5%AE%A1"><span class="top-box-text">架构复审</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E4%BB%8B%E7%BB%8D-4"><span class="top-box-text">介绍</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%9E%B6%E6%9E%84%E6%96%87%E6%A1%A3"><span class="top-box-text">架构文档</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%8E%9F%E5%88%99"><span class="top-box-text">原则</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="top-box-text">软件架构设计</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E8%BD%AF%E4%BB%B6%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="top-box-text">软件体系结构</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E9%9C%80%E6%B1%82"><span class="top-box-text">软件架构需求</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%9F%BA%E4%BA%8E%E6%9E%B6%E6%9E%84%E7%9A%84%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1-ABSD"><span class="top-box-text">基于架构的软件设计 - ABSD</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="top-box-text">设计策略</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="top-box-text">设计模式</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="top-box-text">三种模式</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F"><span class="top-box-text">外观模式</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0"><span class="top-box-text">软件系统架构评估</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#ATAM"><span class="top-box-text">ATAM</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E9%A2%86%E5%9F%9F%E5%88%86%E6%9E%90"><span class="top-box-text">领域分析</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#DSSA"><span class="top-box-text">DSSA</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%9E%B6%E6%9E%84%E9%9C%80%E6%B1%82"><span class="top-box-text">架构需求</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#UML"><span class="top-box-text">UML</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90"><span class="top-box-text">架构分析</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#SAAM"><span class="top-box-text">SAAM</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E8%BD%AF%E4%BB%B6%E7%AD%96%E7%95%A5"><span class="top-box-text">软件策略</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E9%87%8E%E7%94%9F%E7%9F%A5%E8%AF%86"><span class="top-box-text">野生知识</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA"><span class="top-box-text">机器人</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#IDL"><span class="top-box-text">IDL</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B"><span class="top-box-text">逆向工程</span></a></li></ol></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E7%B3%BB%E7%BB%9F%E7%A7%BB%E6%A4%8D"><span class="top-box-text">系统移植</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E9%98%B6%E6%AE%B5"><span class="top-box-text">阶段</span></a></li></ol></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/10/03/gang-chuang-jian-de-xiang-mu-wu-fa-shi-yong-shi-mei-you-zai-de-qing-qiu-nei-kai-qi/">
+          <h3 class="post-title">
+            下一篇：Laravel 刚创建的项目 API 无法使用 Session，是没有在Api的请求内开启Session
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

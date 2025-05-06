@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Mysql数据库设计规范</title>
+<meta name="keywords" content="Mysql数据库设计规范, Hexo">
+<meta name="description" content="1. 数据库命名规范
+采用单词+下划线’_’组成
+命名简洁明确（长度不能超过30个字符）
+例如：user,stat,log,也可以wifi_user, wifi_stat,wifi_log 给数据库加个前缀
+除非是备份数据库可以加0-9的自">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Mysql数据库设计规范">
+<meta property="og:description" content="1. 数据库命名规范
+采用单词+下划线’_’组成
+命名简洁明确（长度不能超过30个字符）
+例如：user,stat,log,也可以wifi_user, wifi_stat,wifi_log 给数据库加个前缀
+除非是备份数据库可以加0-9的自">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Mysql数据库设计规范</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2021-08-01</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h3 id="1-数据库命名规范"><a href="#1-数据库命名规范" class="headerlink" title="1. 数据库命名规范"></a>1. 数据库命名规范</h3><ol>
+<li>采用单词+下划线’_’组成</li>
+<li>命名简洁明确（长度不能超过30个字符）</li>
+<li>例如：user,stat,log,也可以wifi_user, wifi_stat,wifi_log 给数据库加个前缀</li>
+<li>除非是备份数据库可以加0-9的自然数</li>
+</ol>
+<h3 id="2-数据库表名命名规范"><a href="#2-数据库表名命名规范" class="headerlink" title="2. 数据库表名命名规范"></a>2. 数据库表名命名规范</h3><ol>
+<li>采用26 个英文字母（区分大小写）和0-9 的自然数（经常不需要）加上下划线’_’组成</li>
+<li>命名简洁明确，多个单词用下划线’_’分隔。</li>
+</ol>
+<h3 id="3-数据库表字段命名规范"><a href="#3-数据库表字段命名规范" class="headerlink" title="3. 数据库表字段命名规范"></a>3. 数据库表字段命名规范</h3><ol>
+<li>单词+下划线组成</li>
+<li>例： user_login, user_id</li>
+<li>每个表中必须有自增主键，add_time(默认系统时间)</li>
+<li>表与表之间的相关联字段名称要求尽可能的相同</li>
+</ol>
+<h3 id="4-数据库表字段类型规范"><a href="#4-数据库表字段类型规范" class="headerlink" title="4. 数据库表字段类型规范"></a>4. 数据库表字段类型规范</h3><p>用尽量少的存储空间来存储一个字段的数据</p>
+<p>能用int就不用varchar,char,能用varchar(10)就不用varchar(255)</p>
+<p>IP地址最好用INT类型</p>
+<p>固定长度的类型最好使用char，例如：邮编</p>
+<p>能使用tinyint就不要使用smallint, int</p>
+<p>最好每个字段一个默认值，最好不能为Null</p>
+<h3 id="5-数据库表索引规范"><a href="#5-数据库表索引规范" class="headerlink" title="5. 数据库表索引规范"></a>5. 数据库表索引规范</h3><p>命名简洁明确，例如：user_login表，user_name字段的索引应为user_name_index唯一索引</p>
+<p>为每个表创建一个主键索引</p>
+<p>为每个表创建合理的索引</p>
+<p>建立复合索引请慎重</p>
+<h3 id="6-数据库范式"><a href="#6-数据库范式" class="headerlink" title="6. 数据库范式"></a>6. 数据库范式</h3><ol>
+<li><p>第一范式（1NF) ：字段值具有原子性，不能再分（所有关系型数据库系统都满足第一范式）</p>
+<ul>
+<li>例如：姓名字段，其中姓和名是一个整体，如果区分姓和名那就必须设立两个字段</li>
+</ul>
+</li>
+<li><p>第二范式（2NF）：一个表必须有主键，即每行数据都能被唯一区分</p>
+<ul>
+<li>备注：必须先满足第一范式</li>
+</ul>
+</li>
+<li><p>第三范式：一个表中不能包含其他相关表中非关键字段的信息，即表数据中不能用冗余字段</p>
+<ul>
+<li><p>备注：必须先满足第二范式</p>
+</li>
+<li><p>一般不需要完全遵循第三范式，因为过度的工程化会导致项目过度细化而影响系统整体性能</p>
+</li>
+<li><p>例如：老师和学生都有账号，密码等，如果把老师账号和学生账号冗余在其信息表内，而学生账号放在学生信息表内，其实没有影响其整体的存储，但这样的效率省了大量的join操作，提升了性能，（就算拆成几张表也无法节省内存，也只会占用更多的硬盘空间，或内存空间）血的教训！！！！</p>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#1-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="top-box-text">1. 数据库命名规范</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%90%8D%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="top-box-text">2. 数据库表名命名规范</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%AD%97%E6%AE%B5%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="top-box-text">3. 数据库表字段命名规范</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#4-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B%E8%A7%84%E8%8C%83"><span class="top-box-text">4. 数据库表字段类型规范</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#5-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E7%B4%A2%E5%BC%95%E8%A7%84%E8%8C%83"><span class="top-box-text">5. 数据库表索引规范</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#6-%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F"><span class="top-box-text">6. 数据库范式</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2021/08/01/you-hua/">
+          <h3 class="post-title">
+            下一篇：Mysql优化
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

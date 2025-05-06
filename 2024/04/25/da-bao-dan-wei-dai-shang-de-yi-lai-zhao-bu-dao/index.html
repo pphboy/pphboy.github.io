@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Pyinstaller打包 openvino，但未带上 openvino的依赖，找不到CPU,GPU</title>
+<meta name="keywords" content="Pyinstaller打包 openvino，但未带上 openvino的依赖，找不到CPU,GPU, Hexo">
+<meta name="description" content="命令:
+1pyinstaller --onefile --collect-submodules openvino --collect-binaries openvino --collect-data openvino server.py
+
+">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Pyinstaller打包 openvino，但未带上 openvino的依赖，找不到CPU,GPU">
+<meta property="og:description" content="命令:
+1pyinstaller --onefile --collect-submodules openvino --collect-binaries openvino --collect-data openvino server.py
+
+">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Pyinstaller打包 openvino，但未带上 openvino的依赖，找不到CPU,GPU</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2024-04-25</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p>命令:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller --onefile --collect-submodules openvino --collect-binaries openvino --collect-data openvino server.py</span><br></pre></td></tr></table></figure>
+
+<p>server.spec (自动生成)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"># -*- mode: python ; coding: utf-8 -*-</span><br><span class="line">from PyInstaller.utils.hooks import collect_data_files</span><br><span class="line">from PyInstaller.utils.hooks import collect_dynamic_libs</span><br><span class="line">from PyInstaller.utils.hooks import collect_submodules</span><br><span class="line"></span><br><span class="line">datas = []</span><br><span class="line">binaries = []</span><br><span class="line">hiddenimports = []</span><br><span class="line">datas += collect_data_files(&#x27;openvino&#x27;)</span><br><span class="line">binaries += collect_dynamic_libs(&#x27;openvino&#x27;)</span><br><span class="line">hiddenimports += collect_submodules(&#x27;openvino&#x27;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = Analysis(</span><br><span class="line">    [&#x27;server.py&#x27;],</span><br><span class="line">    pathex=[],</span><br><span class="line">    binaries=binaries,</span><br><span class="line">    datas=datas,</span><br><span class="line">    hiddenimports=hiddenimports,</span><br><span class="line">    hookspath=[],</span><br><span class="line">    hooksconfig=&#123;&#125;,</span><br><span class="line">    runtime_hooks=[],</span><br><span class="line">    excludes=[],</span><br><span class="line">    noarchive=False,</span><br><span class="line">    optimize=0,</span><br><span class="line">)</span><br><span class="line">pyz = PYZ(a.pure)</span><br><span class="line"></span><br><span class="line">exe = EXE(</span><br><span class="line">    pyz,</span><br><span class="line">    a.scripts,</span><br><span class="line">    a.binaries,</span><br><span class="line">    a.datas,</span><br><span class="line">    [],</span><br><span class="line">    name=&#x27;server&#x27;,</span><br><span class="line">    debug=False,</span><br><span class="line">    bootloader_ignore_signals=False,</span><br><span class="line">    strip=False,</span><br><span class="line">    upx=True,</span><br><span class="line">    upx_exclude=[],</span><br><span class="line">    runtime_tmpdir=None,</span><br><span class="line">    console=True,</span><br><span class="line">    disable_windowed_traceback=False,</span><br><span class="line">    argv_emulation=False,</span><br><span class="line">    target_arch=None,</span><br><span class="line">    codesign_identity=None,</span><br><span class="line">    entitlements_file=None,</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2024/02/28/xie/">
+          <h3 class="post-title">
+            下一篇：vue &amp;amp; vite 写 tsx
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

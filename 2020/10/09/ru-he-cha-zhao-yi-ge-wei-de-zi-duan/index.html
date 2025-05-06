@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>如何查找一个为NULL的MYSQL字段</title>
+<meta name="keywords" content="如何查找一个为NULL的MYSQL字段, Hexo">
+<meta name="description" content=" – 4、查询平均成绩小于60分的同学的学生编号和学生姓名和平均成绩        – (包括有成绩的和无成绩的) 
+前言：在做这个题目 https://www.cnblogs.com/pipihao/p/13786304.html因为之前">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="如何查找一个为NULL的MYSQL字段">
+<meta property="og:description" content=" – 4、查询平均成绩小于60分的同学的学生编号和学生姓名和平均成绩        – (包括有成绩的和无成绩的) 
+前言：在做这个题目 https://www.cnblogs.com/pipihao/p/13786304.html因为之前">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <link rel="stylesheet" href="/style/simple-lightbox.min.css"><meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">如何查找一个为NULL的MYSQL字段</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-10-09</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <p> – 4、查询平均成绩小于60分的同学的学生编号和学生姓名和平均成绩        – (包括有成绩的和无成绩的) </p>
+<h3 id="前言：在做这个题目-https-www-cnblogs-com-pipihao-p-13786304-html"><a href="#前言：在做这个题目-https-www-cnblogs-com-pipihao-p-13786304-html" class="headerlink" title="前言：在做这个题目 https://www.cnblogs.com/pipihao/p/13786304.html"></a>前言：在做这个题目 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/pipihao/p/13786304.html">https://www.cnblogs.com/pipihao/p/13786304.html</a></h3><p>因为之前 我好像没有接触过什么 为NULL字段的查询，细节不小</p>
+<h3 id="WHERE-字段-IS-NULL"><a href="#WHERE-字段-IS-NULL" class="headerlink" title="WHERE 字段 IS NULL"></a>WHERE 字段 IS NULL</h3><h3 id="WHERE-字段-IS-NOT-NULL"><a href="#WHERE-字段-IS-NOT-NULL" class="headerlink" title="WHERE 字段 IS NOT NULL"></a>WHERE 字段 IS NOT NULL</h3><h5 id=""><a href="#" class="headerlink" title=""></a></h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 这是数据查询的SQL</span><br><span class="line">SELECT </span><br><span class="line">	s.*,(s1.`s_score`+s2.`s_score`+s3.`s_score`)/3 平均成绩</span><br><span class="line">FROM </span><br><span class="line">	student s</span><br><span class="line">LEFT JOIN score s1 ON s1.`s_id` = s.`s_id` AND s1.`c_id` = 01</span><br><span class="line">LEFT JOIN score s2 ON s2.`s_id` = s.`s_id` AND s2.`c_id` = 02 </span><br><span class="line">LEFT JOIN score s3 ON s3.`s_id` = s.`s_id` AND s3.`c_id` = 03</span><br></pre></td></tr></table></figure>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201009161204920-372015533.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201009161204920-372015533.png"  lazyload></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 这是我自己之前写的SQL </span><br><span class="line">SELECT </span><br><span class="line">	s.*,(s1.`s_score`+s2.`s_score`+s3.`s_score`)/3 平均成绩</span><br><span class="line">FROM </span><br><span class="line">	student s</span><br><span class="line">LEFT JOIN score s1 ON s1.`s_id` = s.`s_id` AND s1.`c_id` = 01</span><br><span class="line">LEFT JOIN score s2 ON s2.`s_id` = s.`s_id` AND s2.`c_id` = 02 </span><br><span class="line">LEFT JOIN score s3 ON s3.`s_id` = s.`s_id` AND s3.`c_id` = 03</span><br><span class="line">WHERE   (s1.`s_score`+s2.`s_score`+s3.`s_score`)/3 &lt; 60 </span><br></pre></td></tr></table></figure>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201009161402591-1478256604.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201009161402591-1478256604.png"  lazyload></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 这是完善之后 的SQL 加了IS NULL 可以判断字段是否为NULL</span><br><span class="line">SELECT </span><br><span class="line">	s.*,(s1.`s_score`+s2.`s_score`+s3.`s_score`)/3 平均成绩</span><br><span class="line">FROM </span><br><span class="line">	student s</span><br><span class="line">LEFT JOIN score s1 ON s1.`s_id` = s.`s_id` AND s1.`c_id` = 01</span><br><span class="line">LEFT JOIN score s2 ON s2.`s_id` = s.`s_id` AND s2.`c_id` = 02 </span><br><span class="line">LEFT JOIN score s3 ON s3.`s_id` = s.`s_id` AND s3.`c_id` = 03</span><br><span class="line">WHERE   </span><br><span class="line">	(s1.`s_score`+s2.`s_score`+s3.`s_score`)/3 &lt; 60 </span><br><span class="line">OR </span><br><span class="line">	(s1.`s_score`+s2.`s_score`+s3.`s_score`)/3 IS NULL</span><br></pre></td></tr></table></figure>
+<p><a class="simple-lightbox" target="_blank" rel="noopener" href="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201009161536745-779223655.png"><img   src="/images/loading.svg" data-src="https://img2020.cnblogs.com/blog/2146100/202010/2146100-20201009161536745-779223655.png"  lazyload></a></p>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A%E5%9C%A8%E5%81%9A%E8%BF%99%E4%B8%AA%E9%A2%98%E7%9B%AE-https-www-cnblogs-com-pipihao-p-13786304-html"><span class="top-box-text">前言：在做这个题目 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;pipihao&#x2F;p&#x2F;13786304.html</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#WHERE-%E5%AD%97%E6%AE%B5-IS-NULL"><span class="top-box-text">WHERE 字段 IS NULL</span></a></li><li class="top-box-item top-box-level-3"><a class="top-box-link" href="#WHERE-%E5%AD%97%E6%AE%B5-IS-NOT-NULL"><span class="top-box-text">WHERE 字段 IS NOT NULL</span></a></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/10/09/ji-chu-ti-zhuan-zai/">
+          <h3 class="post-title">
+            下一篇：MYSQL 50 基础题　（转载）
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  <script src="/js/simple-lightbox.min.js"></script><script>document.addEventListener('DOMContentLoaded', function() {new SimpleLightbox('.post-detail .simple-lightbox', {fileExt: false,captionsData:'alt'});});</script></body>
+</html>
+

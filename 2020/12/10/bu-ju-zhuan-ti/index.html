@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>Flex布局专题</title>
+<meta name="keywords" content="Flex布局专题, Hexo">
+<meta name="description" content="Flex布局专题参照 https://www.runoob.com/w3cnote/flex-grammar.html
+下面是自己看代码的一下 小结，和认识，加笔记，加原文
+
+
+认识容器
+
+flex布局需要基于一个容器才能开展
+在容器内的称">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="Flex布局专题">
+<meta property="og:description" content="Flex布局专题参照 https://www.runoob.com/w3cnote/flex-grammar.html
+下面是自己看代码的一下 小结，和认识，加笔记，加原文
+
+
+认识容器
+
+flex布局需要基于一个容器才能开展
+在容器内的称">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">Flex布局专题</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-12-10</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h4 id="Flex布局专题"><a href="#Flex布局专题" class="headerlink" title="Flex布局专题"></a>Flex布局专题</h4><h5 id="参照-https-www-runoob-com-w3cnote-flex-grammar-html"><a href="#参照-https-www-runoob-com-w3cnote-flex-grammar-html" class="headerlink" title="参照 https://www.runoob.com/w3cnote/flex-grammar.html"></a>参照 <a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/flex-grammar.html">https://www.runoob.com/w3cnote/flex-grammar.html</a></h5><ul>
+<li>下面是自己看代码的一下 小结，和认识，加笔记，加原文</li>
+</ul>
+<ol>
+<li><p>认识容器</p>
+<ul>
+<li>flex布局需要基于一个容器才能开展</li>
+<li>在容器内的称为子容器</li>
+</ul>
+</li>
+<li><p>容器的属性</p>
+<ul>
+<li><p><strong>flex-direction</strong></p>
+<ul>
+<li><p>介绍：改变子容器排列的方向</p>
+</li>
+<li><pre><code class="language-css">.box &#123;
+  flex-direction: row | row-reverse | column | column-reverse;
+&#125;
+
+/*
+row（默认值）：主轴为水平方向，起点在左端。
+row-reverse：主轴为水平方向，起点在右端。
+reverse就是倒序的意思。
+column：主轴为垂直方向，起点在上沿。
+column-reverse：主轴为垂直方向，起点在下沿。
+*/
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* **flex-wrap**</span><br><span class="line"></span><br><span class="line">  * 介绍：控制子窗口是否换行，如何换行</span><br><span class="line"></span><br><span class="line">  * ```css</span><br><span class="line">    .box&#123;</span><br><span class="line">      flex-wrap: nowrap | wrap | wrap-reverse;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    /*</span><br><span class="line">    nowrap，不换行，</span><br><span class="line">    wrap 换行</span><br><span class="line">    wrap-reserve 倒序换行</span><br><span class="line">    */</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>wrap-reserve 将子元素，倒序，然后，换行</p>
+</li>
+</ul>
+</li>
+<li><p><strong>flex-flow</strong></p>
+<ul>
+<li><p>flex-flow是flex-direction 和flex-wrap的简写形式，默认的值是row 和 nowrap</p>
+</li>
+<li><pre><code class="language-css">.box &#123;
+  flex-flow: &lt;flex-direction&gt; &lt;flex-wrap&gt;;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* ```css</span><br><span class="line">  .box &#123;</span><br><span class="line">      flex-flow: row nowrap;</span><br><span class="line">  &#125;</span><br><span class="line">  .box &#123;</span><br><span class="line">      flex-flow: column wrap;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>justify-content</strong></p>
+<ul>
+<li><p>介绍：justify-content属性定义了项目的对齐方式 </p>
+</li>
+<li><p>就是定义了子元素如何分布</p>
+</li>
+<li><pre><code class="language-css">.box &#123;
+  justify-content: flex-start | flex-end | center | space-between | space-around;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  * 取值的具体介绍</span><br><span class="line"></span><br><span class="line">    * flex-start 左对齐</span><br><span class="line">    * flex-end 右对齐</span><br><span class="line">    * center 居中对齐</span><br><span class="line">    * space-between 两端对齐，项目之间的间隔都相等。</span><br><span class="line">    * space-around: 每个项目两侧的间隔相等。项目之间的间隔，是边框的两倍。</span><br><span class="line"></span><br><span class="line">* **align-items**</span><br><span class="line"></span><br><span class="line">  * 介绍：关于子元素在交叉轴上如何对齐 (个人觉得是相对 于 纵轴进行 对齐)</span><br><span class="line"></span><br><span class="line">  * ```css</span><br><span class="line">    .box &#123;</span><br><span class="line">        align-items:flex-item</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>flex-start: 向上排列</p>
+</li>
+<li><p>flex-end:向下排列</p>
+</li>
+<li><p>center: 垂直居中排序</p>
+</li>
+<li><p>stretch :塞 满 整个纵轴</p>
+</li>
+<li><p>baseline:项目的第一行文字同一水平线</p>
+</li>
+</ul>
+</li>
+<li><p><strong>align-content</strong></p>
+<ul>
+<li><p>介绍：align-content对很多个轴线(一行)，子元素的对齐 方式，如果 子元素只有一根轴线，则该 属性不起作用。</p>
+</li>
+<li><pre><code class="language-css">.box &#123;
+  align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+&#125;
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">     * align-content的 flex-start | flex-end | center| stretch与 align-item是一样的</span><br><span class="line"></span><br><span class="line">     * space-around：每根轴线两侧的间隔者相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。(这个的间隔是边框的1倍)</span><br><span class="line"></span><br><span class="line">     * space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。（间隔是平均的，边框的大小 不知）</span><br><span class="line"></span><br><span class="line">3. 子元素的 属性（在菜鸟的文档内说是项目的属性）</span><br><span class="line"></span><br><span class="line">   * order</span><br><span class="line"></span><br><span class="line">     * 定义项目的排列顺序，数值起小，越靠前，默认为0</span><br><span class="line"></span><br><span class="line">   * flex-grow(这个是操作子元素，操作项目的)</span><br><span class="line"></span><br><span class="line">     * flex-grow定义项目的缩放，默认为0，为0，就不做缩放。</span><br><span class="line">     * 如果值都为1 ，则是平均分隔，反正就是根据这个值来分项目的大小</span><br><span class="line"></span><br><span class="line">   * flex-shrink</span><br><span class="line"></span><br><span class="line">     * flex-shrink 定义 项目的缩小比例，如果空间不够的时候，缩小项目。</span><br><span class="line">     * ``如果所有项目的flex-shrink属性者为1，当空间不足时，都将等比例缩小。如果一个项目flex-shrink属性为0，其他项目都 为1 ，则空间不足时，前者不缩小。负值对该属性无效。``</span><br><span class="line"></span><br><span class="line">   * flex-basis</span><br><span class="line"></span><br><span class="line">     * flex-basis：分配多余的空间，如果有多余 的空间，可以分配给使用本属性的项目，项目的原本的默认值|大小 为auto。</span><br><span class="line"></span><br><span class="line">   * flex</span><br><span class="line"></span><br><span class="line">     * flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</span><br><span class="line"></span><br><span class="line">       ```css</span><br><span class="line">       .item &#123;</span><br><span class="line">         flex: none | [ &lt;&#x27;flex-grow&#x27;&gt; &lt;&#x27;flex-shrink&#x27;&gt;? || &lt;&#x27;flex-basis&#x27;&gt;]</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>align-self</p>
+<ul>
+<li><p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">  <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>auto,flex-start,flex-end,center,baseline,stretch</p>
+</li>
+<li><p>该 属性可能 取6个传值，除了 auto,其他都与align-items属性完全一致。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+          
+        <div class="top-div">
+          
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2020/12/01/zong-jie-juan-zi-guan-li/">
+          <h3 class="post-title">
+            下一篇：总结 卷子管理
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+

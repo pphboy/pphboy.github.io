@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+
+    
+<script>!function(){var e=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,t=localStorage.getItem("use-color-scheme")||"auto";("dark"===t||e&&"light"!==t)&&document.documentElement.classList.toggle("dark",!0)}()</script>
+    
+
+<meta charset="utf-8" >
+
+<title>重学SpringBoot. step5 再学SpringMVC</title>
+<meta name="keywords" content="重学SpringBoot. step5 再学SpringMVC, Hexo">
+<meta name="description" content="SpringMVC参考：《深入浅出 SpringBoot 2.X》
+虽然说的是SpringBoot，但把SpringMVC将的很好，正是SpringMVC应用到SpringBoot中非常典型的应用方式。
+多数SpringBootWeb的项目">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="重学SpringBoot. step5 再学SpringMVC">
+<meta property="og:description" content="SpringMVC参考：《深入浅出 SpringBoot 2.X》
+虽然说的是SpringBoot，但把SpringMVC将的很好，正是SpringMVC应用到SpringBoot中非常典型的应用方式。
+多数SpringBootWeb的项目">
+
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style/main.css">
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    <div id="app" class="main">
+
+<div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://example.com">
+        <img class="avatar" src="/images/avatar.png" alt="logo" width="32px" height="32px">
+      </a>
+      <a href="http://example.com">
+        <h1 class="site-title">Hexo</h1>
+      </a>
+    </div>
+    <div class="right">
+        <i class="icon menu-switch icon-menu-outline" ></i>
+    </div>
+  </div>
+</div>
+
+<div class="menu-container" style="height: 0;opacity: 0;">
+<nav class="menu-list">
+  
+    
+      <a href="/" class="menu purple-link">
+        首页
+      </a>
+    
+  
+    
+      <a href="/tags" class="menu purple-link">
+        标签
+      </a>
+    
+  
+    
+      <a href="/archives" class="menu purple-link">
+        归档
+      </a>
+    
+  
+    
+      <a href="/about" class="menu purple-link">
+        关于
+      </a>
+    
+  
+</nav>
+</div>
+
+
+
+  <div class="content-container">
+    <div class="post-detail">
+      
+      <h2 class="post-title">重学SpringBoot. step5 再学SpringMVC</h2>
+      <div class="post-info post-detail-info">
+        <span><i class="icon icon-calendar-outline"></i> 2022-05-10</span>
+        
+      </div>
+      <div class="post-content-wrapper">
+        <div class="post-content">
+          <h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><p>参考：<a target="_blank" rel="noopener" href="https://weread.qq.com/web/reader/48732c40718b74cd487c7c3">《深入浅出 SpringBoot 2.X》</a></p>
+<p>虽然说的是SpringBoot，但把SpringMVC将的很好，正是SpringMVC应用到SpringBoot中非常典型的应用方式。</p>
+<p>多数SpringBootWeb的项目，都是用MVC，在SpringBoot的应用中，MVC变得极为简单，其不再需要单独的配置文件，要添加资源的映射和拦截器，跨域的配置，都可以通过实现WebMvcConfigurer，然后再其实实现相应的 方向即可添加这些自定义的功能。</p>
+<h2 id="处理器映射"><a href="#处理器映射" class="headerlink" title="处理器映射"></a>处理器映射</h2><p>最常用的五个请求类型：GET，POST，DELETE，PUT，OPTIONS </p>
+<p>http有很多个请求类型，目前我只用过这五个。</p>
+<p>一个协议对象的注解为</p>
+<p>@RequstMapping(“path”)<br>@GetMapping,@PostMapping，@DeleteMapping @PutMapping</p>
+<p>上面这五个注解的用法是一样的，但RequestMapping默认可以接收到五个请求类型，特定的请求类型需要使用特定的请求类型注解，Request也可以指定请求类型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = &quot;user&quot;,method = RequestMethod.DELETE)</span></span><br></pre></td></tr></table></figure>
+
+<p>其实这些都不是重点，你不能指望这篇文章提高你的MVC基础水平。</p>
+<p>书中大量引用了URL参数，但这是不推荐的，固定的资源可以用URL路径传递值，动态的数据则使用POST进行请求。</p>
+<h2 id="自定义参数转换规则"><a href="#自定义参数转换规则" class="headerlink" title="自定义参数转换规则"></a>自定义参数转换规则</h2><p>第一，知道有这个东西，第二，知道怎么用。</p>
+<p>需求：将Request请求的参数转成对象，1-username</p>
+<p>Path参数，Request参数，都可以在自己的规则进行转换</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8083/user/convert/1-man</span><br><span class="line">http://localhost:8083/user/convert/user=1-man</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/convert/&#123;user&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> User <span class="title function_">stringToUser</span><span class="params">(<span class="meta">@PathVariable(&quot;user&quot;)</span> User user)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>下面是转换时候用的类，他会自动注入到容器中，供使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringToUserConvertor</span> <span class="keyword">implements</span> <span class="title class_">Converter</span>&lt;String, User&gt; &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">convert</span><span class="params">(String source)</span> &#123;</span><br><span class="line">        String[] split = source.split(<span class="string">&quot;-&quot;</span>);</span><br><span class="line">        System.out.println(source+<span class="string">&quot; : source&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">User</span>().setUserName(split[<span class="number">1</span>]).setId(Long.parseLong(split[<span class="number">0</span>]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>返回的值就是，转换的类的类名</p>
+<h2 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h2><p>首先你需要知道一些基础的注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotNull</span>   <span class="meta">@Future</span>  <span class="meta">@DateTimeFormat</span></span><br><span class="line"><span class="meta">@DecimalMin</span></span><br><span class="line"><span class="meta">@Min</span> <span class="meta">@Max</span></span><br><span class="line"><span class="meta">@NotEmpty</span>  <span class="meta">@Range(min=1,max10)</span></span><br><span class="line"><span class="meta">@Email</span>   <span class="meta">@Size</span>  <span class="meta">@Length</span></span><br></pre></td></tr></table></figure>
+<p>这些注解都有一个属性为message，就是报错之后需要传递的属性</p>
+<p>然后就是自定义校验器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserValidator</span> <span class="keyword">implements</span> <span class="title class_">Validator</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">supports</span><span class="params">(Class&lt;?&gt; clazz)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> clazz.equals(User.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">validate</span><span class="params">(Object target, Errors errors)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(target == <span class="literal">null</span>)&#123;</span><br><span class="line">            errors.rejectValue(<span class="string">&quot;matherfather&quot;</span>,<span class="literal">null</span>,<span class="string">&quot;不能为空&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> (User) target;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(StringUtils.hasText(user.getUserName()))&#123;</span><br><span class="line">            errors.rejectValue(<span class="string">&quot;username 会不会吗？&quot;</span>,<span class="literal">null</span>,<span class="string">&quot;UserName只能为空啊，你会不会写？&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自定义的验证需要添加到WebDataBinder内，才则绑定成功</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@InitBinder</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">initBinder</span><span class="params">(WebDataBinder webDataBinder)</span>&#123;</span><br><span class="line">    webDataBinder.setValidator(<span class="keyword">new</span> <span class="title class_">UserValidator</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h2><p>拦截器会根据添加的顺序进行执行，拦截器执行完后，需要返回一个boolean类型的值 ，如果为true则继续执行，为false则停止。</p>
+<p>整体而言，是一个拦截器链，但会根据拦截器的执行 顺序。</p>
+<p>拦截器有三个方法，分别是拦截前(preHandler)，拦截后(postHandler)，请求完成(afterHandler)</p>
+<p>拦截器的实现就是实现 HandlerInteceptor，并且可以给对应的拦截器添加匹配的拦截规则 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestInteceptor</span> <span class="keyword">implements</span> <span class="title class_">HandlerInteceptor</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 需要添加到WebMvcConfigurar的实现类中</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurar</span>&#123;</span><br><span class="line">    addInteceptors(InteceptorRegistry registry)&#123;</span><br><span class="line">        registry.addInteceptor(<span class="keyword">new</span> <span class="title class_">TestInteceptor</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+        </div>
+          
+        <div class="top-div">
+          <ol class="top-box"><li class="top-box-item top-box-level-1"><a class="top-box-link" href="#SpringMVC"><span class="top-box-text">SpringMVC</span></a><ol class="top-box-child"><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E6%98%A0%E5%B0%84"><span class="top-box-text">处理器映射</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%82%E6%95%B0%E8%BD%AC%E6%8D%A2%E8%A7%84%E5%88%99"><span class="top-box-text">自定义参数转换规则</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%95%B0%E6%8D%AE%E9%AA%8C%E8%AF%81"><span class="top-box-text">数据验证</span></a></li><li class="top-box-item top-box-level-2"><a class="top-box-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="top-box-text">拦截器</span></a></li></ol></li></ol>
+        </div>
+          
+      </div>
+    </div>
+
+    
+      <div class="next-post">
+        <a class="purple-link" href="/2022/05/09/zhong-xue-de-ying-yong/">
+          <h3 class="post-title">
+            下一篇：重学SpringBoot. step4 Redis的应用
+          </h3>
+        </a>
+      </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
+
+<footer>
+<div class="site-footer">
+  <div class="social-container">
+    
+      
+        <a aria-label="跳转至github" href="https://github.com/f-dong" target="_blank">
+          <i class="icon icon-github"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/f-dong/hexo-theme-minimalism" target="_blank">Theme</a>
+  
+  
+  
+  
+  
+  
+</div>
+</footer>
+
+
+      </div>
+    </div>
+    
+<script id="hexo-configurations"> window.theme_config = {"image":{"lazyload_enable":true,"photo_zoom":"simple-lightbox"}}; window.is_post = true; </script>
+
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
