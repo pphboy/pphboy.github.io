@@ -62,9 +62,12 @@ export default defineConfig({
   // Keep .html links: GitHub Pages has no configurable rewrite rules.
   cleanUrls: false,
   head: [
+    ['link', { rel: 'icon', type: 'image/png', href: '/piwork/logo.png' }],
+    ['link', { rel: 'apple-touch-icon', href: '/piwork/logo.png' }],
     ['meta', { property: 'og:site_name', content: 'Piwork' }],
     ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:description', content: description }]
+    ['meta', { property: 'og:description', content: description }],
+    ['meta', { property: 'og:image', content: 'https://pphboy.github.io/piwork/logo.png' }]
   ],
   sitemap: { hostname: 'https://pphboy.github.io/piwork/' },
   locales: {
@@ -88,6 +91,7 @@ export default defineConfig({
     }
   },
   themeConfig: {
+    logo: { src: '/logo.png', alt: 'Piwork' },
     search: {
       provider: 'local',
       options: {

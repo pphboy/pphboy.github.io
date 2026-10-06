@@ -4,6 +4,9 @@ hero:
   name: Piwork
   text: 可分享、可运行的 AI 工作空间
   tagline: 由可演进的 Harness 驱动。
+  image:
+    src: /logo.png
+    alt: Piwork
   actions:
     - theme: brand
       text: 开始使用

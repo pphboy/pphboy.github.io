@@ -23,6 +23,8 @@ Documentation links retain `.html` for direct GitHub Pages access.
 Each English Markdown page has a corresponding page under `docs/zh/`. Keep both
 versions in sync. The language menu preserves the current page, and each locale
 has its own navigation and search index. Shared install files stay in `docs/public/`.
+The supplied transparent logo is `docs/public/logo.png`, shared by both homepages,
+the navigation, favicon, touch icon, and Open Graph metadata.
 
 ## Content maintenance
 

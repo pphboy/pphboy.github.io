@@ -4,6 +4,9 @@ hero:
   name: Piwork
   text: A shareable, runnable AI workspace
   tagline: Powered by an evolvable Harness.
+  image:
+    src: /logo.png
+    alt: Piwork
   actions:
     - theme: brand
       text: Get Started
