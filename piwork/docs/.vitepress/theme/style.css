@@ -1,0 +1,72 @@
+:root {
+  /* Blue and cyan from the logo; deeper blues keep white text readable. */
+  --piwork-logo-blue: #087bf6;
+  --piwork-logo-cyan: #60e0f3;
+  --piwork-logo-ice: #93d8f1;
+
+  --vp-c-brand-1: #0967ca;
+  --vp-c-brand-2: #075bb8;
+  --vp-c-brand-3: #096de0;
+  --vp-c-brand-soft: rgba(8, 123, 246, 0.12);
+
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f2f7fb;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #f2f7fb;
+  --vp-c-border: #bdceda;
+  --vp-c-divider: #dce7ee;
+  --vp-c-gutter: #dce7ee;
+  --vp-c-text-1: #1c232b;
+  --vp-c-text-2: #536575;
+  --vp-c-text-3: #687e90;
+
+  --vp-button-brand-bg: #096de0;
+  --vp-button-brand-hover-bg: #075fc9;
+  --vp-button-brand-active-bg: #064fa8;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-active-text: #ffffff;
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #0967ca 25%, #087c95);
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(8, 123, 246, 0.18),
+    rgba(96, 224, 243, 0.24)
+  );
+  --vp-home-hero-image-filter: blur(56px);
+}
+
+.dark {
+  --vp-c-brand-1: #61d7f2;
+  --vp-c-brand-2: #94e5f7;
+  --vp-c-brand-soft: rgba(96, 224, 243, 0.14);
+
+  /* Charcoal surfaces echo the logo outline. */
+  --vp-c-bg: #171c22;
+  --vp-c-bg-alt: #11161c;
+  --vp-c-bg-elv: #202832;
+  --vp-c-bg-soft: #202832;
+  --vp-c-border: #425262;
+  --vp-c-divider: #2c3946;
+  --vp-c-gutter: #11161c;
+  --vp-c-text-1: #f2f8fc;
+  --vp-c-text-2: #b0c2cf;
+  --vp-c-text-3: #849dad;
+
+  --vp-home-hero-name-background: linear-gradient(
+    120deg,
+    var(--piwork-logo-cyan) 25%,
+    var(--piwork-logo-ice)
+  );
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    rgba(8, 123, 246, 0.22),
+    rgba(96, 224, 243, 0.12)
+  );
+}
+
+::selection {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-brand-soft);
+}
