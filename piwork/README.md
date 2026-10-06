@@ -20,6 +20,7 @@ http://localhost:4173/piwork/. Edit Markdown in `docs/` and navigation in
 `docs/.vitepress/config.ts`. The default theme provides light/dark mode and local search;
 `docs/.vitepress/theme/style.css` adapts its colors to the logo's blue/cyan palette
 with charcoal surfaces in dark mode. Keep shared theme changes consistent across locales.
+Discussions stays next to GitHub in both the navigation and homepage actions.
 Documentation links retain `.html` for direct GitHub Pages access.
 
 Each English Markdown page has a corresponding page under `docs/zh/`. Keep both

@@ -14,6 +14,9 @@ hero:
     - theme: alt
       text: GitHub
       link: https://github.com/pphboy/piwork
+    - theme: alt
+      text: Discussions
+      link: https://github.com/pphboy/piwork/discussions
 ---
 
 ## What is Piwork?

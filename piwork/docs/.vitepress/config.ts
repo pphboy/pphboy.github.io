@@ -11,8 +11,8 @@ function navigation(chinese: boolean): DefaultTheme.Config {
       { text: chinese ? '文档' : 'Docs', link: link('/guide/'), activeMatch: `^${prefix}/(guide|concepts)/` },
       { text: chinese ? '演示' : 'Demo', link: link('/demo/kanban'), activeMatch: `^${prefix}/demo/` },
       { text: chinese ? '规范' : 'Spec', link: link('/spec/'), activeMatch: `^${prefix}/spec/` },
-      { text: chinese ? '讨论' : 'Discussions', link: `${repository}/discussions` },
-      { text: 'GitHub', link: repository }
+      { text: 'GitHub', link: repository },
+      { text: chinese ? '讨论社区' : 'Discussions', link: `${repository}/discussions` }
     ],
     sidebar: [
       { text: chinese ? '首页' : 'Home', link: link('/') },

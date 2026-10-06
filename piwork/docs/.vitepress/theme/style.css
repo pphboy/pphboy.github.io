@@ -27,14 +27,7 @@
   --vp-button-brand-hover-text: #ffffff;
   --vp-button-brand-active-text: #ffffff;
 
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(120deg, #0967ca 25%, #087c95);
-  --vp-home-hero-image-background-image: linear-gradient(
-    135deg,
-    rgba(8, 123, 246, 0.18),
-    rgba(96, 224, 243, 0.24)
-  );
-  --vp-home-hero-image-filter: blur(56px);
+  --vp-home-hero-name-color: var(--vp-c-brand-1);
 }
 
 .dark {
@@ -53,17 +46,6 @@
   --vp-c-text-1: #f2f8fc;
   --vp-c-text-2: #b0c2cf;
   --vp-c-text-3: #849dad;
-
-  --vp-home-hero-name-background: linear-gradient(
-    120deg,
-    var(--piwork-logo-cyan) 25%,
-    var(--piwork-logo-ice)
-  );
-  --vp-home-hero-image-background-image: linear-gradient(
-    135deg,
-    rgba(8, 123, 246, 0.22),
-    rgba(96, 224, 243, 0.12)
-  );
 }
 
 ::selection {
