@@ -11,11 +11,11 @@
 ## 2. Independent deployment
 
 - [x] 2.1 Implement scoped Git publication and integrate it with the existing Hexo deploy command; verify product and blog preservation, obsolete-file removal, and racing updates with isolated Git tests.
-- [ ] 2.2 Add the product build and deploy GitHub Action, using locked dependencies and the existing Pages branch; verify PRs cannot publish and deployment changes only `piwork/`.
+- [x] 2.2 Add the product build and deploy GitHub Action, using locked dependencies and the existing Pages branch; verify PRs cannot publish and deployment changes only `piwork/`.
 - [x] 2.3 Document blog and product deployment behavior and the restored Mini theme mapping; verify the original theme commit and root build/preview.
 
 ## 3. Integration and publication
 
 - [x] 3.1 Review both languages' built internal links, asset paths, code blocks, local search, desktop/mobile, light/dark rendering, and language switching; fix any observed errors.
-- [ ] 3.2 Commit and publish the authorized source and product distribution; verify the Action result, live `/piwork/` and deep links, and unchanged root Pages tree.
-- [ ] 3.3 Record build/deployment results and remaining verification limits; verify the final diff is scoped and the Piwork implementation checkout is untouched.
+- [x] 3.2 Commit and publish the authorized source and product distribution; verify the Action result, live `/piwork/` and deep links, and unchanged root Pages tree.
+- [x] 3.3 Record build/deployment results and remaining verification limits; verify the final diff is scoped and this task made no changes to the Piwork implementation checkout.
