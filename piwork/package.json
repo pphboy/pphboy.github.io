@@ -1,0 +1,24 @@
+{
+  "name": "piwork-website",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.29.2",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs",
+    "test:deploy": "node --test scripts/deploy.test.mjs",
+    "deploy": "node scripts/deploy.mjs piwork docs/.vitepress/dist"
+  },
+  "devDependencies": {
+    "vitepress": "1.6.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

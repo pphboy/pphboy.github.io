@@ -101,6 +101,6 @@ theme: mini
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
+  type: git-preserve-piwork
   repo: git@github.com:pphboy/pphboy.github.io.git
   branch: gh-pages

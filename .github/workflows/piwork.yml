@@ -1,0 +1,103 @@
+name: Piwork website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'piwork/**'
+      - 'scripts/pages-deployer.js'
+      - '.github/workflows/piwork.yml'
+  pull_request:
+    paths:
+      - 'piwork/**'
+      - 'scripts/pages-deployer.js'
+      - '.github/workflows/piwork.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: piwork-website-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: piwork/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: piwork/pnpm-lock.yaml
+      - name: Install locked dependencies
+        run: pnpm --dir piwork install --frozen-lockfile
+      - name: Test deployment boundaries
+        run: pnpm --dir piwork test:deploy
+      - name: Build website
+        run: pnpm --dir piwork build
+      - uses: actions/upload-artifact@v7
+        with:
+          name: piwork-site
+          path: piwork/docs/.vitepress/dist/
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v8
+        with:
+          name: piwork-site
+          path: piwork/docs/.vitepress/dist/
+      - name: Confirm existing Pages source
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { data } = await github.rest.repos.getPages(context.repo);
+            if (data.source?.branch !== 'gh-pages' || data.source?.path !== '/' || data.build_type === 'workflow') {
+              throw new Error('Expected the existing branch-based Pages source: gh-pages, /. No settings were changed.');
+            }
+      - name: Check out existing published files
+        uses: actions/checkout@v7
+        with:
+          ref: gh-pages
+          path: pages-branch
+      - name: Publish only piwork/
+        id: publish
+        run: |
+          node piwork/scripts/deploy.mjs piwork piwork/docs/.vitepress/dist --checkout pages-branch
+          echo "sha=$(git -C pages-branch rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      # GITHUB_TOKEN pushes do not automatically trigger branch-based Pages builds.
+      - name: Request and verify the Pages build
+        uses: actions/github-script@v9
+        env:
+          PIWORK_PAGES_COMMIT: ${{ steps.publish.outputs.sha }}
+        with:
+          script: |
+            await github.rest.repos.requestPagesBuild(context.repo);
+            for (let attempt = 0; attempt < 60; attempt++) {
+              const { data } = await github.rest.repos.getLatestPagesBuild(context.repo);
+              if (data.commit === process.env.PIWORK_PAGES_COMMIT) {
+                if (data.status === 'built') {
+                  core.info('Published https://pphboy.github.io/piwork/');
+                  return;
+                }
+                if (data.status === 'errored') throw new Error(data.error?.message || 'Pages build failed.');
+              }
+              await new Promise(resolve => setTimeout(resolve, 5000));
+            }
+            throw new Error('Timed out waiting for the requested Pages commit.');
