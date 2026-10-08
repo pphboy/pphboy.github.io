@@ -19,7 +19,7 @@
 
 ## 在 Piwork 中构建看板
 
-[安装 Piwork](/zh/guide/installation)，打开 Desktop，创建并启动名为 `Kanban` 的 Work。在 Chat 中可以提出：
+先按[终端快速开始](/zh/guide/quick-start)创建 Work 并收到回复；创建会自动启动。在 CLI chat 中可以提出：
 
 > 在共享工作空间中构建一个简单 Kanban 看板，包含 Todo、Doing 和 Done 三列。将数据持久化到托管工作空间。使用可用的 Work Service 工具将应用声明为 Service，包含 HTTP 端口和就绪检查。检查运行中的 Service，并说明你验证了什么。
 

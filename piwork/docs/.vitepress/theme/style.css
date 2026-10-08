@@ -52,3 +52,45 @@
   color: var(--vp-c-text-1);
   background: var(--vp-c-brand-soft);
 }
+
+/* Keep the shared brand mark centered above the bilingual homepage intro. */
+.VPHero .container {
+  flex-direction: column;
+  align-items: center;
+}
+
+.VPHero .image {
+  order: -1;
+  margin: 0 0 24px;
+}
+
+.VPHero .image-container {
+  width: 160px;
+  height: 160px;
+  transform: none;
+}
+
+.VPHero .image-src {
+  max-width: 160px;
+  max-height: 160px;
+}
+
+.VPHome .VPHero.has-image .main {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.VPHome .VPHero .name {
+  margin-inline: auto;
+}
+
+.VPHero .name,
+.VPHero .text,
+.VPHero .tagline {
+  max-width: none;
+}
+
+.VPHome .VPHero.has-image .actions {
+  justify-content: center;
+}

@@ -31,17 +31,26 @@ the navigation, favicon, touch icon, and Open Graph metadata.
 
 ## Content maintenance
 
-The source was reviewed at Piwork commit `326837881f2a3561ae5911dab98a2248d758c2e0`.
-Read its current implementation and specs before changing commands or formats.
-The concept and Spec pages distinguish current, experimental, and future behavior.
-Kanban has a walkthrough and a documented slot for a real recording, screenshot,
-and `.work` download; no demo artifacts have been invented.
+Installation and Quick Start were synchronized with Piwork commit
+`ea2f2a053b707760c1c98242f0f7ba15842efd12` on 2026-10-09. The default path
+starts Core and an interactive CLI with Docker run, waits for delivery readiness,
+and completes login, automatic Work startup and a terminal model reply. Native
+CLI is a folded alternative; Compose is an optional Core-only Demo.
 
-`docs/public/install/0.1.0/` contains English copies of the upstream Compose/env
-templates and the existing digest-pinned candidate image set. Its `README.txt`
-records provenance. Keep runtime configuration equivalent to upstream, leave
-secrets blank, and regenerate `SHA256SUMS` when updating these files. Verify all
-image digests can be pulled anonymously. Public GitHub Releases were empty at review.
+Keep English and Chinese code blocks aligned with the upstream README. Preserve
+command names, secret-input rules, Core same-path binds, persistent CLI state and
+60-second Core shutdown. Do not add a CLI Compose or GUI prerequisite to the trial.
+
+`docs/public/install/0.0.1/` uses fixed image references, metadata and original
+setup files from the verified public 0.0.1 release, plus the upstream blank run
+configuration template. README.txt records the separate documentation and image
+provenance. Regenerate SHA256SUMS when changing these static files; never include
+real env, API keys, passwords or tokens. Existing install/0.1.0/ candidate files
+remain for old URLs. Website synchronization does not build or publish images.
+
+The concept and Spec pages distinguish current, experimental and future behavior.
+Kanban retains its slot for real media and a verified .work download; no demo
+artifacts were invented.
 
 ## Build and deployment
 

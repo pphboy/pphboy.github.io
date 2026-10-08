@@ -2,7 +2,7 @@
 
 这些页面面向开发者，总结当前 Piwork 实现，依据源码项目已有规范编写，不另行定义 API 或包格式。
 
-源码核对版本为 [`326837881f2a`](https://github.com/pphboy/piwork/tree/326837881f2a3561ae5911dab98a2248d758c2e0)，核对日期为 2026 年 10 月 6 日。安装指南使用已有的公开 `0.1.0` 候选 Docker 镜像集；固定引用和构建来源单独记录在<a href="/piwork/install/0.1.0/README.txt" download>安装元数据</a>中。源码与镜像交付有各自的版本。
+安装与快速开始已同步 Piwork `ea2f2a053b707760c1c98242f0f7ba15842efd12`（2026-10-09）。默认路径使用已发行的 [0.0.1 Preview](https://github.com/pphboy/piwork/releases/tag/v0.0.1)，镜像源码版本为 `20fb8334f1dce93bfa79cb6b5c86acf1cc460963`。固定引用、发行元数据与模板来源见<a href="/piwork/install/0.0.1/README.txt" download>安装元数据</a>。源码内容更新与镜像发行是独立步骤，本次同步没有构建或发布新镜像。
 
 | 范围 | 本站文档 | 权威来源 |
 | --- | --- | --- |
@@ -20,6 +20,6 @@
 
 ## 当前交付边界
 
-Core 通过 Unix API 管理一台本地 Linux Docker Engine。Docker 交付面向 `linux/amd64`、Engine 28+ 和 Compose 2.24+。Go CLI 有 Windows 和 Linux 构建目标；尚未完成的原生 Windows 验收项见源码的 [CLI 平台指南](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md)。
+Core 通过 Unix API 管理一台本地 Linux Docker Engine。Docker 交付面向 `linux/amd64` 和 Engine 28+；仅 Core Compose Demo 或高级 Compose 部署另需 Compose 2.24+。Go CLI 有 Windows 和 Linux 构建目标；尚未完成的原生 Windows 验收项见源码的 [CLI 平台指南](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md)。
 
 Work 需要就绪的运行镜像和模型配置。Core 关闭时会停止受管理的运行容器，并保留持久状态。关闭 Desktop 或 CLI 不会停止 Work。

@@ -2,7 +2,7 @@
 
 These pages summarize the current Piwork implementation for developers. They adapt the source project's existing specifications; they do not define a competing API or package format.
 
-The source was reviewed at commit [`326837881f2a`](https://github.com/pphboy/piwork/tree/326837881f2a3561ae5911dab98a2248d758c2e0) on October 6, 2026. The installation guide uses the existing public `0.1.0` candidate Docker image set; its pinned references and build provenance are recorded separately in the <a href="/piwork/install/0.1.0/README.txt" download>setup metadata</a>. Source changes and image delivery are separate versions.
+Installation and Quick Start were synchronized with Piwork `ea2f2a053b707760c1c98242f0f7ba15842efd12` on October 9, 2026. The default path uses published [0.0.1 Preview](https://github.com/pphboy/piwork/releases/tag/v0.0.1) images built from `20fb8334f1dce93bfa79cb6b5c86acf1cc460963`. Fixed references, release metadata and template provenance are in the <a href="/piwork/install/0.0.1/README.txt" download>setup metadata</a>. Documentation updates and image releases are separate; this sync did not build or publish new images.
 
 | Area | Read here | Authoritative source |
 | --- | --- | --- |
@@ -20,6 +20,6 @@ For mismatches, prefer current implementation over older design notes. [Open an 
 
 ## Current delivery boundary
 
-Core manages one local Linux Docker Engine through its Unix API. Docker delivery targets `linux/amd64`, Engine 28+, and Compose 2.24+. The Go CLI has Windows and Linux targets; outstanding native Windows checks are documented in the source [CLI platform guide](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md).
+Core manages one local Linux Docker Engine through its Unix API. Docker delivery targets `linux/amd64` and Engine 28+; Compose 2.24+ is only needed for the Core Demo or advanced Compose setups. The Go CLI has Windows and Linux targets; outstanding native Windows checks are documented in the source [CLI platform guide](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md).
 
 A Work requires ready runtime images and model configuration. Core shutdown stops managed runtime containers while retaining durable state. Closing Desktop or the CLI does not stop the Work.

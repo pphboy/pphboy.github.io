@@ -20,8 +20,8 @@ function navigation(chinese: boolean): DefaultTheme.Config {
         text: chinese ? '开始使用' : 'Getting Started',
         items: [
           { text: chinese ? '概览' : 'Overview', link: link('/guide/') },
-          { text: chinese ? '安装' : 'Installation', link: link('/guide/installation') },
           { text: chinese ? '快速开始' : 'Quick Start', link: link('/guide/quick-start') },
+          { text: chinese ? '安装' : 'Installation', link: link('/guide/installation') },
           { text: chinese ? '第一个 Work' : 'Your First Work', link: link('/guide/first-work') },
           { text: chinese ? '从源码构建' : 'Build from Source', link: link('/guide/source-installation') }
         ]

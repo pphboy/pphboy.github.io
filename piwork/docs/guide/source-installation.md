@@ -44,10 +44,17 @@ read -r -p 'Model ID: ' PIWORK_MODEL_ID
 
 Bootstrap prompts for the administrator password; `config set` prompts for the model API key. For a custom provider endpoint, also supply `--model-base-url` with its actual HTTPS URL.
 
-Wait until Core is ready, then start the native Desktop client:
+Wait for Core readiness, then use the native CLI in the second terminal to log in, create a Work and receive a reply:
 
-```bash
-./dist/go/piwork-cli --core "$PIWORK_CORE_URL" desktop
+```sh
+./dist/go/piwork-cli --core "$PIWORK_CORE_URL" login --account admin
+./dist/go/piwork-cli work create --name 'My Work' --wait
 ```
 
-The browser opens on local port `17891`. Sign in to Core at `http://127.0.0.1:7171` and follow [Your First Work](/guide/first-work). The native binary accepts the same user commands as the CLI container.
+Use the actual creation `workId`:
+
+```sh
+./dist/go/piwork-cli chat WORK_ID --message 'Hello, Piwork!'
+```
+
+Creating a Work starts it automatically. Continue with [Your First Work](/guide/first-work) for more terminal commands. Desktop remains another optional entry.

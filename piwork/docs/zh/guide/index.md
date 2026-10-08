@@ -1,25 +1,17 @@
 # 开始使用
 
-Piwork 有两个入口：**Core** 在 Linux Docker 主机上管理 Work；**CLI / Desktop** 连接 Core，并在浏览器中提供操作界面。Core 还负责管理 Agent、Service 和辅助容器。
+**Core** 在 Linux Docker 主机上管理 Work、Agent、Service 和数据；**CLI** 提供终端用户命令。首次试用在同一台 Linux 电脑完成，需要受支持的模型提供方和 API key。
 
-第一次使用，建议在同一台 Linux 电脑上运行 Core 和 Desktop。执行 AI 任务还需要受支持的模型服务和 API Key。
+1. [快速开始](/zh/guide/quick-start)：默认 Docker run，终端登录、创建 Work并收到回复；原生 CLI 是折叠选项。
+2. [安装与部署](/zh/guide/installation)：环境要求、可选 Core Compose Demo、故障处理和恢复。
+3. [第一个 Work](/zh/guide/first-work)：终端文件任务，以及停止、导出、导入和继续使用。
 
-1. [安装并配置 Core](/zh/guide/installation)。
-2. [启动 Desktop、登录并创建 Work](/zh/guide/quick-start)。
-3. [运行、导出和导入第一个 Work](/zh/guide/first-work)。
-
-已有可用的 Core？直接阅读[快速开始](/zh/guide/quick-start)。
-
-## 第一次体验
-
-创建 Work，启动它的 Harness，让它生成一个文件，再通过 Desktop 查看。停止并导出 Work，导入为一个独立副本，继续使用其中的文件和历史。
-
-想尝试应用工作空间，可以阅读 [Kanban Work 演示说明](/zh/demo/kanban)。
+已有配置完成的 Core 时，直接使用快速开始中的 CLI 入口。
 
 ## 当前支持范围
 
-Core 运行在一台 Linux 主机上。Docker 镜像当前面向 `linux/amd64`。CLI 容器可以在 Linux 上运行，也可以在 Windows Docker Desktop 的 Linux 容器模式下运行；浏览器与 CLI 必须在同一台电脑上。
+已发行 0.0.1 Preview 的镜像为 linux/amd64，Core 使用 Linux rootful Docker Engine 28+ 和本机 Unix socket。客户端支持 Linux 或 Windows Docker Desktop 的 Linux 容器模式，Windows 客户端连接 Linux Core。Compose 2.24+ 仅用于可选 Core Demo 或高级部署。
 
-WSL2 用户需要能访问 Docker Engine Unix socket 的 Linux 环境。当前交付记录没有单独验证 WSL2 Core；已记录的起点是 Linux 主机。
+WSL2 用户须有可用的 Linux Engine Unix socket；具体测试环境与边界见[上游终端验收记录](https://github.com/pphboy/piwork/blob/main/docs/docker-quickstart-acceptance.md)。Desktop 仍作为独立用户入口提供，终端试用不依赖它。
 
-第一版官网使用已有的 `0.1.0` Docker 候选镜像集。[规范概览](/zh/spec/)记录了核对的源码版本和实验性行为。
+[规范概览](/zh/spec/)记录源码与镜像来源，应用示例见 [Kanban Work](/zh/demo/kanban)。

@@ -44,10 +44,17 @@ read -r -p 'Model ID: ' PIWORK_MODEL_ID
 
 Bootstrap 会提示输入管理员密码，`config set` 会提示输入模型 API Key。自定义模型服务地址还需通过 `--model-base-url` 提供实际 HTTPS URL。
 
-等待 Core 就绪，然后启动原生 Desktop 客户端：
+等待 Core 就绪，再在第二个终端使用原生 CLI 登录、创建 Work 并收到回复。CLI 不需要启动浏览器：
 
-```bash
-./dist/go/piwork-cli --core "$PIWORK_CORE_URL" desktop
+```sh
+./dist/go/piwork-cli --core "$PIWORK_CORE_URL" login --account admin
+./dist/go/piwork-cli work create --name 'My Work' --wait
 ```
 
-浏览器会打开本地 `17891` 端口。登录 `http://127.0.0.1:7171` 的 Core，然后按照[第一个 Work](/zh/guide/first-work)继续。原生客户端和 CLI 容器接受相同的用户命令。
+使用创建结果中的实际 `workId`：
+
+```sh
+./dist/go/piwork-cli chat WORK_ID --message 'Hello, Piwork!'
+```
+
+创建 Work 自动启动；更多终端命令见[第一个 Work](/zh/guide/first-work)。Desktop 仍是另一个可选用户入口。

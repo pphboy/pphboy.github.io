@@ -1,88 +1,90 @@
 # Your First Work
 
-Start with a small task that produces a persistent file. This makes it easy to see what a Work retains and what moves with it.
+Start by receiving a model reply in [Quick Start](/guide/quick-start). Reuse that Work here, without another create or start. Replace `WORK_ID` with its original creation ID. Commands run inside the CLI container.
 
-## Create and run
+## Write and read a file
 
-Create `My First Work` in Desktop, start it, and open **Chat**. Try this instruction:
-
-> Create a file named welcome.md in the workspace. Write a short description of this Work and the files currently available. Read the file back and report what you verified.
-
-Open **Files** and check `welcome.md`. The prompt is an example task, not a guaranteed result; confirm the actual file before continuing. Work files live in the shared workspace at `/var/data/workspace`.
-
-The Harness uses models and tools to perform the task. For an application task, it can declare a [Service](/concepts/service) through its Work-scoped tools. Try that next in the [Kanban walkthrough](/demo/kanban).
-
-## Export and continue
-
-1. Stop the Work and wait for its stopped state.
-2. Use Desktop's export flow to download a `.work` file.
-3. Use the package inspection flow to check the archive.
-4. Import it with a new name, on this Core or a compatible second Core.
-5. Start the imported Work. Check the file and retained conversation history.
-
-Export contains durable files, history, configuration, Services, Skills, Pi Packages, and fixed images. It does not freeze a live process. Model API keys managed by Piwork are supplied separately on the target. Secrets you saved in files or history remain in the archive.
-
-## The same workflow from the CLI container
-
-The following Bash function is a local shortcut for the real `piwork-cli` inside your running Compose container. Define it in the setup directory:
-
-```bash
-piwork_cli() {
-  docker compose --env-file release.env --env-file client.env \
-    -f compose.cli.yaml exec cli piwork-cli "$@"
-}
+```sh
+piwork-cli chat WORK_ID \
+    --message 'Create welcome.md in the workspace, read it back, and report what you verified.'
 ```
 
-Sign in and create a Work. `login` prompts for the password without placing it in command arguments:
+The model uses tools in `/var/data/workspace`. Ask it to report what it actually read and verified. A prompt does not guarantee completion; check the file before continuing. Core manages the Work workspace; the CLI login volume does not store these files.
 
-```bash
-piwork_cli login --account admin
-piwork_cli work create --name 'My First Work' --wait
-piwork_cli work list
+For an application task, Work-scoped tools can create a [Service](/concepts/service). See the [Kanban Work](/demo/kanban) example.
+
+## Add optional file exchange storage
+
+Only add exchange storage for import, export or local-file operations. Exit the current CLI, read the fixed CLI image in the host installation directory, and enter a container with an exchange volume. It reuses the existing login state:
+
+```sh
+PIWORK_CLI_IMAGE=$(
+    sed -n '/^PIWORK_CLI_IMAGE=.*@sha256:[0-9a-f]\{64\}$/s/^PIWORK_CLI_IMAGE=//p' release.env
+)
+test -n "$PIWORK_CLI_IMAGE"
 ```
 
-Replace `WORK_ID` below with the actual ID from the result. Creation and starting are separate operations.
-
-```bash
-piwork_cli work start WORK_ID --wait
-piwork_cli chat WORK_ID --message 'Create welcome.md in the workspace and read it back.'
-piwork_cli work service list WORK_ID
-piwork_cli work stop WORK_ID --wait
-piwork_cli work export WORK_ID --output /exchange/first-work.work
-piwork_cli work package inspect /exchange/first-work.work
+```sh
+docker run --rm --init -it \
+    --name piwork-cli-files \
+    --add-host host.docker.internal:host-gateway \
+    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
+    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
+    --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
+    --entrypoint /bin/sh \
+    "$PIWORK_CLI_IMAGE" -i
 ```
 
-The export destination must not already exist. Save the file on your host:
+Keep this shell running so another host terminal can use docker cp. The exchange volume transports archives; it is not a backup of Work data. Remote clients use the reachable Core URL. Windows clients enter Linux containers as described in Installation and omit the Linux same-host host-gateway option.
 
-```bash
-docker compose --env-file release.env --env-file client.env \
-  -f compose.cli.yaml cp cli:/exchange/first-work.work ./first-work.work
+## Stop, export and inspect
+
+Inside the CLI container, stop the original Work before exporting. The destination file must not already exist:
+
+```sh
+piwork-cli work stop WORK_ID --wait
+piwork-cli work export WORK_ID --output /exchange/first-work.work
+piwork-cli work package inspect /exchange/first-work.work
 ```
 
-For a second installation, copy the archive to that client's setup directory and sign in to its configured target Core first. Upload the file into the running CLI container and import it:
+In another host terminal, save the archive locally:
 
-```bash
-docker compose --env-file release.env --env-file client.env \
-  -f compose.cli.yaml cp ./first-work.work cli:/exchange/incoming.work
-piwork_cli work import /exchange/incoming.work --name 'Continued Work' --wait
-piwork_cli work list
-piwork_cli work start IMPORTED_WORK_ID --wait
+```sh
+docker cp piwork-cli-files:/exchange/first-work.work ./first-work.work
 ```
 
-Replace `IMPORTED_WORK_ID` with the new ID. Import creates an independent, stopped Work; it does not resume execution automatically.
+The archive retains durable files, history, configuration, Services, Skills, Pi Packages and fixed images. It does not freeze a live process. The target supplies its own platform-managed model key; secrets saved in files or history can remain in the package.
 
-## If an operation is interrupted
+## Import and continue
 
-Keep the returned Operation ID and inspect it before submitting another action:
+Use the same kind of CLI container logged in to the target Core; its name here is piwork-cli-files. First copy the archive on the target host:
 
-```bash
-piwork_cli operation show OPERATION_ID
+```sh
+docker cp ./first-work.work piwork-cli-files:/exchange/incoming.work
 ```
 
-A client disconnect does not cancel an accepted operation. If an export download was interrupted, use its original Snapshot ID to retry the download into a new output path:
+Back inside the target CLI container, import, then use the returned new Work ID for an explicit start:
 
-```bash
-piwork_cli work snapshot download SNAPSHOT_ID --output /exchange/retried.work
+```sh
+piwork-cli work import /exchange/incoming.work --name 'Continued Work' --wait
+piwork-cli work start IMPORTED_WORK_ID --wait
 ```
 
-See the [Work specification](/spec/work) for portability and format limits.
+Import creates an independent stopped Work and does not start it automatically. Replace `IMPORTED_WORK_ID` with its actual ID and continue inspecting the retained file and history:
+
+```sh
+piwork-cli chat IMPORTED_WORK_ID \
+    --message 'Read welcome.md from the workspace and summarize the retained files.'
+```
+
+## Recover after interruption
+
+Use the original Operation, Run or Snapshot ID instead of submitting another mutation to query its result. Resume a disconnected chat stream with its Run ID and last sequence; choose a new nonexistent output path for a download retry:
+
+```sh
+piwork-cli operation show OPERATION_ID
+piwork-cli run watch WORK_ID RUN_ID --after SEQUENCE
+piwork-cli work snapshot download SNAPSHOT_ID --output /exchange/retried.work
+```
+
+See the [Work Spec](/spec/work) for portability and format boundaries.

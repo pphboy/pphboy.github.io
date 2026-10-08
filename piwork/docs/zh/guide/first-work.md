@@ -1,88 +1,90 @@
 # 第一个 Work
 
-先尝试一个会生成持久文件的小任务，这样可以直接看到 Work 保存什么，以及导出后能带走什么。
+先按[快速开始](/zh/guide/quick-start)收到一次模型回复。以下复用已经创建的 Work，不再执行 create 或 start；将 `WORK_ID` 替换为原创建结果。命令在 CLI 容器内执行。
 
-## 创建并运行
+## 写入并读取文件
 
-在 Desktop 中创建 `My First Work`，启动并打开 **Chat**。可以尝试这条指令：
-
-> 在工作空间中创建 welcome.md。简短介绍这个 Work 和当前可用的文件，然后重新读取文件，说明你验证了什么。
-
-打开 **Files**，检查 `welcome.md`。这只是任务示例，不保证模型一定完成；继续前请确认实际文件。共享工作空间路径是 `/var/data/workspace`。
-
-Harness 使用模型和工具执行任务。构建应用时，它还可以通过 Work 专属工具声明 [Service](/zh/concepts/service)。可以接着尝试 [Kanban 演示说明](/zh/demo/kanban)。
-
-## 导出并继续
-
-1. 停止 Work，等待状态变为已停止。
-2. 使用 Desktop 的导出流程下载 `.work` 文件。
-3. 使用包检查流程检查归档。
-4. 在当前 Core 或兼容的第二个 Core 中，以新名称导入。
-5. 启动导入的 Work，检查文件和保留的对话历史。
-
-导出包含持久文件、历史、配置、Services、Skills、Pi Packages 和固定镜像，不包含活进程的内存状态。Piwork 管理的模型 API Key 需要在目标端单独提供；你保存在文件或历史中的密钥仍会包含在归档中。
-
-## 在 CLI 容器中执行同样的流程
-
-以下 Bash 函数只是本地快捷方式，实际执行的是 Compose 容器中的 `piwork-cli`。在安装目录中定义：
-
-```bash
-piwork_cli() {
-  docker compose --env-file release.env --env-file client.env \
-    -f compose.cli.yaml exec cli piwork-cli "$@"
-}
+```sh
+piwork-cli chat WORK_ID \
+    --message 'Create welcome.md in the workspace, read it back, and report what you verified.'
 ```
 
-登录并创建 Work。`login` 会提示输入密码，无需把密码放在命令参数中：
+模型通过工具在 `/var/data/workspace` 执行任务。让它报告实际读取和验证的结果；任务提示不保证模型一定完成，继续前应核对文件。Work 的共享工作空间由 Core 管理，CLI 的登录卷不保存这些文件。
 
-```bash
-piwork_cli login --account admin
-piwork_cli work create --name 'My First Work' --wait
-piwork_cli work list
+应用任务可以通过 Work 专属工具创建 [Service](/zh/concepts/service)，示例见 [Kanban Work](/zh/demo/kanban)。
+
+## 准备可选文件交换存储
+
+仅导入、导出或读取本地文件时添加交换卷。退出当前 CLI，在宿主机安装目录读取固定 CLI 镜像，再进入带交换卷的容器；已有登录状态卷会复用：
+
+```sh
+PIWORK_CLI_IMAGE=$(
+    sed -n '/^PIWORK_CLI_IMAGE=.*@sha256:[0-9a-f]\{64\}$/s/^PIWORK_CLI_IMAGE=//p' release.env
+)
+test -n "$PIWORK_CLI_IMAGE"
 ```
 
-将下面的 `WORK_ID` 替换为返回的实际 ID。创建和启动是两个独立操作。
-
-```bash
-piwork_cli work start WORK_ID --wait
-piwork_cli chat WORK_ID --message 'Create welcome.md in the workspace and read it back.'
-piwork_cli work service list WORK_ID
-piwork_cli work stop WORK_ID --wait
-piwork_cli work export WORK_ID --output /exchange/first-work.work
-piwork_cli work package inspect /exchange/first-work.work
+```sh
+docker run --rm --init -it \
+    --name piwork-cli-files \
+    --add-host host.docker.internal:host-gateway \
+    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
+    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
+    --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
+    --entrypoint /bin/sh \
+    "$PIWORK_CLI_IMAGE" -i
 ```
 
-导出目标文件不能已经存在。将归档保存到本机：
+此 shell 保持运行，以便另一宿主机终端执行 docker cp。交换卷只搬运归档，不是 Work 数据备份。远程 Core 的 URL 应替换为实际可达地址；Windows 客户端按安装指南进入 Linux 容器，不使用 Linux 同机的 host-gateway 参数。
 
-```bash
-docker compose --env-file release.env --env-file client.env \
-  -f compose.cli.yaml cp cli:/exchange/first-work.work ./first-work.work
+## 停止、导出并检查
+
+在 CLI 容器内，停止原 Work 后导出；目标文件必须尚不存在：
+
+```sh
+piwork-cli work stop WORK_ID --wait
+piwork-cli work export WORK_ID --output /exchange/first-work.work
+piwork-cli work package inspect /exchange/first-work.work
 ```
 
-在第二个实例上，把归档复制到客户端安装目录，并先登录该客户端所配置的目标 Core。将文件复制到已运行的 CLI 容器中，再导入：
+在另一个宿主机终端，将归档保存到本机：
 
-```bash
-docker compose --env-file release.env --env-file client.env \
-  -f compose.cli.yaml cp ./first-work.work cli:/exchange/incoming.work
-piwork_cli work import /exchange/incoming.work --name 'Continued Work' --wait
-piwork_cli work list
-piwork_cli work start IMPORTED_WORK_ID --wait
+```sh
+docker cp piwork-cli-files:/exchange/first-work.work ./first-work.work
 ```
 
-将 `IMPORTED_WORK_ID` 替换为新 ID。导入会创建独立且已停止的 Work，不会自动恢复执行。
+归档保存持久文件、历史、配置、Service、Skill、Pi Package 和固定镜像，不冻结活进程。目标 Core 需要另行提供平台管理的模型 key；文件或历史中自行保存的秘密仍可能进入包。
 
-## 操作中断时
+## 导入并继续
 
-保留返回的 Operation ID，提交下一次操作前先检查：
+在目标 Core 登录的同类 CLI 容器中操作；本例容器名为 piwork-cli-files。在目标宿主机先复制归档：
 
-```bash
-piwork_cli operation show OPERATION_ID
+```sh
+docker cp ./first-work.work piwork-cli-files:/exchange/incoming.work
 ```
 
-客户端断开不会取消已接受的操作。如果导出下载中断，用原始 Snapshot ID 重试，并指定新的输出路径：
+回到目标 CLI 容器，先 import，再将返回的新 Work ID 用于显式 start：
 
-```bash
-piwork_cli work snapshot download SNAPSHOT_ID --output /exchange/retried.work
+```sh
+piwork-cli work import /exchange/incoming.work --name 'Continued Work' --wait
+piwork-cli work start IMPORTED_WORK_ID --wait
 ```
 
-可携带性和格式限制见 [Work 规范](/zh/spec/work)。
+import 创建独立的 stopped Work，不会自动启动。将 `IMPORTED_WORK_ID` 替换为导入结果，可以继续检查原文件和历史：
+
+```sh
+piwork-cli chat IMPORTED_WORK_ID \
+    --message 'Read welcome.md from the workspace and summarize the retained files.'
+```
+
+## 中断后恢复
+
+使用原 Operation、Run 或 Snapshot ID，不通过重新提交 mutation 来查询结果。聊天断线后按原 Run 和最后序号恢复观察；下载中断时选择尚不存在的新输出路径：
+
+```sh
+piwork-cli operation show OPERATION_ID
+piwork-cli run watch WORK_ID RUN_ID --after SEQUENCE
+piwork-cli work snapshot download SNAPSHOT_ID --output /exchange/retried.work
+```
+
+可携带性与格式边界见 [Work 规范](/zh/spec/work)。

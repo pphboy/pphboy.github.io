@@ -10,7 +10,7 @@ hero:
   actions:
     - theme: brand
       text: 开始使用
-      link: /zh/guide/installation
+      link: /zh/guide/quick-start
     - theme: alt
       text: GitHub
       link: https://github.com/pphboy/piwork
@@ -43,13 +43,17 @@ Harness 可以帮助构建和修改它所在的工作空间。它的指令、Ski
 
 ## 开始使用
 
-如果你能运行 Docker，就可以尝试 Piwork。你需要 Linux x86-64 Core 主机、Docker Engine 28+、Compose 2.24+ 和模型服务账号。客户端支持 Linux 和 Windows Docker Desktop。
+[在终端试用 Core 和 CLI](/zh/guide/quick-start)：下载安装包，填写五项 Core 配置，分别用一条 Docker run 启动 Core 和交互 CLI，再登录、创建 Work 并收到第一条回复。要求 Linux x86-64 Core 主机、Docker Engine 28+ 和可用模型；首次试用不需要 Compose。
 
-[下载并配置 Docker 安装文件](/zh/guide/installation)，然后启动 Core：
+CLI 入口如下，镜像变量从已校验安装包取得：
 
-```bash
-docker compose --env-file release.env --env-file core.env \
-  -f compose.core.yaml up -d --wait --wait-timeout 600 core
+```sh
+docker run --rm --init -it \
+    --add-host host.docker.internal:host-gateway \
+    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
+    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
+    --entrypoint /bin/sh \
+    "$PIWORK_CLI_IMAGE" -i
 ```
 
-[打开 Desktop，运行第一个 Work](/zh/guide/quick-start)。问题和反馈可以提交到 [GitHub Discussions](https://github.com/pphboy/piwork/discussions)。
+原生 CLI 是快速开始中的折叠选项；[Core Compose Demo](/zh/guide/installation#core-compose-demo) 是可选部署示例，仅选择它时需要 Compose 2.24+。问题和反馈可提交到 [GitHub Discussions](https://github.com/pphboy/piwork/discussions)。

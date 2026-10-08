@@ -19,7 +19,7 @@ One application Service is sufficient for a first board. A separate database Ser
 
 ## Build a board in Piwork
 
-[Install Piwork](/guide/installation), open Desktop, and create and start a Work named `Kanban`. In Chat, you can ask:
+Use [terminal Quick Start](/guide/quick-start) to create a Work and receive a reply; creation starts it automatically. In CLI chat, you can ask:
 
 > Build a small Kanban board in the shared workspace with Todo, Doing, and Done columns. Persist its data in the managed workspace. Declare the application as a Service using the available Work Service tools, with an HTTP port and readiness check. Inspect the running Service and tell me what you verified.
 
