@@ -31,26 +31,11 @@ the navigation, favicon, touch icon, and Open Graph metadata.
 
 ## Content maintenance
 
-Installation and Quick Start were synchronized with Piwork commit
-`ea2f2a053b707760c1c98242f0f7ba15842efd12` on 2026-10-09. The default path
-starts Core and an interactive CLI with Docker run, waits for delivery readiness,
-and completes login, automatic Work startup and a terminal model reply. Native
-CLI is a folded alternative; Compose is an optional Core-only Demo.
+Docker Quick Start runs Core and CLI independently. Core supports Core-only Compose. The optional combined example lives in examples/single-host/ and has its own data and credentials. Inputs come from the existing host environment; CLI startup waits for complete readiness and opens a terminal. Native CLI is a folded alternative. The advanced Core-only Demo uses a separate data directory.
 
-Keep English and Chinese code blocks aligned with the upstream README. Preserve
-command names, secret-input rules, Core same-path binds, persistent CLI state and
-60-second Core shutdown. Do not add a CLI Compose or GUI prerequisite to the trial.
+Keep both locales aligned with upstream commands and image defaults. Source: fc409adc1a0bcd7cdf48d711fe7e6efca92a4bdb; input SHA256: 808d890c66072207aea4d453459cc7ff7837af2e64464243a22f9e2010295523; state: published. Images are published and anonymous pulls/cold readiness are verified. Website changes and downloads await final user confirmation; pushing website main triggers the existing Piwork deployment workflow. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
 
-`docs/public/install/0.0.1/` uses fixed image references, metadata and original
-setup files from the verified public 0.0.1 release, plus the upstream blank run
-configuration template. README.txt records the separate documentation and image
-provenance. Regenerate SHA256SUMS when changing these static files; never include
-real env, API keys, passwords or tokens. Existing install/0.1.0/ candidate files
-remain for old URLs. Website synchronization does not build or publish images.
-
-The concept and Spec pages distinguish current, experimental and future behavior.
-Kanban retains its slot for real media and a verified .work download; no demo
-artifacts were invented.
+Run upstream check-docker-quickstart.mjs with --website-root pointing at this directory after synchronizing. No real credentials or initialization env belongs in static files. Website synchronization does not push images or publish pages.
 
 ## Build and deployment
 

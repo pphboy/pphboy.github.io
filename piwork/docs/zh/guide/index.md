@@ -15,3 +15,7 @@
 WSL2 用户须有可用的 Linux Engine Unix socket；具体测试环境与边界见[上游终端验收记录](https://github.com/pphboy/piwork/blob/main/docs/docker-quickstart-acceptance.md)。Desktop 仍作为独立用户入口提供，终端试用不依赖它。
 
 [规范概览](/zh/spec/)记录源码与镜像来源，应用示例见 [Kanban Work](/zh/demo/kanban)。
+
+<!-- docker-trial-route -->
+[终端 Quick Start](/zh/guide/quick-start.html) 使用独立 Core/CLI 镜像，Core 可单独采用 Compose；合并方式见单机部署示例，原生构建与管理员操作见独立导航。
+<!-- docker-trial-route -->

@@ -15,24 +15,16 @@ For an application task, Work-scoped tools can create a [Service](/concepts/serv
 
 ## Add optional file exchange storage
 
-Only add exchange storage for import, export or local-file operations. Exit the current CLI, read the fixed CLI image in the host installation directory, and enter a container with an exchange volume. It reuses the existing login state:
+Only add exchange storage for import, export or local-file operations. Exit the current CLI, enter a container with an exchange volume. It reuses the existing login state:
 
 ```sh
-PIWORK_CLI_IMAGE=$(
-    sed -n '/^PIWORK_CLI_IMAGE=.*@sha256:[0-9a-f]\{64\}$/s/^PIWORK_CLI_IMAGE=//p' release.env
-)
-test -n "$PIWORK_CLI_IMAGE"
-```
-
-```sh
-docker run --rm --init -it \
+docker run --rm --init --interactive --tty \
     --name piwork-cli-files \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
     --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
-    --entrypoint /bin/sh \
-    "$PIWORK_CLI_IMAGE" -i
+    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
 ```
 
 Keep this shell running so another host terminal can use docker cp. The exchange volume transports archives; it is not a backup of Work data. Remote clients use the reachable Core URL. Windows clients enter Linux containers as described in Installation and omit the Linux same-host host-gateway option.

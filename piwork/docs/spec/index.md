@@ -23,3 +23,7 @@ For mismatches, prefer current implementation over older design notes. [Open an 
 Core manages one local Linux Docker Engine through its Unix API. Docker delivery targets `linux/amd64` and Engine 28+; Compose 2.24+ is only needed for the Core Demo or advanced Compose setups. The Go CLI has Windows and Linux targets; outstanding native Windows checks are documented in the source [CLI platform guide](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md).
 
 A Work requires ready runtime images and model configuration. Core shutdown stops managed runtime containers while retaining durable state. Closing Desktop or the CLI does not stop the Work.
+
+<!-- docker-trial-route -->
+[Terminal Quick Start](/guide/quick-start.html) uses independent Core/CLI images; Core also supports Core-only Compose, with combined usage in the single-host example; native builds and administrator operations have separate navigation.
+<!-- docker-trial-route -->

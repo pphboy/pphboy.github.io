@@ -15,3 +15,7 @@ Published 0.0.1 Preview images target linux/amd64. Core uses Linux rootful Docke
 WSL2 users need an available Linux Engine Unix socket; tested environments and boundaries are recorded in the [upstream terminal acceptance](https://github.com/pphboy/piwork/blob/main/docs/docker-quickstart-acceptance.md). Desktop remains an independent entry; the terminal trial does not depend on it.
 
 The [Spec overview](/spec/) records source and image provenance. For an application example, see [Kanban Work](/demo/kanban).
+
+<!-- docker-trial-route -->
+[Terminal Quick Start](/guide/quick-start.html) uses independent Core/CLI images; Core also supports Core-only Compose, with combined usage in the single-host example; native builds and administrator operations have separate navigation.
+<!-- docker-trial-route -->

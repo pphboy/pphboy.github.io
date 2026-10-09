@@ -1,5 +1,9 @@
 # Build from Source
 
+<!-- docker-source-route -->
+For the default trial, use the independent Core/CLI images (Core also supports Core-only Compose) in [Quick Start](/guide/quick-start.html). The following is a native source build for developers. [Docker release builds](https://github.com/pphboy/piwork/blob/main/docs/docker-release.md) compile inside Docker and need no host Go/Node.
+<!-- docker-source-route -->
+
 Use this path to work with the current Piwork source instead of the published Docker image set. These commands follow the source project's [Core operations guide](https://github.com/pphboy/piwork/blob/main/docs/operations.md).
 
 ## Prerequisites

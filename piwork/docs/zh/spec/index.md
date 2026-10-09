@@ -23,3 +23,7 @@
 Core 通过 Unix API 管理一台本地 Linux Docker Engine。Docker 交付面向 `linux/amd64` 和 Engine 28+；仅 Core Compose Demo 或高级 Compose 部署另需 Compose 2.24+。Go CLI 有 Windows 和 Linux 构建目标；尚未完成的原生 Windows 验收项见源码的 [CLI 平台指南](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md)。
 
 Work 需要就绪的运行镜像和模型配置。Core 关闭时会停止受管理的运行容器，并保留持久状态。关闭 Desktop 或 CLI 不会停止 Work。
+
+<!-- docker-trial-route -->
+[终端 Quick Start](/zh/guide/quick-start.html) 使用独立 Core/CLI 镜像，Core 可单独采用 Compose；合并方式见单机部署示例，原生构建与管理员操作见独立导航。
+<!-- docker-trial-route -->

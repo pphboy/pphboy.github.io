@@ -1,5 +1,9 @@
 # 从源码构建
 
+<!-- docker-source-route -->
+默认试用请使用 [Quick Start](/zh/guide/quick-start.html) 的独立 Core/CLI 镜像；Core 可单独使用 Compose。下面仅为开发者的原生源码构建；Docker 发行构建见 [发行维护](https://github.com/pphboy/piwork/blob/main/docs/docker-release.md)，宿主不必安装 Go/Node。
+<!-- docker-source-route -->
+
 这条路径使用当前 Piwork 源码，而不是已发布的 Docker 镜像集。命令来自源码项目的 [Core 运维指南](https://github.com/pphboy/piwork/blob/main/docs/operations.md)。
 
 ## 前置条件

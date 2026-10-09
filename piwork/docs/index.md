@@ -43,17 +43,6 @@ A board, its data, an application Service, and a Harness that helps build and op
 
 ## Get started
 
-[Try Core and CLI in the terminal](/guide/quick-start): download the installer, fill five Core settings, use one Docker run for Core and one for the interactive CLI, then log in, create a Work and receive your first reply. You need a Linux x86-64 Core host, Docker Engine 28+ and an available model; the first trial does not require Compose.
+[Try Core and CLI in the terminal](/guide/quick-start.html): use the existing initialization environment, one Docker command per entry, or deploy Core alone using [docker-compose.yml](/piwork/install/0.0.1-fc409adc1a0b-808d890c6607-dirty/docker-compose.yml). Log in, create a Work and receive the first reply. Images are published and verified for anonymous pulls; Compose downloads become available with this website update.
 
-The CLI entry is below; its image variable comes from the verified installer:
-
-```sh
-docker run --rm --init -it \
-    --add-host host.docker.internal:host-gateway \
-    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
-    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    --entrypoint /bin/sh \
-    "$PIWORK_CLI_IMAGE" -i
-```
-
-The native CLI is a folded Quick Start alternative. The [Core Compose Demo](/guide/installation#core-compose-demo) is optional and needs Compose 2.24+. Questions and feedback belong in [GitHub Discussions](https://github.com/pphboy/piwork/discussions).
+Native CLI remains a folded Quick Start alternative. See [Installation](/guide/installation.html#core-compose-demo) for the advanced Core-only Demo.

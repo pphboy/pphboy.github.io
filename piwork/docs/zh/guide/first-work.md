@@ -18,21 +18,13 @@ piwork-cli chat WORK_ID \
 仅导入、导出或读取本地文件时添加交换卷。退出当前 CLI，在宿主机安装目录读取固定 CLI 镜像，再进入带交换卷的容器；已有登录状态卷会复用：
 
 ```sh
-PIWORK_CLI_IMAGE=$(
-    sed -n '/^PIWORK_CLI_IMAGE=.*@sha256:[0-9a-f]\{64\}$/s/^PIWORK_CLI_IMAGE=//p' release.env
-)
-test -n "$PIWORK_CLI_IMAGE"
-```
-
-```sh
-docker run --rm --init -it \
+docker run --rm --init --interactive --tty \
     --name piwork-cli-files \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
     --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
-    --entrypoint /bin/sh \
-    "$PIWORK_CLI_IMAGE" -i
+    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
 ```
 
 此 shell 保持运行，以便另一宿主机终端执行 docker cp。交换卷只搬运归档，不是 Work 数据备份。远程 Core 的 URL 应替换为实际可达地址；Windows 客户端按安装指南进入 Linux 容器，不使用 Linux 同机的 host-gateway 参数。
