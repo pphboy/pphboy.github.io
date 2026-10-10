@@ -23,6 +23,8 @@ function navigation(chinese: boolean): DefaultTheme.Config {
           { text: chinese ? '快速开始' : 'Quick Start', link: link('/guide/quick-start') },
           { text: chinese ? '安装' : 'Installation', link: link('/guide/installation') },
           { text: chinese ? '第一个 Work' : 'Your First Work', link: link('/guide/first-work') },
+          { text: chinese ? 'Web 开发' : 'Web Development', link: link('/guide/web-development') },
+          { text: chinese ? 'AI 模型' : 'AI Models', link: link('/guide/ai-models') },
           { text: chinese ? '从源码构建' : 'Build from Source', link: link('/guide/source-installation') }
         ]
       },
