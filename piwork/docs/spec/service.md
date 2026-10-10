@@ -22,6 +22,14 @@ The current MCP surface contains:
 
 Tools are projected to the model under the `work-services__` namespace, subject to tool policy. Mutation requests require an `idempotencyKey` and return durable acceptance before the operation finishes. Retain the original Service and Operation IDs to inspect results.
 
+## Memory policy
+
+Application Service containers have no Piwork memory limit or Service memory reservation. An omitted `memoryBytes` normalizes to zero; valid historical positive values remain compatibility data and do not restore a cap. Negative, fractional and unsafe integer values remain invalid. Current projections report `memoryLimitMode=unlimited`, and deployment context reports `serviceMemoryPolicy=unlimited` with `defaultServiceMemoryBytes=0`.
+
+Work/host memory accounting excludes historical Service reservations, including during configuration and import. Agent/helper memory policies and atomic CPU/service/volume admission remain in force. Managed recovery replaces older capped Service containers and retains their identity and workspace. Actual memory availability depends on the host and outer deployment.
+
+The [Web development guide](/guide/web-development.html) covers the default base, single HTTP port, offline tools, persistence and automatic version adoption.
+
 ## Network and storage
 
 Declared HTTP ports can be opened through Desktop's authenticated application gateway. Containers do not receive arbitrary public host-port exposure. Platform credentials remain separate from application cookies and authorization.

@@ -8,9 +8,13 @@
 
 Already have a configured Core? Use the CLI entry in Quick Start directly.
 
+Building an application? [Web Development](/guide/web-development.html) covers the default base, automatic adoption, sqlite3, persistence and upgrades.
+
+For model setup, see [AI Models](/guide/ai-models.html): one-form connections, message Test, Runtime defaults and Work/Thinking upgrade boundaries.
+
 ## Current scope
 
-Published 0.0.1 Preview images target linux/amd64. Core uses Linux rootful Docker Engine 28+ and its local Unix socket. CLI runs on Linux or Windows Docker Desktop in Linux-container mode; Windows clients connect to Linux Core. Compose 2.24+ is only needed for the optional Core Demo or advanced setups.
+Published 0.0.2 Preview images target linux/amd64. Core uses Linux rootful Docker Engine 28+ and its local Unix socket. CLI runs on Linux or Windows Docker Desktop in Linux-container mode; Windows clients connect to Linux Core. Compose 2.24+ is only needed for the optional Core Demo or advanced setups.
 
 WSL2 users need an available Linux Engine Unix socket; tested environments and boundaries are recorded in the [upstream terminal acceptance](https://github.com/pphboy/piwork/blob/main/docs/docker-quickstart-acceptance.md). Desktop remains an independent entry; the terminal trial does not depend on it.
 

@@ -18,6 +18,12 @@ Each definition specifies its image, command, environment, network ports, worksp
 
 Applications can also expose capability contracts for the experimental `piwork-brain` package. That supports structured queries and verified actions; it is an additional application contract, not something every HTTP server provides automatically.
 
+## Default Web environment and updates
+
+New Web applications with the current default Brain use the reusable FastAPI + React + TypeScript + Vite [Web base](/guide/web-development.html). Other stacks and existing applications remain supported. The Harness completes checks, build, deployment and actual version verification after edits; standard templates automatically adopt ready updates while preserving supported drafts and paths.
+
+Application Services have no Piwork memory cap or Service memory reservation. CPU/count quotas and Agent/helper memory policies remain effective. Both Agent and Web base include sqlite3 CLI for authorized workspace development and inspection.
+
 ## Access and persistence
 
 Desktop exposes declared HTTP Services through authenticated local application access. Open an application from its Service entry rather than looking for an exposed container IP.

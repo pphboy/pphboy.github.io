@@ -13,6 +13,10 @@ The model uses tools in `/var/data/workspace`. Ask it to report what it actually
 
 For an application task, Work-scoped tools can create a [Service](/concepts/service). See the [Kanban Work](/demo/kanban) example.
 
+## Build and improve a Web application
+
+The current default Brain uses FastAPI + React + TypeScript + Vite and a fixed reusable base image for new Web applications. Ask this Work to build an application, deploy it as a Service and verify the result. Later changes include checks/build and deployment; standard templates update the open page automatically and retain supported drafts/path. See [Web Development](/guide/web-development.html) for a task example, sqlite3, persistence and upgrades.
+
 ## Add optional file exchange storage
 
 Only add exchange storage for import, export or local-file operations. Exit the current CLI, enter a container with an exchange volume. It reuses the existing login state:
@@ -24,7 +28,7 @@ docker run --rm --init --interactive --tty \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
     --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
-    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
 Keep this shell running so another host terminal can use docker cp. The exchange volume transports archives; it is not a backup of Work data. Remote clients use the reachable Core URL. Windows clients enter Linux containers as described in Installation and omit the Linux same-host host-gateway option.

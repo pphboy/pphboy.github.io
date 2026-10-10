@@ -24,10 +24,10 @@ docker run --detach --init \
     --env PIWORK_MODEL_BASE_URL \
     --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-core:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
-Core can also be deployed alone with [Core-only docker-compose.yml](/piwork/install/0.0.1-fc409adc1a0b-808d890c6607-dirty/docker-compose.yml) (Compose 2.24+); CLI keeps its independent Docker command. Stop the previous Core before switching deployment methods, retaining the same data directory. For an optional combined setup, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md).
+Core can also be deployed alone with [Core-only docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml) (Compose 2.24+); CLI keeps its independent Docker command. Stop the previous Core before switching deployment methods, retaining the same data directory. For an optional combined setup, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md).
 
 ### CLI
 
@@ -38,7 +38,7 @@ docker run --rm --init --interactive --tty \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
 Run the following **inside the CLI container**. Replace `ACCOUNT` with your account; login prompts for a hidden password. Creating a Work starts it automatically:
@@ -63,7 +63,7 @@ The reply appears in the terminal. Use `exit` to leave; the same CLI startup com
 
 <!-- native-quickstart:start -->
 
-Download the [Linux Core / Console / CLI bundle](https://github.com/pphboy/piwork/releases/download/v0.0.1/piwork-linux-amd64-0.0.1.tar.gz) or [experimental Windows CLI bundle](https://github.com/pphboy/piwork/releases/download/v0.0.1/piwork-cli-windows-amd64-0.0.1.zip). Verify the release SHA256 before extracting; the Linux CLI is in `bin/`.
+Download the [Linux Core / Console / CLI bundle](https://github.com/pphboy/piwork/releases/download/v0.0.2/piwork-linux-amd64-0.0.2.tar.gz) or [experimental Windows CLI executable](https://github.com/pphboy/piwork/releases/download/v0.0.2/piwork-cli-windows-amd64-0.0.2.exe). Verify the release SHA256. Extract the Linux bundle to find the CLI in `bin/`; save the Windows executable as `piwork-cli.exe`. Full Windows native acceptance remains pending.
 
 Use an already configured, ready Core, compatible with your native CLI version. In the directory containing the executable, replace `CORE_URL` with its address (`http://127.0.0.1:7171` for the same Linux computer) and `ACCOUNT` with your account. Login prompts for a hidden password. On Windows PowerShell, replace `./piwork-cli` with `.\piwork-cli.exe`.
 

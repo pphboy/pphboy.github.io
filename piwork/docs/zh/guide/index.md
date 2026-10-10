@@ -8,9 +8,13 @@
 
 已有配置完成的 Core 时，直接使用快速开始中的 CLI 入口。
 
+需要开发应用？[Web 开发指南](/zh/guide/web-development.html)介绍默认基础镜像、自动生效、sqlite3、持久化与升级。
+
+配置模型请阅读 [AI 模型](/zh/guide/ai-models.html)：单表单添加、消息 Test、Runtime 默认选择及 Work/Thinking 升级边界。
+
 ## 当前支持范围
 
-已发行 0.0.1 Preview 的镜像为 linux/amd64，Core 使用 Linux rootful Docker Engine 28+ 和本机 Unix socket。客户端支持 Linux 或 Windows Docker Desktop 的 Linux 容器模式，Windows 客户端连接 Linux Core。Compose 2.24+ 仅用于可选 Core Demo 或高级部署。
+已发行 0.0.2 Preview 的镜像为 linux/amd64，Core 使用 Linux rootful Docker Engine 28+ 和本机 Unix socket。客户端支持 Linux 或 Windows Docker Desktop 的 Linux 容器模式，Windows 客户端连接 Linux Core。Compose 2.24+ 仅用于可选 Core Demo 或高级部署。
 
 WSL2 用户须有可用的 Linux Engine Unix socket；具体测试环境与边界见[上游终端验收记录](https://github.com/pphboy/piwork/blob/main/docs/docker-quickstart-acceptance.md)。Desktop 仍作为独立用户入口提供，终端试用不依赖它。
 

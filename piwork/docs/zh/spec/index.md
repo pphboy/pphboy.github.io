@@ -2,7 +2,7 @@
 
 这些页面面向开发者，总结当前 Piwork 实现，依据源码项目已有规范编写，不另行定义 API 或包格式。
 
-安装与快速开始已同步 Piwork `ea2f2a053b707760c1c98242f0f7ba15842efd12`（2026-10-09）。默认路径使用已发行的 [0.0.1 Preview](https://github.com/pphboy/piwork/releases/tag/v0.0.1)，镜像源码版本为 `20fb8334f1dce93bfa79cb6b5c86acf1cc460963`。固定引用、发行元数据与模板来源见<a href="/piwork/install/0.0.1/README.txt" download>安装元数据</a>。源码内容更新与镜像发行是独立步骤，本次同步没有构建或发布新镜像。
+当前交付为 [Piwork 0.0.2 Preview](https://github.com/pphboy/piwork/releases/tag/v0.0.2)，包含 Web base 与直接模型管理。五角色镜像已发布并匿名拉取/执行核验，固定身份见[发行清单](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/release-manifest.json)。干净构建源码为 `fb4f577da3b4d0008b97a59103b84efefbf9b508`，输入摘要为 `512ec778b2671454ce1e66ceb11893f4f3ff908286ec2ae4947fd24fda100f37`；发行 tag 另包含发布材料更新，不改写镜像构建身份。Web base 保留独立[已发布记录](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/web-base-release.json)。Windows 原生客户端继续以实验性程序交付，完整正式验收未完成；实际范围见 Release 附件 preview-verification.md。旧下载目录保留历史归属。
 
 | 范围 | 本站文档 | 权威来源 |
 | --- | --- | --- |

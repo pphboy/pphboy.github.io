@@ -24,10 +24,10 @@ docker run --detach --init \
     --env PIWORK_MODEL_BASE_URL \
     --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-core:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
-Core 也可用 [Core-only docker-compose.yml](/piwork/install/0.0.1-fc409adc1a0b-808d890c6607-dirty/docker-compose.yml) 单独部署（Compose 2.24+），CLI 仍使用自己的 Docker 命令。切换 Core 部署方式前先停止原容器，保留同一数据目录。Core 与 CLI 合并的可选方式见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。
+Core 也可用 [Core-only docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml) 单独部署（Compose 2.24+），CLI 仍使用自己的 Docker 命令。切换 Core 部署方式前先停止原容器，保留同一数据目录。Core 与 CLI 合并的可选方式见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。
 
 ### CLI
 
@@ -38,7 +38,7 @@ docker run --rm --init --interactive --tty \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
 下面的命令在 **CLI 容器内**执行。将 `ACCOUNT` 替换为你的账号；登录时隐藏密码输入。创建 Work 会自动启动它：
@@ -63,7 +63,7 @@ piwork-cli chat WORK_ID --message 'Hello, Piwork!'
 
 <!-- native-quickstart:start -->
 
-下载 [Linux Core / Console / CLI 包](https://github.com/pphboy/piwork/releases/download/v0.0.1/piwork-linux-amd64-0.0.1.tar.gz)或 [Windows CLI 实验性包](https://github.com/pphboy/piwork/releases/download/v0.0.1/piwork-cli-windows-amd64-0.0.1.zip)。先核对发行 SHA256 再解压；Linux CLI 位于 `bin/`。
+下载 [Linux Core / Console / CLI 包](https://github.com/pphboy/piwork/releases/download/v0.0.2/piwork-linux-amd64-0.0.2.tar.gz)或 [Windows CLI 实验性程序](https://github.com/pphboy/piwork/releases/download/v0.0.2/piwork-cli-windows-amd64-0.0.2.exe)。先核对发行 SHA256；Linux 包解压后 CLI 位于 `bin/`，Windows 程序保存为 `piwork-cli.exe` 即可。Windows 完整原生验收仍未完成。
 
 连接已经配置完成且就绪的 Core，并与原生 CLI 版本兼容的 Core。在可执行文件所在目录，将 `CORE_URL` 替换为其地址（同机 Linux 为 `http://127.0.0.1:7171`），将 `ACCOUNT` 替换为账号；登录时隐藏输入密码。Windows PowerShell 将 `./piwork-cli` 替换为 `.\piwork-cli.exe`。
 

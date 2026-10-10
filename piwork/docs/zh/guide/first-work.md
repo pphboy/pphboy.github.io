@@ -13,9 +13,13 @@ piwork-cli chat WORK_ID \
 
 应用任务可以通过 Work 专属工具创建 [Service](/zh/concepts/service)，示例见 [Kanban Work](/zh/demo/kanban)。
 
+## 开发与改进 Web 应用
+
+当前默认 Brain 为新 Web 应用使用 FastAPI + React + TypeScript + Vite 和固定的可复用基础镜像。让此 Work 开发应用、部署为 Service 并验证结果；后续修改包含检查、构建与部署，标准模板会自动更新已打开页面并保留支持的草稿/路径。任务示例、sqlite3、持久化和升级见 [Web 开发](/zh/guide/web-development.html)。
+
 ## 准备可选文件交换存储
 
-仅导入、导出或读取本地文件时添加交换卷。退出当前 CLI，在宿主机安装目录读取固定 CLI 镜像，再进入带交换卷的容器；已有登录状态卷会复用：
+仅导入、导出或读取本地文件时添加交换卷。退出当前 CLI，再进入下面使用固定镜像的交换卷容器；已有登录状态卷会复用：
 
 ```sh
 docker run --rm --init --interactive --tty \
@@ -24,7 +28,7 @@ docker run --rm --init --interactive --tty \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
     --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
-    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
 此 shell 保持运行，以便另一宿主机终端执行 docker cp。交换卷只搬运归档，不是 Work 数据备份。远程 Core 的 URL 应替换为实际可达地址；Windows 客户端按安装指南进入 Linux 容器，不使用 Linux 同机的 host-gateway 参数。

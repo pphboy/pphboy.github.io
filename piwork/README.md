@@ -33,7 +33,9 @@ the navigation, favicon, touch icon, and Open Graph metadata.
 
 Docker Quick Start runs Core and CLI independently. Core supports Core-only Compose. The optional combined example lives in examples/single-host/ and has its own data and credentials. Inputs come from the existing host environment; CLI startup waits for complete readiness and opens a terminal. Native CLI is a folded alternative. The advanced Core-only Demo uses a separate data directory.
 
-Keep both locales aligned with upstream commands and image defaults. Source: fc409adc1a0bcd7cdf48d711fe7e6efca92a4bdb; input SHA256: 808d890c66072207aea4d453459cc7ff7837af2e64464243a22f9e2010295523; state: published. Images are published and anonymous pulls/cold readiness are verified. Website changes and downloads await final user confirmation; pushing website main triggers the existing Piwork deployment workflow. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
+Keep both locales aligned with upstream commands and image defaults. Source: fb4f577da3b4d0008b97a59103b84efefbf9b508; input SHA256: 512ec778b2671454ce1e66ceb11893f4f3ff908286ec2ae4947fd24fda100f37; state: published. Piwork 0.0.2 Preview images are published and anonymously verified. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
+
+Maintain the bilingual Web Development and AI Models guides and navigation together. Platform 0.0.2 and the independent Web base have published identities; versioned downloads include the exact release manifest, base receipt and checksums. Preserve older install directories. Windows native delivery remains experimental.
 
 Run upstream check-docker-quickstart.mjs with --website-root pointing at this directory after synchronizing. No real credentials or initialization env belongs in static files. Website synchronization does not push images or publish pages.
 

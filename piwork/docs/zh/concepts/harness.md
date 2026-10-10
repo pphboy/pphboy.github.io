@@ -18,6 +18,10 @@ Piwork 在 Work 的 Agent 容器内运行基于 **Pi Agent SDK** 的 TypeScript 
 
 例如，在 Kanban Work 中，可以让它检查看板存储、增加功能、重启相关 Service，再验证应用仍能使用。模型说“完成”不等于变更已经通过验证。
 
+当前默认 Brain 为新 Web 应用选择固定的 FastAPI + React + TypeScript + Vite [Web base](/zh/guide/web-development.html)。修改应用后，它完成必要检查、构建和 Service 部署，再验证实际加载版本与业务结果。标准模板会自动更新已打开页面，单纯保存文件不代表完成交付。获准的 sqlite3 bash 在已预装命令的 Agent 中执行。
+
+管理员在 Serve UI **AI models** 直接添加独立模型连接；Work Chat 选择获准模型。未知 Thinking 的自定义模型可用 **Normal** 发送，原有非空 Thinking 偏好需显式确认后再切换。完整配置、Test 与配套版本要求见 [AI 模型](/zh/guide/ai-models.html)。
+
 ## 为什么是“可演进的”？
 
 Harness 的上下文属于 Work。随着工作空间发展，它的指令、Skills、工具和扩展包可以更适合这个环境。这些资源和历史会随 Work 一起导出。

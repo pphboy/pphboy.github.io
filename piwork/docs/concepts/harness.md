@@ -18,6 +18,10 @@ It can use those tools to:
 
 For a Kanban Work, a useful task is: inspect the board's storage, add a feature, restart the relevant Service, then verify that the application still works. A model saying “done” is not the same as a verified change.
 
+For new Web applications, the current default Brain selects the fixed FastAPI + React + TypeScript + Vite [Web base](/guide/web-development.html). After changing an application, it completes the required check/build and Service deployment, then verifies the actual loaded version and business result. Standard templates automatically update an open page; saving files alone does not complete delivery. Authorized sqlite3 bash runs in Agent, where the command is installed.
+
+Administrators add independent connections in Serve UI **AI models**; Work Chat selects authorized models. Custom models with unknown Thinking support can send in **Normal**, while an existing nonempty Thinking preference requires explicit confirmation before switching. See [AI Models](/guide/ai-models.html) for setup, Test and compatible-build requirements.
+
 ## Why “evolvable”?
 
 The Harness's context belongs to the Work. Its instructions, Skills, tools, and packages can become more useful as that workspace develops. These resources and their history move with the Work when it is exported.

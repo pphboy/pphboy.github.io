@@ -2,7 +2,7 @@
 
 These pages summarize the current Piwork implementation for developers. They adapt the source project's existing specifications; they do not define a competing API or package format.
 
-Installation and Quick Start were synchronized with Piwork `ea2f2a053b707760c1c98242f0f7ba15842efd12` on October 9, 2026. The default path uses published [0.0.1 Preview](https://github.com/pphboy/piwork/releases/tag/v0.0.1) images built from `20fb8334f1dce93bfa79cb6b5c86acf1cc460963`. Fixed references, release metadata and template provenance are in the <a href="/piwork/install/0.0.1/README.txt" download>setup metadata</a>. Documentation updates and image releases are separate; this sync did not build or publish new images.
+Current delivery is [Piwork 0.0.2 Preview](https://github.com/pphboy/piwork/releases/tag/v0.0.2), including the Web base and direct model management. All five runtime images were published, anonymously pulled and executed; see the [release manifest](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/release-manifest.json). Clean build source: `fb4f577da3b4d0008b97a59103b84efefbf9b508`; input SHA256: `512ec778b2671454ce1e66ceb11893f4f3ff908286ec2ae4947fd24fda100f37`. The release tag additionally includes publication materials and does not rewrite image build identity. The Web base retains its independent [published receipt](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/web-base-release.json). The native Windows client remains an experimental executable with formal native acceptance pending; see preview-verification.md in the release. Historical download directories keep their provenance.
 
 | Area | Read here | Authoritative source |
 | --- | --- | --- |

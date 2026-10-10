@@ -22,6 +22,14 @@ Harness 通过原生 `piwork-service-mcp` 进程和经过身份验证的 Work �
 
 工具以 `work-services__` 命名空间提供给模型，并受工具策略约束。修改请求需要 `idempotencyKey`，操作完成前会先返回持久接受结果。保留原始 Service ID 和 Operation ID，供后续检查。
 
+## 内存政策
+
+应用 Service 容器不设置 Piwork 内存上限，也不预留 Service 内存。省略的 `memoryBytes` 规范化为零，合法历史正数仅保留兼容数据，不恢复限制；负数、非整数和不安全整数仍非法。当前投影返回 `memoryLimitMode=unlimited`，部署上下文返回 `serviceMemoryPolicy=unlimited` 和 `defaultServiceMemoryBytes=0`。
+
+Work/宿主内存核算排除历史 Service 预留，包括配置与导入路径。Agent/helper 内存政策以及原子的 CPU、服务数和卷数准入继续有效。受管恢复替换旧受限 Service 容器并保留身份与 workspace，实际可用内存由宿主及外层部署决定。
+
+默认 base、单 HTTP 入口、离线工具、持久化与版本自动采用见 [Web 开发指南](/zh/guide/web-development.html)。
+
 ## 网络和存储
 
 已声明的 HTTP 端口可以通过 Desktop 的认证应用网关访问。容器不会获得任意公网主机端口暴露。平台凭据与应用 cookies 和应用授权保持独立。

@@ -1,12 +1,16 @@
 # Installation and Deployment
 
-Use [Quick Start](/guide/quick-start.html) for the default trial. Run Core and CLI independently; for Core-only Compose download [docker-compose.yml](/piwork/install/0.0.1-fc409adc1a0b-808d890c6607-dirty/docker-compose.yml); initialization comes from the existing host environment. No installer, configuration file editing or Desktop is required. Images are published and verified for anonymous pulls; download links become available with this website update.
+Use [Quick Start](/guide/quick-start.html) for the default trial. Run Core and CLI independently; for Core-only Compose download [docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml); initialization comes from the existing host environment. No installer, configuration file editing or Desktop is required. Current state: published.
 
 ## Platforms and persistence
 
 Core runs on Linux x86-64 with rootful Docker Engine 28+, its local Unix socket, host networking and ports 7171/7172. CLI runs on Linux or Windows Docker Desktop Linux containers and connects to Linux Core. Core Compose and the single-host example require Compose 2.24+; direct Docker run does not. Core same-path binds and CLI credential storage remain separate, and model endpoints must be reachable from Work networks.
 
-For combined Core and CLI usage, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) and its [example Compose](/piwork/install/0.0.1-fc409adc1a0b-808d890c6607-dirty/single-host-compose.yml).
+For combined Core and CLI usage, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) and its [example Compose](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/single-host-compose.yml).
+
+## Service and model upgrades
+
+0.0.2 ships matching Core, Console, Agent/helpers and CLI. New model/Normal behavior requires a compatible Agent; existing Works explicitly Apply an image change. Stop normally and back up Core data, managed volumes and private configuration; migrated registry/nullable history is not readable by older binaries. See [AI Models](/guide/ai-models.html). Application Services have no Piwork memory cap or reservation; CPU/count and Agent/helper memory policies still apply. See [Web Development](/guide/web-development.html) for defaults, sqlite3 and automatic adoption.
 
 ## Core Compose Demo
 
@@ -15,7 +19,7 @@ For combined Core and CLI usage, see [Single-host deployment](https://github.com
 This optional advanced Core-only Demo uses a separate `/var/lib/piwork/core` installation and the same Docker terminal CLI. It shares ports 7171/7172 with the default examples; stop the previous Core normally before switching. Use the existing initialization environment above. Mounting and safe initialization create a new empty directory; retain existing ownership and permissions.
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.1-fc409adc1a0b-808d890c6607-dirty \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.2-fb4f577da3b4-512ec778b267 \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
 ```
 
@@ -26,7 +30,7 @@ docker run --rm --init --interactive --tty \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
 <!-- core-compose-demo:end -->
@@ -84,7 +88,7 @@ Windows Docker Desktop uses Linux containers; the terminal CLI connects to a rea
 docker run --rm --init --interactive --tty `
     --env PIWORK_CORE_URL=CORE_URL `
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client `
-    docker.io/pphboy/piwork-cli:0.0.1-fc409adc1a0b-808d890c6607-dirty
+    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 if ($LASTEXITCODE -ne 0) { throw 'CLI container failed' }
 ```
 
@@ -95,5 +99,3 @@ Remote Linux clients likewise replace the Core URL. HTTPS retains certificate ve
 ## Advanced and older-version entry points
 
 For source/native builds, see [Build from Source](/guide/source-installation.html). The older 0.0.1 installer, release.env, templates and Desktop operations remain in the [versioned upstream guide](https://github.com/pphboy/piwork/blob/main/deploy/docker/README.md#legacy-001-installer). Existing install/0.0.1 and install/0.1.0 links retain their older provenance.
-
-Actual image digests and provenance: [release manifest](/piwork/install/0.0.1-fc409adc1a0b-808d890c6607-dirty/release-manifest.json).

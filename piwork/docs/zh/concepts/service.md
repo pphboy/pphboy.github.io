@@ -18,6 +18,12 @@ Service 定义包含镜像、命令、环境变量、网络端口、工作空间
 
 应用还可以为实验性 `piwork-brain` 包实现能力契约，以支持结构化查询和可验证操作。这需要额外的应用实现，并不是每个 HTTP 服务都自动具备的能力。
 
+## 默认 Web 环境与更新
+
+使用当前默认 Brain 的新 Web 应用采用可复用的 FastAPI + React + TypeScript + Vite [Web base](/zh/guide/web-development.html)，同时支持用户选择其他技术栈和维护已有应用。Harness 在修改后完成检查、构建、部署及实际版本验证；标准模板自动采用已就绪的更新，并保留支持恢复的草稿与路径。
+
+应用 Service 不设置 Piwork 内存上限，也不预留 Service 内存；CPU/数量配额和 Agent/helper 内存政策继续有效。Agent 和 Web base 都提供 sqlite3 CLI，供获准的 workspace 开发与数据检查使用。
+
 ## 访问和持久化
 
 Desktop 通过需要身份验证的本地应用入口提供已声明的 HTTP Services。从 Service 条目打开应用即可。

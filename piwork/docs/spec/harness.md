@@ -35,6 +35,18 @@ Service events can request bounded automatic execution when the Work is ready an
 
 Export preserves this durable history. Imported events and requests remain historical and cannot schedule or replay effects from the source installation.
 
+## Default development and actual adoption
+
+The current Brain defaults new Web applications to a fixed Web base and matching FastAPI + React + TypeScript + Vite templates. A shared initializer refuses existing targets before writing Spec, source, locks or registration. Subsequent maintenance reads and updates the existing application.
+
+Application delivery includes required checks/build, Service update/restart, original Operation observation, and verification of the actually loaded code and business behavior. Template versions combine source/locks with immutable image environment identity. The page adopts a ready frontend once, restores supported drafts/path and re-reads backend data without an extra passive Run. Brain/package and Agent image adoption still requires the existing explicit Apply path; application refresh does not change captured context.
+
+Agent production and acceptance both install sqlite3 CLI for policy-authorized bash. A Service-only binary or a package edit does not add it to an older captured Agent image. Maintenance locations and supported behavior are documented in [Web Development](/guide/web-development.html).
+
+## Model selection and Normal
+
+Compatible Agents negotiate Chat contract 3 and distinguish known SDK Thinking levels from unknown capabilities. Normal for an unknown model means no extra Thinking was requested (null), and cannot stand in for legacy Off; Sessions, Runs and Work packages preserve the original fact. Accepted Runs pin model/credential identity, unaffected by catalog edits, Key rotation or new-Work defaults. Existing Works explicitly Apply a compatible Agent. See [AI Models](/guide/ai-models.html).
+
 ## Future direction
 
 A Harness increasingly adapted to its Work and user is the product direction. The current system does not guarantee unrestricted autonomous learning, invisible self-upgrades, or that every application exposes structured capabilities.
