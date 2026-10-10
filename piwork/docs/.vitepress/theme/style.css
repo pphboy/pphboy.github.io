@@ -81,7 +81,9 @@
   text-align: center;
 }
 
-.VPHome .VPHero .name {
+.VPHome .VPHero.has-image .name,
+.VPHome .VPHero.has-image .text,
+.VPHome .VPHero.has-image .tagline {
   margin-inline: auto;
 }
 
