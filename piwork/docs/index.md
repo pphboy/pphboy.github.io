@@ -12,12 +12,21 @@ hero:
       text: Get Started
       link: /guide/quick-start
     - theme: alt
+      text: Watch Demo
+      link: /demo/product-demo.html
+    - theme: alt
       text: GitHub
       link: https://github.com/pphboy/piwork
     - theme: alt
       text: Discussions
       link: https://github.com/pphboy/piwork/discussions
 ---
+
+## Piwork in 70 seconds
+
+AI creates a real content studio, evolves it while preserving existing ideas, and the entire Work moves to another Piwork environment. [View the demo and recording details](/demo/product-demo.html).
+
+<ProductDemo />
 
 ## What is Piwork?
 
@@ -39,9 +48,9 @@ Default Web development uses a reusable FastAPI + React + TypeScript + Vite envi
 
 Export a stopped Work as a `.work` file. Import it into a compatible installation and start it explicitly. The target supplies its own model credentials.
 
-## Demo: Kanban Work
+## Example: Kanban Work
 
-A board, its data, an application Service, and a Harness that helps build and operate it form one workspace. [Read the Kanban walkthrough](/demo/kanban). A downloadable demo and recording are still being prepared.
+A board, its data, an application Service, and a Harness that helps build and operate it form one workspace. [Read the Kanban walkthrough](/demo/kanban). The Kanban example's downloadable package and recording are still being prepared.
 
 ## Get started
 

@@ -12,12 +12,21 @@ hero:
       text: 开始使用
       link: /zh/guide/quick-start
     - theme: alt
+      text: 观看演示
+      link: /zh/demo/product-demo.html
+    - theme: alt
       text: GitHub
       link: https://github.com/pphboy/piwork
     - theme: alt
       text: 讨论社区
       link: https://github.com/pphboy/piwork/discussions
 ---
+
+## 70 秒了解 Piwork
+
+AI 创建真实的内容工作室，在保留已有灵感的基础上持续进化，再将整个 Work 迁移到另一套 Piwork 环境。[查看演示与录制说明](/zh/demo/product-demo.html)。
+
+<ProductDemo />
 
 ## Piwork 是什么？
 
@@ -39,9 +48,9 @@ Harness 可以帮助构建和修改它所在的工作空间。它的指令、Ski
 
 将已停止的 Work 导出为 `.work` 文件，在兼容的实例中导入，再手动启动。接收方需要配置自己的模型凭据。
 
-## 演示：Kanban Work
+## 示例：Kanban Work
 
-看板、数据、应用 Service 和帮助构建及操作看板的 Harness，共同组成一个工作空间。[查看 Kanban 演示说明](/zh/demo/kanban)。可下载的演示包和录屏仍在准备中。
+看板、数据、应用 Service 和帮助构建及操作看板的 Harness，共同组成一个工作空间。[查看 Kanban 演示说明](/zh/demo/kanban)。该看板示例的可下载演示包和录屏仍在准备中。
 
 ## 开始使用
 

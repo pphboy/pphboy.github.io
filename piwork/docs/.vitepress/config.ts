@@ -9,7 +9,7 @@ function navigation(chinese: boolean): DefaultTheme.Config {
   return {
     nav: [
       { text: chinese ? '文档' : 'Docs', link: link('/guide/'), activeMatch: `^${prefix}/(guide|concepts)/` },
-      { text: chinese ? '演示' : 'Demo', link: link('/demo/kanban'), activeMatch: `^${prefix}/demo/` },
+      { text: chinese ? '演示' : 'Demo', link: link('/demo/product-demo.html'), activeMatch: `^${prefix}/demo/` },
       { text: chinese ? '规范' : 'Spec', link: link('/spec/'), activeMatch: `^${prefix}/spec/` },
       { text: 'GitHub', link: repository },
       { text: chinese ? '讨论社区' : 'Discussions', link: `${repository}/discussions` }
@@ -37,7 +37,10 @@ function navigation(chinese: boolean): DefaultTheme.Config {
           { text: 'Harness', link: link('/concepts/harness') }
         ]
       },
-      { text: chinese ? '演示' : 'Demo', items: [{ text: 'Kanban Work', link: link('/demo/kanban') }] },
+      { text: chinese ? '演示' : 'Demo', items: [
+        { text: chinese ? '产品演示视频' : 'Product demo video', link: link('/demo/product-demo.html') },
+        { text: 'Kanban Work', link: link('/demo/kanban') }
+      ] },
       {
         text: chinese ? '规范' : 'Spec',
         items: [
