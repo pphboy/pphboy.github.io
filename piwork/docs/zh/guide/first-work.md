@@ -1,86 +1,16 @@
 # 第一个 Work
 
-先按[快速开始](/zh/guide/quick-start)收到一次模型回复。以下复用已经创建的 Work，不再执行 create 或 start；将 `WORK_ID` 替换为原创建结果。命令在 CLI 容器内执行。
+先按 [Quick Start](/zh/guide/quick-start.html) 启动并完成网页引导。点击 **Open workbench**，选择 **New Work**，创建后在 Chat 发送消息。Files 管理工作区，Settings 保存并显式 Apply 配置，Service 可预览或独立打开。关闭网页不停止 Work。
 
-## 写入并读取文件
+Service 响应 Cookie 保存在服务端分区；依赖脚本读取/写入 Cookie 的应用不保证透明兼容。脚本写入的浏览器 Cookie 可能在同 IP 的 Service 间串用，不会被代理采用。详情见安装说明。
 
-```sh
-piwork-cli chat WORK_ID \
-    --message 'Create welcome.md in the workspace, read it back, and report what you verified.'
-```
+## 创建并使用
 
-模型通过工具在 `/var/data/workspace` 执行任务。让它报告实际读取和验证的结果；任务提示不保证模型一定完成，继续前应核对文件。Work 的共享工作空间由 Core 管理，CLI 的登录卷不保存这些文件。
+1. 在 Quick setup 选择或添加模型，点击 **Save and continue**。模型保存、Runtime 绑定和依赖准备分别反馈；Test 可选，不会自动发起模型请求。
+2. 准备页显示正在等待的实际组件。只有全部依赖 Ready 时，完成区 **Open workbench** 才可用；等待期间也可通过 Admin 顶栏返回工作台。
+3. 在工作台选择 **New Work**，填写名称并创建；等待 Work ready 后打开，在 Chat 中发送目标任务。
+4. 使用 Files 查看或编辑工作区文件，通过 Service 入口查看应用。修改默认模型只影响后续新 Work，已有 Work 的配置需要所有者显式保存并 Apply。
 
-应用任务可以通过 Work 专属工具创建 [Service](/zh/concepts/service)，示例见 [Kanban Work](/zh/demo/kanban)。
+## 分享与继续
 
-## 开发与改进 Web 应用
-
-当前默认 Brain 为新 Web 应用使用 FastAPI + React + TypeScript + Vite 和固定的可复用基础镜像。让此 Work 开发应用、部署为 Service 并验证结果；后续修改包含检查、构建与部署，标准模板会自动更新已打开页面并保留支持的草稿/路径。任务示例、sqlite3、持久化和升级见 [Web 开发](/zh/guide/web-development.html)。
-
-## 准备可选文件交换存储
-
-仅导入、导出或读取本地文件时添加交换卷。退出当前 CLI，再进入下面使用固定镜像的交换卷容器；已有登录状态卷会复用：
-
-```sh
-docker run --rm --init --interactive --tty \
-    --name piwork-cli-files \
-    --add-host host.docker.internal:host-gateway \
-    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
-    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
-    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
-```
-
-此 shell 保持运行，以便另一宿主机终端执行 docker cp。交换卷只搬运归档，不是 Work 数据备份。远程 Core 的 URL 应替换为实际可达地址；Windows 客户端按安装指南进入 Linux 容器，不使用 Linux 同机的 host-gateway 参数。
-
-## 停止、导出并检查
-
-在 CLI 容器内，停止原 Work 后导出；目标文件必须尚不存在：
-
-```sh
-piwork-cli work stop WORK_ID --wait
-piwork-cli work export WORK_ID --output /exchange/first-work.work
-piwork-cli work package inspect /exchange/first-work.work
-```
-
-在另一个宿主机终端，将归档保存到本机：
-
-```sh
-docker cp piwork-cli-files:/exchange/first-work.work ./first-work.work
-```
-
-归档保存持久文件、历史、配置、Service、Skill、Pi Package 和固定镜像，不冻结活进程。目标 Core 需要另行提供平台管理的模型 key；文件或历史中自行保存的秘密仍可能进入包。
-
-## 导入并继续
-
-在目标 Core 登录的同类 CLI 容器中操作；本例容器名为 piwork-cli-files。在目标宿主机先复制归档：
-
-```sh
-docker cp ./first-work.work piwork-cli-files:/exchange/incoming.work
-```
-
-回到目标 CLI 容器，先 import，再将返回的新 Work ID 用于显式 start：
-
-```sh
-piwork-cli work import /exchange/incoming.work --name 'Continued Work' --wait
-piwork-cli work start IMPORTED_WORK_ID --wait
-```
-
-import 创建独立的 stopped Work，不会自动启动。将 `IMPORTED_WORK_ID` 替换为导入结果，可以继续检查原文件和历史：
-
-```sh
-piwork-cli chat IMPORTED_WORK_ID \
-    --message 'Read welcome.md from the workspace and summarize the retained files.'
-```
-
-## 中断后恢复
-
-使用原 Operation、Run 或 Snapshot ID，不通过重新提交 mutation 来查询结果。聊天断线后按原 Run 和最后序号恢复观察；下载中断时选择尚不存在的新输出路径：
-
-```sh
-piwork-cli operation show OPERATION_ID
-piwork-cli run watch WORK_ID RUN_ID --after SEQUENCE
-piwork-cli work snapshot download SNAPSHOT_ID --output /exchange/retried.work
-```
-
-可携带性与格式边界见 [Work 规范](/zh/spec/work)。
+先停止 Work，再从其操作菜单导出 `.work` 包。在另一套安装导入后，Work 保持 stopped；检查目标模型与环境后显式 **Start**。导入不重放历史，关闭浏览器也不会停止运行中的 Work。

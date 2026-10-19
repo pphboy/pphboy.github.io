@@ -31,11 +31,9 @@ the navigation, favicon, touch icon, and Open Graph metadata.
 
 ## Content maintenance
 
-Docker Quick Start runs Core and CLI independently. Core supports Core-only Compose. The optional combined example lives in examples/single-host/ and has its own data and credentials. Inputs come from the existing host environment; CLI startup waits for complete readiness and opens a terminal. Native CLI is a folded alternative. The advanced Core-only Demo uses a separate data directory.
+Docker Quick Start starts one unified Linux application with browser onboarding and the full workbench. Default startup requires no business environment variables; only an optional paired ADMIN test bootstrap remains. CLI is optional. Service ports and script Cookie limitations are documented alongside the main entry. The single-host example has separate data. Published provenance is preserved.
 
-Keep both locales aligned with upstream commands and image defaults. Source: fb4f577da3b4d0008b97a59103b84efefbf9b508; input SHA256: 512ec778b2671454ce1e66ceb11893f4f3ff908286ec2ae4947fd24fda100f37; state: published. Piwork 0.0.2 Preview images are published and anonymously verified. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
-
-Maintain the bilingual Web Development and AI Models guides and navigation together. Platform 0.0.2 and the independent Web base have published identities; versioned downloads include the exact release manifest, base receipt and checksums. Preserve older install directories. Windows native delivery remains experimental.
+Keep both locales aligned with upstream commands and image defaults. Source: 62f2868cb8e24da3d08db7a7d6c00aabd6226cd4; input SHA256: d69916b5282972c9a336745e4efc30b749fad531a42ed5aac3c8b4dcad4c38ff; state: published. Image identities and anonymous readability have been verified; the versioned downloads match this release. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
 
 Run upstream check-docker-quickstart.mjs with --website-root pointing at this directory after synchronizing. No real credentials or initialization env belongs in static files. Website synchronization does not push images or publish pages.
 

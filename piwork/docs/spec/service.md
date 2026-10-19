@@ -44,4 +44,4 @@ The experimental brain's Service capability contract adds structured observation
 
 Broader categories of capabilities may fit the product's Service concept over time. The current runtime contract is a managed application container.
 
-See the authoritative [work-services spec](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-services/spec.md), [Service MCP guide](https://github.com/pphboy/piwork/blob/main/docs/service-mcp.md), and [application access guide](https://github.com/pphboy/piwork/blob/main/docs/service-access.md).
+See the authoritative [work-services spec](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-services/spec.md), [Service MCP guide](https://github.com/pphboy/piwork/blob/main/openspec/specs/mcp-tool-access/spec.md), and [application access guide](https://github.com/pphboy/piwork/blob/main/openspec/specs/browser-service-access/spec.md).

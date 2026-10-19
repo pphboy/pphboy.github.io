@@ -2,7 +2,7 @@
 
 [English](/guide/ai-models.html) | **简体中文**
 
-本流程需要配套的当前 Core、Console、Agent 和 CLI。旧固定镜像保留原有能力，修改文档或重启旧 Agent 不会升级它；升级前先阅读本页的数据与 Work 迁移说明。
+统一 Linux 应用已包含 Core、网页工作台、Admin 与首次引导，CLI 为独立可选工具。旧固定镜像保留原有能力，修改文档或重启旧 Agent 不会升级它；升级前先阅读本页的数据与 Work 迁移说明。
 
 平台镜像状态以 `deploy/docker/release.json` 为准。`candidate` 引用需要先构建或加载匹配的本地镜像，不代表 DockerHub 已可取得；Web base 的独立发布也不代表平台镜像已发布。已有安装先备份停止后的 Core 数据和受管卷，再配套更新 Core/Console、兼容 Agent/helper 和客户端；既有 Work 更换镜像仍由所有者显式 Apply。
 
@@ -34,7 +34,7 @@ Test 是辅助诊断，不是保存、启用或选择的门槛。404、认证、
 
 ## Runtime、Work 与 Thinking
 
-在 **Runtime** 配置 Agent 镜像并选择模型，无需再次输入 Key。添加模型不改变默认；**Use for future Work** 仅更新新 Work 的默认模型并保留其他设置。已有 Work 和 Chat override 不变，自动 Service 请求使用 active Work 默认值。Work default 选项、响应设置和输入区域显示实际捕获的 Model ID，目录改名不暗示已有 Work 已采用新型号。
+在 **Admin → Quick setup** 填写或选择模型，再点击 **Save and continue**；完整 **Runtime** 页也可选择已保存模型，无需再次输入 Key。Agent 镜像由目标 Core 的发行版本固定，没有手填、选择或高级覆盖；显式保存才采用当前发行引用，仅影响后续新 Work，读取或启动不会改写旧 Runtime 或已有 Work。添加模型不改变默认；**Use for future Work** 仅更新新 Work 的默认模型并保留其他设置。已有 Work 和 Chat override 不变，自动 Service 请求使用 active Work 默认值。Work default 选项、响应设置和输入区域显示实际捕获的 Model ID，目录改名不暗示已有 Work 已采用新型号。
 
 已知模型保留 SDK 的真实 Thinking 档位与协议映射，不新增管理员默认 Thinking。未知或自定义模型的 `thinkingAvailability` 为 `unknown`，没有确认档位；**Normal** 使用 `thinkingLevel: null`，表示未额外请求 Thinking。普通请求省略未确认参数，不代表供应商内部推理被关闭。未知默认模型的新 Session 可以直接普通发送。
 
@@ -48,7 +48,7 @@ Test 是辅助诊断，不是保存、启用或选择的门槛。404、认证、
 
 新 registry 格式需要新版 Core；旧二进制不能直接读取已迁移数据。升级前正常停止安装，保留完整 Core 数据、相关受管卷与私有运行配置备份，以备配套回退。
 
-Work 包保留非秘密模型要求与原 Thinking 事实（含 Normal/null），不复制源模型/Provider 身份、Key 或活跃执行授权。目标配置自己的模型和凭据，导入保持 stopped，不重放历史；匹配不唯一时保留可读历史并要求显式选择。nullable 历史需要兼容 reader。完整流程见 [Work 快照](https://github.com/pphboy/piwork/blob/main/docs/work-snapshot.md)和[包格式](https://github.com/pphboy/piwork/blob/main/docs/work-package-format.md)。
+Work 包保留非秘密模型要求与原 Thinking 事实（含 Normal/null），不复制源模型/Provider 身份、Key 或活跃执行授权。目标配置自己的模型和凭据，导入保持 stopped，不重放历史；匹配不唯一时保留可读历史并要求显式选择。nullable 历史需要兼容 reader。完整流程见 [Work 快照](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-snapshots/spec.md)和[包格式](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md)。
 
 ## 管理员 API
 

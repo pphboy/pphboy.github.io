@@ -1,14 +1,10 @@
 # Quick Start
 
-## 使用 Docker 试用 Core 和 CLI
+## 一键启动 Piwork
 
 <!-- docker-quickstart:start -->
 
-### Core
-
-使用 Linux x86-64 和 Docker Engine 28+。宿主环境中应已有 `PIWORK_ADMIN_ACCOUNT`、`PIWORK_ADMIN_PASSWORD`（至少 12 位）、`PIWORK_MODEL_PROVIDER`、`PIWORK_MODEL`、`PIWORK_API_KEY`。可选 `PIWORK_MODEL_BASE_URL` 使用 Work 可达的 HTTPS 地址；不用时保持未设置。
-
-在宿主终端运行 Core。镜像自带发行默认值，并自动准备 Agent 和 helper：
+Linux x86-64、rootful Docker Engine 28+。运行一个容器即可提供工作台、管理和首次设置，无需环境变量或客户端 CLI：
 
 ```sh
 docker run --detach --init \
@@ -16,69 +12,47 @@ docker run --detach --init \
     --network host \
     --restart unless-stopped \
     --stop-timeout 60 \
-    --env PIWORK_ADMIN_ACCOUNT \
-    --env PIWORK_ADMIN_PASSWORD \
-    --env PIWORK_MODEL_PROVIDER \
-    --env PIWORK_MODEL \
-    --env PIWORK_API_KEY \
-    --env PIWORK_MODEL_BASE_URL \
     --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.2-fb4f577da3b4-512ec778b267
+    docker.io/pphboy/piwork-core:0.0.7-62f2868cb8e2-d69916b52829-dirty
 ```
 
-Core 也可用 [Core-only docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml) 单独部署（Compose 2.24+），CLI 仍使用自己的 Docker 命令。切换 Core 部署方式前先停止原容器，保留同一数据目录。Core 与 CLI 合并的可选方式见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。
-
-### CLI
-
-CLI 独立运行，只需已有且可达的 Core，不需要 Core 初始化变量。下面连接同机 Core；连接其他 Core 时替换 `PIWORK_CORE_URL`。它等待完整就绪后进入终端：
+打开终端输出中的访问地址。后台启动时，在服务器查看首次设置链接；该链接授权创建首管理员，十分钟后过期，请勿分享：
 
 ```sh
-docker run --rm --init --interactive --tty \
-    --add-host host.docker.internal:host-gateway \
-    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
-    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
+docker logs piwork-core-quickstart
 ```
 
-下面的命令在 **CLI 容器内**执行。将 `ACCOUNT` 替换为你的账号；登录时隐藏密码输入。创建 Work 会自动启动它：
+链接过期时取得新链接（仅安装维护者可执行）：
 
 ```sh
-piwork-cli login --account ACCOUNT
-piwork-cli work create --name 'My Work' --wait
+docker exec piwork-core-quickstart piwork-serve --data-dir /var/lib/piwork/quickstart/core setup link
 ```
 
-使用创建结果中的实际 `workId` 替换 `WORK_ID`，发送第一条消息：
+浏览器创建管理员时输入密码及确认密码，随后正常登录进入 Admin 的 **Quick setup**（`/admin/setup`）。按两步引导填写模型 ID、API 类型、Base URL 和 API Key，或选择已保存模型，点击 **Save and continue**，顺序保存模型并绑定 CoreRuntime。准备页面会自动更新；全部依赖显示 Ready 后，点击 **Open workbench** 进入 Piwork。Agent 镜像随服务端版本内置并自动使用，无需也不能手填、选择或高级覆盖。模型 Test 是显式可选操作；保存不自动调用模型。打开工作台创建 Work，然后聊天、管理文件或打开 Service。后续从 Admin **Overview → Quick setup** 返回配置；顶栏 **Workbench** 可随时返回工作台，准备区的完成按钮仍需等待全部 Ready。已保存的账号、模型和 Work 在重启后保留。
 
-```sh
-piwork-cli chat WORK_ID --message 'Hello, Piwork!'
-```
+服务端默认监听 `0.0.0.0:7171`；本机或远程电脑通过实际非回环 IP 打开 `http://服务器IP:7171`。局域网即可使用，无需公网地址。主站放行 TCP 7171，Service 入口另需 TCP 17891–17954（可用 `--service-ports` 修改）；7172 是内部 Agent RPC，不向浏览器开放。端口由 Piwork 代理，不是用户容器直出。只开放主站时工作台仍可使用，Service 入口会不可达。无需域名、DNS 或本机代理。HTTP 不加密；不可信网络请显式配置 HTTPS，并同时放行/代理主站与全部 Service 端口。
 
-回复直接显示在终端。用 `exit` 离开；同样的 CLI 启动命令会复用凭证，Work 不因 CLI 退出而停止。等待失败或观察中断时，按 [终端操作说明](/zh/guide/installation.html#terminal-operations) 查询状态或恢复原 Operation/Run，不重复提交。
+Service 支持响应 Cookie 的服务端登录、Basic/Bearer、HTTP、SSE 和 WebSocket。响应 Cookie 按浏览器会话及 Service 保存在服务器，Secure Cookie 仅通过 HTTPS 入口发送。依赖 document.cookie/Cookie Store 读写（如脚本读取 CSRF Cookie）的应用不保证透明兼容；脚本写入浏览器 Cookie 也不保证同 IP 跨 Service 隔离，且不会转发上游。不支持硬编码 .work URL、跨站 SSO 或上游 HTTPS 的透明适配。应用 CSP/X-Frame-Options 保留；禁止嵌入时使用新标签页。
+
+可选 [Compose](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/docker-compose.yml)（2.24+）和 [单机示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md) 同样直接进入网页；CLI 是高级可选工具。运行与恢复见 [安装手册](/zh/guide/installation.html#terminal-operations)。
 
 <!-- docker-quickstart:end -->
 
 <details>
-<summary>使用原生 CLI（连接已有 Core）</summary>
+<summary>构建并使用原生 Linux 应用</summary>
 
 <!-- native-quickstart:start -->
 
-下载 [Linux Core / Console / CLI 包](https://github.com/pphboy/piwork/releases/download/v0.0.2/piwork-linux-amd64-0.0.2.tar.gz)或 [Windows CLI 实验性程序](https://github.com/pphboy/piwork/releases/download/v0.0.2/piwork-cli-windows-amd64-0.0.2.exe)。先核对发行 SHA256；Linux 包解压后 CLI 位于 `bin/`，Windows 程序保存为 `piwork-cli.exe` 即可。Windows 完整原生验收仍未完成。
-
-连接已经配置完成且就绪的 Core，并与原生 CLI 版本兼容的 Core。在可执行文件所在目录，将 `CORE_URL` 替换为其地址（同机 Linux 为 `http://127.0.0.1:7171`），将 `ACCOUNT` 替换为账号；登录时隐藏输入密码。Windows PowerShell 将 `./piwork-cli` 替换为 `.\piwork-cli.exe`。
+上方 Docker 镜像已包含统一入口。完成下方源码构建后，从任意目录启动 Linux 程序：
 
 ```sh
-./piwork-cli --core CORE_URL login --account ACCOUNT
-./piwork-cli work create --name 'My Work' --wait
+./dist/go/piwork --no-open
 ```
 
-将创建结果中的实际 `workId` 用于下一条命令：
+默认数据目录为用户配置目录下 `piwork/server`，监听 `0.0.0.0:7171`；使用终端给出的实际 IP 链接。`--data-dir`、`--listen`、`--public-origin`、`--service-ports` 和 TLS 参数见 `--help`。首次设置链接只给安装维护者。Agent 镜像随服务端版本内置并自动使用，不提供手填或覆盖；网页创建管理员后配置模型。`piwork setup link` 可轮换过期证明。退出主程序会按 Core 关闭契约停止受管 Work；关闭网页不会。
 
-```sh
-./piwork-cli chat WORK_ID --message 'Hello, Piwork!'
-```
-
-更多命令见[用户 CLI 手册](https://github.com/pphboy/piwork/blob/main/docs/user-cli.md)，平台说明见 [CLI 平台交付](https://github.com/pphboy/piwork/blob/main/docs/cli-platforms.md)。
+`piwork-cli` 保留独立 Windows/Linux 命令行与本机 Desktop；`piwork-console` 仅为旧独立管理入口，不属于默认启动依赖。历史 [0.0.7 Linux 发布包](https://github.com/pphboy/piwork/releases/download/v0.0.7/piwork-linux-amd64-0.0.7.tar.gz) 与 [实验性 Windows CLI 0.0.5](https://github.com/pphboy/piwork/releases/download/v0.0.5/piwork-cli-windows-amd64-0.0.5.exe) 不包含本次统一服务端入口。
 
 <!-- native-quickstart:end -->
 

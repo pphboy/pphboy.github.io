@@ -44,4 +44,4 @@ Work/宿主内存核算排除历史 Service 预留，包括配置与导入路径
 
 未来可能有更多能力类型适合 Service 概念。当前运行契约是受管理的应用容器。
 
-权威来源：[work-services 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-services/spec.md)、[Service MCP 指南](https://github.com/pphboy/piwork/blob/main/docs/service-mcp.md)和[应用访问指南](https://github.com/pphboy/piwork/blob/main/docs/service-access.md)。
+权威来源：[work-services 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-services/spec.md)、[Service MCP 指南](https://github.com/pphboy/piwork/blob/main/openspec/specs/mcp-tool-access/spec.md)和[应用访问指南](https://github.com/pphboy/piwork/blob/main/openspec/specs/browser-service-access/spec.md)。

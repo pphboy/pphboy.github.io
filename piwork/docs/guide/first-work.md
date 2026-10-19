@@ -1,86 +1,16 @@
-# Your First Work
+# Your first Work
 
-Start by receiving a model reply in [Quick Start](/guide/quick-start). Reuse that Work here, without another create or start. Replace `WORK_ID` with its original creation ID. Commands run inside the CLI container.
+Follow [Quick Start](/guide/quick-start.html) and complete browser setup. Click **Open workbench**, choose **New Work**, then send a message in Chat. Use Files for the workspace, Settings to save and explicitly Apply configuration, and Service to preview or open an application tab. Closing the browser does not stop a Work.
 
-## Write and read a file
+Service response Cookies stay in server-side partitions. Apps relying on script-read/written Cookies are outside transparent support. Script-written browser Cookies may be shared across Services on the same IP and are never adopted by the proxy. See Installation for details.
 
-```sh
-piwork-cli chat WORK_ID \
-    --message 'Create welcome.md in the workspace, read it back, and report what you verified.'
-```
+## Create and use a Work
 
-The model uses tools in `/var/data/workspace`. Ask it to report what it actually read and verified. A prompt does not guarantee completion; check the file before continuing. Core manages the Work workspace; the CLI login volume does not store these files.
+1. In Quick setup, choose or add a model and select **Save and continue**. Model saving, Runtime binding and preparation have separate feedback. Test is optional; saving does not call the model.
+2. Preparation shows the actual components still being awaited. The completion **Open workbench** action requires every dependency to be Ready; the Admin topbar also lets you return while preparation continues.
+3. Select **New Work**, enter a name and create it. Open the Work after readiness, then describe your task in Chat.
+4. Use Files for workspace content and Service entries for running applications. Default model changes affect future Works; an existing Work requires its owner's explicit configuration save and Apply.
 
-For an application task, Work-scoped tools can create a [Service](/concepts/service). See the [Kanban Work](/demo/kanban) example.
+## Share and continue
 
-## Build and improve a Web application
-
-The current default Brain uses FastAPI + React + TypeScript + Vite and a fixed reusable base image for new Web applications. Ask this Work to build an application, deploy it as a Service and verify the result. Later changes include checks/build and deployment; standard templates update the open page automatically and retain supported drafts/path. See [Web Development](/guide/web-development.html) for a task example, sqlite3, persistence and upgrades.
-
-## Add optional file exchange storage
-
-Only add exchange storage for import, export or local-file operations. Exit the current CLI, enter a container with an exchange volume. It reuses the existing login state:
-
-```sh
-docker run --rm --init --interactive --tty \
-    --name piwork-cli-files \
-    --add-host host.docker.internal:host-gateway \
-    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
-    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    --mount type=volume,src=piwork-quickstart-client-exchange,dst=/exchange \
-    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
-```
-
-Keep this shell running so another host terminal can use docker cp. The exchange volume transports archives; it is not a backup of Work data. Remote clients use the reachable Core URL. Windows clients enter Linux containers as described in Installation and omit the Linux same-host host-gateway option.
-
-## Stop, export and inspect
-
-Inside the CLI container, stop the original Work before exporting. The destination file must not already exist:
-
-```sh
-piwork-cli work stop WORK_ID --wait
-piwork-cli work export WORK_ID --output /exchange/first-work.work
-piwork-cli work package inspect /exchange/first-work.work
-```
-
-In another host terminal, save the archive locally:
-
-```sh
-docker cp piwork-cli-files:/exchange/first-work.work ./first-work.work
-```
-
-The archive retains durable files, history, configuration, Services, Skills, Pi Packages and fixed images. It does not freeze a live process. The target supplies its own platform-managed model key; secrets saved in files or history can remain in the package.
-
-## Import and continue
-
-Use the same kind of CLI container logged in to the target Core; its name here is piwork-cli-files. First copy the archive on the target host:
-
-```sh
-docker cp ./first-work.work piwork-cli-files:/exchange/incoming.work
-```
-
-Back inside the target CLI container, import, then use the returned new Work ID for an explicit start:
-
-```sh
-piwork-cli work import /exchange/incoming.work --name 'Continued Work' --wait
-piwork-cli work start IMPORTED_WORK_ID --wait
-```
-
-Import creates an independent stopped Work and does not start it automatically. Replace `IMPORTED_WORK_ID` with its actual ID and continue inspecting the retained file and history:
-
-```sh
-piwork-cli chat IMPORTED_WORK_ID \
-    --message 'Read welcome.md from the workspace and summarize the retained files.'
-```
-
-## Recover after interruption
-
-Use the original Operation, Run or Snapshot ID instead of submitting another mutation to query its result. Resume a disconnected chat stream with its Run ID and last sequence; choose a new nonexistent output path for a download retry:
-
-```sh
-piwork-cli operation show OPERATION_ID
-piwork-cli run watch WORK_ID RUN_ID --after SEQUENCE
-piwork-cli work snapshot download SNAPSHOT_ID --output /exchange/retried.work
-```
-
-See the [Work Spec](/spec/work) for portability and format boundaries.
+Stop the Work before exporting its `.work` package from the Work actions. Import on another installation creates a stopped Work; check the destination model and environment, then explicitly **Start** it. Import does not replay history. Closing the browser does not stop a running Work.

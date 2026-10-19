@@ -40,7 +40,7 @@ Piwork 将可运行的 AI 工作空间封装成一个可携带的单元，称为
 
 Harness 可以帮助构建和修改它所在的工作空间。它的指令、Skills、扩展包和经过验证的经验，可以随着 Work 一起演进。
 
-默认 Web 开发使用可复用的 FastAPI + React + TypeScript + Vite 环境。标准模板自动采用已部署的更新；使用与维护入口见 [Web 开发](/zh/guide/web-development.html)。
+默认 Web 开发使用可复用的 Python + NiceGUI + SQLite 环境。标准模板自动采用已部署的更新；使用与维护入口见 [Web 开发](/zh/guide/web-development.html)。
 
 ## 如何使用
 
@@ -54,6 +54,4 @@ Harness 可以帮助构建和修改它所在的工作空间。它的指令、Ski
 
 ## 开始使用
 
-[在终端试用 Core 和 CLI](/zh/guide/quick-start.html)：使用已有初始化环境，Core 和 CLI 各一条 Docker 命令，Core 也可单独下载 [docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml)。登录、创建 Work 后即可收到首条回复。Piwork 0.0.2 Preview 镜像已发布并完成匿名核验。
-
-原生 CLI 保留为 Quick Start 的折叠替代入口。高级 Core-only Demo 见 [安装说明](/zh/guide/installation.html#core-compose-demo)。
+[一键启动 Piwork](/zh/guide/quick-start.html)：一个 Docker 容器，打开服务器 IP 的网页完成管理员、模型与 CoreRuntime 配置，直接使用完整工作台。无需 CLI、域名或初始化环境。可选 [docker-compose.yml](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/docker-compose.yml)。当前状态 published；镜像已发布并完成匿名核验。

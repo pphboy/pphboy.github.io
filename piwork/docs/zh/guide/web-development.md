@@ -1,82 +1,106 @@
 # Web 开发
 
-使用可复用的 `pphboy/piwork-web-base` 环境，在 Work 内开发 Web 应用。采用当前默认 Brain 的新应用使用 **FastAPI + React + TypeScript + Vite**；你也可以指定其他技术栈或派生自己的镜像。
+默认新应用使用 **Python 3.13 + NiceGUI + SQLite**，标准包和浏览器资源已随固定基础镜像交付，无需为每个应用安装 Node、运行 npm 或独立构建前端。Agent 编辑 Work 共享工作区，Core 在单独的 Service 中运行应用。
 
-Harness 在 Agent 容器中编辑 Work 共享工作空间，Core 以独立 Service 运行应用。基础镜像提供工具链、锁定的离线依赖和通用命令；应用源码与数据属于 Work。
+完成 [Quick Start](/zh/guide/quick-start.html) 后，在工作台新建 Work，并在 Chat 描述目标，例如“创建一个任务看板，持久化数据，部署为 Service，并验证实际运行结果”。从 Service 入口预览或独立打开应用。已有应用按实际文件局部维护，不重新初始化。
 
-## 开发第一个应用
+旧 FastAPI/React 镜像保留为历史制品，现有应用不会自动转换框架。
 
-完成[快速开始](/zh/guide/quick-start.html)后，在 CLI 容器中向已有 Work 发送任务：
+## 可用状态与身份
 
-```sh
-piwork-cli chat WORK_ID \
-    --message '使用默认 Web base 开发任务看板，持久保存数据，部署为 Service，并验证实际运行的应用。'
-```
+当前源码使用环境契约 **2**、**0.2.0** 版本系列，Python **3.13.16**、NiceGUI **3.18.0**、pip **26.2.1** 与 sqlite3 CLI **3.40.1-2+deb12u2**，首先验证 Linux amd64。精确标准依赖见 [requirements.lock](https://github.com/pphboy/piwork/blob/main/deploy/images/web-base/requirements.lock)，上游 Python 固定镜像见 [environment.json](https://github.com/pphboy/piwork/blob/main/deploy/images/web-base/environment.json)；镜像只读环境清单还记录实际安装包和构建输入 hash。
 
-将 `WORK_ID` 替换为实际 ID。默认部署 Skill 初始化可写应用、维护其 Spec，并通过已有 Service 工具部署和验证。已有应用目标会在任何覆盖写入前被拒绝；维护应用时读取并修改实际文件。
+<!-- web-base-reference:start -->
+**已发布并通过匿名验证。** `docker.io/pphboy/piwork-web-base:0.2.0-5818e1de7bb5-6b6f6f8bbf62-dirty@sha256:c85c9928549f5b6a58dd519bbf1840fe83e52b9da22eaae556f7aca64b448098` 是固定的 Linux amd64、contract-2 base。[release.json](https://github.com/pphboy/piwork/blob/main/deploy/images/web-base/release.json) 保留真实构建 commit/dirty、输入 hash、image ID 和 registry digest；脑包使用该已验证引用。`dist/web-base/candidate.json` 保留本地构建身份。旧 FastAPI/React 制品继续保存在[历史发布记录](https://github.com/pphboy/piwork/blob/main/deploy/images/web-base/releases/fastapi-react-0.1.0.json)。
+<!-- web-base-reference:end -->
 
-在 Desktop 的 Service 条目打开已声明的 Web 端口。自然语言任务启动开发，完成与否仍以实际 Service、Operation 和业务结果为准。
+## 在 Work 中使用
 
-## 修改后无需手动刷新
+新 Pi-managed 应用在授权的 **Agent bash** 中调用 `node <loaded-skill-directory>/initialize.mjs --template web-app --name <service-name>`；`workstation` 选择反馈/异步导出例子。初始化入口在任何写入前拒绝所有已有目标，先创建 SPEC.md，再复制可编辑应用到 `apps/<service-name>`。既有应用读取实际内容并局部修改，不重复初始化。
 
-继续让同一 Work 修改应用。交付包括必要的测试、检查、构建、Service 更新或重启，以及实际运行版本和受影响业务结果的验证。
+Service 使用实际已验证镜像引用、显式 workspace 读写 grant、命令 `/usr/local/bin/piwork-web`、参数 `["run", "--app", "/var/data/workspace/apps/<service-name>"]`、名为 web 的 TCP 8080 端口与 HTTP `/health` 就绪检查。源码、检查和临时文件在应用目录，业务数据在 `data/<service-name>`。Core 注入 `/etc/piwork/interaction` 的身份/CA，不能把它们写进浏览器 JavaScript 或源码。
 
-标准模板在页面可见时每五秒检查就绪版本，并在恢复可见或连接时立即检查。页面自动采用新前端，恢复支持保存的非秘密草稿与当前路径；仅后端修改和普通 Agent Action 通过重读业务查询更新界面。显式开发模式支持 React Fast Refresh 与后端重载。
+同一 base 也支持普通 NiceGUI 脚本用自己的 `python app.py` 命令启动，或通过 `FROM` 派生；镜像不包含 Todo/复盘业务，普通脚本不需要 Pi 身份。Pi-managed 模板接入既有 Service 协议。
 
-版本绑定对应源码、锁文件和实际镜像环境，因此仅升级基础环境也会让已打开页面采用新产物。失败构建、相同版本和断线不会造成循环刷新。该能力由模板提供；既有应用或第三方页面需要自己的更新支持。
+## 命令与自动采用
 
-应用版本读取不启动额外 Agent Run，也不 Apply 脑包。
-
-## 环境与运行方式
-
-已发布基础镜像支持 `linux/amd64`，固定 Python 3.13.16、Node 24.21.0、FastAPI 0.143.0、React 19.3.0、TypeScript 7.0.2、Vite 8.3.4 和 sqlite3 CLI 3.40.1。完整依赖与校验以[上游环境和锁文件](https://github.com/pphboy/piwork/tree/main/deploy/images/web-base)为准。
-
-```text
-docker.io/pphboy/piwork-web-base:0.1.0-03395d0810f7-bbb24bdd0167-dirty@sha256:e83902fb568e97b2d01d488ce7c9c3d15f373ab58b46e041337baa832b8cfb81
-```
-
-默认 Service 显式运行 `/usr/local/bin/piwork-web`，参数为 `["run", "--app", "/var/data/workspace/apps/<service-name>"]`。FastAPI 通过单个声明的 HTTP **8080** 端口提供构建后的前端、API、应用交互接口和健康检查。Core 授予 workspace 访问并注入受管交互身份，单独启动容器不会取得该身份。
-
-| 命令 | 用途 |
-| --- | --- |
-| `piwork-web prepare` | 从锁定离线缓存准备应用目录内的依赖。 |
-| `piwork-web check` | 执行隔离的前后端测试和类型检查。 |
-| `piwork-web build` | 发布匹配已检查源码与环境的前端产物。 |
-| `piwork-web serve` | 提供已检查的应用。 |
-| `piwork-web run` | 准备、检查、构建并运行。 |
-| `piwork-web dev` | 显式运行前后端开发模式。 |
-
-这些命令在应用容器中执行，默认 Skill 选择相应 Service 命令并检查结果。标准依赖集合支持离线；新增依赖需要匹配的锁定制品或派生镜像。
-
-## 持久文件与 sqlite3
-
-源码、锁文件、可写依赖和构建结果位于 `apps/<service-name>`，业务数据位于 `data/<service-name>`。Agent 和 Service 沿用共享文件身份，Service 根文件系统保持只读。重启或替换 Service 不重新初始化模板，也不清空业务数据。
-
-已发布的 Agent 和 Web base 都提供真正的 sqlite3 命令。AI 的 bash 在 **Agent** 中运行，并遵守 Work 工具策略。工作站模板的授权只读检查可使用：
+以下命令在 **Service base 内**的应用目录运行：
 
 ```sh
-sqlite3 -readonly -json /var/data/workspace/data/workstation/workstation.sqlite 'SELECT name FROM sqlite_master WHERE type="table";'
+piwork-web prepare
+piwork-web check
+piwork-web serve
+piwork-web run
+piwork-web dev
 ```
 
-其他应用自行选择数据库名。普通业务修改仍遵守 Action/Query 契约，Core/history/Memory 等平台受管数据库不属于此应用操作路径。Core 和 CLI 宿主无需安装 Python、Node 或 sqlite3。
+prepare 选择标准或已准备的扩展环境；check 运行 Python 源码/应用检查；run 准备环境、补做缺失或输入变化的检查后启动，相同输入重启复用有效检查；serve 拒绝失配检查；dev 显式启用 Python 重载。无需独立前端 build 命令。
 
-## 资源政策与升级
+Pi 修改后完成必要检查及原 Service 更新/重启，验证实际运行 codeVersion 与业务结果。模板自动采用就绪版本，恢复其支持的非秘密 Todo 标题草稿与路径，并重读共享业务状态；检查失败、短暂断线或相同版本不造成刷新循环。这些操作不 Apply 脑包/Work 配置。
 
-应用 Service **不设置 Piwork 内存上限，也不预留 Service 内存**。CPU、服务/卷数量及 Agent/helper 内存政策继续有效，实际可用内存由宿主与外层环境决定。旧 Service `memoryBytes` 值仅保留兼容历史，零表示无限制。
+`/api/runtime-version` 提供安全版本：codeVersion 绑定源码/配置、扩展锁与实际 base 环境；frontendVersion 绑定 Python 页面/资源、扩展锁与环境。改写可写 marker 不改变进程实际加载版本。
 
-按正常关闭、启动流程升级 Core，受管恢复会替换旧受限 Service 容器并保留 workspace。既有 Work 保持捕获的 Brain 和 Agent 镜像；采用新指导或 Agent 工具需要正常包更新、镜像选择和显式 Apply。Core 升级不覆盖管理员默认选择，也不转换已有应用。
+默认页面输入是存在的 `app.py`、`ui.py`、`page-client.js` 和 `style.css`。通过 `page-files.json` 添加应用相对路径的辅助模块和本地资源：
 
-## 维护或扩展基础镜像
+```json
+{"files": ["pages/header.py", "assets/theme.css"]}
+```
 
-长期维护源是 **Piwork 仓库的 `deploy/images/web-base/`**。DockerHub 保存发布制品；运行中的 Work 或脑包引用不是环境构建源。
+拆分页面、增加或移除资源时同步维护清单与应用 Spec。有效路径排序去重；声明文件内容或有效集合变化会改变 frontendVersion，仅独立业务修改保持页面版本稳定。无效或缺失文件、越界路径和符号链接使检查/启动明确失败。业务模块、数据、缓存和依赖环境不加入清单。没有清单的现有应用继续使用默认页面输入。
 
-| 位置 | 职责 |
-| --- | --- |
-| `deploy/images/web-base/` | Dockerfile、环境、锁文件、工具和双语手册。 |
-| `scripts/` 与 `Makefile` | 构建、验证和独立发布入口。 |
-| `internal/coreassets/piwork-brain/` | 部署指导、模板和固定镜像引用。 |
-| `dist/web-base/` | 被忽略的本地候选和验证产物。 |
+## 追加 Python 包
 
-下游可用固定 tag 和 digest 执行 `FROM`，在镜像构建时安装锁定依赖，并以 `10001:10001` 运行。Work 本身不因此取得 Docker build 或 socket 权限。
+在应用 `requirements.in` 中声明精确的**额外**版本，例如 `package-name==1.2.3`，或应用目录内的本地 wheel 路径。明确准备时可从可达注册表取得兼容包：
 
-具体命令、派生与发行维护见[基础镜像手册](https://github.com/pphboy/piwork/blob/main/deploy/images/web-base/README.zh-CN.md)，已验证范围见[验收记录](https://github.com/pphboy/piwork/blob/main/docs/web-base-acceptance.md)。
+```sh
+piwork-web prepare --install-deps
+```
+
+由 Agent 开发时，Pi 写入声明，再经现有 Service 命令/Operation 运行 `run --install-deps`；Agent bash 本身没有 Python/pip，也不使用 Docker exec/build。成功准备后，同一输入不重复下载，即使 Service 定义仍保留该参数。
+
+pip 将额外包装入可写、版本化的 `.deps/` 环境，并继承镜像标准包；保留 `requirements.lock`、校验过的 wheels 与有效环境记录。检查、应用和安装的命令使用同一解释器。安装器不升级固定 base 包；版本冲突、缺系统库、下载或完整性错误明确失败，保留原有效环境和数据。标准应用不创建完整 venv/node_modules；删除可再生环境或移动应用后，可在匹配 base 中从保留材料精确离线重建。
+
+系统库或基础包版本变化通过派生镜像处理。下游 Dockerfile 可在构建时切换 root 安装固定依赖，随后回到 `USER 10001:10001`。使用版本适配器的应用需让派生环境清单绑定其实际构建输入，不能用未更新的 base 清单宣称新环境身份。
+
+准备自己的 app.py 和完整 hash 锁文件 requirements.lock，使用 `docker build --build-arg NICEGUI_BASE=<verified-fixed-reference> -t my-nicegui-app:local .` 构建。本地开发可显式使用已验证本地候选，对外交付应使用已发布固定 digest。
+
+```dockerfile
+ARG NICEGUI_BASE
+FROM ${NICEGUI_BASE}
+USER 0:0
+COPY requirements.lock /opt/my-app/requirements.lock
+RUN python -m pip install --require-hashes -r /opt/my-app/requirements.lock
+COPY app.py /opt/my-app/app.py
+USER 10001:10001
+CMD ["python", "/opt/my-app/app.py"]
+```
+
+## 持久化、身份与 sqlite3
+
+运行身份为 **10001:10001**，根文件系统只读，HOME/TMPDIR/cache/可写依赖均使用获准 workspace。Stop/Start、Service 替换保留源码、锁和数据；完整 Work 导出导入保留额外安装材料，导入得到 stopped Work，由用户显式 Start。目标需具备原固定 base。既有 Work 包、应用和镜像不自动转换。
+
+Agent 和 base 均提供实际 sqlite3 CLI；AI bash 在 Agent 执行，Service 有命令不代表 Agent 能调用。普通业务变更仍走命名 Query/Action 契约。
+
+```sh
+sqlite3 -readonly -json /var/data/workspace/data/<service-name>/workstation.sqlite 'SELECT name FROM sqlite_master WHERE type="table";'
+```
+
+应用 Service 不设 Piwork 内存上限或预留；弃用的 memoryBytes 仅为兼容历史，不是可用预算。CPU 与数量准入保持，详见[运维说明](https://github.com/pphboy/piwork/blob/main/openspec/specs/core-service-startup/spec.md)。
+
+## 维护、验证与发布
+
+权威维护源是本仓库此目录；脑包模板/引用消费该环境，`dist/web-base/` 保存被忽略的本地产物，DockerHub 保存发布制品。开发镜像检查需要 Docker Engine/CLI 与仓库 Node 工具，用户宿主不新增 Python/Node/sqlite3 运行依赖。
+
+```sh
+node scripts/lock-web-base.mjs
+make web-base-image
+node scripts/test-web-base-tools.mjs
+node scripts/check-web-base.mjs
+node scripts/check-web-base.mjs dist/web-base/candidate.json web-app
+node scripts/check-web-base-dependencies.mjs
+node scripts/check-web-base-core.mjs
+```
+
+真实 Core/SDK/浏览器检查还使用兼容 acceptance Agent/helper 镜像与已构建 Go 程序，见[测试说明](https://github.com/pphboy/piwork/blob/main/AGENTS.md#构建与验证)。测试按唯一 installation/fixture 标签创建并仅清理自身资源。分别测量准备/启动/重启、workspace/快照体积及完整分享，超时预算不作为性能结果。
+
+本地构建/检查不推送。只有明确要求发行后才使用 `scripts/publish-web-base.mjs`，核对实际当前候选与证据、拒绝远端 tag 冲突，并在匿名 digest 拉取/运行通过后更新正式脑包引用；旧 commit/dirty/input/digest 身份保留。

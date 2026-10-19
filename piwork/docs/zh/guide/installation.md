@@ -1,36 +1,22 @@
 # 安装与部署
 
-默认试用见 [Quick Start](/zh/guide/quick-start.html)。Core、CLI 独立运行；Core 可下载 [docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml)；初始化来自已有宿主环境，不需要安装包、配置文件编辑或 Desktop。当前状态：published。
+默认试用见 [Quick Start](/zh/guide/quick-start.html)。统一应用直接提供网页、管理和首次引导；可下载 [docker-compose.yml](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/docker-compose.yml)；默认不需要业务环境变量，浏览器完成管理员与模型配置。当前状态：published。
 
 ## 平台与持久化
 
-Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix socket、host 网络及 7171/7172。CLI 可用 Linux 或 Windows Docker Desktop 的 Linux 容器连接 Linux Core。Core Compose 和单机部署示例要求 2.24+；直接 Docker run 不要求 Compose。Core 同绝对路径 bind 与 CLI 用户状态卷保持分离，模型端点须从 Work 网络可达。
+Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix socket 和 host 网络。主站 7171，Service 入口 17891–17954 须从客户端可达；7172 仅内部 Agent RPC。Linux/Windows 浏览器直接连接 Linux 服务端，CLI 是可选高级工具。Core Compose 和单机部署示例要求 2.24+；直接 Docker run 不要求 Compose。Core 同绝对路径 bind 与 CLI 用户状态卷保持分离，模型端点须从 Work 网络可达。
 
-合并运行 Core 和 CLI 见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/single-host-compose.yml)。
-
-## Service 与模型升级
-
-0.0.2 使用配套 Core、Console、Agent/helper 和 CLI；新模型流程与 Normal 依赖兼容 Agent，旧 Work 更换镜像仍需显式 Apply。升级前正常停止安装并备份 Core 数据、受管卷和私有配置，迁移后的 registry/nullable 历史不供旧二进制直接读取。见 [AI 模型](/zh/guide/ai-models.html)。应用 Service 不设置 Piwork 内存上限或内存预留，CPU/数量及 Agent/helper 内存政策仍有效；默认环境、sqlite3 与页面自动采用见 [Web 开发](/zh/guide/web-development.html)。
+可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/single-host-compose.yml)。
 
 ## Core Compose Demo
 
 <!-- core-compose-demo:start -->
 
-这是可选的高级 Core-only Demo，使用独立的 `/var/lib/piwork/core`，CLI 仍用同版 Docker 终端。与默认示例共用 7171/7172 端口，切换前先正常停止原 Core。宿主仍使用上面的初始化环境；新空目录由挂载和安全初始化创建，已有目录保留原所有者和权限。
+可选 Compose Demo 使用独立数据目录 `/var/lib/piwork/core`，正常停止占用相同端口的安装后再启动。模型和管理员仍在网页设置。
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.2-fb4f577da3b4-512ec778b267 \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.7-62f2868cb8e2-d69916b52829-dirty \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
-```
-
-在同一宿主运行下列 CLI 命令，然后在容器内按 Quick Start 登录这个 Demo 的账号、创建 Work 并聊天。就绪等待在镜像入口内完成：
-
-```sh
-docker run --rm --init --interactive --tty \
-    --add-host host.docker.internal:host-gateway \
-    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
-    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
 ```
 
 <!-- core-compose-demo:end -->
@@ -39,60 +25,68 @@ docker run --rm --init --interactive --tty \
 
 <!-- terminal-operations:start -->
 
-宿主终端中检查默认 Docker run Core。完整就绪不同于进程健康；修正环境、socket、镜像或端口问题后重试 CLI：
+进程健康与运行环境就绪分开：未创建管理员或模型时网页和 /healthz 正常，/readyz 尚未就绪。
 
 ```sh
-docker exec piwork-core-quickstart piwork-serve --json status
-docker logs --tail 100 piwork-core-quickstart
+docker exec piwork-core-quickstart piwork-serve --data-dir /var/lib/piwork/quickstart/core --json status
 ```
 
-Core 使用单独的 Compose 部署时改用：
+CoreRuntime 的 Agent 镜像由目标 Core 的发行版本固定；旧脚本移除 `config set --agent-image`，其他模型和 Key 参数不变。在线使用目标 Core 版本，离线初始化使用本地服务端内嵌值。升级后读取或启动保留原 Runtime；显式再次保存才采用当前发行引用，仅影响后续新 Work，已有 Work 保持不变。
 
 ```sh
-docker compose -f docker-compose.yml exec -T core piwork-serve --json status
-docker compose -f docker-compose.yml logs --tail 100 core
+docker exec --interactive --tty piwork-core-quickstart piwork-serve --data-dir /var/lib/piwork/quickstart/core config set --model-provider PROVIDER --model MODEL
 ```
 
-下面在 CLI 容器内使用原返回值，恢复已经接受的 Operation/Run，不重复创建或发送消息：
+服务端默认监听 `0.0.0.0:7171`；本机或远程电脑通过实际非回环 IP 打开 `http://服务器IP:7171`。局域网即可使用，无需公网地址。主站放行 TCP 7171，Service 入口另需 TCP 17891–17954（可用 `--service-ports` 修改）；7172 是内部 Agent RPC，不向浏览器开放。端口由 Piwork 代理，不是用户容器直出。只开放主站时工作台仍可使用，Service 入口会不可达。无需域名、DNS 或本机代理。HTTP 不加密；不可信网络请显式配置 HTTPS，并同时放行/代理主站与全部 Service 端口。
+
+Service 支持响应 Cookie 的服务端登录、Basic/Bearer、HTTP、SSE 和 WebSocket。响应 Cookie 按浏览器会话及 Service 保存在服务器，Secure Cookie 仅通过 HTTPS 入口发送。依赖 document.cookie/Cookie Store 读写（如脚本读取 CSRF Cookie）的应用不保证透明兼容；脚本写入浏览器 Cookie 也不保证同 IP 跨 Service 隔离，且不会转发上游。不支持硬编码 .work URL、跨站 SSO 或上游 HTTPS 的透明适配。应用 CSP/X-Frame-Options 保留；禁止嵌入时使用新标签页。
+
+端口与 Service 身份持久绑定，重启不把旧 origin 分配给另一个应用。入口池耗尽时维护者显式扩大范围并放行端口；旧授权不跨重启保留。
+
+高级部署：`--public-origin` 指定精确公开来源（忽略客户端 Forwarded 头），`--tls-cert` / `--tls-key` 为所有入口提供 TLS。Key 文件须为私有权限。受信反向代理必须完整转发主站和每个独立 Service 端口，HTTPS 各入口须证书可信；只代理主站不足以使用 Service。模型端点须从 Work 网络可达。
+
+可选测试初始化：仅 `PIWORK_ADMIN_ACCOUNT` 与 `PIWORK_ADMIN_PASSWORD` 成对有效时创建空安装的首管理员。示例合成值：`admin` / `synthetic-test-password`。已有账号不被覆盖；模型及 Agent/helper 的旧初始化环境变量已移除，持久模型继续使用。
+
+可选 CLI 连接已经就绪的 Core，保留独立凭证卷；Windows/Linux 浏览器直接使用网页，无需 CLI。
+
+```sh
+docker run --rm --init --interactive --tty \
+    --add-host host.docker.internal:host-gateway \
+    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
+    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
+    docker.io/pphboy/piwork-cli:0.0.7-62f2868cb8e2-d69916b52829-dirty
+```
+
+```sh
+piwork-cli login --account ACCOUNT
+piwork-cli work create --name 'My Work' --wait
+```
+
+```sh
+piwork-cli chat WORK_ID --message 'Hello, Piwork!'
+```
+
+未知修改先读回状态，使用原 Operation/Run ID 恢复，不重复创建或发消息：
 
 ```sh
 piwork-cli operation show OPERATION_ID
 piwork-cli run watch WORK_ID RUN_ID --after SEQUENCE
 ```
 
-`--wait` 观察预算为 120 秒。聊天的 Ctrl+C 按既有规则请求取消；继续会话使用原 `SESSION_ID`。登录凭证保存在独立卷，`exit` 和重建 CLI 不停止 Work；同样的 CLI 启动命令可以重新进入。合法初始化值变化不覆盖已保存的管理员或模型，修改使用既有 operator 命令。
-
-正常停止默认 Core，并核对退出成功。受管 Work 停止，原 ID、历史、卷和运行意图保留；失败时保留日志，不宣称已确认关闭：
+正常停止会停止本安装受管 Work，保留 ID、历史、卷和运行意图；关闭网页或 CLI 不停止 Work。
 
 ```sh
 docker stop --time 60 piwork-core-quickstart
 test "$(docker inspect --format '{{.State.ExitCode}}' piwork-core-quickstart)" = 0
-```
-
-复用数据重新启动：
-
-```sh
 docker start piwork-core-quickstart
 ```
-
-Compose 的停止/重启使用下面命令。常规操作不使用 `down -v` 或全局 prune。备份包括一致的 Core 目录和匹配的 Work 卷；只备份 SQLite 或镜像不能恢复完整 Work。升级/回退固定发行引用，保留旧 Compose 与清单，并先核对格式兼容。文件交换与自定义 CA 是可选高级步骤，首次聊天不需要交换卷。
 
 ```sh
 docker compose -f docker-compose.yml stop core
 docker compose -f docker-compose.yml up --detach --wait --wait-timeout 600 core
 ```
 
-Windows Docker Desktop 使用 Linux 容器，终端 CLI 连接可达的 Linux Core。PowerShell 中 `CORE_URL` 替换为实际地址；密码仍在容器内隐藏输入：
-
-```powershell
-docker run --rm --init --interactive --tty `
-    --env PIWORK_CORE_URL=CORE_URL `
-    --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client `
-    docker.io/pphboy/piwork-cli:0.0.2-fb4f577da3b4-512ec778b267
-if ($LASTEXITCODE -ne 0) { throw 'CLI container failed' }
-```
-
-远端 Linux 客户端同样替换 Core URL。HTTPS 保持证书验证；模型/MCP 地址须从 Core 的 Work 网络可达，CLI 的宿主别名不能替代它。
+保留原数据目录及匹配 Work 卷，不使用 down -v 或全局 prune。升级前正常停止旧 Core，复用 `--data-dir`，用户和模型不要求重新输入。备份需要一致的 Core 数据及 Work 卷。
 
 <!-- terminal-operations:end -->
 

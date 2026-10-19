@@ -37,4 +37,4 @@ V1 is Linux and protocol/layout specific. Current limits include 100 GiB package
 
 The current portable format is version 1; it is not a generic host backup or cross-platform process checkpoint. Broader portability is future direction, not part of this format's guarantees.
 
-For the complete strict manifest, tree encoding, history validation, and limits, use the authoritative [Work package format](https://github.com/pphboy/piwork/blob/main/docs/work-package-format.md), [portable-work spec](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md), and [snapshot guide](https://github.com/pphboy/piwork/blob/main/docs/work-snapshot.md).
+For the complete strict manifest, tree encoding, history validation, and limits, use the authoritative [Work package format](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md), [portable-work spec](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md), and [snapshot guide](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-snapshots/spec.md).

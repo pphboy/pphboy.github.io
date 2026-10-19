@@ -1,25 +1,21 @@
 # Getting Started
 
-**Core** manages Works, Agents, Services and data on a Linux Docker host. **CLI** provides terminal user commands. The first trial uses one Linux computer and needs a supported model provider and API key.
+One Linux application provides **Core**, the web workbench, **Admin** and first-time setup. Open the server IP from a Linux or Windows browser; the independent CLI is optional.
 
-1. [Quick Start](/guide/quick-start): Docker run by default, terminal login, Work creation and the first reply; native CLI is a folded alternative.
-2. [Installation and Deployment](/guide/installation): prerequisites, optional Core Compose Demo, troubleshooting and recovery.
-3. [Your First Work](/guide/first-work): a terminal file task, followed by stop, export, import and continuation.
+1. [Start with one command](/guide/quick-start.html): run one Docker container, create an administrator with password confirmation through the private setup link, then sign in and configure a model in **Admin → Quick setup**.
+2. [Installation and Deployment](/guide/installation.html): platforms, ports, persistence, optional Compose, troubleshooting and recovery.
+3. [Your First Work](/guide/first-work.html): wait for preparation, select **Open workbench**, then create a Work and use Chat, Files and Services.
 
-Already have a configured Core? Use the CLI entry in Quick Start directly.
+For an existing installation, open the workbench directly. Administrators return through **Overview → Quick setup**. **Save and continue** saves the model and binds CoreRuntime in sequence. Test is explicit and optional; the server release fixes the Agent image without an image field.
 
-Building an application? [Web Development](/guide/web-development.html) covers the default base, automatic adoption, sqlite3, persistence and upgrades.
-
-For model setup, see [AI Models](/guide/ai-models.html): one-form connections, message Test, Runtime defaults and Work/Thinking upgrade boundaries.
+Building an application? [Web Development](/guide/web-development.html) covers the default environment, persistence and upgrades. See [AI Models](/guide/ai-models.html) for protocols, Keys, Test and Thinking.
 
 ## Current scope
 
-Published 0.0.2 Preview images target linux/amd64. Core uses Linux rootful Docker Engine 28+ and its local Unix socket. CLI runs on Linux or Windows Docker Desktop in Linux-container mode; Windows clients connect to Linux Core. Compose 2.24+ is only needed for the optional Core Demo or advanced setups.
-
-WSL2 users need an available Linux Engine Unix socket; tested environments and boundaries are recorded in the [upstream terminal acceptance](https://github.com/pphboy/piwork/blob/main/docs/docker-quickstart-acceptance.md). Desktop remains an independent entry; the terminal trial does not depend on it.
+Images target Linux amd64. Core uses rootful Docker Engine 28+ and its local Unix socket. Remote browsers need no domain, DNS, WSL or client CLI. The main port is 7171, Service entries use 17891–17954, and 7172 is internal Agent RPC. Compose 2.24+ is needed only for optional Compose deployment.
 
 The [Spec overview](/spec/) records source and image provenance. For an application example, see [Kanban Work](/demo/kanban).
 
 <!-- docker-trial-route -->
-[Terminal Quick Start](/guide/quick-start.html) uses independent Core/CLI images; Core also supports Core-only Compose, with combined usage in the single-host example; native builds and administrator operations have separate navigation.
+[Quick Start](/guide/quick-start.html) uses the unified application and browser onboarding. CLI is optional; native builds and administrator operations have separate navigation.
 <!-- docker-trial-route -->

@@ -40,7 +40,7 @@ Piwork packages a runnable AI workspace into a portable unit called a **Work**. 
 
 The Harness can help build and change the workspace it runs in. Its instructions, Skills, packages, and verified experience can evolve with that Work.
 
-Default Web development uses a reusable FastAPI + React + TypeScript + Vite environment. Standard templates adopt deployed updates automatically; see [Web Development](/guide/web-development.html) for usage and maintenance.
+Default Web development uses a reusable Python + NiceGUI + SQLite environment. Standard templates adopt deployed updates automatically; see [Web Development](/guide/web-development.html) for usage and maintenance.
 
 ## How it works
 
@@ -54,6 +54,4 @@ A board, its data, an application Service, and a Harness that helps build and op
 
 ## Get started
 
-[Try Core and CLI in the terminal](/guide/quick-start.html): use the existing initialization environment, one Docker command per entry, or deploy Core alone using [docker-compose.yml](/piwork/install/0.0.2-fb4f577da3b4-512ec778b267/docker-compose.yml). Log in, create a Work and receive the first reply. Piwork 0.0.2 Preview images are published and anonymously verified.
-
-Native CLI remains a folded Quick Start alternative. See [Installation](/guide/installation.html#core-compose-demo) for the advanced Core-only Demo.
+[Start Piwork with one command](/guide/quick-start.html): one Docker container, then open the server IP to configure the administrator, model and CoreRuntime and use the full workbench. No CLI, domain or initialization environment is required. Optional [docker-compose.yml](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/docker-compose.yml). State: published. Images are published and anonymously verified.

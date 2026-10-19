@@ -51,4 +51,4 @@ Agent 生产与验收镜像均预装 sqlite3 CLI，供策略允许的 bash 使�
 
 Harness 越来越适合特定 Work 和用户，是产品方向。当前系统不保证无限制自主学习、不可见的自动升级，也不保证所有应用都有结构化能力接口。
 
-权威来源：[brain 工作流程](https://github.com/pphboy/piwork/blob/main/docs/piwork-brain.md)、[brain 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/piwork-brain/spec.md)、[agent-conversation 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/agent-conversation/spec.md)和[包激活规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/pi-package-activation/spec.md)。
+权威来源：[brain 工作流程](https://github.com/pphboy/piwork/blob/main/openspec/specs/piwork-brain/spec.md)、[brain 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/piwork-brain/spec.md)、[agent-conversation 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/agent-conversation/spec.md)和[包激活规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/pi-package-activation/spec.md)。

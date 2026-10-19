@@ -37,4 +37,4 @@ V1 依赖 Linux 和具体协议 / 布局。当前限制为 100 GiB 包字节、1
 
 当前可携带格式为版本 1，不是通用主机备份或跨平台进程检查点。更广泛的可携带性是未来方向，不属于当前格式保证。
 
-完整 manifest、目录树编码、历史验证和限制，见权威来源：[Work 包格式](https://github.com/pphboy/piwork/blob/main/docs/work-package-format.md)、[portable-work 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md)和[快照指南](https://github.com/pphboy/piwork/blob/main/docs/work-snapshot.md)。
+完整 manifest、目录树编码、历史验证和限制，见权威来源：[Work 包格式](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md)、[portable-work 规范](https://github.com/pphboy/piwork/blob/main/openspec/specs/portable-work/spec.md)和[快照指南](https://github.com/pphboy/piwork/blob/main/openspec/specs/work-snapshots/spec.md)。
