@@ -1,0 +1,5 @@
+Piwork 0.0.7-62f2868cb8e2-d69916b52829-dirty
+State: published
+Source: 62f2868cb8e24da3d08db7a7d6c00aabd6226cd4
+Input SHA256: d69916b5282972c9a336745e4efc30b749fad531a42ed5aac3c8b4dcad4c38ff
+Registry identities and anonymous image readability verified.
