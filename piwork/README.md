@@ -33,7 +33,7 @@ the navigation, favicon, touch icon, and Open Graph metadata.
 
 Docker Quick Start starts one unified Linux application with browser onboarding and the full workbench. Default startup requires no business environment variables; only an optional paired ADMIN test bootstrap remains. CLI is optional. Service ports and script Cookie limitations are documented alongside the main entry. The single-host example has separate data. Published provenance is preserved.
 
-Keep both locales aligned with upstream commands and image defaults. Source: 62f2868cb8e24da3d08db7a7d6c00aabd6226cd4; input SHA256: d69916b5282972c9a336745e4efc30b749fad531a42ed5aac3c8b4dcad4c38ff; state: published. Image identities and anonymous readability have been verified; the versioned downloads match this release. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
+Keep both locales aligned with upstream commands and image defaults. Source: fbf639bcbf4381d8700c815272c019d0dd7c8363; input SHA256: c2a689377a51c43223319a2f26d3a076f042a0831a18897a8920ebdb62745e00; state: published. Image identities and anonymous readability have been verified; the versioned downloads match this release. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
 
 Run upstream check-docker-quickstart.mjs with --website-root pointing at this directory after synchronizing. No real credentials or initialization env belongs in static files. Website synchronization does not push images or publish pages.
 

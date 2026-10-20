@@ -1,12 +1,12 @@
 # Installation and Deployment
 
-Use [Quick Start](/guide/quick-start.html) for the default trial. The unified application serves the workbench, administration and setup; optionally download [docker-compose.yml](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/docker-compose.yml); initialize the administrator and model in the browser without business environment variables. Current state: published.
+Use [Quick Start](/guide/quick-start.html) for the default trial. The unified application serves the workbench, administration and setup; optionally download [docker-compose.yml](/piwork/install/0.0.8-fbf639bcbf43-c2a689377a51/docker-compose.yml); initialize the administrator and model in the browser without business environment variables. Current state: published.
 
 ## Platforms and persistence
 
 Core runs on Linux x86-64 with rootful Docker Engine 28+, its local Unix socket and host networking. Client-accessible ports are 7171 and the Service range 17891–17954; 7172 is internal Agent RPC. Linux/Windows browsers connect directly to the Linux server; CLI is optional. Core Compose and the single-host example require Compose 2.24+; direct Docker run does not. Core same-path binds and CLI credential storage remain separate, and model endpoints must be reachable from Work networks.
 
-For an optional CLI setup, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) and its [example Compose](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/single-host-compose.yml).
+For an optional CLI setup, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) and its [example Compose](/piwork/install/0.0.8-fbf639bcbf43-c2a689377a51/single-host-compose.yml).
 
 ## Core Compose Demo
 
@@ -15,7 +15,7 @@ For an optional CLI setup, see [Single-host deployment](https://github.com/pphbo
 The optional Compose demo uses its own `/var/lib/piwork/core` directory. Stop an installation using the same ports normally before starting. Set up the administrator and model in the browser.
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.7-62f2868cb8e2-d69916b52829-dirty \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.8-fbf639bcbf43-c2a689377a51 \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
 ```
 
@@ -54,7 +54,7 @@ docker run --rm --init --interactive --tty \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.7-62f2868cb8e2-d69916b52829-dirty
+    docker.io/pphboy/piwork-cli:0.0.8-fbf639bcbf43-c2a689377a51
 ```
 
 ```sh

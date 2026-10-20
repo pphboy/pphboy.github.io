@@ -1,12 +1,12 @@
 # 安装与部署
 
-默认试用见 [Quick Start](/zh/guide/quick-start.html)。统一应用直接提供网页、管理和首次引导；可下载 [docker-compose.yml](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/docker-compose.yml)；默认不需要业务环境变量，浏览器完成管理员与模型配置。当前状态：published。
+默认试用见 [Quick Start](/zh/guide/quick-start.html)。统一应用直接提供网页、管理和首次引导；可下载 [docker-compose.yml](/piwork/install/0.0.8-fbf639bcbf43-c2a689377a51/docker-compose.yml)；默认不需要业务环境变量，浏览器完成管理员与模型配置。当前状态：published。
 
 ## 平台与持久化
 
 Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix socket 和 host 网络。主站 7171，Service 入口 17891–17954 须从客户端可达；7172 仅内部 Agent RPC。Linux/Windows 浏览器直接连接 Linux 服务端，CLI 是可选高级工具。Core Compose 和单机部署示例要求 2.24+；直接 Docker run 不要求 Compose。Core 同绝对路径 bind 与 CLI 用户状态卷保持分离，模型端点须从 Work 网络可达。
 
-可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.7-62f2868cb8e2-d69916b52829-dirty/single-host-compose.yml)。
+可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.8-fbf639bcbf43-c2a689377a51/single-host-compose.yml)。
 
 ## Core Compose Demo
 
@@ -15,7 +15,7 @@ Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix sock
 可选 Compose Demo 使用独立数据目录 `/var/lib/piwork/core`，正常停止占用相同端口的安装后再启动。模型和管理员仍在网页设置。
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.7-62f2868cb8e2-d69916b52829-dirty \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.8-fbf639bcbf43-c2a689377a51 \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
 ```
 
@@ -54,7 +54,7 @@ docker run --rm --init --interactive --tty \
     --add-host host.docker.internal:host-gateway \
     --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.7-62f2868cb8e2-d69916b52829-dirty
+    docker.io/pphboy/piwork-cli:0.0.8-fbf639bcbf43-c2a689377a51
 ```
 
 ```sh

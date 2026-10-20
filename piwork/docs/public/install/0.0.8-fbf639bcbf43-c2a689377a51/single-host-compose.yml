@@ -1,0 +1,37 @@
+name: piwork-single-host
+# Liveness keeps first-time setup accessible; /readyz tracks runtime preparation.
+services:
+  core:
+    image: docker.io/pphboy/piwork-core:0.0.8-fbf639bcbf43-c2a689377a51
+    init: true
+    user: "0:0"
+    network_mode: host
+    command: ["serve", "--data-dir", "/var/lib/piwork/examples/single-host/core", "--no-open"]
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: false
+      - type: bind
+        source: /var/lib/piwork/examples/single-host/core
+        target: /var/lib/piwork/examples/single-host/core
+        bind:
+          create_host_path: true
+    stop_grace_period: 60s
+    restart: unless-stopped
+  cli:
+    image: docker.io/pphboy/piwork-cli:0.0.8-fbf639bcbf43-c2a689377a51
+    profiles: [cli]
+    init: true
+    user: "0:0"
+    stdin_open: true
+    tty: true
+    environment:
+      PIWORK_CORE_URL: http://host.docker.internal:7171
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    volumes:
+      - client-state:/var/lib/piwork/client
+volumes:
+  client-state:
+    name: piwork-single-host-client-state
