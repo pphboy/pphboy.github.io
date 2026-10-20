@@ -8,6 +8,6 @@ make build
 ./dist/go/piwork --no-open
 ```
 
-直接打开打印的实际 IP 地址，创建管理员并正常登录后配置模型和 CoreRuntime。Agent 镜像随服务端版本内置并自动使用，不提供手填或高级覆盖。`--data-dir` 指定持久目录，`--public-origin` 指定远程公开来源；主站和 Service 端口须同时可达。参数见 `./dist/go/piwork --help`。宿主运行不依赖 Node、Go 或 Docker CLI。
+直接打开打印的实际 IP 地址，创建管理员并正常登录后配置模型和 CoreRuntime。Agent 镜像随服务端版本内置并自动使用，不提供手填或高级覆盖。`--data-dir` 指定持久目录，`--public-origin` 指定远程公开来源；浏览器只需 ControlPlane 17891，Service 须支持路径前缀；Core 17871 由后端和 CLI 使用。参数见 `./dist/go/piwork --help`。宿主运行不依赖 Node、Go 或 Docker CLI。
 
 [Docker release builds](https://github.com/pphboy/piwork/blob/main/openspec/specs/docker-delivery/spec.md)

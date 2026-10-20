@@ -1,12 +1,12 @@
 # 安装与部署
 
-默认试用见 [Quick Start](/zh/guide/quick-start.html)。统一应用直接提供网页、管理和首次引导；可下载 [docker-compose.yml](/piwork/install/0.0.8-fbf639bcbf43-c2a689377a51/docker-compose.yml)；默认不需要业务环境变量，浏览器完成管理员与模型配置。当前状态：published。
+默认试用见 [Quick Start](/zh/guide/quick-start.html)。统一应用直接提供网页、管理和首次引导；可下载 [docker-compose.yml](/piwork/install/0.0.9-0901cf119dc1-0e1261f05b9d/docker-compose.yml)；默认不需要业务环境变量，浏览器完成管理员与模型配置。当前状态：published。
 
 ## 平台与持久化
 
-Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix socket 和 host 网络。主站 7171，Service 入口 17891–17954 须从客户端可达；7172 仅内部 Agent RPC。Linux/Windows 浏览器直接连接 Linux 服务端，CLI 是可选高级工具。Core Compose 和单机部署示例要求 2.24+；直接 Docker run 不要求 Compose。Core 同绝对路径 bind 与 CLI 用户状态卷保持分离，模型端点须从 Work 网络可达。
+Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix socket 和 host 网络。浏览器只使用 ControlPlane 17891，Service 共用 /services/ 路径；Core 默认 loopback 17871 供后端/CLI，远程 CLI 须显式 --core-listen；7172 保留为容器可达的内部 Agent mTLS RPC。Linux/Windows 浏览器直接连接 Linux 服务端，CLI 是可选高级工具。Core Compose 和单机部署示例要求 2.24+；直接 Docker run 不要求 Compose。Core 同绝对路径 bind 与 CLI 用户状态卷保持分离，模型端点须从 Work 网络可达。
 
-可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.8-fbf639bcbf43-c2a689377a51/single-host-compose.yml)。
+可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.9-0901cf119dc1-0e1261f05b9d/single-host-compose.yml)。
 
 ## Core Compose Demo
 
@@ -15,7 +15,7 @@ Core 部署在 Linux x86-64、rootful Docker Engine 28+，使用同机 Unix sock
 可选 Compose Demo 使用独立数据目录 `/var/lib/piwork/core`，正常停止占用相同端口的安装后再启动。模型和管理员仍在网页设置。
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.8-fbf639bcbf43-c2a689377a51 \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.9-0901cf119dc1-0e1261f05b9d \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
 ```
 
@@ -37,24 +37,24 @@ CoreRuntime 的 Agent 镜像由目标 Core 的发行版本固定；旧脚本移�
 docker exec --interactive --tty piwork-core-quickstart piwork-serve --data-dir /var/lib/piwork/quickstart/core config set --model-provider PROVIDER --model MODEL
 ```
 
-服务端默认监听 `0.0.0.0:7171`；本机或远程电脑通过实际非回环 IP 打开 `http://服务器IP:7171`。局域网即可使用，无需公网地址。主站放行 TCP 7171，Service 入口另需 TCP 17891–17954（可用 `--service-ports` 修改）；7172 是内部 Agent RPC，不向浏览器开放。端口由 Piwork 代理，不是用户容器直出。只开放主站时工作台仍可使用，Service 入口会不可达。无需域名、DNS 或本机代理。HTTP 不加密；不可信网络请显式配置 HTTPS，并同时放行/代理主站与全部 Service 端口。
+一键启动在同一进程运行两个独立 HTTP 服务：ControlPlane 默认 `0.0.0.0:17891`，Core 默认 `127.0.0.1:17871`。浏览器通过实际局域网 IP 的 17891 使用全部 UI、文件、事件及 `/services/<workId>/<serviceId>/<port>/`，无需域名或额外 Service 端口。后端与 CLI/operator 直连 Core；远程或 bridge CLI 需显式配置 `--core-listen 0.0.0.0:17871`（或可达网卡）并放行相应网络，不能把 loopback 当成容器可达。7172 保留为容器可达的内部 Agent mTLS RPC，不是浏览器入口。用户 Service 不发布宿主端口。HTTPS 反向代理须转发同一 origin 的全部路径、SSE 与 WebSocket；Core TLS 如有需要由受信终止入口提供。
 
-Service 支持响应 Cookie 的服务端登录、Basic/Bearer、HTTP、SSE 和 WebSocket。响应 Cookie 按浏览器会话及 Service 保存在服务器，Secure Cookie 仅通过 HTTPS 入口发送。依赖 document.cookie/Cookie Store 读写（如脚本读取 CSRF Cookie）的应用不保证透明兼容；脚本写入浏览器 Cookie 也不保证同 IP 跨 Service 隔离，且不会转发上游。不支持硬编码 .work URL、跨站 SSO 或上游 HTTPS 的透明适配。应用 CSP/X-Frame-Options 保留；禁止嵌入时使用新标签页。
+托管 Service 与工作台同源，须视为可信应用；其脚本可使用当前用户的 UI 权限。应用须支持动态 Service URL 前缀；旧根路径应用不会自动改写源码、镜像或包。Service 支持响应 Cookie 的服务端登录、Basic/Bearer、HTTP、SSE 和 WebSocket。响应 Cookie 按浏览器会话及 Service 保存在服务器，Secure Cookie 仅通过 HTTPS 入口发送。依赖 document.cookie/Cookie Store 读写（如脚本读取 CSRF Cookie）的应用不保证透明兼容；脚本写入浏览器 Cookie 也不保证同 IP 跨 Service 隔离，且不会转发上游。不支持硬编码 .work URL、跨站 SSO 或上游 HTTPS 的透明适配。应用 CSP/X-Frame-Options 保留；禁止嵌入时使用新标签页。
 
-端口与 Service 身份持久绑定，重启不把旧 origin 分配给另一个应用。入口池耗尽时维护者显式扩大范围并放行端口；旧授权不跨重启保留。
+路径按当前 Work/Service/声明端口寻址，重启后普通登录并重新核验；不保留旧端口池或跨端口授权。
 
-高级部署：`--public-origin` 指定精确公开来源（忽略客户端 Forwarded 头），`--tls-cert` / `--tls-key` 为所有入口提供 TLS。Key 文件须为私有权限。受信反向代理必须完整转发主站和每个独立 Service 端口，HTTPS 各入口须证书可信；只代理主站不足以使用 Service。模型端点须从 Work 网络可达。
+高级部署：`--public-origin` 指定精确公开来源（忽略客户端 Forwarded 头），`--tls-cert` / `--tls-key` 为浏览器入口提供 TLS。Key 文件须为私有权限。受信反向代理必须在同一 origin 完整转发工作台和 /services/ 路径及升级连接，证书须可信。模型端点须从 Work 网络可达。
 
 可选测试初始化：仅 `PIWORK_ADMIN_ACCOUNT` 与 `PIWORK_ADMIN_PASSWORD` 成对有效时创建空安装的首管理员。示例合成值：`admin` / `synthetic-test-password`。已有账号不被覆盖；模型及 Agent/helper 的旧初始化环境变量已移除，持久模型继续使用。
 
-可选 CLI 连接已经就绪的 Core，保留独立凭证卷；Windows/Linux 浏览器直接使用网页，无需 CLI。
+可选 bridge CLI 连接已经就绪的 Core；先以 `--core-listen 0.0.0.0:17871` 显式启动服务端并允许该网络，保留独立凭证卷；Windows/Linux 浏览器直接使用网页，无需 CLI。
 
 ```sh
 docker run --rm --init --interactive --tty \
     --add-host host.docker.internal:host-gateway \
-    --env PIWORK_CORE_URL=http://host.docker.internal:7171 \
+    --env PIWORK_CORE_URL=http://host.docker.internal:17871 \
     --mount type=volume,src=piwork-quickstart-client-state,dst=/var/lib/piwork/client \
-    docker.io/pphboy/piwork-cli:0.0.8-fbf639bcbf43-c2a689377a51
+    docker.io/pphboy/piwork-cli:0.0.9-0901cf119dc1-0e1261f05b9d
 ```
 
 ```sh

@@ -8,6 +8,6 @@ make build
 ./dist/go/piwork --no-open
 ```
 
-Open the printed IP address directly, create the administrator and sign in, then configure the model and CoreRuntime in the browser. The release Agent image is embedded and supplied automatically, without an image input or advanced override. Use `--data-dir` for persistence and `--public-origin` for an explicit public origin; expose both the main site and Service port range. See `./dist/go/piwork --help`. Running the built server needs no Node, Go or Docker CLI.
+Open the printed IP address directly, create the administrator and sign in, then configure the model and CoreRuntime in the browser. The release Agent image is embedded and supplied automatically, without an image input or advanced override. Use `--data-dir` for persistence and `--public-origin` for an explicit public origin; expose ControlPlane 17891 for browsers, including prefix-aware Services; Core 17871 is for the backend and CLI. See `./dist/go/piwork --help`. Running the built server needs no Node, Go or Docker CLI.
 
 [Docker release builds](https://github.com/pphboy/piwork/blob/main/openspec/specs/docker-delivery/spec.md)
