@@ -1,6 +1,6 @@
 # 第一个 Work
 
-先按 [Quick Start](/zh/guide/quick-start.html) 启动并完成网页引导。点击 **Open workbench**，选择 **New Work**，创建后在 Chat 发送消息。Files 管理工作区，Settings 保存并显式 Apply 配置，Service 可预览或独立打开。关闭网页不停止 Work。
+先按 [Quick Start](/zh/guide/quick-start.html) 启动并完成网页引导。依赖准备完成后会自动进入工作台，也可使用 **Open workbench**；再选择 **New Work**，创建后在 Chat 发送消息。Files 管理工作区，Settings 保存并显式 Apply 配置，Service 可预览或独立打开。关闭网页不停止 Work。
 
 Service 响应 Cookie 保存在服务端分区；依赖脚本读取/写入 Cookie 的应用不保证透明兼容。脚本写入的浏览器 Cookie 可能在同 IP 的 Service 间串用，不会被代理采用。详情见安装说明。
 

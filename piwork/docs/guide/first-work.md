@@ -1,6 +1,6 @@
 # Your first Work
 
-Follow [Quick Start](/guide/quick-start.html) and complete browser setup. Click **Open workbench**, choose **New Work**, then send a message in Chat. Use Files for the workspace, Settings to save and explicitly Apply configuration, and Service to preview or open an application tab. Closing the browser does not stop a Work.
+Follow [Quick Start](/guide/quick-start.html) and complete browser setup. After preparation completes, the workbench opens automatically; **Open workbench** is also available. Choose **New Work**, then send a message in Chat. Use Files for the workspace, Settings to save and explicitly Apply configuration, and Service to preview or open an application tab. Closing the browser does not stop a Work.
 
 Service response Cookies stay in server-side partitions. Apps relying on script-read/written Cookies are outside transparent support. Script-written browser Cookies may be shared across Services on the same IP and are never adopted by the proxy. See Installation for details.
 

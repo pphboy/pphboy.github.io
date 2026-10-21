@@ -54,4 +54,4 @@ Harness 可以帮助构建和修改它所在的工作空间。它的指令、Ski
 
 ## 开始使用
 
-[一键启动 Piwork](/zh/guide/quick-start.html)：一个 Docker 容器，打开服务器 IP 的网页完成管理员、模型与 CoreRuntime 配置，直接使用完整工作台。无需 CLI、域名或初始化环境。可选 [docker-compose.yml](/piwork/install/0.0.9-0901cf119dc1-0e1261f05b9d/docker-compose.yml)。当前状态 published；镜像已发布并完成匿名核验。
+[一键启动 Piwork](/zh/guide/quick-start.html)：一个 Docker 容器，打开服务器 IP 的网页完成管理员、模型与 CoreRuntime 配置，直接使用完整工作台。无需 CLI、域名或初始化环境。可选 [docker-compose.yml](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml)。当前状态 published；镜像已发布并完成匿名核验。

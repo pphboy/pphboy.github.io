@@ -54,4 +54,4 @@ A board, its data, an application Service, and a Harness that helps build and op
 
 ## Get started
 
-[Start Piwork with one command](/guide/quick-start.html): one Docker container, then open the server IP to configure the administrator, model and CoreRuntime and use the full workbench. No CLI, domain or initialization environment is required. Optional [docker-compose.yml](/piwork/install/0.0.9-0901cf119dc1-0e1261f05b9d/docker-compose.yml). State: published. Images are published and anonymously verified.
+[Start Piwork with one command](/guide/quick-start.html): one Docker container, then open the server IP to configure the administrator, model and CoreRuntime and use the full workbench. No CLI, domain or initialization environment is required. Optional [docker-compose.yml](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml). State: published. Images are published and anonymously verified.
