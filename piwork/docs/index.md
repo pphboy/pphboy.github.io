@@ -9,11 +9,11 @@ hero:
     alt: Piwork
   actions:
     - theme: brand
+      text: Download
+      link: https://github.com/pphboy/piwork/releases/latest
+    - theme: alt
       text: Get Started
       link: /guide/quick-start
-    - theme: alt
-      text: Watch Demo
-      link: /demo/product-demo.html
     - theme: alt
       text: GitHub
       link: https://github.com/pphboy/piwork
