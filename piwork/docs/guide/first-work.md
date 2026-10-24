@@ -1,16 +1,222 @@
-# Your first Work
+# Your First Work
 
-Follow [Quick Start](/guide/quick-start.html) and complete browser setup. After preparation completes, the workbench opens automatically; **Open workbench** is also available. Choose **New Work**, then send a message in Chat. Use Files for the workspace, Settings to save and explicitly Apply configuration, and Service to preview or open an application tab. Closing the browser does not stop a Work.
+Learn how to create and use your first Piwork workspace.
 
-Service response Cookies stay in server-side partitions. Apps relying on script-read/written Cookies are outside transparent support. Script-written browser Cookies may be shared across Services on the same IP and are never adopted by the proxy. See Installation for details.
+## Prerequisites
 
-## Create and use a Work
+Before creating your first Work, ensure you have:
 
-1. In Quick setup, choose or add a model and select **Save and continue**. Model saving, Runtime binding and preparation have separate feedback. Test is optional; saving does not call the model.
-2. Preparation shows the actual components still being awaited. The completion **Open workbench** action requires every dependency to be Ready; the Admin topbar also lets you return while preparation continues.
-3. Select **New Work**, enter a name and create it. Open the Work after readiness, then describe your task in Chat.
-4. Use Files for workspace content and Service entries for running applications. Default model changes affect future Works; an existing Work requires its owner's explicit configuration save and Apply.
+- ✅ Piwork Core running ([Quick Start](/guide/quick-start.html))
+- ✅ Administrator account created
+- ✅ AI model configured in **Admin → Quick setup**
+- ✅ Runtime preparation completed (all components show **Ready** status)
 
-## Share and continue
+## What You'll Learn
 
-Stop the Work before exporting its `.work` package from the Work actions. Import on another installation creates a stopped Work; check the destination model and environment, then explicitly **Start** it. Import does not replay history. Closing the browser does not stop a running Work.
+- Creating a Work
+- Using Chat to interact with AI
+- Managing workspace files
+- Running Services (applications)
+- Stopping and restarting Works
+- Exporting and importing workspaces
+
+## Step 1: Open the Workbench
+
+After completing setup, the workbench opens automatically. You can also:
+
+1. Click **Open workbench** from the preparation screen
+2. Or access it directly from the Admin navigation bar
+
+## Step 2: Create a Work
+
+1. Click **New Work** in the workbench
+2. Enter a descriptive name for your workspace (e.g., "My First Project")
+3. Click **Create**
+4. Wait for the Work to reach **Ready** status
+
+### What's Happening?
+
+Piwork is:
+- Creating an isolated workspace container
+- Setting up the default environment
+- Loading Harness configuration
+- Preparing the workspace directory
+
+## Step 3: Start Chatting
+
+Once your Work is ready:
+
+1. Click to **Open** the Work
+2. Navigate to the **Chat** tab
+3. Type a message and press **Send**
+
+### Try These Examples
+
+**Simple question:**
+```
+What can you help me with in this workspace?
+```
+
+**Create a file:**
+```
+Create a hello.txt file with a welcome message
+```
+
+**Build an application:**
+```
+Create a simple todo app with NiceGUI
+```
+
+The AI can:
+- Answer questions about the workspace
+- Create and modify files
+- Write code and applications
+- Run commands
+- Use workspace-specific tools
+
+## Step 4: Explore Files
+
+The **Files** tab shows your workspace directory:
+
+- **Browse** files and folders
+- **Upload** files from your computer
+- **Download** files to your computer
+- **View** file contents
+
+All files persist in the workspace - they're not temporary.
+
+## Step 5: Use Services
+
+When the AI creates an application with a web interface:
+
+1. A new **Service** entry appears automatically
+2. Click **Preview** to see it in an embedded frame
+3. Or click **Open** to use it in a full application tab
+
+### Service Examples
+
+- Todo lists and kanban boards
+- Data dashboards
+- Content management systems
+- Internal tools
+- API backends with web UIs
+
+## Managing Your Work
+
+### Settings Tab
+
+Use **Settings** to:
+- Change the AI model
+- Adjust workspace configuration
+- View Work metadata
+
+**Important:** Click **Apply** to activate changes. Saving doesn't automatically apply them.
+
+### Stopping a Work
+
+Closing your browser **does not stop** the Work. It keeps running on the server.
+
+To stop a Work:
+1. Return to the workbench list
+2. Open the Work's menu (⋮)
+3. Select **Stop**
+
+### Restarting a Work
+
+Stopped Works appear in the workbench list:
+1. Find the stopped Work
+2. Click **Start**
+3. Wait for **Ready** status
+4. Open the Work
+
+All files, history, and Services are preserved.
+
+## Sharing Your Work
+
+### Exporting
+
+To share a Work with others or move it to another Piwork installation:
+
+1. **Stop the Work** (required before export)
+2. Open the Work's menu (⋮)
+3. Select **Export**
+4. Download the `.work` file
+
+The export includes:
+- Workspace files
+- Application code
+- Service configurations
+- Harness state
+- (Conversation history is separate)
+
+### Importing
+
+To import a Work on another Piwork installation:
+
+1. Go to the workbench
+2. Click **Import Work**
+3. Upload the `.work` file
+4. The Work is created in **Stopped** state
+5. Check model and environment compatibility
+6. Click **Start** to run it
+
+**Note:** Import does not replay conversation history. The destination installation must have:
+- Compatible runtime images
+- Model credentials configured
+- Sufficient resources
+
+## Tips and Best Practices
+
+### Naming Works
+
+Use descriptive names that identify the project:
+- ✅ "Customer Dashboard"
+- ✅ "Q4 Report Generator"
+- ❌ "Test123"
+- ❌ "My Work"
+
+### When to Create New Works
+
+Create separate Works for:
+- Different projects or clients
+- Experiments vs. production
+- Different technology stacks
+- Isolated environments
+
+### Performance
+
+- Stop Works you're not actively using
+- Export completed projects for archival
+- Monitor workspace disk usage
+
+### Troubleshooting
+
+**Work won't start:**
+- Check Core logs for errors
+- Verify model credentials are valid
+- Ensure Docker has sufficient resources
+
+**Service won't load:**
+- Check if the application started successfully
+- Review Chat history for error messages
+- Verify the service port is correct
+
+**Files are missing:**
+- Files persist only if saved to the workspace directory
+- Temporary files (`/tmp`) are not preserved
+- Check the Files tab, not system temp folders
+
+## Next Steps
+
+Now that you've created your first Work:
+
+- **Build something:** Try the [Web Development](/guide/web-development.html) guide
+- **Customize:** Learn about [AI Models](/guide/ai-models.html) configuration
+- **Explore:** See example projects in [Demos](/demo/product-demo.html)
+- **Deploy:** Read the full [Installation](/guide/installation.html) guide
+
+## Need Help?
+
+- [GitHub Discussions](https://github.com/pphboy/piwork/discussions) - Ask the community
+- [Report Issues](https://github.com/pphboy/piwork/issues) - Found a bug?
+- [Core Concepts](/concepts/) - Understand Work, Service, and Harness

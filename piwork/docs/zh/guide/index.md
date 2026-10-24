@@ -1,21 +1,34 @@
 # 开始使用
 
-一个 Linux 应用提供 **Core**、网页工作台、**Admin** 管理和首次设置。其他 Linux 或 Windows 电脑直接通过服务器 IP 打开浏览器使用，CLI 是独立可选工具。
+Piwork 是一个可分享、可运行的 AI 工作空间。按照以下步骤开始：
 
-1. [一键启动](/zh/guide/quick-start.html)：运行一个 Docker 容器，通过私有设置链接创建管理员并确认密码，正常登录后在 **Admin → Quick setup** 填写或选择模型。
-2. [安装与部署](/zh/guide/installation.html)：平台、端口、持久化、可选 Compose、故障处理及恢复。
-3. [第一个 Work](/zh/guide/first-work.html)：等待准备完成，点击 **Open workbench** 后创建 Work，使用 Chat、Files 和 Service。
+## 快速路径
 
-已有安装可直接打开工作台；管理员从 **Overview → Quick setup** 重新配置。**Save and continue** 顺序保存模型与 CoreRuntime，Test 显式可选，Agent 镜像由服务端发行版本固定，不需要填写。
+1. [快速开始](/zh/guide/quick-start.html) - 5 分钟内启动 Piwork
+2. [第一个 Work](/zh/guide/first-work.html) - 创建第一个工作空间
+3. [Web 开发](/zh/guide/web-development.html) - 构建 AI 驱动的 Web 应用
 
-需要开发应用？[Web 开发指南](/zh/guide/web-development.html)介绍默认环境、持久化和升级。模型协议、Key、Test 和 Thinking 见 [AI 模型](/zh/guide/ai-models.html)。
+## 深入了解
 
-## 当前支持范围
+- [安装](/zh/guide/installation.html) - 部署选项和配置
+- [AI 模型](/zh/guide/ai-models.html) - 配置和使用 AI 模型
+- [从源码构建](/zh/guide/source-installation.html) - 开发者构建指南
 
-镜像面向 Linux amd64；Core 使用 Linux rootful Docker Engine 28+ 和同机 Unix socket。网页工作台可从远程浏览器访问，无需域名、DNS、WSL 或客户端 CLI。主站默认 7171，Service 入口为 17891–17954，7172 仅供内部 Agent RPC。Compose 2.24+ 仅用于可选 Compose 部署。
+## 系统要求
 
-[规范概览](/zh/spec/)记录源码及镜像来源；应用示例见 [Kanban Work](/zh/demo/kanban)。
+- **操作系统：** Linux x86-64
+- **容器运行时：** Docker Engine 28+（rootful 模式）
+- **端口：** 17891（UI）、17871（Core API）
+- **资源：** 最少 2GB 内存，推荐 4GB+
 
-<!-- docker-trial-route -->
-[Quick Start](/zh/guide/quick-start.html) 使用统一应用与网页引导，CLI 可选；原生构建与管理员操作见独立导航。
-<!-- docker-trial-route -->
+## Piwork 如何工作
+
+单个 Linux 应用提供 **Core**、Web 工作台、**Admin** 和首次设置。从 Linux 或 Windows 浏览器打开服务器 IP；独立的 CLI 是可选的。
+
+[规范概览](/zh/spec/)记录了源码和镜像来源。应用示例请参考 [Kanban Work](/zh/demo/kanban)。
+
+## 需要帮助？
+
+- [产品演示](/zh/demo/product-demo.html) - 70 秒了解 Piwork
+- [核心概念](/zh/concepts/) - 理解 Work、Service 和 Harness
+- [GitHub Discussions](https://github.com/pphboy/piwork/discussions) - 社区支持
