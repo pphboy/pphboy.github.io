@@ -10,9 +10,9 @@ Piwork 是一个可分享、可运行的 AI 工作空间。按照以下步骤开
 
 ## 深入了解
 
-- [安装](/zh/guide/installation.html) - 部署选项和配置
-- [AI 模型](/zh/guide/ai-models.html) - 配置和使用 AI 模型
-- [从源码构建](/zh/guide/source-installation.html) - 开发者构建指南
+- [安装](/zh/guide/installation.html) - 完整部署指南，包括 Docker Compose、网络配置和生命周期管理
+- [AI 模型](/zh/guide/ai-models.html) - 配置模型、管理 API 密钥和优化 AI 交互
+- [从源码构建](/zh/guide/source-installation.html) - 从源代码构建 Piwork 的开发者指南
 
 ## 系统要求
 

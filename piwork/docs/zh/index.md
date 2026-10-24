@@ -54,19 +54,29 @@ Harness 可以帮助构建和修改它所在的工作空间。它的指令、Ski
 
 ## 开始使用
 
-### 下载
+### 1. 下载
 
-**最新版本：0.0.10** — [发行说明](https://github.com/pphboy/piwork/releases)
+**最新版本：0.0.10**
 
-通过 Docker 下载：
+[📦 从 GitHub Releases 下载](https://github.com/pphboy/piwork/releases/latest) — 获取 Docker 镜像、Compose 文件和发行说明
+
+通过 Docker 快速安装：
 ```sh
 docker pull docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
 ```
 
-或使用 [docker-compose.yml](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) 进行声明式设置。
+或浏览[所有下载选项](/zh/guide/downloads.html)，包括 Compose 文件和源码构建。
 
-### 快速启动
+### 2. 安装和设置
 
-[一键启动 Piwork](/zh/guide/quick-start.html)：一个 Docker 容器，打开服务器 IP 的网页完成管理员、模型与 CoreRuntime 配置。完整工作台在浏览器中运行。无需 CLI、域名或初始化环境。
+[快速开始指南](/zh/guide/quick-start.html) — 5 分钟内启动 Piwork
 
-当前状态 published；镜像已发布并完成匿名核验。
+一个 Docker 容器提供完整的工作台。打开服务器 IP，配置管理员账户和 AI 模型，然后开始构建。
+
+### 3. 创建第一个 Work
+
+[按照教程](/zh/guide/first-work.html)创建您的第一个 AI 驱动的工作空间
+
+---
+
+**已经安装？** 在浏览器中打开 `http://localhost:17891` · [文档](/zh/guide/) · [社区讨论](https://github.com/pphboy/piwork/discussions)

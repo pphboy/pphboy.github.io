@@ -10,9 +10,9 @@ Piwork is a shareable, runnable AI workspace. Follow these steps to get started:
 
 ## Learn More
 
-- [Installation](/guide/installation.html) - Deployment options and configuration
-- [AI Models](/guide/ai-models.html) - Configure and use AI models
-- [Build from Source](/guide/source-installation.html) - Developer build guide
+- [Installation](/guide/installation.html) - Complete deployment guide with Docker Compose, networking, and lifecycle management
+- [AI Models](/guide/ai-models.html) - Configure models, manage API keys, and optimize AI interactions
+- [Build from Source](/guide/source-installation.html) - Developer guide for building Piwork from source code
 
 ## System Requirements
 

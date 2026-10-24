@@ -54,19 +54,29 @@ A board, its data, an application Service, and a Harness that helps build and op
 
 ## Get started
 
-### Download
+### 1. Download
 
-**Latest Release: 0.0.10** — [Release Notes](https://github.com/pphboy/piwork/releases)
+**Latest Release: 0.0.10**
 
-Download via Docker:
+[📦 Download from GitHub Releases](https://github.com/pphboy/piwork/releases/latest) — Get Docker images, Compose files, and release notes
+
+Quick install via Docker:
 ```sh
 docker pull docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
 ```
 
-Or use [docker-compose.yml](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) for declarative setup.
+Or browse [all download options](/guide/downloads.html) including Compose files and source builds.
 
-### Quick Start
+### 2. Install and Setup
 
-[Start Piwork with one command](/guide/quick-start.html): one Docker container, then open the server IP to configure the administrator, model and CoreRuntime. The full workbench runs in your browser. No CLI, domain or initialization environment required.
+[Quick Start Guide](/guide/quick-start.html) — Get Piwork running in 5 minutes
 
-State: published. Images are published and anonymously verified.
+One Docker container provides the complete workbench. Open the server IP, configure your administrator account and AI model, then start building.
+
+### 3. Create Your First Work
+
+[Follow the tutorial](/guide/first-work.html) to create your first AI-powered workspace
+
+---
+
+**Already installed?** Open `http://localhost:17891` in your browser · [Documentation](/guide/) · [Community Discussions](https://github.com/pphboy/piwork/discussions)
