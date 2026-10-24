@@ -54,4 +54,19 @@ A board, its data, an application Service, and a Harness that helps build and op
 
 ## Get started
 
-[Start Piwork with one command](/guide/quick-start.html): one Docker container, then open the server IP to configure the administrator, model and CoreRuntime and use the full workbench. No CLI, domain or initialization environment is required. Optional [docker-compose.yml](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml). State: published. Images are published and anonymously verified.
+### Download
+
+**Latest Release: 0.0.10** — [Release Notes](https://github.com/pphboy/piwork/releases)
+
+Download via Docker:
+```sh
+docker pull docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
+```
+
+Or use [docker-compose.yml](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) for declarative setup.
+
+### Quick Start
+
+[Start Piwork with one command](/guide/quick-start.html): one Docker container, then open the server IP to configure the administrator, model and CoreRuntime. The full workbench runs in your browser. No CLI, domain or initialization environment required.
+
+State: published. Images are published and anonymously verified.
