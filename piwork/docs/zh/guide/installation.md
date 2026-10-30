@@ -1,6 +1,6 @@
 # 安装与部署
 
-本页供 Linux 服务端维护者部署统一应用。桌面一键启动见 [快速开始](/zh/guide/quick-start.html)。以下服务端命令和 [docker-compose.yml](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/docker-compose.yml) 对应当前 Core 发行；无需业务环境变量，浏览器完成首次配置。当前状态：published。
+本页供 Linux 服务端维护者部署统一应用。桌面一键启动见 [快速开始](/zh/guide/quick-start.html)。以下服务端命令和 [docker-compose.yml](/piwork/install/0.0.17-efadc31a58b3-c8d512cca1d1/docker-compose.yml) 对应当前 Core 发行；无需业务环境变量，浏览器完成首次配置。当前状态：published。
 
 ## 启动 Linux 服务端
 
@@ -18,7 +18,7 @@ docker run --detach --init \
     --stop-timeout 60 \
     --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.16-73dbea6e5c20-102f826ec67a
+    docker.io/pphboy/piwork-core:0.0.17-efadc31a58b3-c8d512cca1d1
 ```
 
 在本机或另一台电脑直接打开 `http://服务器IP:17891`，使用服务器实际 IP。空安装会显示创建管理员；已有账号时正常登录，无需终端授权链接。
@@ -29,7 +29,7 @@ docker run --detach --init \
 
 托管 Service 与工作台同源，须视为可信应用；其脚本可使用当前用户的 UI 权限。应用须支持动态 Service URL 前缀；旧根路径应用不会自动改写源码、镜像或包。Service 支持响应 Cookie 的服务端登录、Basic/Bearer、HTTP、SSE 和 WebSocket。响应 Cookie 按浏览器会话及 Service 保存在服务器，HTTP 入口不转发 Secure Cookie。依赖 document.cookie/Cookie Store 读写（如脚本读取 CSRF Cookie）的应用不保证透明兼容；脚本写入浏览器 Cookie 也不保证同 IP 跨 Service 隔离，且不会转发上游。不支持硬编码 .work URL、跨站 SSO 或上游 HTTPS 的透明适配。应用 CSP/X-Frame-Options 保留；禁止嵌入时使用新标签页。
 
-可选 [Compose](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/docker-compose.yml)（2.24+）和 [单机示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md) 同样直接进入网页；CLI 是高级可选工具。运行与恢复见 [安装手册](/zh/guide/installation.html#terminal-operations)。
+可选 [Compose](/piwork/install/0.0.17-efadc31a58b3-c8d512cca1d1/docker-compose.yml)（2.24+）和 [单机示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md) 同样直接进入网页；CLI 是高级可选工具。运行与恢复见 [安装手册](/zh/guide/installation.html#terminal-operations)。
 
 <!-- docker-quickstart:end -->
 
@@ -37,7 +37,7 @@ docker run --detach --init \
 
 同一进程提供两个 HTTP 服务：UI 默认 `0.0.0.0:17891`，Core 默认 `0.0.0.0:17871`。浏览器只连接 UI，所有文件、事件及 `/services/<workId>/<serviceId>/<port>/` 使用同一入口；后端固定通过 loopback HTTP 连接 Core。外部 Linux CLI 直接连接服务器 Core 端口。仅使用 --ui-port/--core-port 改端口。UI 接受本机实际 IPv4、localhost、回环和主机名，校验 Host、Origin 与 CSRF，不信任 Forwarded；切换地址需独立登录。只提供 HTTP，不提供 HTTPS、域名或反向代理配置。内部 Agent 保留容器可达的 7172 mTLS 回连。用户 Service 不发布宿主端口，模型端点须从 Work 网络可达。
 
-可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/single-host-compose.yml)。
+可选 CLI 单机示例见 [单机部署示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)。可单独下载 [示例 Compose](/piwork/install/0.0.17-efadc31a58b3-c8d512cca1d1/single-host-compose.yml)。
 
 ## Core Compose Demo
 
@@ -46,7 +46,7 @@ docker run --detach --init \
 可选 Compose Demo 使用独立数据目录 `/var/lib/piwork/core`，正常停止占用相同端口的安装后再启动。模型和管理员仍在网页设置。
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.16-73dbea6e5c20-102f826ec67a \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.17-efadc31a58b3-c8d512cca1d1 \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
 ```
 

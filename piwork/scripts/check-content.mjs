@@ -10,7 +10,7 @@ const repository = 'https://github.com/pphboy/piwork-microvm'
 assert.match(release.version, /^\d+\.\d+\.\d+$/)
 assert.match(release.piworkVersion, /^\d+\.\d+\.\d+$/)
 assert.equal(release.releaseUrl, `${repository}/releases/tag/v${release.version}`)
-assert.equal(release.checksumsUrl, `${repository}/releases/download/v${release.version}/SHA256SUMS`)
+assert.equal(release.manifestUrl, `${repository}/releases/download/v${release.version}/release-manifest.json`)
 assert.deepEqual(release.platforms.map(p => p.id).sort(), ['linux', 'windows'])
 for (const platform of release.platforms) {
   const extension = platform.id === 'windows' ? '.exe' : ''

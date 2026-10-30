@@ -1,6 +1,6 @@
 # Installation and Deployment
 
-This page is for Linux server maintainers. For the desktop one-click launcher, use [Quick Start](/guide/quick-start.html). The server commands and [docker-compose.yml](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/docker-compose.yml) below match the current Core release; initialize in the browser without business environment variables. Current state: published.
+This page is for Linux server maintainers. For the desktop one-click launcher, use [Quick Start](/guide/quick-start.html). The server commands and [docker-compose.yml](/piwork/install/0.0.17-efadc31a58b3-c8d512cca1d1/docker-compose.yml) below match the current Core release; initialize in the browser without business environment variables. Current state: published.
 
 ## Start the Linux server
 
@@ -18,7 +18,7 @@ docker run --detach --init \
     --stop-timeout 60 \
     --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
     --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.16-73dbea6e5c20-102f826ec67a
+    docker.io/pphboy/piwork-core:0.0.17-efadc31a58b3-c8d512cca1d1
 ```
 
 On this computer or another computer, open `http://SERVER_IP:17891` using the server’s actual IP. An empty installation shows Create administrator; an initialized installation shows normal sign-in. No terminal authorization link is required.
@@ -29,7 +29,7 @@ One process serves two HTTP listeners: UI defaults to `0.0.0.0:17891`, Core to `
 
 Hosted Services share the workbench origin and must be trusted: scripts can use the current user’s UI permissions. Apps must support a dynamic Service URL prefix; old root-path apps, images and packages are not rewritten automatically. Services support server-side login using response Cookies, Basic/Bearer, HTTP, SSE and WebSocket. Response Cookies stay on the server, partitioned by browser session and Service; Secure Cookies are not forwarded through the HTTP entry. Apps that read/write document.cookie or Cookie Store (including script-read CSRF Cookies) are not guaranteed to work transparently. Script-written browser Cookies are not isolated across Services on the same IP and are never forwarded upstream. Hard-coded .work URLs, cross-site SSO and upstream HTTPS are outside transparent support. Application CSP/X-Frame-Options remain intact; open an application tab when embedding is denied.
 
-Optional [Compose](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/docker-compose.yml) (2.24+) and the [single-host example](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) open the same web application. CLI is an optional advanced tool. See the [operations guide](/guide/installation.html#terminal-operations) for recovery.
+Optional [Compose](/piwork/install/0.0.17-efadc31a58b3-c8d512cca1d1/docker-compose.yml) (2.24+) and the [single-host example](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) open the same web application. CLI is an optional advanced tool. See the [operations guide](/guide/installation.html#terminal-operations) for recovery.
 
 <!-- docker-quickstart:end -->
 
@@ -37,7 +37,7 @@ Optional [Compose](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/docker-compo
 
 One process serves two HTTP listeners: UI defaults to `0.0.0.0:17891`, Core to `0.0.0.0:17871`. Browsers use only UI, including files, events and `/services/<workId>/<serviceId>/<port>/`; the backend calls Core over fixed loopback HTTP. External Linux CLI connects directly to the server Core port. Change ports only with --ui-port/--core-port. UI accepts actual local IPv4 addresses, localhost, loopback and the machine hostname, validates Host, Origin and CSRF, and ignores Forwarded. Each address needs its own login. HTTP only; no HTTPS, custom domain or reverse proxy configuration. Internal Agent callbacks retain container-reachable mTLS on 7172. User Services publish no host ports. Model endpoints must be reachable from Work networks.
 
-For an optional CLI setup, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) and its [example Compose](/piwork/install/0.0.16-73dbea6e5c20-102f826ec67a/single-host-compose.yml).
+For an optional CLI setup, see [Single-host deployment](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) and its [example Compose](/piwork/install/0.0.17-efadc31a58b3-c8d512cca1d1/single-host-compose.yml).
 
 ## Core Compose Demo
 
@@ -46,7 +46,7 @@ For an optional CLI setup, see [Single-host deployment](https://github.com/pphbo
 The optional Compose demo uses its own `/var/lib/piwork/core` directory. Stop an installation using the same ports normally before starting. Set up the administrator and model in the browser.
 
 ```sh
-PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.16-73dbea6e5c20-102f826ec67a \
+PIWORK_CORE_IMAGE=docker.io/pphboy/piwork-core:0.0.17-efadc31a58b3-c8d512cca1d1 \
     docker compose -f compose.core.yaml up --detach --wait --wait-timeout 600 core
 ```
 

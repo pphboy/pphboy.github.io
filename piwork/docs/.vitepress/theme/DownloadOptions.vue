@@ -32,7 +32,7 @@ const guide = computed(() => withBase(`${chinese.value ? '/zh' : ''}/guide/quick
         <li>{{ chinese ? '首次进入 Piwork 时，按页面提示创建管理员并配置自己的 AI 模型凭据。' : 'On first use, follow Piwork’s setup to create an administrator and configure your own AI model credentials.' }}</li>
       </ul>
     </details>
-    <p class="release-links"><a :href="release.releaseUrl" target="_blank" rel="noopener noreferrer">{{ chinese ? '发行说明' : 'Release notes' }} ↗</a><a :href="release.checksumsUrl">SHA256SUMS ↗</a></p>
+    <p class="release-links"><a :href="release.releaseUrl" target="_blank" rel="noopener noreferrer">{{ chinese ? '发行说明' : 'Release notes' }} ↗</a><a :href="release.manifestUrl">{{ chinese ? '发行清单与校验信息' : 'Release manifest and checksums' }} ↗</a></p>
   </div>
 </template>
 
