@@ -1,34 +1,17 @@
 # 开始使用
 
-Piwork 是一个可分享、可运行的 AI 工作空间。按照以下步骤开始：
+从下载到打开 Work，沿着同一条一键启动路径开始。
 
-## 快速路径
+1. [下载 Piwork](/zh/guide/downloads.html)：选择 Windows 或 Linux 桌面启动器。
+2. [快速开始](/zh/guide/quick-start.html)：下载并打开、点击启动、完成首次设置、创建 Work。
+3. [第一个 Work](/zh/guide/first-work.html)：使用应用、管理文件、持续改进并整体迁移。
 
-1. [快速开始](/zh/guide/quick-start.html) - 5 分钟内启动 Piwork
-2. [第一个 Work](/zh/guide/first-work.html) - 创建第一个工作空间
-3. [Web 开发](/zh/guide/web-development.html) - 构建 AI 驱动的 Web 应用
+## 从一个内容工作室开始
 
-## 深入了解
+描述需求，做出能用的应用；继续对话，加入发布日历；将整个 Work 导出，在另一套兼容的 Piwork 中接着使用。[回到首页查看完整故事](/zh/#how-it-works)。
 
-- [安装](/zh/guide/installation.html) - 完整部署指南，包括 Docker Compose、网络配置和生命周期管理
-- [AI 模型](/zh/guide/ai-models.html) - 配置模型、管理 API 密钥和优化 AI 交互
-- [从源码构建](/zh/guide/source-installation.html) - 从源代码构建 Piwork 的开发者指南
+## 继续了解
 
-## 系统要求
-
-- **操作系统：** Linux x86-64
-- **容器运行时：** Docker Engine 28+（rootful 模式）
-- **端口：** 17891（UI）、17871（Core API）
-- **资源：** 最少 2GB 内存，推荐 4GB+
-
-## Piwork 如何工作
-
-单个 Linux 应用提供 **Core**、Web 工作台、**Admin** 和首次设置。从 Linux 或 Windows 浏览器打开服务器 IP；独立的 CLI 是可选的。
-
-[规范概览](/zh/spec/)记录了源码和镜像来源。应用示例请参考 [Kanban Work](/zh/demo/kanban)。
-
-## 需要帮助？
-
-- [产品演示](/zh/demo/product-demo.html) - 70 秒了解 Piwork
-- [核心概念](/zh/concepts/) - 理解 Work、Service 和 Harness
-- [GitHub Discussions](https://github.com/pphboy/piwork/discussions) - 社区支持
+- [核心概念](/zh/concepts/)：Work、Service 和 Harness。
+- [产品演示](/zh/demo/product-demo.html)：观看学习、桌面、音乐、视频和游戏五个真实演示。
+- [社区讨论](https://github.com/pphboy/piwork/discussions)：提问与交流。

@@ -5,6 +5,8 @@ npm ci
 make build
 ```
 
+<!-- native-quickstart:start -->
+
 [Build the current source](https://github.com/pphboy/piwork/blob/main/AGENTS.md#构建与验证), then run from the repository root. Released programs also work outside the checkout. Native programs support Linux x86-64 only.
 
 ```sh
@@ -27,6 +29,7 @@ The Linux native client starts Desktop by default and connects to an existing Co
 
 Open `http://desktop.localhost:17901/` locally. Desktop shares user credentials with terminal commands but has its own default Core preference. Business commands select --core, PIWORK_CORE_URL, saved credentials, then the local default. Closing the browser or CLI does not stop Works. Windows browsers can also access the Linux Core UI.
 
+<!-- native-quickstart:end -->
 One process serves two HTTP listeners: UI defaults to `0.0.0.0:17891`, Core to `0.0.0.0:17871`. Browsers use only UI, including files, events and `/services/<workId>/<serviceId>/<port>/`; the backend calls Core over fixed loopback HTTP. External Linux CLI connects directly to the server Core port. Change ports only with --ui-port/--core-port. UI accepts actual local IPv4 addresses, localhost, loopback and the machine hostname, validates Host, Origin and CSRF, and ignores Forwarded. Each address needs its own login. HTTP only; no HTTPS, custom domain or reverse proxy configuration. Internal Agent callbacks retain container-reachable mTLS on 7172. User Services publish no host ports. Model endpoints must be reachable from Work networks.
 
 [Docker release builds](https://github.com/pphboy/piwork/blob/main/openspec/specs/docker-delivery/spec.md)

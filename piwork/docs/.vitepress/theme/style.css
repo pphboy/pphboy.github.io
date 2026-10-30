@@ -53,46 +53,15 @@
   background: var(--vp-c-brand-soft);
 }
 
-/* Keep the shared brand mark centered above the bilingual homepage intro. */
-.VPHero .container {
-  flex-direction: column;
-  align-items: center;
-}
+/* The product homepage owns its layout; documentation keeps the default theme. */
+.vp-doc .work-shot { margin: 28px 0; }
+.vp-doc .work-shot img { max-height: 520px; object-fit: contain; background: var(--vp-c-bg-soft); }
+.vp-doc .work-shot a { text-decoration: none; }
 
-.VPHero .image {
-  order: -1;
-  margin: 0 0 24px;
-}
-
-.VPHero .image-container {
-  width: 160px;
-  height: 160px;
-  transform: none;
-}
-
-.VPHero .image-src {
-  max-width: 160px;
-  max-height: 160px;
-}
-
-.VPHome .VPHero.has-image .main {
-  width: 100%;
-  max-width: 800px;
-  text-align: center;
-}
-
-.VPHome .VPHero.has-image .name,
-.VPHome .VPHero.has-image .text,
-.VPHome .VPHero.has-image .tagline {
-  margin-inline: auto;
-}
-
-.VPHero .name,
-.VPHero .text,
-.VPHero .tagline {
-  max-width: none;
-}
-
-.VPHome .VPHero.has-image .actions {
-  justify-content: center;
+/* Keep every navigation destination reachable on tablet-sized screens. */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .VPNavBarSearch { padding-left: 16px; }
+  .VPNavBarSearch .DocSearch-Button { width: 36px; min-width: 36px; padding: 0; justify-content: center; }
+  .VPNavBarSearch .DocSearch-Button-Placeholder,
+  .VPNavBarSearch .DocSearch-Button-Keys { display: none; }
 }

@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "piworkVersion": "0.0.10",
+  "publishedAt": "2026-10-22",
+  "releaseUrl": "https://github.com/pphboy/piwork-microvm/releases/tag/v0.2.0",
+  "checksumsUrl": "https://github.com/pphboy/piwork-microvm/releases/download/v0.2.0/SHA256SUMS",
+  "platforms": [
+    {
+      "id": "windows",
+      "label": "Windows",
+      "architecture": "x86-64",
+      "file": "piwork-microvm-gui-v0.2.0-windows-amd64.exe",
+      "sizeBytes": 414813324,
+      "sha256": "c574f4b7955a01fa9ad11419b05e5469594b24dbdeeb04fb434bd1e4310c0027"
+    },
+    {
+      "id": "linux",
+      "label": "Linux",
+      "architecture": "x86-64",
+      "file": "piwork-microvm-gui-v0.2.0-linux-amd64",
+      "sizeBytes": 397127309,
+      "sha256": "ce9ba8bbd43624b5170bfbeb1d6a9d166206f8bd2127bbff0f4c9c776835d20e"
+    }
+  ]
+}

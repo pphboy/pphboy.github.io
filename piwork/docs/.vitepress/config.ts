@@ -1,6 +1,6 @@
 import { defineConfig, type DefaultTheme } from 'vitepress'
 
-const description = 'Piwork is a shareable, runnable AI workspace powered by an evolvable Harness.'
+const description = 'Create. Evolve. Take it anywhere. A portable AI workspace for conversations, files, data, and running apps.'
 const repository = 'https://github.com/pphboy/piwork'
 
 function navigation(chinese: boolean): DefaultTheme.Config {
@@ -8,9 +8,10 @@ function navigation(chinese: boolean): DefaultTheme.Config {
   const link = (path: string) => `${prefix}${path}`
   return {
     nav: [
-      { text: chinese ? '文档' : 'Docs', link: link('/guide/'), activeMatch: `^${prefix}/(guide|concepts)/` },
+      { text: chinese ? '工作方式' : 'How it works', link: link('/#how-it-works') },
+      { text: chinese ? '下载' : 'Download', link: link('/guide/downloads.html') },
+      { text: chinese ? '文档' : 'Docs', link: link('/guide/'), activeMatch: `^${prefix}/(guide/(?!downloads)|concepts/)` },
       { text: chinese ? '演示' : 'Demo', link: link('/demo/product-demo.html'), activeMatch: `^${prefix}/demo/` },
-      { text: chinese ? '规范' : 'Spec', link: link('/spec/'), activeMatch: `^${prefix}/spec/` },
       { text: 'GitHub', link: repository },
       { text: chinese ? '讨论社区' : 'Discussions', link: `${repository}/discussions` }
     ],
@@ -22,11 +23,7 @@ function navigation(chinese: boolean): DefaultTheme.Config {
           { text: chinese ? '概览' : 'Overview', link: link('/guide/') },
           { text: chinese ? '下载' : 'Downloads', link: link('/guide/downloads') },
           { text: chinese ? '快速开始' : 'Quick Start', link: link('/guide/quick-start') },
-          { text: chinese ? '安装' : 'Installation', link: link('/guide/installation') },
           { text: chinese ? '第一个 Work' : 'Your First Work', link: link('/guide/first-work') },
-          { text: chinese ? 'Web 开发' : 'Web Development', link: link('/guide/web-development') },
-          { text: chinese ? 'AI 模型' : 'AI Models', link: link('/guide/ai-models') },
-          { text: chinese ? '从源码构建' : 'Build from Source', link: link('/guide/source-installation') }
         ]
       },
       {
@@ -82,8 +79,8 @@ export default defineConfig({
     zh: {
       label: '简体中文',
       lang: 'zh-CN',
-      description: 'Piwork 是一个可分享、可运行的 AI 工作空间，由可演进的 Harness 驱动。',
-      head: [['meta', { property: 'og:description', content: 'Piwork 是一个可分享、可运行的 AI 工作空间，由可演进的 Harness 驱动。' }]],
+      description: '创造、演进，随处带走。将对话、文件、数据和运行中的应用保存在同一个 AI 工作空间。',
+      head: [['meta', { property: 'og:description', content: '创造、演进，随处带走。将对话、文件、数据和运行中的应用保存在同一个 AI 工作空间。' }]],
       themeConfig: {
         ...navigation(true),
         docFooter: { prev: '上一页', next: '下一页' },

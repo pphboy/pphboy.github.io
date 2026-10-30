@@ -1,34 +1,17 @@
-# Getting Started
+# Get started
 
-Piwork is a shareable, runnable AI workspace. Follow these steps to get started:
+Take one path from downloading Piwork to opening a Work.
 
-## Quick Path
+1. [Download Piwork](/guide/downloads.html): choose the Windows or Linux desktop launcher.
+2. [Quick Start](/guide/quick-start.html): open it, click Start, complete setup, and create a Work.
+3. [Your first Work](/guide/first-work.html): use your app, manage files, keep improving, and move the whole workspace.
 
-1. [Quick Start](/guide/quick-start.html) - Get Piwork running in 5 minutes
-2. [Your First Work](/guide/first-work.html) - Create your first workspace
-3. [Web Development](/guide/web-development.html) - Build AI-powered web applications
+## Start with a content studio
 
-## Learn More
+Describe what you need and build a useful app. Keep the conversation going to add a publishing calendar. Export the whole Work and continue in another compatible Piwork installation. [See the full story on the homepage](/#how-it-works).
 
-- [Installation](/guide/installation.html) - Complete deployment guide with Docker Compose, networking, and lifecycle management
-- [AI Models](/guide/ai-models.html) - Configure models, manage API keys, and optimize AI interactions
-- [Build from Source](/guide/source-installation.html) - Developer guide for building Piwork from source code
+## Keep exploring
 
-## System Requirements
-
-- **Operating System:** Linux x86-64
-- **Container Runtime:** Docker Engine 28+ (rootful mode)
-- **Ports:** 17891 (UI), 17871 (Core API)
-- **Resources:** 2GB RAM minimum, 4GB+ recommended
-
-## How Piwork Works
-
-One Linux application provides **Core**, the web workbench, **Admin** and first-time setup. Open the server IP from a Linux or Windows browser; the independent CLI is optional.
-
-The [Spec overview](/spec/) records source and image provenance. For an application example, see [Kanban Work](/demo/kanban).
-
-## Need Help?
-
-- [Product Demo](/demo/product-demo.html) - See Piwork in 70 seconds
-- [Core Concepts](/concepts/) - Understand Work, Service, and Harness
-- [GitHub Discussions](https://github.com/pphboy/piwork/discussions) - Community support
+- [Core concepts](/concepts/): Work, Service, and Harness.
+- [Product demo](/demo/product-demo.html): five real demos across learning, desktop tasks, music, video, and games.
+- [Discussions](https://github.com/pphboy/piwork/discussions): questions and community.

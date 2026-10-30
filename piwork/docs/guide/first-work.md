@@ -1,222 +1,41 @@
-# Your First Work
+# Your first Work
 
-Learn how to create and use your first Piwork workspace.
+Follow [Quick Start](/guide/quick-start.html), complete account and model setup, wait for the dependencies to be ready, then select **Open workbench**.
 
-## Prerequisites
+## Create and open
 
-Before creating your first Work, ensure you have:
+Select **New Work** and give it a name, such as “My Creative Studio.” Wait for it to be ready, open **Chat**, and send a concrete request:
 
-- ✅ Piwork Core running ([Quick Start](/guide/quick-start.html))
-- ✅ Administrator account created
-- ✅ AI model configured in **Admin → Quick setup**
-- ✅ Runtime preparation completed (all components show **Ready** status)
+> Build a content studio for my podcast, video, and writing ideas. Include categories, search, a detail view, and persistent data.
 
-## What You'll Learn
+Follow the results in the conversation. When the app is ready, open its **Service** and try its search, filters, and idea details.
 
-- Creating a Work
-- Using Chat to interact with AI
-- Managing workspace files
-- Running Services (applications)
-- Stopping and restarting Works
-- Exporting and importing workspaces
+<WorkShot src="/screenshots/product/studio-created.png" alt="The content studio’s idea library with categories, search, and idea cards" caption="Product demo: a request in a conversation becomes a usable app inside a Work." />
 
-## Step 1: Open the Workbench
+## Keep improving the same Work
 
-After completing setup, the workbench opens automatically. You can also:
+Return to Chat and describe the next change:
 
-1. Click **Open workbench** from the preparation screen
-2. Or access it directly from the Admin navigation bar
+> Add a publishing calendar. Keep my existing ideas. Clicking a calendar entry should open the original idea details.
 
-## Step 2: Create a Work
+Check the updated app and your existing data. The conversation, app, and files stay together in this Work, ready for the next improvement.
 
-1. Click **New Work** in the workbench
-2. Enter a descriptive name for your workspace (e.g., "My First Project")
-3. Click **Create**
-4. Wait for the Work to reach **Ready** status
+Use **Files** to browse, upload, and download workspace files. **Settings** saves configuration; explicitly **Apply** changes when the page requires it.
 
-### What's Happening?
+## Take the whole Work with you
 
-Piwork is:
-- Creating an isolated workspace container
-- Setting up the default environment
-- Loading Harness configuration
-- Preparing the workspace directory
+1. **Stop the Work** and wait for it to stop.
+2. Export a `.work` file from the Work menu.
+3. Import that file into another compatible Piwork installation and wait for completion.
+4. The imported Work is stopped. Click **Start** yourself.
+5. Wait for it to be ready, open the app, check the existing content, and continue.
 
-## Step 3: Start Chatting
+The recipient supplies their own model credentials and a compatible runtime. A `.work` export moves a Work; it is not a backup of the entire Piwork installation. It includes workspace content, private history, and any credentials you stored there. Review what you share and send it only to a trusted recipient.
 
-Once your Work is ready:
+<WorkShot src="/screenshots/product/studio-restored.png" alt="The moved content studio still opens the original idea and its publishing date" caption="Recorded after migration: the original idea, publishing calendar, and app continue together." />
 
-1. Click to **Open** the Work
-2. Navigate to the **Chat** tab
-3. Type a message and press **Send**
+## Continue next time
 
-### Try These Examples
+Closing the browser does not stop your Work. To stop one Work, select **Stop** from its workbench menu. Select **Start** to continue later.
 
-**Simple question:**
-```
-What can you help me with in this workspace?
-```
-
-**Create a file:**
-```
-Create a hello.txt file with a welcome message
-```
-
-**Build an application:**
-```
-Create a simple todo app with NiceGUI
-```
-
-The AI can:
-- Answer questions about the workspace
-- Create and modify files
-- Write code and applications
-- Run commands
-- Use workspace-specific tools
-
-## Step 4: Explore Files
-
-The **Files** tab shows your workspace directory:
-
-- **Browse** files and folders
-- **Upload** files from your computer
-- **Download** files to your computer
-- **View** file contents
-
-All files persist in the workspace - they're not temporary.
-
-## Step 5: Use Services
-
-When the AI creates an application with a web interface:
-
-1. A new **Service** entry appears automatically
-2. Click **Preview** to see it in an embedded frame
-3. Or click **Open** to use it in a full application tab
-
-### Service Examples
-
-- Todo lists and kanban boards
-- Data dashboards
-- Content management systems
-- Internal tools
-- API backends with web UIs
-
-## Managing Your Work
-
-### Settings Tab
-
-Use **Settings** to:
-- Change the AI model
-- Adjust workspace configuration
-- View Work metadata
-
-**Important:** Click **Apply** to activate changes. Saving doesn't automatically apply them.
-
-### Stopping a Work
-
-Closing your browser **does not stop** the Work. It keeps running on the server.
-
-To stop a Work:
-1. Return to the workbench list
-2. Open the Work's menu (⋮)
-3. Select **Stop**
-
-### Restarting a Work
-
-Stopped Works appear in the workbench list:
-1. Find the stopped Work
-2. Click **Start**
-3. Wait for **Ready** status
-4. Open the Work
-
-All files, history, and Services are preserved.
-
-## Sharing Your Work
-
-### Exporting
-
-To share a Work with others or move it to another Piwork installation:
-
-1. **Stop the Work** (required before export)
-2. Open the Work's menu (⋮)
-3. Select **Export**
-4. Download the `.work` file
-
-The export includes:
-- Workspace files
-- Application code
-- Service configurations
-- Harness state
-- (Conversation history is separate)
-
-### Importing
-
-To import a Work on another Piwork installation:
-
-1. Go to the workbench
-2. Click **Import Work**
-3. Upload the `.work` file
-4. The Work is created in **Stopped** state
-5. Check model and environment compatibility
-6. Click **Start** to run it
-
-**Note:** Import does not replay conversation history. The destination installation must have:
-- Compatible runtime images
-- Model credentials configured
-- Sufficient resources
-
-## Tips and Best Practices
-
-### Naming Works
-
-Use descriptive names that identify the project:
-- ✅ "Customer Dashboard"
-- ✅ "Q4 Report Generator"
-- ❌ "Test123"
-- ❌ "My Work"
-
-### When to Create New Works
-
-Create separate Works for:
-- Different projects or clients
-- Experiments vs. production
-- Different technology stacks
-- Isolated environments
-
-### Performance
-
-- Stop Works you're not actively using
-- Export completed projects for archival
-- Monitor workspace disk usage
-
-### Troubleshooting
-
-**Work won't start:**
-- Check Core logs for errors
-- Verify model credentials are valid
-- Ensure Docker has sufficient resources
-
-**Service won't load:**
-- Check if the application started successfully
-- Review Chat history for error messages
-- Verify the service port is correct
-
-**Files are missing:**
-- Files persist only if saved to the workspace directory
-- Temporary files (`/tmp`) are not preserved
-- Check the Files tab, not system temp folders
-
-## Next Steps
-
-Now that you've created your first Work:
-
-- **Build something:** Try the [Web Development](/guide/web-development.html) guide
-- **Customize:** Learn about [AI Models](/guide/ai-models.html) configuration
-- **Explore:** See example projects in [Demos](/demo/product-demo.html)
-- **Deploy:** Read the full [Installation](/guide/installation.html) guide
-
-## Need Help?
-
-- [GitHub Discussions](https://github.com/pphboy/piwork/discussions) - Ask the community
-- [Report Issues](https://github.com/pphboy/piwork/issues) - Found a bug?
-- [Core Concepts](/concepts/) - Understand Work, Service, and Harness
+When you finish using Piwork locally, stop it normally through the desktop launcher. Wait for shutdown to finish and keep the data directory. Open the same launcher to return.

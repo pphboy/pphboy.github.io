@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useData, withBase } from 'vitepress'
+import video from './product-video.json'
 
 const { lang } = useData()
 const chinese = computed(() => lang.value.startsWith('zh'))
 const playing = ref(false)
-const videoUrl = 'https://www.youtube.com/watch?v=ll1MS091gPU'
+const videoUrl = `https://www.youtube.com/watch?v=${video.id}`
+const embedUrl = `https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`
+const duration = `${Math.floor(video.durationSeconds / 60)}:${String(video.durationSeconds % 60).padStart(2, '0')}`
 const title = computed(() => chinese.value
-  ? 'Piwork 产品演示：创造、进化、迁移整个工作空间'
-  : 'Piwork product demo: Create. Evolve. Take it anywhere.')
+  ? 'Piwork：一个 AI 工作空间，五个真实演示'
+  : video.title)
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const title = computed(() => chinese.value
     <div class="product-demo-player">
       <iframe
         v-if="playing"
-        src="https://www.youtube-nocookie.com/embed/ll1MS091gPU?autoplay=1&amp;rel=0"
+        :src="embedUrl"
         :title="title"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -29,14 +32,14 @@ const title = computed(() => chinese.value
         :aria-label="chinese ? '播放 Piwork 产品演示' : 'Play the Piwork product demo'"
         @click="playing = true"
       >
-        <img :src="withBase('/demo/piwork-product-demo.jpg')" :alt="title" width="1280" height="720" loading="lazy" />
+        <img :src="withBase(video.poster)" :alt="title" width="1280" height="720" loading="lazy" />
         <span class="product-demo-play" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
         </span>
       </button>
     </div>
     <p class="product-demo-link">
-      <a :href="videoUrl" target="_blank" rel="noopener noreferrer">{{ chinese ? '在 YouTube 观看 · 70 秒' : 'Watch on YouTube · 70 seconds' }}</a>
+      <a :href="videoUrl" target="_blank" rel="noopener noreferrer">{{ chinese ? '在 YouTube 观看' : 'Watch on YouTube' }} · {{ duration }}</a>
     </p>
   </div>
 </template>

@@ -1,154 +1,77 @@
+---
+title: Quick Start
+description: Download, start, complete first-time setup, and open your first Work.
+---
+
 # Quick Start
 
-Get Piwork running in minutes. This guide uses Docker for the fastest setup.
+**Download → Start → Set up → Open a Work.** Follow this one path to run Piwork on your computer.
 
-## Prerequisites
+<LauncherVersion />
 
-Before starting, ensure you have:
+## 1. Download and open
 
-- **Linux x86-64** system
-- **Docker Engine 28+** (rootful mode)
-- Port **17891** available (UI) and **17871** (Core API)
+Visit [Downloads](/guide/downloads.html), choose Windows or Linux, and open the downloaded desktop launcher.
 
-## Download Piwork
+- **Windows:** double-click the downloaded `.exe` file.
+- **Linux:** allow the file to run as a program in its file properties, then open it.
 
-Piwork is distributed as Docker images. The Core image includes everything needed to run the workbench, administration, and setup.
+Keep the default data directory. The launcher will reuse this installation and its data the next time you open it.
 
-**Latest Release: `0.0.10`**
+<WorkShot src="/screenshots/product/launcher-start.png" :width="800" :height="600" alt="The real desktop launcher with its Start Piwork button and data directory" caption="Open the launcher and click Start Piwork. You can change the language under More." />
 
-Pull the image:
+## 2. Start Piwork
 
-```sh
-docker pull docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
-```
+Click **Start Piwork**. The launcher shows progress as it checks your computer, starts the runtime, and waits for the web interface.
 
-**Alternative downloads:**
-- [Docker Compose file](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) - For Compose-based setup
-- [Build from source](/guide/source-installation.html) - For development or native builds
-- [Release notes](https://github.com/pphboy/piwork/releases) - Version history and older releases
+When **Open Piwork** becomes available, click it to open Piwork in your browser. Initial startup time depends on your computer; keep the launcher window open while it starts.
 
-## Start Piwork
+## 3. Complete first-time setup
 
-<!-- docker-quickstart:start -->
+On your first visit, follow the steps in Piwork:
 
-Use Linux x86-64 and rootful Docker Engine 28+. One container serves the workbench, administration and first-time setup, with no environment variables or client CLI required:
+1. **Create an administrator:** enter the account, password, and password confirmation, then sign in.
+2. **Configure an AI model:** in **Quick setup**, enter your own API Key. Open **Advanced settings** to set the model ID, API type, and Base URL, or select a saved model.
+3. Select **Save and continue**, wait for the required components to show **Ready**, then select **Open workbench**.
 
-This published image includes direct browser entry and web setup.
+One-click launch starts the environment. Your first visit still includes account and model setup; you supply your own model credentials.
 
-```sh
-docker run --detach --init \
-    --name piwork-core-quickstart \
-    --network host \
-    --restart unless-stopped \
-    --stop-timeout 60 \
-    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-    --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
-```
+<WorkShot src="/screenshots/product/first-setup.png" :width="952" :height="820" alt="The real administrator setup page, with empty account and password fields" caption="Complete initial setup in Piwork. Your account and model configuration are retained in this installation." />
 
-On this computer or another computer, open `http://SERVER_IP:17891` using the server's actual IP. An empty installation shows Create administrator; an initialized installation shows normal sign-in. No terminal authorization link is required.
+## 4. Open your first Work
 
-<!-- docker-quickstart:end -->
+In the workbench, select **New Work**, give it a name, and wait for it to be ready. Open **Chat** and describe a tool you want to make:
 
-## Initial Setup
+> Build me a content studio for my podcast, video, and writing ideas, with categories, search, and a detail view.
 
-### Step 1: Create Administrator Account
+Follow progress in the conversation. When the app is ready, open its **Service** and use it. Keep making changes through the same Work.
 
-When you first open Piwork, you'll see the administrator creation page:
+<WorkShot src="/screenshots/product/work-open.png" alt="An open Creative Studio Work with a usable idea library" caption="The content studio from the product demo: one Work keeps the app, its content, and the conversation behind it." />
 
-1. Enter a **password** (8+ characters recommended)
-2. Re-enter to **confirm**
-3. Click **Create administrator**
+Next, read [Your first Work](/guide/first-work.html) for files, apps, ongoing changes, and moving your workspace.
 
-### Step 2: Configure AI Model
-
-After signing in, you'll be directed to **Quick setup** (`/admin/setup`):
-
-1. Choose your AI provider and enter:
-   - **Model ID** (e.g., `claude-opus-5-5`)
-   - **API Type** (OpenAI compatible, Anthropic, etc.)
-   - **Base URL** (provider's endpoint)
-   - **API Key** (your credentials)
-2. Or select a previously saved model
-3. Click **Save and continue**
-
-The system will:
-- Save the model configuration
-- Bind the CoreRuntime
-- Prepare required dependencies (Agent image is embedded and automatic)
-
-### Step 3: Open Workbench
-
-Wait for all components to show **Ready** status, then click **Open workbench** to start using Piwork.
-
-You can now:
-- Create your first Work
-- Chat with AI
-- Manage files and Services
-- Export and share workspaces
-
-## What's Running?
-
-Piwork Core runs two HTTP services:
-- **UI** at `0.0.0.0:17891` - For browsers (workbench, admin, files, events)
-- **Core API** at `0.0.0.0:17871` - For internal backend and CLI clients
-
-Browsers connect only to the UI port. The backend uses loopback HTTP to reach Core. External Linux CLI clients connect directly to the Core port.
-
-## Next Steps
-
-- [Create your first Work](/guide/first-work.html)
-- [Learn about Web Development](/guide/web-development.html)
-- [View the product demo](/demo/product-demo.html)
-- [Explore AI model configuration](/guide/ai-models.html)
-
-## Alternative Setup Methods
+## System requirements and help
 
 <details>
-<summary>Using Docker Compose</summary>
+<summary>What does my computer need?</summary>
 
-Optional [Compose](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) (2.24+) and the [single-host example](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) provide the same web interface with declarative configuration.
+- Windows 11 x86-64: enable firmware virtualization and **Windows Hypervisor Platform**, and install WebView2 Runtime. Restart when required by Windows.
+- Linux x86-64: read/write access to `/dev/kvm`, GTK 3, WebKitGTK 4.1, and a system browser launcher.
+- Defaults are 2 vCPU and 4 GiB RAM. Allow at least 4 GiB free in the installation directory plus 1 GiB for resource extraction.
+- Have your AI provider’s model details and credentials ready. The runtime must be able to reach the model endpoint.
 
 </details>
 
 <details>
-<summary>Build and use the native Linux application</summary>
+<summary>What if startup fails or never becomes ready?</summary>
 
-<!-- native-quickstart:start -->
-
-[Build the current source](/guide/source-installation.html), then run from the repository root. Released programs also work outside the checkout. Native programs support Linux x86-64 only.
-
-```sh
-./dist/go/piwork-core
-```
-
-Core includes administration, the workbench and first-time setup. Its only startup settings are `--ui-port` (17891), `--core-port` (17871), and `--data-dir` (piwork/server under the user configuration directory). `--help` and `--version` only display information. Ports must be distinct, within 1–65535 and different from internal RPC 7172. Relative data paths resolve from the working directory.
-
-```sh
-./dist/go/piwork-core --ui-port 17991 --core-port 17971 --data-dir /var/lib/piwork/custom/core
-```
-
-Choose one startup command. Open the printed HTTP URL, create the administrator, then configure models and runtime in Admin Quick setup. On a headless server, open that address manually. Ctrl+C stops this installation's managed Works while preserving data, history and desired state; restart with the same data path.
-
-The Linux native client starts Desktop by default and connects to an existing Core. Select another Desktop port when the local Core UI already uses 17891. The client requires no Docker and does not start or stop Core.
-
-```sh
-./dist/go/piwork-cli --core http://127.0.0.1:17871 desktop --port 17901 --no-open
-```
-
-Open `http://desktop.localhost:17901/` locally. Desktop shares user credentials with terminal commands but has its own default Core preference. Business commands select --core, PIWORK_CORE_URL, saved credentials, then the local default. Closing the browser or CLI does not stop Works. Windows browsers can also access the Linux Core UI.
-
-<!-- native-quickstart:end -->
+Keep the launcher open and check the current stage and run logs. Check the requirements above first. If the logs report a port conflict, stop the conflicting Piwork instance normally before retrying. For a persistent problem, use the launcher’s log export and [report the issue](https://github.com/pphboy/piwork-microvm/issues). Do not include passwords or API keys.
 
 </details>
 
 <details>
-<summary>Technical details: networking and services</summary>
+<summary>How do I continue next time, or quit?</summary>
 
-One process serves two HTTP listeners: UI defaults to `0.0.0.0:17891`, Core to `0.0.0.0:17871`. Browsers use only UI, including files, events and `/services/<workId>/<serviceId>/<port>/`; the backend calls Core over fixed loopback HTTP. External Linux CLI connects directly to the server Core port. Change ports only with --ui-port/--core-port. UI accepts actual local IPv4 addresses, localhost, loopback and the machine hostname, validates Host, Origin and CSRF, and ignores Forwarded. Each address needs its own login. HTTP only; no HTTPS, custom domain or reverse proxy configuration. Internal Agent callbacks retain container-reachable mTLS on 7172. User Services publish no host ports. Model endpoints must be reachable from Work networks.
-
-Hosted Services share the workbench origin and must be trusted: scripts can use the current user's UI permissions. Apps must support a dynamic Service URL prefix; old root-path apps, images and packages are not rewritten automatically. Services support server-side login using response Cookies, Basic/Bearer, HTTP, SSE and WebSocket. Response Cookies stay on the server, partitioned by browser session and Service; Secure Cookies are not forwarded through the HTTP entry. Apps that read/write document.cookie or Cookie Store (including script-read CSRF Cookies) are not guaranteed to work transparently. Script-written browser Cookies are not isolated across Services on the same IP and are never forwarded upstream. Hard-coded .work URLs, cross-site SSO and upstream HTTPS are outside transparent support. Application CSP/X-Frame-Options remain intact; open an application tab when embedding is denied.
-
-Optional [Compose](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) (2.24+) and the [single-host example](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.md) open the same web application. CLI is an optional advanced tool. See the [operations guide](/guide/installation.html#terminal-operations) for recovery.
+Open the same launcher with the same data directory and click Start to continue. Closing the browser does not stop your Work. When you finish, stop Piwork in the launcher, or close its window and confirm a normal shutdown. Wait for shutdown to finish, and keep the installation data for next time.
 
 </details>

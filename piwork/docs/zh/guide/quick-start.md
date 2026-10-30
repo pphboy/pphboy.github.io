@@ -1,154 +1,77 @@
-# Quick Start
+---
+title: 快速开始
+description: 下载、启动、完成首次设置，打开你的第一个 Work。
+---
 
-几分钟内启动 Piwork。本指南使用 Docker 进行最快速的设置。
+# 快速开始
 
-## 前置要求
+**下载 → 一键启动 → 首次设置 → 打开 Work。** 按照这条路径，开始使用本地的 Piwork。
 
-开始之前，请确保：
+<LauncherVersion />
 
-- **Linux x86-64** 系统
-- **Docker Engine 28+**（rootful 模式）
-- 端口 **17891**（UI）和 **17871**（Core API）可用
+## 1. 下载并打开
 
-## 下载 Piwork
+前往[下载页](/zh/guide/downloads.html)，选择 Windows 或 Linux 版本，然后打开下载的桌面启动器。
 
-Piwork 以 Docker 镜像形式分发。Core 镜像包含运行工作台、管理和设置所需的所有内容。
+- **Windows**：双击下载的 `.exe` 文件。
+- **Linux**：在文件属性中允许作为程序执行，然后打开文件。
 
-**最新版本：`0.0.10`**
+保留默认数据目录即可。以后再次打开启动器，会继续使用这套安装及其数据。
 
-拉取镜像：
+<WorkShot src="/screenshots/product/launcher-start.png" :width="800" :height="600" alt="真实桌面启动器中的 Start Piwork 按钮和默认数据目录" caption="打开启动器后，点击 Start Piwork。界面语言可在 More 中切换。" />
 
-```sh
-docker pull docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
-```
+## 2. 启动 Piwork
 
-**其他下载方式：**
-- [Docker Compose 文件](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml) - 用于基于 Compose 的设置
-- [从源码构建](/zh/guide/source-installation.html) - 用于开发或原生构建
-- [发行说明](https://github.com/pphboy/piwork/releases) - 版本历史和旧版本
+点击 **Start Piwork（启动 Piwork）**。启动器会显示检查环境、启动运行环境和等待网页就绪的进度。
 
-## 启动 Piwork
+等待 **Open Piwork（打开 Piwork）** 可用，再点击它打开工作台网页。首次启动的等待时间取决于本机环境；启动过程中保留窗口。
 
-<!-- docker-quickstart:start -->
+## 3. 完成首次设置
 
-Linux x86-64、rootful Docker Engine 28+。运行一个容器即可提供工作台、管理和首次设置，无需环境变量或客户端 CLI：
+首次进入网页时，按页面提示：
 
-本版固定镜像包含直接访问与网页配置流程。
+1. **创建管理员**：填写账号、密码及确认密码，然后正常登录。
+2. **配置 AI 模型**：在 **Quick setup** 中填写自己的 API Key；展开 **Advanced settings** 可设置模型 ID、API 类型和 Base URL。已有模型也可直接选用。
+3. 点击 **Save and continue**，等待页面显示所需组件均为 **Ready**，再点击 **Open workbench**。
 
-```sh
-docker run --detach --init \
-    --name piwork-core-quickstart \
-    --network host \
-    --restart unless-stopped \
-    --stop-timeout 60 \
-    --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
-    --volume /var/lib/piwork/quickstart/core:/var/lib/piwork/quickstart/core \
-    docker.io/pphboy/piwork-core:0.0.10-024c864cb667-99aec1718558
-```
+一键启动负责打开运行环境。首次使用仍需完成账号和模型设置；模型凭据由你自行提供。
 
-在本机或另一台电脑直接打开 `http://服务器IP:17891`，使用服务器实际 IP。空安装会显示创建管理员；已有账号时正常登录，无需终端授权链接。
+<WorkShot src="/screenshots/product/first-setup.png" :width="952" :height="820" alt="真实 Piwork 首次管理员创建页面，账号与密码输入框为空" caption="在 Piwork 网页中完成首次设置。账号和模型配置会在同一安装中保留。" />
 
-<!-- docker-quickstart:end -->
+## 4. 打开第一个 Work
 
-## 初始设置
+进入工作台后，点击 **New Work**，为工作空间命名，等待就绪后打开 **Chat**。试着描述你想做的工具：
 
-### 步骤 1：创建管理员账号
+> 帮我做一个内容工作室，整理播客、视频和写作灵感。需要分类、搜索和详情页。
 
-首次打开 Piwork 时，会看到管理员创建页面：
+在对话中查看执行进度。应用准备好后，打开对应的 **Service** 使用成果；以后还可以在同一个 Work 中继续提出修改。
 
-1. 输入**密码**（建议 8 位以上字符）
-2. 再次输入以**确认**
-3. 点击**创建管理员**
+<WorkShot src="/screenshots/product/work-open.png" alt="已打开的内容工作室 Work，包含可使用的灵感库" caption="产品演示中的内容工作室：一个 Work，保存应用、内容和持续改进的过程。" />
 
-### 步骤 2：配置 AI 模型
+接下来，按[第一个 Work](/zh/guide/first-work.html)了解文件、应用、继续修改和整体迁移。
 
-登录后，会自动进入 **Quick setup**（`/admin/setup`）：
-
-1. 选择 AI 提供商并输入：
-   - **Model ID**（如 `claude-opus-5-5`）
-   - **API Type**（OpenAI 兼容、Anthropic 等）
-   - **Base URL**（提供商端点）
-   - **API Key**（您的凭据）
-2. 或选择之前保存的模型
-3. 点击 **Save and continue**
-
-系统将：
-- 保存模型配置
-- 绑定 CoreRuntime
-- 准备所需依赖（Agent 镜像自动内置）
-
-### 步骤 3：打开工作台
-
-等待所有组件显示 **Ready** 状态后，点击 **Open workbench** 开始使用 Piwork。
-
-现在您可以：
-- 创建第一个 Work
-- 与 AI 聊天
-- 管理文件和 Service
-- 导出和共享工作空间
-
-## 正在运行什么？
-
-Piwork Core 运行两个 HTTP 服务：
-- **UI** 在 `0.0.0.0:17891` - 供浏览器使用（工作台、管理、文件、事件）
-- **Core API** 在 `0.0.0.0:17871` - 供内部后端和 CLI 客户端使用
-
-浏览器仅连接 UI 端口。后端通过 loopback HTTP 访问 Core。外部 Linux CLI 客户端直接连接 Core 端口。
-
-## 下一步
-
-- [创建第一个 Work](/zh/guide/first-work.html)
-- [了解 Web 开发](/zh/guide/web-development.html)
-- [查看产品演示](/demo/product-demo.html)
-- [探索 AI 模型配置](/zh/guide/ai-models.html)
-
-## 其他设置方式
+## 系统要求与启动帮助
 
 <details>
-<summary>使用 Docker Compose</summary>
+<summary>下载前需要准备什么？</summary>
 
-可选 [Compose](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml)（2.24+）和[单机示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md)提供相同的 Web 界面和声明式配置。
+- Windows 11 x86-64：开启固件虚拟化和 **Windows Hypervisor Platform**，安装 WebView2 Runtime；按系统要求重启。
+- Linux x86-64：当前用户可以读写 `/dev/kvm`，已安装 GTK 3、WebKitGTK 4.1 和系统浏览器启动工具。
+- 默认运行环境使用 2 vCPU、4 GiB 内存。安装目录至少有 4 GiB 空间，另留 1 GiB 解包空间。
+- 准备自己 AI 提供商的模型信息和凭据，网络需能访问对应模型服务。
 
 </details>
 
 <details>
-<summary>构建并使用原生 Linux 应用</summary>
+<summary>启动失败或一直没有就绪怎么办？</summary>
 
-<!-- native-quickstart:start -->
-
-先按[开发入口](/zh/guide/source-installation.html)构建当前源码，再从仓库根运行；发行程序也可离开源码目录使用。原生程序仅支持 Linux x86-64。
-
-```sh
-./dist/go/piwork-core
-```
-
-Core 自带管理 UI、工作台和首次设置。只接受 `--ui-port`（17891）、`--core-port`（17871）、`--data-dir`（用户配置目录下 piwork/server）三项运行配置；`--help`、`--version` 仅查询信息。端口为 1–65535，必须不同且不能使用内部 RPC 7172。相对数据路径相对当前目录解析。
-
-```sh
-./dist/go/piwork-core --ui-port 17991 --core-port 17971 --data-dir /var/lib/piwork/custom/core
-```
-
-使用其中一种启动方式。打开输出的 HTTP URL 创建管理员，登录 Admin 的 Quick setup 配置模型和运行环境。无图形环境可手工打开该地址。Ctrl+C 正常关闭会停止本安装受管 Work，保留数据、历史和运行意图；重启复用相同数据路径。
-
-Linux 原生客户端默认启动 Desktop，连接已有 Core；同机 UI 已占用 17891 时显式使用另一 Desktop 端口。客户端无需 Docker，不启动或停止 Core。
-
-```sh
-./dist/go/piwork-cli --core http://127.0.0.1:17871 desktop --port 17901 --no-open
-```
-
-在本机浏览器打开 `http://desktop.localhost:17901/`。Desktop 与用户命令共享凭据，Desktop 默认 Core 偏好独立；业务命令依次选择 --core、PIWORK_CORE_URL、已保存凭据、默认本机地址。关闭浏览器或 CLI 不停止 Work。Windows 浏览器也可直接连接 Linux Core UI。
-
-<!-- native-quickstart:end -->
+保留启动器窗口，查看当前阶段和运行日志。先核对上面的系统要求；如果日志提示端口占用，正常关闭冲突的 Piwork 实例后重试。问题持续时，通过启动器的日志导出功能保存日志，向[社区反馈](https://github.com/pphboy/piwork-microvm/issues)，不要附带密码或 API Key。
 
 </details>
 
 <details>
-<summary>技术细节：网络和服务</summary>
+<summary>下次怎么继续？如何退出？</summary>
 
-同一进程提供两个 HTTP 服务：UI 默认 `0.0.0.0:17891`，Core 默认 `0.0.0.0:17871`。浏览器只连接 UI，所有文件、事件及 `/services/<workId>/<serviceId>/<port>/` 使用同一入口；后端固定通过 loopback HTTP 连接 Core。外部 Linux CLI 直接连接服务器 Core 端口。仅使用 --ui-port/--core-port 改端口。UI 接受本机实际 IPv4、localhost、回环和主机名，校验 Host、Origin 与 CSRF，不信任 Forwarded；切换地址需独立登录。只提供 HTTP，不提供 HTTPS、域名或反向代理配置。内部 Agent 保留容器可达的 7172 mTLS 回连。用户 Service 不发布宿主端口，模型端点须从 Work 网络可达。
-
-托管 Service 与工作台同源，须视为可信应用；其脚本可使用当前用户的 UI 权限。应用须支持动态 Service URL 前缀；旧根路径应用不会自动改写源码、镜像或包。Service 支持响应 Cookie 的服务端登录、Basic/Bearer、HTTP、SSE 和 WebSocket。响应 Cookie 按浏览器会话及 Service 保存在服务器，HTTP 入口不转发 Secure Cookie。依赖 document.cookie/Cookie Store 读写（如脚本读取 CSRF Cookie）的应用不保证透明兼容；脚本写入浏览器 Cookie 也不保证同 IP 跨 Service 隔离，且不会转发上游。不支持硬编码 .work URL、跨站 SSO 或上游 HTTPS 的透明适配。应用 CSP/X-Frame-Options 保留；禁止嵌入时使用新标签页。
-
-可选 [Compose](/piwork/install/0.0.10-024c864cb667-99aec1718558/docker-compose.yml)（2.24+）和 [单机示例](https://github.com/pphboy/piwork/blob/main/examples/single-host/README.zh-CN.md) 同样直接进入网页；CLI 是高级可选工具。运行与恢复见 [安装手册](/zh/guide/installation.html#terminal-operations)。
+再次打开同一个启动器及数据目录，点击启动即可继续。关闭浏览器不会停止 Work。结束本次使用时，从启动器选择停止，或关闭窗口并确认正常关闭，等待收尾完成；保留安装数据供下次使用。
 
 </details>

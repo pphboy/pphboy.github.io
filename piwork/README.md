@@ -20,7 +20,7 @@ http://localhost:4173/piwork/. Edit Markdown in `docs/` and navigation in
 `docs/.vitepress/config.ts`. The default theme provides light/dark mode and local search;
 `docs/.vitepress/theme/style.css` adapts its colors to the logo's blue/cyan palette
 with charcoal surfaces in dark mode. Keep shared theme changes consistent across locales.
-Discussions stays next to GitHub in both the navigation and homepage actions.
+The homepage uses HomeStory.vue for the Creative Studio narrative; its single primary action leads to the desktop download page. Discussions stays next to GitHub in the navigation.
 Documentation links retain `.html` for direct GitHub Pages access.
 
 Each English Markdown page has a corresponding page under `docs/zh/`. Keep both
@@ -31,11 +31,18 @@ the navigation, favicon, touch icon, and Open Graph metadata.
 
 ## Content maintenance
 
-Docker Quick Start starts one unified Linux application with browser onboarding and the full workbench. Default startup requires no business environment variables; only an optional paired ADMIN test bootstrap remains. CLI is optional. Same-origin Service paths, trust boundaries and script Cookie limitations are documented alongside the main entry. The single-host example has separate data. Published provenance is preserved.
+The English and Chinese homepages explain **Create. Evolve. Take it anywhere.** through one real Creative Studio Work. HomeStory.vue owns the product layout; WorkShot.vue opens real screenshots at full size; ProductDemo.vue keeps the existing video behind an explicit play action.
 
-Keep both locales aligned with upstream commands and image defaults. Source: 024c864cb6675e5c4c5d46b94033ef0c2d0ba84c; input SHA256: 99aec17185580058c1c777dc3914cf28f71192b91df1f57f175bd2d24c64017d; state: published. Image identities and anonymous readability have been verified; the versioned downloads match this release. Existing install/0.0.1 and install/0.1.0 files retain their provenance.
+Downloads and Quick Start follow one path: download the desktop GUI, start Piwork, complete account/model setup, and open a Work. Windows/Linux select assets for the same workflow. The published launcher version, included Piwork version, asset filenames, sizes and checksum links are maintained together in `docs/.vitepress/theme/download-release.json`; check them against the actual public release when updating. Run `pnpm check:content` to validate metadata and screenshot references. `pnpm build` also runs this check.
 
-Run upstream check-docker-quickstart.mjs with --website-root pointing at this directory after synchronizing. No real credentials or initialization env belongs in static files. Website synchronization does not push images or publish pages.
+The upstream server sync owns only bilingual `guide/installation.md`, `guide/source-installation.md`, fixed `public/install/<releaseId>/` resources, and the explicit server-release block below. It must preserve the homepages, desktop downloads, Quick Start, First Work, guide/spec navigation, theme components and product screenshots. Upstream `check-docker-quickstart.mjs --website-root <this-directory>` verifies server materials separately. Product screenshots are real recorded UI; the owning OpenSpec change records their sources and verification limits.
+
+<!-- server-release:start -->
+
+Core server materials: 0.0.13-c48a40daf766-19451f0a08fc; state: published. Source: c48a40daf766ed0990e3871d0608e41b3c5b6404; input SHA256: 19451f0a08fc287961b14c367b04d9c4a7a0fc61660c16be41d681ce07fa5855.
+<!-- server-release:end -->
+
+No real credentials or initialization secrets belong in static files. Synchronizing or building does not publish the site or new binaries. Existing versioned install downloads retain their original provenance.
 
 ## Build and deployment
 
