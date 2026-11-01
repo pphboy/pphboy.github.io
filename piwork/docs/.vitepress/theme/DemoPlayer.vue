@@ -25,9 +25,9 @@ async function fullscreen() {
 }
 function keydown(event: KeyboardEvent) {
   if (event.key === 'Escape') { expanded.value = false; stop(); return }
+  if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); return }
+  if (event.key === 'ArrowRight') { event.preventDefault(); step(1); return }
   if (event.target instanceof HTMLButtonElement || event.target instanceof HTMLAnchorElement) return
-  if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1) }
-  if (event.key === 'ArrowRight') { event.preventDefault(); step(1) }
   if (event.key === ' ') { event.preventDefault(); togglePlay() }
 }
 watch(() => props.locale, () => { stop(); current.value = 0 })
