@@ -25,7 +25,7 @@
         "workFile": "video_planner_en.work",
         "workBytes": 825984793,
         "workSha256": "da8a329185ae1641f76bf95dfac0a355fcf0c653ba97eb3381ac14fb7d7dc86a",
-        "ready": false
+        "ready": true
       }
     },
     {
@@ -51,8 +51,9 @@
         "workFile": "kanban_en.work",
         "workBytes": 819777774,
         "workSha256": "6a13fc64fd2ebaab7a8b4523aa6161d0e2279770255e9ef9a631c45dbe4a94bd",
-        "ready": false
+        "ready": true
       }
     }
-  ]
+  ],
+  "sharedFolder": "2026-11-01_13-23_Demo"
 }

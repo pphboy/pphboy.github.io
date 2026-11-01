@@ -24,11 +24,11 @@ async function fullscreen() {
   else expanded.value = !expanded.value
 }
 function keydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') { expanded.value = false; stop(); return }
   if (event.target instanceof HTMLButtonElement || event.target instanceof HTMLAnchorElement) return
   if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1) }
   if (event.key === 'ArrowRight') { event.preventDefault(); step(1) }
   if (event.key === ' ') { event.preventDefault(); togglePlay() }
-  if (event.key === 'Escape') { expanded.value = false; stop() }
 }
 watch(() => props.locale, () => { stop(); current.value = 0 })
 onBeforeUnmount(stop)
