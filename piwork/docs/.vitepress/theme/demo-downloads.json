@@ -9,12 +9,12 @@
         "file": "video_planner_zh.work.zip",
         "bytes": 300903938,
         "sha256": "834ebf124d7e89c78e4750397c15241896457f3e3f9c5bba04d620cd6a50e7b1",
-        "url": null,
+        "url": "https://1814020327.share.123pan.cn/123pan/wCG7Vv-fcUD",
         "source": "123云盘",
         "workFile": "video_planner_zh.work",
         "workBytes": 824340016,
         "workSha256": "492c85539070942845b34ebe1289f6f887146bd7b4351184fe81d8075c8545be",
-        "ready": false
+        "ready": true
       },
       "en": {
         "file": "video_planner_en.work.zip",
@@ -35,12 +35,12 @@
         "file": "kanban_zh.work.zip",
         "bytes": 297659800,
         "sha256": "62eab85fc8bdb782d8473648498a42d3940379d916999d3fbf318a8887f601c9",
-        "url": null,
+        "url": "https://1814020327.share.123pan.cn/123pan/wCG7Vv-eVyR",
         "source": "123云盘",
         "workFile": "kanban_zh.work",
         "workBytes": 820020931,
         "workSha256": "6a66713654635c94a71cd1d09c557258411f70e0de5a1e6fe989d0d8950afb1e",
-        "ready": false
+        "ready": true
       },
       "en": {
         "file": "kanban_en.work.zip",

@@ -59,7 +59,7 @@ function size(bytes: number) { return `${(bytes / 1000000).toFixed(0)} MB` }
       <div class="demo-download-row">
         <div class="demo-download-copy"><strong>{{ chinese ? '把这个 Work 带走' : 'Make this Work yours' }}</strong><p>{{ chinese ? '包含应用、示例数据和中文 Agent 对话。' : 'Includes the app, example data and English Agent Chat.' }}</p><span>{{ pkg(demo.id).file }} · {{ size(pkg(demo.id).bytes) }} · {{ pkg(demo.id).source }}</span></div>
         <div class="demo-download-actions">
-          <a v-if="available(demo.id)" class="demo-download" :href="pkg(demo.id).url!" target="_blank" rel="noopener noreferrer">{{ chinese ? '打开中文下载目录' : 'Download English Work (ZIP)' }} <span aria-hidden="true">↓</span></a>
+          <a v-if="available(demo.id)" class="demo-download" :href="pkg(demo.id).url!" target="_blank" rel="noopener noreferrer">{{ chinese ? '下载中文 Work（ZIP）' : 'Download English Work (ZIP)' }} <span aria-hidden="true">↓</span></a>
           <span v-else class="demo-download disabled" aria-disabled="true">{{ chinese ? (pkg(demo.id).url ? '中文版正在上传' : '中文分享链接待补充') : 'English download uploading' }}</span>
           <div v-if="!chinese && available(demo.id)" class="demo-file-links"><a class="demo-checksum" :href="`https://github.com/pphboy/pphboy.github.io/releases/download/${downloads.releaseTag}/${pkg(demo.id).workFile}`">Original .work ↗</a><a class="demo-checksum" :href="`${pkg(demo.id).url}.sha256`">ZIP SHA-256 ↗</a></div>
           <span v-else class="demo-checksum">{{ chinese ? (pkg(demo.id).url ? `123云盘 · ${downloads.sharedFolder}` : '123云盘 · 分享链接即将补充') : 'GitHub Releases · Upload in progress' }}</span>
