@@ -11,7 +11,8 @@ function navigation(chinese: boolean): DefaultTheme.Config {
       { text: chinese ? '工作方式' : 'How it works', link: link('/#how-it-works') },
       { text: chinese ? '下载' : 'Download', link: link('/guide/downloads.html') },
       { text: chinese ? '文档' : 'Docs', link: link('/guide/'), activeMatch: `^${prefix}/(guide/(?!downloads)|concepts/)` },
-      { text: chinese ? '演示' : 'Demo', link: link('/demo/product-demo.html'), activeMatch: `^${prefix}/demo/` },
+      { text: chinese ? '应用演示' : 'Demos', link: link('/demos/'), activeMatch: `^${prefix}/demos/` },
+      { text: chinese ? '演示视频' : 'Video', link: link('/demo/product-demo.html'), activeMatch: `^${prefix}/demo/` },
       { text: 'GitHub', link: repository },
       { text: chinese ? '讨论社区' : 'Discussions', link: `${repository}/discussions` }
     ],
@@ -35,7 +36,8 @@ function navigation(chinese: boolean): DefaultTheme.Config {
           { text: 'Harness', link: link('/concepts/harness') }
         ]
       },
-      { text: chinese ? '演示' : 'Demo', items: [
+      { text: chinese ? '演示' : 'Demos', items: [
+        { text: chinese ? '视频策划与看板' : 'Video Planner & Kanban', link: link('/demos/') },
         { text: chinese ? '产品演示视频' : 'Product demo video', link: link('/demo/product-demo.html') },
         { text: 'Kanban Work', link: link('/demo/kanban') }
       ] },
