@@ -1,0 +1,134 @@
+[
+  {
+    "demo": "video-planner",
+    "locale": "en",
+    "file": "video_planner_en.work.zip",
+    "bytes": 301829049,
+    "sha256": "ea78184892eedf88213a09741770d35c1deefcdc1e6642021fa89bd8036d67e4",
+    "workFile": "video_planner_en.work",
+    "workBytes": 825984793,
+    "workSha256": "da8a329185ae1641f76bf95dfac0a355fcf0c653ba97eb3381ac14fb7d7dc86a",
+    "seed": "video_planner_en.work.seed.tar.gz",
+    "archiveEntries": [
+      {
+        "filename": "video_planner_en.work",
+        "date_time": [
+          2026,
+          11,
+          1,
+          11,
+          10,
+          58
+        ],
+        "compress_type": 8,
+        "create_system": 3,
+        "create_version": 20,
+        "extract_version": 20,
+        "external_attr": 2180972544,
+        "internal_attr": 0
+      },
+      {
+        "filename": "video_planner_en.work.sha256",
+        "date_time": [
+          2026,
+          11,
+          1,
+          13,
+          28,
+          58
+        ],
+        "compress_type": 8,
+        "create_system": 3,
+        "create_version": 20,
+        "extract_version": 20,
+        "external_attr": 25165824,
+        "internal_attr": 0,
+        "text": "da8a329185ae1641f76bf95dfac0a355fcf0c653ba97eb3381ac14fb7d7dc86a  video_planner_en.work\n"
+      },
+      {
+        "filename": "README.txt",
+        "date_time": [
+          2026,
+          11,
+          1,
+          13,
+          28,
+          58
+        ],
+        "compress_type": 8,
+        "create_system": 3,
+        "create_version": 20,
+        "extract_version": 20,
+        "external_attr": 25165824,
+        "internal_attr": 0,
+        "text": "Extract this archive, import video_planner_en.work in Piwork, then click Start.\nThe Work includes the app and an English demo conversation.\n"
+      }
+    ]
+  },
+  {
+    "demo": "kanban",
+    "locale": "en",
+    "file": "kanban_en.work.zip",
+    "bytes": 297606280,
+    "sha256": "674a0bd1aa5f9578c247556ba7adfcabb7d13223bfd2efd21b86d029dff8a1d3",
+    "workFile": "kanban_en.work",
+    "workBytes": 819777774,
+    "workSha256": "6a13fc64fd2ebaab7a8b4523aa6161d0e2279770255e9ef9a631c45dbe4a94bd",
+    "seed": "kanban_en.work.seed.tar.gz",
+    "archiveEntries": [
+      {
+        "filename": "kanban_en.work",
+        "date_time": [
+          2026,
+          11,
+          1,
+          12,
+          17,
+          40
+        ],
+        "compress_type": 8,
+        "create_system": 3,
+        "create_version": 20,
+        "extract_version": 20,
+        "external_attr": 2180972544,
+        "internal_attr": 0
+      },
+      {
+        "filename": "kanban_en.work.sha256",
+        "date_time": [
+          2026,
+          11,
+          1,
+          13,
+          29,
+          24
+        ],
+        "compress_type": 8,
+        "create_system": 3,
+        "create_version": 20,
+        "extract_version": 20,
+        "external_attr": 25165824,
+        "internal_attr": 0,
+        "text": "6a13fc64fd2ebaab7a8b4523aa6161d0e2279770255e9ef9a631c45dbe4a94bd  kanban_en.work\n"
+      },
+      {
+        "filename": "README.txt",
+        "date_time": [
+          2026,
+          11,
+          1,
+          13,
+          29,
+          24
+        ],
+        "compress_type": 8,
+        "create_system": 3,
+        "create_version": 20,
+        "extract_version": 20,
+        "external_attr": 25165824,
+        "internal_attr": 0,
+        "text": "Extract this archive, import kanban_en.work in Piwork, then click Start.\nThe Work includes the app and an English demo conversation.\n"
+      }
+    ]
+  }
+]

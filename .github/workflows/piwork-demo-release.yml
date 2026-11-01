@@ -1,0 +1,44 @@
+name: Publish verified Piwork demo Works
+on:
+  push:
+    branches: [feat/piwork-demo-gallery-20261101]
+    paths:
+      - .github/workflows/piwork-demo-release.yml
+      - piwork/demo-seeds/**
+      - piwork/scripts/rebuild-demo-release.py
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: piwork-demo-release-20261101
+  cancel-in-progress: false
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Rebuild native Works from pinned public layers
+        run: |
+          python piwork/scripts/rebuild-demo-release.py \
+            --seeds piwork/demo-seeds \
+            --cache "$RUNNER_TEMP/piwork-public-layers" \
+            --output "$RUNNER_TEMP/piwork-demo-release"
+      - name: Upload verified English Works and archives
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: pphboy/pphboy.github.io
+        run: |
+          gh release upload piwork-demos-2026-11-01 --clobber \
+            "$RUNNER_TEMP/piwork-demo-release/video_planner_en.work" \
+            "$RUNNER_TEMP/piwork-demo-release/video_planner_en.work.sha256" \
+            "$RUNNER_TEMP/piwork-demo-release/video_planner_en.work.zip" \
+            "$RUNNER_TEMP/piwork-demo-release/video_planner_en.work.zip.sha256" \
+            "$RUNNER_TEMP/piwork-demo-release/kanban_en.work" \
+            "$RUNNER_TEMP/piwork-demo-release/kanban_en.work.sha256" \
+            "$RUNNER_TEMP/piwork-demo-release/kanban_en.work.zip" \
+            "$RUNNER_TEMP/piwork-demo-release/kanban_en.work.zip.sha256"
+          cat "$RUNNER_TEMP/piwork-demo-release/release-result.json"
