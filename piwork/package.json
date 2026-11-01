@@ -13,7 +13,8 @@
     "test:deploy": "node --test scripts/deploy.test.mjs",
     "deploy": "node scripts/deploy.mjs piwork docs/.vitepress/dist",
     "check:content": "node scripts/check-content.mjs",
-    "check:demos": "node scripts/check-demos.mjs"
+    "check:demos": "node scripts/check-demos.mjs",
+    "test:demos": "node --test scripts/demo-search.test.mjs"
   },
   "devDependencies": {
     "vitepress": "1.6.4"

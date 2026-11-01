@@ -6,6 +6,7 @@ import WorkShot from './WorkShot.vue'
 import DownloadOptions from './DownloadOptions.vue'
 import LauncherVersion from './LauncherVersion.vue'
 import DemoGallery from './DemoGallery.vue'
+import DemoDetail from './DemoDetail.vue'
 import './style.css'
 
 export default {
@@ -17,5 +18,6 @@ export default {
     app.component('DownloadOptions', DownloadOptions)
     app.component('LauncherVersion', LauncherVersion)
     app.component('DemoGallery', DemoGallery)
+    app.component('DemoDetail', DemoDetail)
   }
 } satisfies Theme

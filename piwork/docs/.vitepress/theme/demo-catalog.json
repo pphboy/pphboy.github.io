@@ -1,0 +1,310 @@
+{
+  "categories": [
+    {
+      "id": "content",
+      "label": {
+        "zh": "内容创作",
+        "en": "Content creation"
+      }
+    },
+    {
+      "id": "productivity",
+      "label": {
+        "zh": "效率工具",
+        "en": "Productivity"
+      }
+    }
+  ],
+  "tags": [
+    {
+      "id": "ai",
+      "label": {
+        "zh": "AI 协作",
+        "en": "AI collaboration"
+      },
+      "aliases": [
+        "AI",
+        "Agent",
+        "助手",
+        "智能体"
+      ]
+    },
+    {
+      "id": "planning",
+      "label": {
+        "zh": "规划",
+        "en": "Planning"
+      },
+      "aliases": [
+        "plan",
+        "策划",
+        "计划"
+      ]
+    },
+    {
+      "id": "storyboard",
+      "label": {
+        "zh": "故事板",
+        "en": "Storyboard"
+      },
+      "aliases": [
+        "分镜",
+        "storyboarding"
+      ]
+    },
+    {
+      "id": "scripts",
+      "label": {
+        "zh": "脚本写作",
+        "en": "Scriptwriting"
+      },
+      "aliases": [
+        "script",
+        "口播",
+        "writing"
+      ]
+    },
+    {
+      "id": "video",
+      "label": {
+        "zh": "视频",
+        "en": "Video"
+      },
+      "aliases": [
+        "创作",
+        "content",
+        "film"
+      ]
+    },
+    {
+      "id": "kanban",
+      "label": {
+        "zh": "看板",
+        "en": "Kanban"
+      },
+      "aliases": [
+        "board",
+        "卡片"
+      ]
+    },
+    {
+      "id": "tasks",
+      "label": {
+        "zh": "任务管理",
+        "en": "Task management"
+      },
+      "aliases": [
+        "task",
+        "todo",
+        "待办"
+      ]
+    },
+    {
+      "id": "timeline",
+      "label": {
+        "zh": "甘特图",
+        "en": "Timeline"
+      },
+      "aliases": [
+        "gantt",
+        "排期",
+        "日程",
+        "schedule"
+      ]
+    }
+  ],
+  "demos": [
+    {
+      "id": "video-planner",
+      "category": "content",
+      "title": {
+        "zh": "视频策划",
+        "en": "Video Planner"
+      },
+      "subtitle": {
+        "zh": "让灵感有条理，让故事有节奏。",
+        "en": "A little structure. A better story."
+      },
+      "description": {
+        "zh": "把想法整理成分镜，逐张打磨脚本、画面和节奏。在全片总览中看清故事的顺序，再切换聚焦阅读，专心预演下一条视频。",
+        "en": "Turn an idea into scenes, refine the script and visual direction, then review the whole story. Switch to focus reading when it is time to rehearse."
+      },
+      "tags": [
+        "storyboard",
+        "scripts",
+        "video",
+        "planning",
+        "ai"
+      ],
+      "coverAlt": {
+        "zh": "实际运行的视频策划应用，展示分镜卡片与脚本",
+        "en": "The live Video Planner app with storyboard scenes and a script"
+      },
+      "features": {
+        "zh": [
+          "用分镜卡片整理故事顺序，逐张修改脚本与拍摄说明。",
+          "把参考图片与留言放在对应的分镜里。",
+          "查看全片节奏，再切换聚焦阅读进行预演。"
+        ],
+        "en": [
+          "Arrange scenes and refine the script and visual direction for each one.",
+          "Keep reference images and production notes with the right scene.",
+          "Review the overall pacing, then rehearse in focus reading."
+        ]
+      },
+      "slides": [
+        {
+          "file": "01_projects",
+          "title": {
+            "zh": "视频库",
+            "en": "Projects"
+          },
+          "description": {
+            "zh": "所有策划集中在一起，从一个故事开始。",
+            "en": "Your plans in one place. Choose a story to begin."
+          }
+        },
+        {
+          "file": "02_storyboard",
+          "title": {
+            "zh": "故事板",
+            "en": "Storyboard"
+          },
+          "description": {
+            "zh": "拖动分镜安排顺序，在同一张卡片里修改脚本和拍摄备注。",
+            "en": "Arrange scenes, refine the script and keep production notes together."
+          }
+        },
+        {
+          "file": "03_overview",
+          "title": {
+            "zh": "全片总览",
+            "en": "Overview"
+          },
+          "description": {
+            "zh": "从开场到收尾，看清整条视频的顺序与节奏。",
+            "en": "See the running order and pacing from the hook to the final scene."
+          }
+        },
+        {
+          "file": "04_focus",
+          "title": {
+            "zh": "聚焦阅读",
+            "en": "Focus reading"
+          },
+          "description": {
+            "zh": "一次只看当前一幕，保留右侧 Agent 对话，随时继续打磨。",
+            "en": "Rehearse one scene at a time, with Agent Chat still by your side."
+          }
+        },
+        {
+          "file": "05_workbench_chat",
+          "title": {
+            "zh": "与 Pi 一起创作",
+            "en": "Create with Pi"
+          },
+          "description": {
+            "zh": "应用与助手在同一个 Work 中，围绕同一个故事继续工作。",
+            "en": "Keep the app and the conversation in the same Work, ready for your next idea."
+          }
+        }
+      ]
+    },
+    {
+      "id": "kanban",
+      "category": "productivity",
+      "title": {
+        "zh": "看板",
+        "en": "Kanban"
+      },
+      "subtitle": {
+        "zh": "把下一步，看得更清楚。",
+        "en": "Make the next step clear."
+      },
+      "description": {
+        "zh": "把工作放进待办、进行中和已完成。按项目与标签聚焦任务，在详情里保留讨论，用甘特图安排开始与截止日期。",
+        "en": "Move work through To do, In progress and Done. Focus by project or label, keep discussion on each task, and plan start and due dates in Timeline."
+      },
+      "tags": [
+        "kanban",
+        "tasks",
+        "timeline",
+        "planning",
+        "ai"
+      ],
+      "coverAlt": {
+        "zh": "实际运行的看板应用，展示发布项目的三列任务",
+        "en": "The live Kanban app with three columns of launch tasks"
+      },
+      "features": {
+        "zh": [
+          "拖动任务卡片，在待办、进行中和已完成之间推进。",
+          "用项目、标签和搜索聚焦当前工作。",
+          "在甘特图中调整任务日期，在详情留言区记录讨论。"
+        ],
+        "en": [
+          "Drag task cards between To do, In progress and Done.",
+          "Focus your work with projects, labels and search.",
+          "Adjust dates in Timeline and keep discussion in task notes."
+        ]
+      },
+      "slides": [
+        {
+          "file": "01_board",
+          "title": {
+            "zh": "全局看板",
+            "en": "Board"
+          },
+          "description": {
+            "zh": "三列状态、一份清晰的任务进度，拖动卡片即可推进工作。",
+            "en": "Three columns and one clear view of progress. Drag a card to move work forward."
+          }
+        },
+        {
+          "file": "02_project",
+          "title": {
+            "zh": "项目聚焦",
+            "en": "Project focus"
+          },
+          "description": {
+            "zh": "选择 Piwork 发布项目，专注这一轮要完成的任务。",
+            "en": "Select the Piwork launch project to focus on the work for this release."
+          }
+        },
+        {
+          "file": "03_task_details",
+          "title": {
+            "zh": "任务详情与讨论",
+            "en": "Task details & notes"
+          },
+          "description": {
+            "zh": "描述、优先级、日期、标签和讨论，都留在任务上。",
+            "en": "Keep the description, priority, dates, labels and discussion attached to the task."
+          }
+        },
+        {
+          "file": "04_timeline",
+          "title": {
+            "zh": "甘特图排期",
+            "en": "Timeline"
+          },
+          "description": {
+            "zh": "查看任务的起止时间，拖动色条调整排期。",
+            "en": "Review start and due dates, then drag task bars to adjust the schedule."
+          }
+        },
+        {
+          "file": "05_labels",
+          "title": {
+            "zh": "标签筛选",
+            "en": "Label filters"
+          },
+          "description": {
+            "zh": "按设计、调研等标签筛选，把注意力放在当前这类工作上。",
+            "en": "Filter by Design, Research or another label to focus on related work."
+          }
+        }
+      ]
+    }
+  ]
+}

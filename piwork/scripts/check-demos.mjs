@@ -6,6 +6,20 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const data = JSON.parse(readFileSync(resolve(root, 'docs/.vitepress/theme/demo-downloads.json'), 'utf8'))
 assert.equal(data.releaseTag, 'piwork-demos-2026-11-01')
 assert.equal(data.releaseUrl, `https://github.com/pphboy/pphboy.github.io/releases/tag/${data.releaseTag}`)
+const catalog = JSON.parse(readFileSync(resolve(root, 'docs/.vitepress/theme/demo-catalog.json'), 'utf8'))
+assert.deepEqual(catalog.demos.map(d => d.id).sort(), data.demos.map(d => d.id).sort())
+for (const demo of catalog.demos) {
+  assert(catalog.categories.some(category => category.id === demo.category))
+  assert(demo.tags.length && demo.tags.every(id => catalog.tags.some(tag => tag.id === id)))
+  for (const locale of ['zh', 'en']) {
+    assert(demo.title[locale] && demo.description[locale])
+    const cover = readFileSync(resolve(root, `docs/public/demos/${demo.id}/${locale}/cover_${locale}.png`))
+    assert.equal(cover.subarray(0, 8).toString('hex'), '89504e470d0a1a0a')
+    assert.equal(cover.readUInt32BE(16), 1440)
+    assert.equal(cover.readUInt32BE(20), 900)
+    assert(existsSync(resolve(root, `docs/${locale === 'zh' ? 'zh/' : ''}demos/${demo.id}.md`)))
+  }
+}
 const shots = {
   'video-planner': ['01_projects', '02_storyboard', '03_overview', '04_focus', '05_workbench_chat'],
   kanban: ['01_board', '02_project', '03_task_details', '04_timeline', '05_labels']
@@ -35,4 +49,4 @@ for (const demo of data.demos) for (const locale of ['zh', 'en']) {
   }
 }
 for (const locale of ['', 'zh/']) assert(existsSync(resolve(root, `docs/${locale}demos/index.md`)))
-console.log('Demos verified: two Works, two language-specific sources, twenty full-workbench screenshots.')
+console.log('Demos verified: two Works, two language-specific sources, four application covers, four detail pages and twenty full-workbench screenshots.')
