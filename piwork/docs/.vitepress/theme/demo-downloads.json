@@ -6,36 +6,52 @@
       "id": "video-planner",
       "fileStem": "video_planner",
       "zh": {
-        "file": "video_planner_zh.work",
-        "bytes": 824340016,
-        "sha256": "492c85539070942845b34ebe1289f6f887146bd7b4351184fe81d8075c8545be",
+        "file": "video_planner_zh.work.zip",
+        "bytes": 300903938,
+        "sha256": "834ebf124d7e89c78e4750397c15241896457f3e3f9c5bba04d620cd6a50e7b1",
         "url": null,
-        "source": "123云盘"
+        "source": "123云盘",
+        "workFile": "video_planner_zh.work",
+        "workBytes": 824340016,
+        "workSha256": "492c85539070942845b34ebe1289f6f887146bd7b4351184fe81d8075c8545be",
+        "ready": false
       },
       "en": {
-        "file": "video_planner_en.work",
-        "bytes": 825984793,
-        "sha256": "da8a329185ae1641f76bf95dfac0a355fcf0c653ba97eb3381ac14fb7d7dc86a",
-        "url": "https://github.com/pphboy/pphboy.github.io/releases/download/piwork-demos-2026-11-01/video_planner_en.work",
-        "source": "GitHub Releases"
+        "file": "video_planner_en.work.zip",
+        "bytes": 301829049,
+        "sha256": "ea78184892eedf88213a09741770d35c1deefcdc1e6642021fa89bd8036d67e4",
+        "url": "https://github.com/pphboy/pphboy.github.io/releases/download/piwork-demos-2026-11-01/video_planner_en.work.zip",
+        "source": "GitHub Releases",
+        "workFile": "video_planner_en.work",
+        "workBytes": 825984793,
+        "workSha256": "da8a329185ae1641f76bf95dfac0a355fcf0c653ba97eb3381ac14fb7d7dc86a",
+        "ready": false
       }
     },
     {
       "id": "kanban",
       "fileStem": "kanban",
       "zh": {
-        "file": "kanban_zh.work",
-        "bytes": 820020931,
-        "sha256": "6a66713654635c94a71cd1d09c557258411f70e0de5a1e6fe989d0d8950afb1e",
+        "file": "kanban_zh.work.zip",
+        "bytes": 297659800,
+        "sha256": "62eab85fc8bdb782d8473648498a42d3940379d916999d3fbf318a8887f601c9",
         "url": null,
-        "source": "123云盘"
+        "source": "123云盘",
+        "workFile": "kanban_zh.work",
+        "workBytes": 820020931,
+        "workSha256": "6a66713654635c94a71cd1d09c557258411f70e0de5a1e6fe989d0d8950afb1e",
+        "ready": false
       },
       "en": {
-        "file": "kanban_en.work",
-        "bytes": 819777774,
-        "sha256": "6a13fc64fd2ebaab7a8b4523aa6161d0e2279770255e9ef9a631c45dbe4a94bd",
-        "url": "https://github.com/pphboy/pphboy.github.io/releases/download/piwork-demos-2026-11-01/kanban_en.work",
-        "source": "GitHub Releases"
+        "file": "kanban_en.work.zip",
+        "bytes": 297606280,
+        "sha256": "674a0bd1aa5f9578c247556ba7adfcabb7d13223bfd2efd21b86d029dff8a1d3",
+        "url": "https://github.com/pphboy/pphboy.github.io/releases/download/piwork-demos-2026-11-01/kanban_en.work.zip",
+        "source": "GitHub Releases",
+        "workFile": "kanban_en.work",
+        "workBytes": 819777774,
+        "workSha256": "6a13fc64fd2ebaab7a8b4523aa6161d0e2279770255e9ef9a631c45dbe4a94bd",
+        "ready": false
       }
     }
   ]

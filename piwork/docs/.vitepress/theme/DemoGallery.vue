@@ -37,6 +37,7 @@ const demos = computed(() => [
   }
 ])
 function pkg(id: string) { return downloads.demos.find(item => item.id === id)![locale.value] }
+function available(id: string) { return Boolean(pkg(id).url) && pkg(id).ready }
 function size(bytes: number) { return `${(bytes / 1000000).toFixed(0)} MB` }
 </script>
 
@@ -58,16 +59,16 @@ function size(bytes: number) { return `${(bytes / 1000000).toFixed(0)} MB` }
       <div class="demo-download-row">
         <div class="demo-download-copy"><strong>{{ chinese ? '把这个 Work 带走' : 'Make this Work yours' }}</strong><p>{{ chinese ? '包含应用、示例数据和中文 Agent 对话。' : 'Includes the app, example data and English Agent Chat.' }}</p><span>{{ pkg(demo.id).file }} · {{ size(pkg(demo.id).bytes) }} · {{ pkg(demo.id).source }}</span></div>
         <div class="demo-download-actions">
-          <a v-if="pkg(demo.id).url" class="demo-download" :href="pkg(demo.id).url!" target="_blank" rel="noopener noreferrer">{{ chinese ? '下载中文 Work' : 'Download English Work' }} <span aria-hidden="true">↓</span></a>
-          <span v-else class="demo-download disabled" aria-disabled="true">中文分享链接待补充</span>
-          <a v-if="!chinese" class="demo-checksum" :href="`${pkg(demo.id).url}.sha256`">SHA-256 ↗</a>
-          <span v-else class="demo-checksum">{{ pkg(demo.id).url ? '123云盘分享下载' : '123云盘 · 分享链接即将补充' }}</span>
+          <a v-if="available(demo.id)" class="demo-download" :href="pkg(demo.id).url!" target="_blank" rel="noopener noreferrer">{{ chinese ? '下载中文 Work（ZIP）' : 'Download English Work (ZIP)' }} <span aria-hidden="true">↓</span></a>
+          <span v-else class="demo-download disabled" aria-disabled="true">{{ chinese ? (pkg(demo.id).url ? '中文版正在上传' : '中文分享链接待补充') : 'English download uploading' }}</span>
+          <a v-if="!chinese && available(demo.id)" class="demo-checksum" :href="`${pkg(demo.id).url}.sha256`">SHA-256 ↗</a>
+          <span v-else class="demo-checksum">{{ chinese ? (pkg(demo.id).url ? '123云盘分享下载' : '123云盘 · 分享链接即将补充') : 'GitHub Releases · Upload in progress' }}</span>
         </div>
       </div>
-      <details class="demo-integrity"><summary>{{ chinese ? '文件完整性' : 'File integrity' }}</summary><code>{{ pkg(demo.id).sha256 }}</code></details>
+      <details class="demo-integrity"><summary>{{ chinese ? '文件完整性' : 'File integrity' }}</summary><p>ZIP · SHA-256</p><code>{{ pkg(demo.id).sha256 }}</code><p>.work · SHA-256</p><code>{{ pkg(demo.id).workSha256 }}</code></details>
     </section>
 
-    <section class="demo-start" aria-labelledby="import-demo"><div><p class="gallery-eyebrow">{{ chinese ? '下载之后' : 'AFTER DOWNLOADING' }}</p><h2 id="import-demo">{{ chinese ? '导入，然后继续做。' : 'Import it. Keep going.' }}</h2></div><ol><li>{{ chinese ? '在 Piwork 中选择导入，打开下载的 .work 文件。' : 'Choose Import in Piwork and open the downloaded .work file.' }}</li><li>{{ chinese ? '点击启动，等待应用就绪，打开 Service。' : 'Click Start, wait for the app to become ready, and open Services.' }}</li><li>{{ chinese ? '切到 Agent 的 Session 3，查看对应语言的简短演示对话。' : 'Choose Agent Session 3 for the short English demo conversation.' }}</li></ol><p>{{ chinese ? '需要兼容的 Piwork 环境，并配置自己的 AI 模型凭据。同名 Work 已存在时，导入时换一个名称。' : 'Use a compatible Piwork installation and configure your own model credentials. Choose another name if the Work already exists.' }} <a :href="guide">{{ chinese ? '查看导入说明 →' : 'Import guide →' }}</a></p></section>
+    <section class="demo-start" aria-labelledby="import-demo"><div><p class="gallery-eyebrow">{{ chinese ? '下载之后' : 'AFTER DOWNLOADING' }}</p><h2 id="import-demo">{{ chinese ? '导入，然后继续做。' : 'Import it. Keep going.' }}</h2></div><ol><li>{{ chinese ? '解压下载的 ZIP，在 Piwork 中导入其中的 .work 文件。' : 'Extract the ZIP, then choose Import in Piwork and open the .work file inside.' }}</li><li>{{ chinese ? '点击启动，等待应用就绪，打开 Service。' : 'Click Start, wait for the app to become ready, and open Services.' }}</li><li>{{ chinese ? '切到 Agent 的 Session 3，查看对应语言的简短演示对话。' : 'Choose Agent Session 3 for the short English demo conversation.' }}</li></ol><p>{{ chinese ? '需要兼容的 Piwork 环境，并配置自己的 AI 模型凭据。同名 Work 已存在时，导入时换一个名称。' : 'Use a compatible Piwork installation and configure your own model credentials. Choose another name if the Work already exists.' }} <a :href="guide">{{ chinese ? '查看导入说明 →' : 'Import guide →' }}</a></p></section>
   </main>
 </template>
 

@@ -13,9 +13,11 @@ const shots = {
 assert.deepEqual(data.demos.map(d => d.id).sort(), Object.keys(shots).sort())
 for (const demo of data.demos) for (const locale of ['zh', 'en']) {
   const pkg = demo[locale]
-  assert.equal(pkg.file, `${demo.fileStem}_${locale}.work`)
+  assert.equal(pkg.file, `${demo.fileStem}_${locale}.work.zip`)
   assert(Number.isSafeInteger(pkg.bytes) && pkg.bytes > 0)
   assert.match(pkg.sha256, /^[a-f\d]{64}$/)
+  assert.match(pkg.workSha256, /^[a-f\d]{64}$/)
+  assert.equal(pkg.workFile, `${demo.fileStem}_${locale}.work`)
   if (locale === 'en') assert.equal(pkg.url, `https://github.com/pphboy/pphboy.github.io/releases/download/${data.releaseTag}/${pkg.file}`)
   if (locale === 'zh' && pkg.url) {
     const url = new URL(pkg.url)
