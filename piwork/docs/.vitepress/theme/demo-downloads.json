@@ -53,6 +53,33 @@
         "workSha256": "6a13fc64fd2ebaab7a8b4523aa6161d0e2279770255e9ef9a631c45dbe4a94bd",
         "ready": true
       }
+    },
+    {
+      "id": "avatar-studio",
+      "fileStem": "avatar_studio",
+      "zh": {
+        "file": "avatar_studio_zh.work.zip",
+        "bytes": 265664058,
+        "sha256": "468530c85cfa60dd4e8fa8766ec4b6a45a3e4affdb99183071e4bba86abdb1d8",
+        "workFile": "avatar_studio_zh.work",
+        "workBytes": 820268332,
+        "workSha256": "9a6baff3c431af66d731fc0d3058057a96ec6b6d1260576374f9bce214abd02f",
+        "url": "https://1814020327.share.123pan.cn/123pan/wCG7Vv-motR",
+        "source": "123云盘",
+        "ready": true
+      },
+      "en": {
+        "file": "avatar_studio_en.work.zip",
+        "bytes": 265767885,
+        "sha256": "344cbf75c22a5dc584e148efb9f38d6419754348a70c5e715122184b7a9c87a9",
+        "workFile": "avatar_studio_en.work",
+        "workBytes": 821014207,
+        "workSha256": "9b612bbe59d9cd5a4814d7a3c4fb31d3652a800d565c43a94451f4cbdd0fe8eb",
+        "url": "https://github.com/pphboy/pphboy.github.io/releases/download/piwork-demos-2026-11-01/avatar_studio_en.work.zip",
+        "source": "GitHub Releases",
+        "ready": true
+      },
+      "sharedFolder": "2026-11-02_23-34_Demo"
     }
   ],
   "sharedFolder": "2026-11-01_13-23_Demo"

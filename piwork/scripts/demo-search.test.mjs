@@ -14,7 +14,7 @@ test('search tag names and aliases, including hashtags', () => {
   assert.deepEqual(ids({ query: '#Gantt' }), ['kanban'])
   assert.deepEqual(ids({ query: '甘特图' }), ['kanban'])
   assert.deepEqual(ids({ query: 'storyboard' }), ['video-planner'])
-  assert.deepEqual(ids({ query: '#AI' }), ['video-planner', 'kanban'])
+  assert.deepEqual(ids({ query: '#AI' }), ['video-planner', 'kanban', 'avatar-studio'])
 })
 test('categories and tags combine without broadening results', () => {
   assert.deepEqual(ids({ category: 'content', tags: ['ai'] }), ['video-planner'])
@@ -25,10 +25,18 @@ test('all query terms must match, and punctuation is safe', () => {
   assert.deepEqual(ids({ query: 'AI gantt' }), ['kanban'])
   assert.deepEqual(ids({ query: 'storyboard gantt' }), [])
   assert.deepEqual(ids({ query: '<script>alert(1)</script>' }), [])
-  assert.deepEqual(ids({ query: '   ' }), ['video-planner', 'kanban'])
+  assert.deepEqual(ids({ query: '   ' }), ['video-planner', 'kanban', 'avatar-studio'])
 })
 test('related demos share actual tags and never include themselves', () => {
-  assert.deepEqual(relatedDemos(catalog, 'video-planner').map(x => x.id), ['kanban'])
-  assert.deepEqual(relatedDemos(catalog, 'kanban').map(x => x.id), ['video-planner'])
+  assert.deepEqual(relatedDemos(catalog, 'video-planner').map(x => x.id), ['kanban', 'avatar-studio'])
+  assert.deepEqual(relatedDemos(catalog, 'kanban').map(x => x.id), ['video-planner', 'avatar-studio'])
   assert.deepEqual(relatedDemos(catalog, 'missing'), [])
+})
+
+test('find Avatar Studio by bilingual names, pixel tags, and design category', () => {
+  assert.deepEqual(ids({ query: '头像' }), ['avatar-studio'])
+  assert.deepEqual(ids({ query: 'AVATAR STUDIO' }), ['avatar-studio'])
+  assert.deepEqual(ids({ query: '#8-bit' }), ['avatar-studio'])
+  assert.deepEqual(ids({ category: 'design', tags: ['ai', 'palette'] }), ['avatar-studio'])
+  assert.deepEqual(ids({ category: 'productivity', tags: ['pixel-art'] }), [])
 })

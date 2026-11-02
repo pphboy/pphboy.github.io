@@ -13,6 +13,13 @@
         "zh": "效率工具",
         "en": "Productivity"
       }
+    },
+    {
+      "id": "design",
+      "label": {
+        "zh": "设计工具",
+        "en": "Design tools"
+      }
     }
   ],
   "tags": [
@@ -110,6 +117,57 @@
         "排期",
         "日程",
         "schedule"
+      ]
+    },
+    {
+      "id": "avatars",
+      "label": {
+        "zh": "头像",
+        "en": "Avatars"
+      },
+      "aliases": [
+        "avatar",
+        "头像工坊",
+        "角色",
+        "character"
+      ]
+    },
+    {
+      "id": "pixel-art",
+      "label": {
+        "zh": "像素风",
+        "en": "Pixel art"
+      },
+      "aliases": [
+        "8-bit",
+        "8bit",
+        "像素",
+        "pixel"
+      ]
+    },
+    {
+      "id": "palette",
+      "label": {
+        "zh": "配色",
+        "en": "Color palettes"
+      },
+      "aliases": [
+        "color",
+        "colour",
+        "颜色",
+        "色板"
+      ]
+    },
+    {
+      "id": "collections",
+      "label": {
+        "zh": "系列画廊",
+        "en": "Collections"
+      },
+      "aliases": [
+        "gallery",
+        "画廊",
+        "系列"
       ]
     }
   ],
@@ -305,6 +363,103 @@
           }
         }
       ]
+    },
+    {
+      "id": "avatar-studio",
+      "category": "design",
+      "title": {
+        "zh": "头像工坊",
+        "en": "Avatar Studio"
+      },
+      "subtitle": {
+        "zh": "一点像素，很多种自己。",
+        "en": "A few pixels. A little personality."
+      },
+      "description": {
+        "zh": "从十张变体中挑选喜欢的样子，再调整视角、造型与配色。把作品保存在系列画廊，下载清晰的 PNG 或整组组图，继续做出自己的像素角色。",
+        "en": "Find a favorite among ten variations, then make the look and colors your own. Keep your characters in collections and take them with you as crisp PNGs or contact sheets."
+      },
+      "tags": [
+        "avatars",
+        "pixel-art",
+        "palette",
+        "collections",
+        "ai"
+      ],
+      "coverAlt": {
+        "zh": "实际运行的头像工坊，展示同一像素角色的十张造型变体",
+        "en": "The live Avatar Studio app showing ten variations of a pixel character"
+      },
+      "features": {
+        "zh": [
+          "并排比较十张变体，切换正面、侧脸与站立视角。",
+          "调整发型、上衣、眼镜、表情、描边与五种配色。",
+          "管理五组共 43 张示例头像，下载单张 PNG 或系列组图。"
+        ],
+        "en": [
+          "Compare ten variations with front, profile, and full-body views.",
+          "Customize hair, outfits, glasses, expressions, outlines, and five colors.",
+          "Explore 43 example avatars in five collections, then download PNGs or contact sheets."
+        ]
+      },
+      "slides": [
+        {
+          "file": "01_variations",
+          "title": {
+            "zh": "十张变体",
+            "en": "Ten variations"
+          },
+          "description": {
+            "zh": "从同一角色的十种变化开始，并排比较不同造型。",
+            "en": "Start with ten variations of one character and compare looks side by side."
+          }
+        },
+        {
+          "file": "02_editor",
+          "title": {
+            "zh": "造型与配色",
+            "en": "Make it yours"
+          },
+          "description": {
+            "zh": "修改视角、造型和五种配色，预览随操作实时变化。",
+            "en": "Fine-tune the view, look, and five colors with a live preview."
+          }
+        },
+        {
+          "file": "03_collections",
+          "title": {
+            "zh": "系列画廊",
+            "en": "Your collections"
+          },
+          "description": {
+            "zh": "把喜欢的造型存下来，继续编辑或下载整组。",
+            "en": "Keep your favorites together, ready to edit or download as a contact sheet."
+          }
+        },
+        {
+          "file": "04_angles",
+          "title": {
+            "zh": "不同角度",
+            "en": "Every angle"
+          },
+          "description": {
+            "zh": "正面、侧脸和站立视角，让同一角色拥有更多表达。",
+            "en": "Explore front, profile, and full-body views of the same character."
+          }
+        },
+        {
+          "file": "05_create_with_pi",
+          "title": {
+            "zh": "与 Pi 一起创作",
+            "en": "Create with Pi"
+          },
+          "description": {
+            "zh": "在同一个 Work 中描述下一组想法，继续和 Agent 协作。",
+            "en": "Describe the next collection in the same Work and keep creating with the Agent."
+          }
+        }
+      ],
+      "guideSession": 7
     }
   ]
 }

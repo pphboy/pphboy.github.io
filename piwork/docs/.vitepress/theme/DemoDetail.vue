@@ -10,6 +10,7 @@ const { lang } = useData()
 const locale = computed<DemoLocale>(() => lang.value.startsWith('zh') ? 'zh' : 'en')
 const chinese = computed(() => locale.value === 'zh')
 const demo = computed(() => demoById(props.demoId)!)
+const guideSession = computed(() => demo.value.guideSession ?? 3)
 const pkg = computed(() => packageFor(props.demoId, locale.value))
 const slides = computed(() => demo.value.slides.map(slide => ({ file: slide.file, title: slide.title[locale.value], description: slide.description[locale.value] })))
 const related = computed(() => relatedDemos(catalog, props.demoId))
@@ -45,11 +46,11 @@ onMounted(() => {
         <button class="detail-preview-button" type="button" :aria-expanded="previewOpen" aria-controls="preview" @click="openPreview">{{ chinese ? '预览界面' : 'Preview screenshots' }} <span aria-hidden="true">↗</span></button>
         <p class="archive-name">{{ pkg.file }}</p>
         <p class="import-note">{{ chinese ? '解压 ZIP 后，将其中的 .work 文件导入 Piwork。' : 'Extract the ZIP and import the .work file into Piwork.' }}</p>
-        <div v-if="!chinese" class="extra-downloads"><a :href="`https://github.com/pphboy/pphboy.github.io/releases/download/${downloads.releaseTag}/${pkg.workFile}`">Original .work ↗</a><a :href="`${pkg.url}.sha256`">ZIP SHA-256 ↗</a></div>
+        <div v-if="!chinese && downloadAvailable(demo.id, locale)" class="extra-downloads"><a :href="`https://github.com/pphboy/pphboy.github.io/releases/download/${downloads.releaseTag}/${pkg.workFile}`">Original .work ↗</a><a :href="`${pkg.url}.sha256`">ZIP SHA-256 ↗</a></div>
       </aside>
     </div>
     <section class="detail-features"><div><p class="eyebrow">{{ chinese ? '关于这个 DEMO' : 'ABOUT THIS DEMO' }}</p><h2>{{ chinese ? '从这里开始，继续做。' : 'A starting point for your own work.' }}</h2></div><ul><li v-for="feature in demo.features[locale]" :key="feature">{{ feature }}</li></ul></section>
-    <section class="detail-included"><h2>{{ chinese ? '下载包含什么' : 'What is included' }}</h2><p>{{ chinese ? '完整应用、示例数据以及对应语言的 Agent 演示对话。导入后点击启动，等待 Service 就绪；切到 Session 3 可以查看简短的使用介绍。' : 'The app, example data and an English Agent demo conversation. After importing, click Start and wait for Services to become ready. Choose Session 3 for a short introduction.' }}</p><p>{{ chinese ? '需要兼容的 Piwork 环境，并配置自己的 AI 模型凭据。已有同名 Work 时，请在导入时换一个名称。' : 'Use a compatible Piwork installation and configure your own model credentials. Choose another name if the Work already exists.' }} <a :href="guide">{{ chinese ? '查看导入说明 →' : 'Import guide →' }}</a></p><details class="detail-integrity"><summary>{{ chinese ? '查看文件校验信息' : 'File integrity' }}</summary><p>ZIP · SHA-256</p><code>{{ pkg.sha256 }}</code><p>.work · SHA-256</p><code>{{ pkg.workSha256 }}</code></details></section>
+    <section class="detail-included"><h2>{{ chinese ? '下载包含什么' : 'What is included' }}</h2><p>{{ chinese ? `完整应用、示例数据以及对应语言的 Agent 演示对话。导入后点击启动，等待 Service 就绪；切到 Session ${guideSession} 可以查看简短的使用介绍。` : `The app, example data and an English Agent demo conversation. After importing, click Start and wait for Services to become ready. Choose Session ${guideSession} for a short introduction.` }}</p><p>{{ chinese ? '需要兼容的 Piwork 环境，并配置自己的 AI 模型凭据。已有同名 Work 时，请在导入时换一个名称。' : 'Use a compatible Piwork installation and configure your own model credentials. Choose another name if the Work already exists.' }} <a :href="guide">{{ chinese ? '查看导入说明 →' : 'Import guide →' }}</a></p><details class="detail-integrity"><summary>{{ chinese ? '查看文件校验信息' : 'File integrity' }}</summary><p>ZIP · SHA-256</p><code>{{ pkg.sha256 }}</code><p>.work · SHA-256</p><code>{{ pkg.workSha256 }}</code></details></section>
     <section v-if="related.length" class="related-demos"><div class="related-heading"><div><p class="eyebrow">{{ chinese ? '继续探索' : 'KEEP EXPLORING' }}</p><h2>{{ chinese ? '也可以试试' : 'You may also like' }}</h2></div><a :href="withBase(galleryPath(locale))">{{ chinese ? '全部 Demo' : 'All demos' }} ↗</a></div><div class="related-grid"><DemoCard v-for="item in related" :key="item.id" :demo="item" :locale="locale" /></div></section>
   </main>
 </template>

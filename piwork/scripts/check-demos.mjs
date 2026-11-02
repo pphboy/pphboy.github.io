@@ -20,10 +20,7 @@ for (const demo of catalog.demos) {
     assert(existsSync(resolve(root, `docs/${locale === 'zh' ? 'zh/' : ''}demos/${demo.id}.md`)))
   }
 }
-const shots = {
-  'video-planner': ['01_projects', '02_storyboard', '03_overview', '04_focus', '05_workbench_chat'],
-  kanban: ['01_board', '02_project', '03_task_details', '04_timeline', '05_labels']
-}
+const shots = Object.fromEntries(catalog.demos.map(demo => [demo.id, demo.slides.map(slide => slide.file)]))
 assert.deepEqual(data.demos.map(d => d.id).sort(), Object.keys(shots).sort())
 for (const demo of data.demos) for (const locale of ['zh', 'en']) {
   const pkg = demo[locale]
@@ -49,4 +46,4 @@ for (const demo of data.demos) for (const locale of ['zh', 'en']) {
   }
 }
 for (const locale of ['', 'zh/']) assert(existsSync(resolve(root, `docs/${locale}demos/index.md`)))
-console.log('Demos verified: two Works, two language-specific sources, four application covers, four detail pages and twenty full-workbench screenshots.')
+console.log(`Demos verified: ${data.demos.length} Works, bilingual packages, ${catalog.demos.length * 2} application covers and detail pages, and ${catalog.demos.reduce((count, demo) => count + demo.slides.length * 2, 0)} full-workbench screenshots.`)
