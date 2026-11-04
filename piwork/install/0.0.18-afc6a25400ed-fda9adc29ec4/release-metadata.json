@@ -1,0 +1,32 @@
+{
+  "manifestVersion": 2,
+  "application": "unified-linux",
+  "controlPlanePort": 17891,
+  "corePort": 17871,
+  "serviceEntryMode": "path",
+  "releaseVersion": "0.0.18",
+  "sourceCommit": "afc6a25400edacd6298ca0bacb802e2844277c02",
+  "sourceModified": false,
+  "sourceInputHash": "fda9adc29ec4e7fb6372ce9c1752b76b0aea02cbf4225727f2426c99bb687187",
+  "desktopUIHash": "300aa7e9c1ebdf70ef0d902cd9f0cfa42c605c0ecb43939216b46a7e6966323b",
+  "consoleUIHash": "5313641a99173f98b17749263516e85932a27f7d51959ba6a8d26fe2e2e53981",
+  "registry": "docker.io/pphboy",
+  "platform": "linux/amd64",
+  "runtimeImage": "alpine:3.22@sha256:5291449c3df73caf6ed85e649dec1b9e818b39a5d8c871e97afc13e9cd5e8fa8",
+  "core": {
+    "format": "piwork-go-core",
+    "schemaVersion": 1
+  },
+  "clientCredentialVersion": 1,
+  "releaseId": "0.0.18-afc6a25400ed-fda9adc29ec4",
+  "images": {
+    "core": "docker.io/pphboy/piwork-core:0.0.18-afc6a25400ed-fda9adc29ec4",
+    "agent": "docker.io/pphboy/piwork-agentd:0.0.18-afc6a25400ed-fda9adc29ec4",
+    "fileHelper": "docker.io/pphboy/piwork-file-helper:0.0.18-afc6a25400ed-fda9adc29ec4",
+    "snapshotHelper": "docker.io/pphboy/piwork-snapshot-helper:0.0.18-afc6a25400ed-fda9adc29ec4",
+    "packageHelper": "docker.io/pphboy/piwork-agentd:0.0.18-afc6a25400ed-fda9adc29ec4"
+  },
+  "state": "published",
+  "compatiblePreviousReleaseVersions": [],
+  "directlyRollbackablePreviousVersions": []
+}
