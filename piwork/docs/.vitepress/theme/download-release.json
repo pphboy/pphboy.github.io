@@ -1,25 +1,25 @@
 {
-  "version": "0.2.5",
-  "piworkVersion": "0.0.17",
-  "publishedAt": "2026-10-30",
-  "releaseUrl": "https://github.com/pphboy/piwork-microvm/releases/tag/v0.2.5",
-  "manifestUrl": "https://github.com/pphboy/piwork-microvm/releases/download/v0.2.5/release-manifest.json",
+  "version": "0.2.6",
+  "piworkVersion": "0.0.18",
+  "publishedAt": "2026-11-04",
+  "releaseUrl": "https://github.com/pphboy/piwork-microvm/releases/tag/v0.2.6",
+  "manifestUrl": "https://github.com/pphboy/piwork-microvm/releases/download/v0.2.6/release-manifest.json",
   "platforms": [
     {
       "id": "windows",
       "label": "Windows",
       "architecture": "x86-64",
-      "file": "piwork-microvm-gui-v0.2.5-windows-amd64.exe",
-      "sizeBytes": 429303524,
-      "sha256": "0c7915dba741353ebd4efa43bff78371efdab58b6dce95a2b2607818a7761809"
+      "file": "piwork-microvm-gui-v0.2.6-windows-amd64.exe",
+      "sizeBytes": 424047185,
+      "sha256": "8093fa9cee1c1cc5e5d1ba75b6165386e0504b2042f87e31ccbddd16534ff8f6"
     },
     {
       "id": "linux",
       "label": "Linux",
       "architecture": "x86-64",
-      "file": "piwork-microvm-gui-v0.2.5-linux-amd64",
-      "sizeBytes": 411693679,
-      "sha256": "6b120d7a834cd26275b13f7a8ea130b525e5f4380688c33ecebb0e9b0f1cf65e"
+      "file": "piwork-microvm-gui-v0.2.6-linux-amd64",
+      "sizeBytes": 406332540,
+      "sha256": "36bd513453a3206cd9d005de98ebf837554606e94d47944e7cc77655a26e60c9"
     }
   ]
 }

@@ -1,0 +1,5 @@
+Piwork 0.0.18-afc6a25400ed-fda9adc29ec4
+State: published
+Source: afc6a25400edacd6298ca0bacb802e2844277c02
+Input SHA256: fda9adc29ec4e7fb6372ce9c1752b76b0aea02cbf4225727f2426c99bb687187
+Registry identities and anonymous image readability verified.
