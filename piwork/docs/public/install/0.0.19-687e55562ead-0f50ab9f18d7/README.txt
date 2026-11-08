@@ -1,0 +1,5 @@
+Piwork 0.0.19-687e55562ead-0f50ab9f18d7
+State: published
+Source: 687e55562eadfdbc47bcb27118eed75e43cd05a1
+Input SHA256: 0f50ab9f18d7c10a6bf0f96a8c02d41e6360c4b4be25a11ff39e3d7e7bb77f06
+Registry identities and anonymous image readability verified.
