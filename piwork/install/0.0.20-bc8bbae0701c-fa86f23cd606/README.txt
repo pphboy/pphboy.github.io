@@ -1,0 +1,5 @@
+Piwork 0.0.20-bc8bbae0701c-fa86f23cd606
+State: published
+Source: bc8bbae0701c311856228999281d9b6523805ca2
+Input SHA256: fa86f23cd6066407b5120f3f522f051c389f3d78ce5042b69ffd928c13ceec49
+Registry identities and anonymous image readability verified.
