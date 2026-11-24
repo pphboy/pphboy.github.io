@@ -39,7 +39,7 @@ The upstream server sync owns only bilingual `guide/installation.md`, `guide/sou
 
 <!-- server-release:start -->
 
-Core server materials: 0.0.19-687e55562ead-0f50ab9f18d7; state: published. Source: 687e55562eadfdbc47bcb27118eed75e43cd05a1; input SHA256: 0f50ab9f18d7c10a6bf0f96a8c02d41e6360c4b4be25a11ff39e3d7e7bb77f06.
+Core server materials: 0.0.20-bc8bbae0701c-fa86f23cd606; state: published. Source: bc8bbae0701c311856228999281d9b6523805ca2; input SHA256: fa86f23cd6066407b5120f3f522f051c389f3d78ce5042b69ffd928c13ceec49.
 <!-- server-release:end -->
 
 No real credentials or initialization secrets belong in static files. Synchronizing or building does not publish the site or new binaries. Existing versioned install downloads retain their original provenance.
